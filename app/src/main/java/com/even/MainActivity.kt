@@ -1,4 +1,4 @@
-package com.even.ui.activité
+package com.even
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
