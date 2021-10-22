@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/connexion">
+
+    <fragment
+        android:id="@+id/connexion"
+        android:name="com.even.ui.fragment.connexion"
+        android:label="connexion" >
+        <action
+            android:id="@+id/action_connexion_to_liste_evenement"
+            app:destination="@id/liste_evenement" />
+    </fragment>
+    <fragment
+        android:id="@+id/liste_evenement"
+        android:name="com.even.ui.fragment.liste_evenement"
+        android:label="liste_evenement" />
+</navigation>
