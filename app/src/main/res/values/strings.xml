@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Évén</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings related to login -->
+
+    <string name="iconMenuRecent">Recent events</string>
+    <string name="iconMenuRecherche">Search</string>
+    <string name="iconMenuMesEvens">My events</string>
 
 </resources>

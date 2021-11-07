@@ -14,9 +14,9 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [liste_evenement.newInstance] factory method to
+ * Use the [recherche.newInstance] factory method to
  * create an instance of this fragment.
  */
-class liste_evenement : Fragment(R.layout.fragment_liste_evenement) {
+class recherche : Fragment(R.layout.fragment_recherche) {
 
 }
