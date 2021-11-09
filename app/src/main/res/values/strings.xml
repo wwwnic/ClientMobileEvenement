@@ -6,5 +6,7 @@
     <string name="username">Nom utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="create_account">Creer un compte</string>
+    <string name="email">Courriel</string>
+    <string name="back">Retour</string>
 
 </resources>
