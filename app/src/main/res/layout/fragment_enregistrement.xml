@@ -25,12 +25,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/textNomUtilisateur"
+                android:id="@+id/connexion_textNomUtilisateur"
+                style="@style/Widget.AppCompat.EditText"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
+                android:selectAllOnFocus="false"
                 android:text="Nom utilisateur"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
@@ -38,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/textMotDePasse"
+                android:id="@+id/connexion_textMotDePasse"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -64,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         <Button
-            android:id="@+id/boutonConnexion"
+            android:id="@+id/connexion_boutonConnexion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enregistrement"
