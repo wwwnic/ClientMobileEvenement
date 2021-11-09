@@ -1,6 +1,9 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="connexion_hauteur_plainText">60dp</dimen>
+    <dimen name="connexion_largeur_plainText">251dp</dimen>
     <dimen name="largeur_bouton_question">200dp</dimen>
     <dimen name="marge_horizontal_fragment">16dp</dimen>
     <dimen name="marge_vertical_fragment">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
