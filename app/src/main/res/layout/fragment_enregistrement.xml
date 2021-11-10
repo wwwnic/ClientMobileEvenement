@@ -16,7 +16,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/enregistrement_boutonRetour"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/enregistrement_arrow"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
@@ -25,15 +35,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/enregistrement_boutonRetour"
-                android:layout_width="80dp"
-                android:layout_height="fill_parent"
-                android:background="#00FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -47,6 +48,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,8 +83,9 @@
                 android:id="@+id/enregistrement_username"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
-                android:background="@drawable/rounded_corner_plaintext"
+                android:background="@drawable/login_plaintext"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,15 +115,15 @@
                 android:id="@+id/enregistrement_password"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
-                android:background="@drawable/rounded_corner_plaintext"
+                android:background="@drawable/login_plaintext"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:autofillHints="" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -146,8 +149,9 @@
                 android:id="@+id/enregistrement_email"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
-                android:background="@drawable/rounded_corner_plaintext"
+                android:background="@drawable/login_plaintext"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="textPassword|textEmailAddress"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -163,6 +167,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/default_button_shape"
         android:text="@string/create_account"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
