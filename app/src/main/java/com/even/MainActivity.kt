@@ -15,37 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_principal)
-
-        loadFragment(liste_evenement())
-
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-
-        bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.menuRecent -> {
-                    loadFragment(liste_evenement())
-                    true
-                }
-                R.id.menuRecherche -> {
-                    loadFragment(recherche())
-                    true
-                }
-                R.id.menuMesEvens -> {
-                    loadFragment(mesEvenements())
-                    true
-                }
-                else -> false
-            }
-        }
-
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        // load fragment
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        setContentView(R.layout.activity_main)
     }
 }

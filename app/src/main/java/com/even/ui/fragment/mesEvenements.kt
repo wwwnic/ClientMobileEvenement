@@ -18,5 +18,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class mesEvenements : Fragment(R.layout.fragment_mes_evenements) {
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 }

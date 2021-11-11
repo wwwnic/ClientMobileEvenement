@@ -13,25 +13,10 @@
             android:id="@+id/action_connexion_to_enregistrement"
             app:destination="@id/enregistrement" />
         <action
-            android:id="@+id/action_connexion_to_liste_evenement"
-            app:destination="@id/liste_evenement" />
+            android:id="@+id/action_connexion_to_principal"
+            app:destination="@id/principal"
+            app:popUpTo="@id/principal" />
     </fragment>
-    <fragment
-        android:id="@+id/liste_evenement"
-        android:name="com.even.ui.fragment.liste_evenement"
-        android:label="liste_evenement"
-        tools:layout="@layout/fragment_liste_evenement">
-        <action
-            android:id="@+id/action_liste_evenement_to_mesEvenements"
-            app:destination="@id/mesEvenements" />
-        <action
-            android:id="@+id/action_liste_evenement_to_recherche"
-            app:destination="@id/recherche" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_question"
-        android:name="com.even.ui.fragment.fragment_question"
-        android:label="fragment_question" />
     <fragment
         android:id="@+id/enregistrement"
         android:name="com.even.ui.fragment.enregistrement"
@@ -41,27 +26,7 @@
             app:destination="@id/connexion" />
     </fragment>
     <fragment
-        android:id="@+id/recherche"
-        android:name="com.even.ui.fragment.recherche"
-        android:label="recherche"
-        tools:layout="@layout/fragment_recherche">
-        <action
-            android:id="@+id/action_recherche_to_liste_evenement"
-            app:destination="@id/liste_evenement" />
-        <action
-            android:id="@+id/action_recherche_to_mesEvenements"
-            app:destination="@id/mesEvenements" />
-    </fragment>
-    <fragment
-        android:id="@+id/mesEvenements"
-        android:name="com.even.ui.fragment.mesEvenements"
-        android:label="fragment_mes_evenements"
-        tools:layout="@layout/fragment_mes_evenements" >
-        <action
-            android:id="@+id/action_mesEvenements_to_recherche"
-            app:destination="@id/recherche" />
-        <action
-            android:id="@+id/action_mesEvenements_to_liste_evenement"
-            app:destination="@id/liste_evenement" />
-    </fragment>
+        android:id="@+id/principal"
+        android:name="com.even.ui.fragment.principal"
+        android:label="principal" />
 </navigation>

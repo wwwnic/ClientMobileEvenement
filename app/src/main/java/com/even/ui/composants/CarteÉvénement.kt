@@ -16,7 +16,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ImageBitmap
@@ -30,9 +30,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.motion.widget.MotionScene
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import com.even.MainActivity
 import com.even.R
 import com.even.domaine.entité.Événement
 import com.even.ui.fragment.details_evenement
+import com.even.ui.fragment.liste_evenement
 import java.time.LocalDateTime
 import java.util.*
 
@@ -43,7 +47,8 @@ fun CarteÉvénement(événement: Événement) {
         .padding(all = 8.dp)
         .fillMaxWidth()
         .height(300.dp)
-        .background(colors.primaryVariant)) {
+        .background(colors.primaryVariant)
+        .clickable { }) {
         Row(modifier = Modifier
             .weight(1F)
             .height(150.dp)) {
@@ -54,7 +59,8 @@ fun CarteÉvénement(événement: Événement) {
             )
         }
         Column(modifier = Modifier
-            .weight((1F))) {
+            .weight(1F)
+            .padding(4.dp)) {
             Row {
                 Text(
                     text = événement.nom,

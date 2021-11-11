@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.even.ui.fragment.recherche">
+    tools:context="com.even.ui.fragment.mesEvenements">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textEven"
             android:layout_width="104dp"
             android:layout_height="102dp"
-            android:layout_marginStart="136dp"
             android:layout_marginTop="265dp"
-            android:layout_marginEnd="171dp"
             android:layout_marginBottom="364dp"
-            android:text="Page recherche"
+            android:text="aaaaaa"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

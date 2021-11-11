@@ -18,7 +18,7 @@ import java.util.*
 import com.even.R
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
-import com.even.databinding.FragmentListeEvenementBinding
+import com.even.MainActivity
 import com.even.ui.composants.CarteÉvénement
 import com.even.ui.composants.ListeCarteÉvénements
 import kotlin.collections.ArrayList
@@ -44,7 +44,7 @@ class liste_evenement : Fragment(R.layout.fragment_liste_evenement) {
             listeEvens.add(évén)
             listeEvens.add(évén)
             listeEvens.add(évén)
-            
+
             findViewById<ComposeView>(R.id.listeBlocsEven).setContent {
                 ListeCarteÉvénements(événements = listeEvens)
             }
