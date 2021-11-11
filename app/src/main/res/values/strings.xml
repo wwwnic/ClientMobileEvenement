@@ -6,6 +6,7 @@
     <string name="password">Mot de passe</string>
     <string name="create_account">Creer un compte</string>
     <string name="email">Courriel</string>
+    <string name="phone">Téléphone</string>
     <string name="back">Retour</string>
     <string name="nameEvent">Nom évènement</string>
     <string name="date">Date</string>
