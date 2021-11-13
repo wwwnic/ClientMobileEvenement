@@ -9,6 +9,7 @@
     <string name="phone">Téléphone</string>
     <string name="back">Retour</string>
     <string name="nameEvent">Nom évènement</string>
+    <string name="organizer">Organisateur</string>
     <string name="date">Date</string>
     <string name="location">Location</string>
     <string name="description">Description</string>
@@ -16,4 +17,7 @@
     <string name="save">Enregistrer</string>
     <string name="cancelEvent">Annuler l\'évènement</string>
     <string name="changeAvatar">Changer l\'avatar</string>
+    <string name="participant">participant(s)</string>
+    <string name="participation">Je participe</string>
+    <string name="number">Nombre de</string>
 </resources>
