@@ -29,4 +29,9 @@
         android:name="com.even.modification_compte"
         android:label="fragment_modification_compte"
         tools:layout="@layout/fragment_modification_compte" />
+    <fragment
+        android:id="@+id/detailEvenement"
+        android:name="com.even.detailEvenement"
+        android:label="fragment_detail_evenement"
+        tools:layout="@layout/fragment_detail_evenement" />
 </navigation>
