@@ -14,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [creation_evenement.newInstance] factory method to
+ * Use the [fragment_question.newInstance] factory method to
  * create an instance of this fragment.
  */
-class creation_evenement : Fragment() {
+class fragment_question : Fragment(R.layout.fragment_creation_evenement) {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -45,12 +45,12 @@ class creation_evenement : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment com.even.ui.fragment.creation_evenement.
+         * @return A new instance of fragment fragment_question.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            creation_evenement().apply {
+            fragment_question().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

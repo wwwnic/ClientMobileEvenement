@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.even.ui.fragment.liste_evenement">
 
-    <fragment
-        android:id="@+id/navigator"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/listeBlocsEven"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:navGraph="@navigation/nav_graph"
-        tools:layout="@layout/fragment_connexion" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
