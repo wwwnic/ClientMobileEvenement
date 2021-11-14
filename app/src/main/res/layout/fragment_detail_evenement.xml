@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detailEvenement" >
+    tools:context="com.even.ui.fragment.details_evenement" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout14"
@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@+id/detailEvenement_nameEvent" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/detailEvenement_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date"
