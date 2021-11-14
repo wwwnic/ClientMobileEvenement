@@ -6,8 +6,10 @@
     <string name="password">Mot de passe</string>
     <string name="create_account">Creer un compte</string>
     <string name="email">Courriel</string>
+    <string name="phone">Téléphone</string>
     <string name="back">Retour</string>
     <string name="nameEvent">Nom évènement</string>
+    <string name="organizer">Organisateur</string>
     <string name="date">Date</string>
     <string name="location">Location</string>
     <string name="description">Description</string>
@@ -17,5 +19,13 @@
     <string name="iconMenuRecent">Recent events</string>
     <string name="iconMenuRecherche">Search</string>
     <string name="iconMenuMesEvens">My events</string>
-
+    <string name="byKeyword">Par mot-clé</string>
+    <string name="byMonth">Par mois</string>
+    <string name="byLocation">Par location</string>
+    <string name="byCreator">Par organisateur</string>
+    <string name="search">Rechercher</string>
+    <string name="changeAvatar">Changer l\'avatar</string>
+    <string name="participant">participant(s)</string>
+    <string name="participation">Je participe</string>
+    <string name="number">Nombre de</string>
 </resources>
