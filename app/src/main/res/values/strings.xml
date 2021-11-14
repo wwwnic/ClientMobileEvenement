@@ -16,6 +16,11 @@
     <string name="create">Créer</string>
     <string name="save">Enregistrer</string>
     <string name="cancelEvent">Annuler l\'évènement</string>
+    <string name="byKeyword">Par mot-clé</string>
+    <string name="byMonth">Par mois</string>
+    <string name="byLocation">Par location</string>
+    <string name="byCreator">Par organisateur</string>
+    <string name="search">Rechercher</string>
     <string name="changeAvatar">Changer l\'avatar</string>
     <string name="participant">participant(s)</string>
     <string name="participation">Je participe</string>
