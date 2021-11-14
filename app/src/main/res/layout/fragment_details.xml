@@ -10,18 +10,69 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textEven"
-            android:layout_width="104dp"
-            android:layout_height="102dp"
-            android:layout_marginTop="265dp"
-            android:layout_marginBottom="364dp"
-            android:text="aaaaaa"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/imageEven"
+            android:layout_width="match_parent"
+            android:layout_height="265dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            tools:src="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="415dp"
+            android:layout_height="466dp"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageEven">
+
+            <TextView
+                android:id="@+id/textNomEven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Nom"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textLocationEven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="location"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textDateEven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textOrgEven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Organisateur"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textDescEven"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Description"
+                android:textAlignment="center" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

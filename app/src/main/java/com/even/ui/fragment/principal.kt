@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.Navigation
+import com.even.MainActivity
 import com.even.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -23,6 +26,7 @@ class principal : Fragment(R.layout.fragment_principal) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNav)
+        loadFragment(liste_evenement())
         loadFragment(liste_evenement())
 
         bottomNav.setOnItemSelectedListener { item ->

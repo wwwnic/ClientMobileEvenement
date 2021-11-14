@@ -45,9 +45,7 @@ class connexion : Fragment(R.layout.fragment_connexion) {
         super.onViewCreated(view, savedInstanceState)
         var bouton = view.findViewById<Button>(R.id.boutonConnexion)
         var navController = Navigation.findNavController(view)
-        bouton?.setOnClickListener { navController.navigate(R.id.principal,null, NavOptions.Builder()
-            .setPopUpTo(R.id.principal, true)
-            .build()) }
+        bouton?.setOnClickListener { navController.navigate(R.id.action_connexion_to_principal) }
     }
 
     companion object {
