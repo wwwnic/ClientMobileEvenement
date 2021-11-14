@@ -73,3 +73,12 @@ fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit) {
         }
     }
 }
+
+@Composable
+fun ListeCarteÉvénements(événements: List<Événement>,clickEvent : (Événement) -> Unit) {
+    LazyColumn {
+        items(événements) { e ->
+            CarteÉvénement(événement = e,clickEvent = { clickEvent(e) })
+        }
+    }
+}

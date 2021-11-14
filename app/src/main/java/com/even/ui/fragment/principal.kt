@@ -52,7 +52,6 @@ class principal : Fragment(R.layout.fragment_principal) {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        // load fragment
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.addToBackStack(null)

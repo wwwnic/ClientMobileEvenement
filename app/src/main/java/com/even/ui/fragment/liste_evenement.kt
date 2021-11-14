@@ -13,7 +13,7 @@ import com.even.domaine.entité.Événement
 import java.util.*
 import com.even.R
 import androidx.compose.ui.platform.ComposeView
-import com.even.ui.composants.CarteÉvénement
+import com.even.ui.composants.ListeCarteÉvénements
 import kotlin.collections.ArrayList
 
 
@@ -56,18 +56,9 @@ class liste_evenement : Fragment(R.layout.fragment_liste_evenement) {
             val composeView = findViewById<ComposeView>(R.id.listeBlocsEven)
 
             composeView.setContent {
-                ListeCarteÉvénements(événements = listeEvens)
+                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(details_evenement(e)) })
             }
 
-        }
-    }
-
-    @Composable
-    fun ListeCarteÉvénements(événements: List<Événement>) {
-        LazyColumn {
-            items(événements) { e ->
-                CarteÉvénement(événement = e,clickEvent = { loadFragment(details_evenement(e)) })
-            }
         }
     }
 
