@@ -1,8 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Évén</string>
-    <!-- Strings related to login -->
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Nom utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="create_account">Creer un compte</string>
+    <string name="email">Courriel</string>
+    <string name="back">Retour</string>
+    <string name="nameEvent">Nom évènement</string>
+    <string name="date">Date</string>
+    <string name="location">Location</string>
+    <string name="description">Description</string>
+    <string name="create">Créer</string>
+    <string name="save">Enregistrer</string>
+    <string name="cancelEvent">Annuler l\'évènement</string>
     <string name="iconMenuRecent">Recent events</string>
     <string name="iconMenuRecherche">Search</string>
     <string name="iconMenuMesEvens">My events</string>
