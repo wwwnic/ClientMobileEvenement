@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/recherche">
+    app:startDestination="@id/enregistrement">
     <fragment
         android:id="@+id/connexion"
         android:name="com.even.ui.fragment.connexion"
@@ -25,8 +25,13 @@
         android:label="fragment_modifier_evenement"
         tools:layout="@layout/fragment_modifier_evenement" />
     <fragment
-        android:id="@+id/recherche"
-        android:name="com.even.recherche"
-        android:label="fragment_recherche"
-        tools:layout="@layout/fragment_recherche" />
+        android:id="@+id/modification_compte"
+        android:name="com.even.modification_compte"
+        android:label="fragment_modification_compte"
+        tools:layout="@layout/fragment_modification_compte" />
+    <fragment
+        android:id="@+id/detailEvenement"
+        android:name="com.even.detailEvenement"
+        android:label="fragment_detail_evenement"
+        tools:layout="@layout/fragment_detail_evenement" />
 </navigation>
