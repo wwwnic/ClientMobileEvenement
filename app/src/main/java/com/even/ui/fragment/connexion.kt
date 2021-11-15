@@ -21,8 +21,12 @@ class connexion : Fragment(R.layout.fragment_connexion) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var bouton = view.findViewById<Button>(R.id.connexion_boutonConnexion)
+        var boutonConnexion = view.findViewById<Button>(R.id.connexion_boutonConnexion)
+        var boutonEnregistrement = view.findViewById<Button>(R.id.connexion_boutonEnregistrement)
+
         var navController = Navigation.findNavController(view)
-        bouton?.setOnClickListener { navController.navigate(R.id.action_connexion_to_principal) }
+        boutonConnexion?.setOnClickListener { navController.navigate(R.id.action_connexion_to_principal) }
+        boutonEnregistrement?.setOnClickListener { navController.navigate(R.id.action_connexion_to_enregistrement) }
+
     }
 }
