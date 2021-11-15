@@ -23,7 +23,7 @@
         android:name="com.even.ui.fragment.enregistrement"
         android:label="fragment_enregistrement2">
         <action
-            android:id="@+id/action_enregistrement_to_connexion2"
+            android:id="@+id/action_enregistrement_to_connexion"
             app:destination="@id/connexion" />
     </fragment>
     <fragment

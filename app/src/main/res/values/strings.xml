@@ -35,4 +35,6 @@
     <string name="log_off_msg">Déconnexion</string>\
     <string name="my_event">Mes évènements</string>
     <string name="recent_event">Évènements récent</string>
+    <string name="sign_up_completed">Vous êtes maintenant enregistré</string>
+
 </resources>
