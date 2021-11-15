@@ -1,54 +1,100 @@
 package com.even.ui.fragment
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.findFragment
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.even.MainActivity
-import com.even.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.even.R
+import com.google.android.material.navigation.NavigationView
+
 
 class principal : Fragment(R.layout.fragment_principal) {
+
+    lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    lateinit var drawerLayout: DrawerLayout
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.fragment_principal, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNav)
-        loadFragment(liste_evenement())
+        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        val navView = view.findViewById<NavigationView>(R.id.nav_view)
 
+        toolbar = view.findViewById(R.id.toolbar)
+        drawerLayout = view.findViewById(R.id.drawer_layout)
+        toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_round_side_menu_24)
+        toolbar.title = resources.getString(R.string.my_event)
+
+        setupDrawerToggle();
+        loadFragment(liste_evenement())
+        bottomNavOnClick(bottomNav)
+        navViewOnClick(navView)
+    }
+
+    private fun navViewOnClick(navView: NavigationView) {
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.account_management -> {
+                    loadFragment(modification_compte())
+                    toolbar.title = resources.getString(R.string.account_management)
+                    drawerLayout.close()
+                    true
+                }
+                R.id.log_off -> {
+                    navView.findNavController().navigate(R.id.connexion)
+                    drawerLayout.close()
+                    Toast.makeText(context, R.string.log_off_msg, Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+    }
+
+    private fun bottomNavOnClick(bottomNav: BottomNavigationView) {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuRecent -> {
                     loadFragment(liste_evenement())
+                    toolbar.title = resources.getString(R.string.recent_event)
                     true
                 }
                 R.id.menuRecherche -> {
                     loadFragment(recherche())
+                    toolbar.title = resources.getString(R.string.search)
                     true
                 }
                 R.id.menuMesEvens -> {
                     loadFragment(mesEvenements())
+                    toolbar.title = resources.getString(R.string.my_event)
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    private fun setupDrawerToggle(): ActionBarDrawerToggle? {
+        return ActionBarDrawerToggle(
+            this.activity,
+            drawerLayout,
+            toolbar,
+            R.string.drawer_open,
+            R.string.drawer_close
+        )
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -57,4 +103,5 @@ class principal : Fragment(R.layout.fragment_principal) {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
 }
