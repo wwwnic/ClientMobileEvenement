@@ -1,4 +1,4 @@
-package com.even.ui.fragment
+package com.even.présentation.vue
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.even.MainActivity
 import com.even.présentation.modèle.ModèleÉvénements
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.google.android.material.bottomnavigation.BottomNavigationView

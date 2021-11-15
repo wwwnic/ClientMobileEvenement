@@ -1,17 +1,15 @@
-package com.even.ui.fragment
+package com.even.présentation.vue
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import com.even.R
 import com.even.domaine.entité.Événement
 import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
-import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
@@ -27,7 +25,11 @@ class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragm
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
 
         composeView.setContent {
-            ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(details_evenement(e)) })
+            MaterialTheme {
+                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
+                    details_evenement(e)
+                ) })
+            }
         }
 
         boutonCreer.setOnClickListener { loadFragment(creation_evenement()) }
@@ -37,16 +39,20 @@ class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragm
                 listeEvens = setListeEvens(tab!!.position)
                 if (tab!!.position == 0) {
                     composeView.setContent {
-                        ListeCarteÉvénements(
-                            événements = listeEvens,
-                            clickEvent = { e -> loadFragment(details_evenement(e)) })
+                        MaterialTheme {
+                            ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
+                                details_evenement(e)
+                            ) })
+                        }
                     }
                     boutonCreer.visibility = View.INVISIBLE
                 } else {
                     composeView.setContent {
-                        ListeCarteÉvénements(
-                            événements = listeEvens,
-                            clickEvent = { e -> loadFragment(modifier_evenement()) })
+                        MaterialTheme {
+                            ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
+                                modifier_evenement()
+                            ) })
+                        }
                     }
                     boutonCreer.visibility = View.VISIBLE
                 }

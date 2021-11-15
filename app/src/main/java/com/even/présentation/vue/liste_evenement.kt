@@ -1,27 +1,14 @@
-package com.even.ui.fragment
+package com.even.présentation.vue
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.material.MaterialTheme
 import com.even.domaine.entité.Événement
-import java.util.*
 import com.even.R
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.unit.dp
 import com.even.présentation.modèle.ModèleÉvénements
 import com.even.ui.composants.ListeCarteÉvénements
-import kotlin.collections.ArrayList
 
 
 class liste_evenement(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_liste_evenement) {
@@ -32,7 +19,11 @@ class liste_evenement(val modèle : ModèleÉvénements) : Fragment(R.layout.fra
         val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
 
         composeView.setContent {
-            ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(details_evenement(e)) })
+            MaterialTheme {
+                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
+                    details_evenement(e)
+                ) })
+            }
         }
     }
 

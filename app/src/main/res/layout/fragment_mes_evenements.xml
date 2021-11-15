@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
-    tools:context="com.even.ui.fragment.mesEvenements">
+    tools:context="com.even.présentation.vue.mesEvenements">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
