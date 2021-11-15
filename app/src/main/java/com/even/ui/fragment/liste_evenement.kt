@@ -13,52 +13,20 @@ import com.even.domaine.entité.Événement
 import java.util.*
 import com.even.R
 import androidx.compose.ui.platform.ComposeView
+import com.even.présentation.modèle.ModèleÉvénements
 import com.even.ui.composants.ListeCarteÉvénements
 import kotlin.collections.ArrayList
 
 
-class liste_evenement : Fragment(R.layout.fragment_liste_evenement) {
+class liste_evenement(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_liste_evenement) {
 
-    private var évén : Événement = Événement(
-        "Party chez Bob",
-        "Maison de Bob",
-        Calendar.getInstance().time,
-        "bob", R.drawable.wowimg,
-        "gros party chez Bob let's gooooooo!"
-    )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val listeEvens : List<Événement> = modèle.Événements
+        val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
 
-    private var évén2 : Événement = Événement(
-        "Autre Party chez Bob",
-        "bbbbbb",
-        Calendar.getInstance().time,
-        "bob encore", R.drawable.wowimg,
-        "hey salut"
-    )
-
-    private var évén3 : Événement = Événement(
-        "Réunion des bricoleurs",
-        "Bricoville",
-        Calendar.getInstance().time,
-        "Les bricoleurs", R.drawable.wowimg,
-        "ayoyeeeeeeeee"
-    )
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_liste_evenement,container,false).apply {
-            val listeEvens : ArrayList<Événement> = ArrayList<Événement>()
-            listeEvens.add(évén)
-            listeEvens.add(évén2)
-            listeEvens.add(évén3)
-            val composeView = findViewById<ComposeView>(R.id.listeBlocsEven)
-
-            composeView.setContent {
-                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(details_evenement(e)) })
-            }
-
+        composeView.setContent {
+            ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(details_evenement(e)) })
         }
     }
 

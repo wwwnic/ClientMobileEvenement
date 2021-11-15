@@ -66,7 +66,7 @@ fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit) {
             }
             Row {
                 Text(
-                    text = "Organisé par: ${événement.organisateur}",
+                    text = "Organisé par: ${événement.organisateur?.nomUtilisateur}",
                     color = MaterialTheme.colors.onPrimary
                 )
             }

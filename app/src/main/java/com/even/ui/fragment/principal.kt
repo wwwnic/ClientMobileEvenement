@@ -9,6 +9,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.even.MainActivity
+import com.even.R
+import com.even.présentation.modèle.ModèleÉvénements
+import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.even.R
 import com.google.android.material.navigation.NavigationView
@@ -31,13 +36,15 @@ class principal : Fragment(R.layout.fragment_principal) {
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navView = view.findViewById<NavigationView>(R.id.nav_view)
 
+        val source = SourceDeDonnéesBidon()
+        
         toolbar = view.findViewById(R.id.toolbar)
         drawerLayout = view.findViewById(R.id.drawer_layout)
         toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_round_side_menu_24)
         toolbar.title = resources.getString(R.string.my_event)
 
         setupDrawerToggle();
-        loadFragment(liste_evenement())
+        loadFragment(liste_evenement(ModèleÉvénements(source)))
         bottomNavOnClick(bottomNav)
         navViewOnClick(navView)
     }
@@ -65,10 +72,11 @@ class principal : Fragment(R.layout.fragment_principal) {
     }
 
     private fun bottomNavOnClick(bottomNav: BottomNavigationView) {
+        val source = SourceDeDonnéesBidon()
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuRecent -> {
-                    loadFragment(liste_evenement())
+                    loadFragment(liste_evenement(ModèleÉvénements(source)))
                     toolbar.title = resources.getString(R.string.recent_event)
                     true
                 }
@@ -78,7 +86,7 @@ class principal : Fragment(R.layout.fragment_principal) {
                     true
                 }
                 R.id.menuMesEvens -> {
-                    loadFragment(mesEvenements())
+                    loadFragment(mesEvenements(ModèleÉvénements(source)))
                     toolbar.title = resources.getString(R.string.my_event)
                     true
                 }
