@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.even.ui.fragment.details_evenement" >
+    tools:context="com.even.ui.fragment.details_evenement">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/detailEvenement_eventImage"
-            android:layout_width="394dp"
-            android:layout_height="224dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -39,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="@string/nameEvent"
             android:textColor="@color/black"
-            android:textSize="34sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,9 +50,10 @@
             android:id="@+id/detailEvenement_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/location"
             android:textColor="@color/black"
-            android:textSize="34sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailEvenement_nameEvent" />
 
@@ -57,9 +61,10 @@
             android:id="@+id/detailEvenement_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/date"
             android:textColor="@color/black"
-            android:textSize="34sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailEvenement_location" />
 
@@ -67,9 +72,10 @@
             android:id="@+id/detailEvenement_organizerAvatar"
             android:layout_width="86dp"
             android:layout_height="85dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_location"
+            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_date"
             tools:src="@tools:sample/avatars" />
 
         <TextView
@@ -111,6 +117,8 @@
             android:text="@string/number"
             android:textColor="@color/black"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
