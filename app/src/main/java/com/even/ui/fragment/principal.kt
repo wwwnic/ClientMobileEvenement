@@ -16,6 +16,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.even.MainActivity
 import com.even.R
+import com.even.présentation.modèle.ModèleÉvénements
+import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class principal : Fragment(R.layout.fragment_principal) {
@@ -30,12 +32,13 @@ class principal : Fragment(R.layout.fragment_principal) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNav)
-        loadFragment(liste_evenement())
+        val source = SourceDeDonnéesBidon()
+        loadFragment(liste_evenement(ModèleÉvénements(source)))
 
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuRecent -> {
-                    loadFragment(liste_evenement())
+                    loadFragment(liste_evenement(ModèleÉvénements(source)))
                     true
                 }
                 R.id.menuRecherche -> {
@@ -43,7 +46,7 @@ class principal : Fragment(R.layout.fragment_principal) {
                     true
                 }
                 R.id.menuMesEvens -> {
-                    loadFragment(mesEvenements())
+                    loadFragment(mesEvenements(ModèleÉvénements(source)))
                     true
                 }
                 else -> false

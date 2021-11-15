@@ -4,23 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context="com.even.ui.fragment.mesEvenements">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="104dp"
-            android:layout_height="102dp"
-            android:layout_marginTop="265dp"
-            android:layout_marginBottom="364dp"
-            android:text="Page mes evenements"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <Button
+            android:id="@+id/boutonCreer"
+            android:layout_width="387dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:text="+ Nouvel événement"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barreTabMesEvens"
+            tools:visibility="visible" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/barreTabMesEvens"
+            android:layout_width="413dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/purple_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:tabIconTint="@color/white"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="5dp"
+            app:tabTextColor="@color/white">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabPresences"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Présences" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabCrees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crées" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/listeBlocsEven"
+            android:layout_width="match_parent"
+            android:layout_height="583dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </androidx.compose.ui.platform.ComposeView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
