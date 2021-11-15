@@ -27,7 +27,7 @@
     <string name="changeAvatar">Changer l\'avatar</string>
     <string name="participant">participant(s)</string>
     <string name="participation">Je participe</string>
-    <string name="number">Nombre de</string>
+    <string name="number">0</string>
     <string name="drawer_open">Ouvrir la navigation</string>
     <string name="drawer_close">Fermer la navigation</string>
     <string name="account_management">Gestion du compte</string>
