@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
@@ -29,10 +30,9 @@ fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit) {
         .padding(all = 8.dp)
         .fillMaxWidth()
         .height(300.dp)
-        .background(MaterialTheme.colors.primaryVariant)
+        .background(MaterialTheme.colors.primary)
         .clickable(onClick = clickEvent)) {
         Row(modifier = Modifier
-            .weight(1F)
             .height(150.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.wowimg),
@@ -41,8 +41,9 @@ fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit) {
             )
         }
         Column(modifier = Modifier
-            .weight(1F)
-            .padding(4.dp)) {
+            .padding(4.dp)
+            .height(150.dp)
+            .background(MaterialTheme.colors.primary)) {
             Row {
                 Text(
                     text = événement.nom,

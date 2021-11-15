@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.even.MainActivity
-import com.even.R
 import com.even.présentation.modèle.ModèleÉvénements
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.google.android.material.bottomnavigation.BottomNavigationView
