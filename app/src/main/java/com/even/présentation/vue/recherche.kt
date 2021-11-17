@@ -1,4 +1,4 @@
-package com.even.ui.fragment
+package com.even.présentation.vue
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

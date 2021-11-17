@@ -27,5 +27,14 @@
     <string name="changeAvatar">Changer l\'avatar</string>
     <string name="participant">participant(s)</string>
     <string name="participation">Je participe</string>
-    <string name="number">Nombre de</string>
+    <string name="number">0</string>
+    <string name="drawer_open">Ouvrir la navigation</string>
+    <string name="drawer_close">Fermer la navigation</string>
+    <string name="account_management">Gestion du compte</string>
+    <string name="log_off">Se déconnecter</string>
+    <string name="log_off_msg">Déconnexion</string>\
+    <string name="my_event">Mes évènements</string>
+    <string name="recent_event">Évènements récent</string>
+    <string name="sign_up_completed">Vous êtes maintenant enregistré</string>
+
 </resources>

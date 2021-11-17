@@ -6,7 +6,7 @@
     app:startDestination="@id/connexion">
     <fragment
         android:id="@+id/connexion"
-        android:name="com.even.ui.fragment.connexion"
+        android:name="com.even.présentation.vue.connexion"
         android:label="connexion">
         <action
             android:id="@+id/action_connexion_to_enregistrement"
@@ -20,14 +20,14 @@
     </fragment>
     <fragment
         android:id="@+id/enregistrement"
-        android:name="com.even.ui.fragment.enregistrement"
+        android:name="com.even.présentation.vue.enregistrement"
         android:label="fragment_enregistrement2">
         <action
-            android:id="@+id/action_enregistrement_to_connexion2"
+            android:id="@+id/action_enregistrement_to_connexion"
             app:destination="@id/connexion" />
     </fragment>
     <fragment
         android:id="@+id/principal"
-        android:name="com.even.ui.fragment.principal"
+        android:name="com.even.présentation.vue.principal"
         android:label="principal" />
 </navigation>

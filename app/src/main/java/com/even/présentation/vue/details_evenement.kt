@@ -1,4 +1,4 @@
-package com.even.ui.fragment
+package com.even.présentation.vue
 
 import android.os.Bundle
 import android.view.View
@@ -23,7 +23,7 @@ class details_evenement(var evenement : Événement) : Fragment(R.layout.fragmen
         texteNom?.text = evenement.nom
         texteLocation?.text = evenement.location
         texteDate?.text = evenement.date.toString()
-        texteOrg?.text = evenement.organisateur
+        texteOrg?.text = evenement.organisateur?.nomUtilisateur
         texteDesc?.text = evenement.description
     }
 }
