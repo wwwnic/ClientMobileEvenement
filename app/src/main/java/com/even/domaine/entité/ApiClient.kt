@@ -1,4 +1,4 @@
-package com.even.retrofit
+package com.even.domaine.entité
 
 import com.even.sourceDeDonnées.IApiService
 import com.google.gson.Gson

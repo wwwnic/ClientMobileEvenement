@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/enregistrement"
-        android:name="com.even.présentation.vue.enregistrement"
+        android:name="com.even.présentation.vue.Enregistrement"
         android:label="fragment_enregistrement2">
         <action
             android:id="@+id/action_enregistrement_to_connexion"

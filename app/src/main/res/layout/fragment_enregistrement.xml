@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.even.présentation.vue.enregistrement">
+    tools:context="com.even.présentation.vue.Enregistrement">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/enregistrement_toolbar"
@@ -142,24 +142,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
-            <EditText
-                android:id="@+id/editTextPhone"
-                android:layout_width="@dimen/connexion_largeur_plainText"
-                android:layout_height="@dimen/connexion_hauteur_plainText"
-                android:background="@drawable/login_plaintext"
-                android:ems="10"
-                android:inputType="phone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
             <TextView
-                android:id="@+id/enregistrement_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/phone"
                 android:textColor="@color/figmaMauve"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/enregistrement_phone"
+                android:layout_width="@dimen/connexion_largeur_plainText"
+                android:layout_height="@dimen/connexion_hauteur_plainText"
+                android:background="@drawable/login_plaintext"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="phone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
