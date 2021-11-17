@@ -15,7 +15,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             "123",
             "bob@gmail.com",
             "(514)123-4567",
-            Calendar.getInstance().time
         )
 
         var util2 : Utilisateur = Utilisateur(
@@ -24,7 +23,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             "456",
             "dude@gmail.com",
             "(514)999-9999",
-            Calendar.getInstance().time
         )
 
         var util3 : Utilisateur = Utilisateur(
@@ -33,7 +31,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             "789",
             "patrick@crosemont.qc.ca",
             "(514)111-1111",
-            Calendar.getInstance().time
         )
         listeUtils.add(util)
         listeUtils.add(util2)
