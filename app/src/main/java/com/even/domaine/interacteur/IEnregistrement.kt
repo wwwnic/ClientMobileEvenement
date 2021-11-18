@@ -4,6 +4,8 @@ interface IEnregistrement {
 
     interface IVue {
         fun naviguerVersConnexion()
+        fun afficherToastSuccesEnregistrement()
+        fun afficherToastErreurEnregistrement()
     }
 
     interface IPrésentateur {
