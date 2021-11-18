@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.even.présentation.vue.liste_evenement">
+    tools:context="com.even.présentation.vue.VueListeEvenement">
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/listeBlocsEven"

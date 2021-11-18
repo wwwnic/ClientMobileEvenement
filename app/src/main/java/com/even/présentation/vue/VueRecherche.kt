@@ -8,6 +8,6 @@ import android.view.ViewGroup
 import com.even.R
 
 
-class recherche : Fragment(R.layout.fragment_recherche) {
+class VueRecherche : Fragment(R.layout.fragment_recherche) {
 
 }

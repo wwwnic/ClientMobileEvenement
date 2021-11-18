@@ -10,7 +10,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.even.R
 
-class connexion : Fragment(R.layout.fragment_connexion) {
+class VueConnexion : Fragment(R.layout.fragment_connexion) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

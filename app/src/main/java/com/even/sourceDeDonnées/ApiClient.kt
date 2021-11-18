@@ -1,6 +1,5 @@
-package com.even.domaine.entité
+package com.even.sourceDeDonnées
 
-import com.even.sourceDeDonnées.IApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -9,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private const val URL: String =
-        "https://40d1c99b-3ca7-43af-8c31-c5f4554f0fcc.mock.pstmn.io"
+        //"https://40d1c99b-3ca7-43af-8c31-c5f4554f0fcc.mock.pstmn.io"
+        "http://10.0.0.149:8080/"
 
     private val gson: Gson by lazy {
         GsonBuilder().setLenient().create()

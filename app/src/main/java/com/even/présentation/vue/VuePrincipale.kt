@@ -13,10 +13,11 @@ import com.even.présentation.modèle.ModèleÉvénements
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.even.R
+import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 import com.google.android.material.navigation.NavigationView
 
 
-class principal : Fragment(R.layout.fragment_principal) {
+class VuePrincipale : Fragment(R.layout.fragment_principal) {
 
     lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -33,7 +34,8 @@ class principal : Fragment(R.layout.fragment_principal) {
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navView = view.findViewById<NavigationView>(R.id.nav_view)
 
-        val source = SourceDeDonnéesBidon()
+        //val source = SourceDeDonnéesBidon()
+        val source = SourceDeDonnéesAPI()
         
         toolbar = view.findViewById(R.id.toolbar)
         drawerLayout = view.findViewById(R.id.drawer_layout)
@@ -41,7 +43,7 @@ class principal : Fragment(R.layout.fragment_principal) {
         toolbar.title = resources.getString(R.string.my_event)
 
         setupDrawerToggle();
-        loadFragment(liste_evenement(ModèleÉvénements(source)))
+        loadFragment(VueListeEvenement(ModèleÉvénements(source)))
         bottomNavOnClick(bottomNav)
         navViewOnClick(navView)
     }
@@ -73,17 +75,17 @@ class principal : Fragment(R.layout.fragment_principal) {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuRecent -> {
-                    loadFragment(liste_evenement(ModèleÉvénements(source)))
+                    loadFragment(VueListeEvenement(ModèleÉvénements(source)))
                     toolbar.title = resources.getString(R.string.recent_event)
                     true
                 }
                 R.id.menuRecherche -> {
-                    loadFragment(recherche())
+                    loadFragment(VueRecherche())
                     toolbar.title = resources.getString(R.string.search)
                     true
                 }
                 R.id.menuMesEvens -> {
-                    loadFragment(mesEvenements(ModèleÉvénements(source)))
+                    loadFragment(VueMesEvenements(ModèleÉvénements(source)))
                     toolbar.title = resources.getString(R.string.my_event)
                     true
                 }

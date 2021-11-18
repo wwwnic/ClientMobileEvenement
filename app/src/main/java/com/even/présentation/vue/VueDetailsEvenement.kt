@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
 
-class details_evenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement) {
+class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

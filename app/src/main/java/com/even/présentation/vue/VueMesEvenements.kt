@@ -15,7 +15,7 @@ import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
 
-class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_mes_evenements) {
+class VueMesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_mes_evenements) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,12 +27,12 @@ class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragm
         composeView.setContent {
             MaterialTheme {
                 ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                    details_evenement(e)
+                    VueDetailsEvenement(e)
                 ) })
             }
         }
 
-        boutonCreer.setOnClickListener { loadFragment(creation_evenement()) }
+        boutonCreer.setOnClickListener { loadFragment(VueCreationEvenement()) }
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -41,7 +41,7 @@ class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragm
                     composeView.setContent {
                         MaterialTheme {
                             ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                                details_evenement(e)
+                                VueDetailsEvenement(e)
                             ) })
                         }
                     }
@@ -50,7 +50,7 @@ class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragm
                     composeView.setContent {
                         MaterialTheme {
                             ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                                modifier_evenement()
+                                VueModifierEvenement()
                             ) })
                         }
                     }

@@ -11,10 +11,10 @@ class ModèleÉvénements(val source : ISourceDeDonnées) {
 
     init {
         Événements = IntGetAllÉvénements(source).getAllÉvénements()
-        Événements.forEach { e ->
+        /*Événements.forEach { e ->
             ModèleUtilisateurs(source).Utilisateurs.forEach { u ->
                 if(u.idUtilisateur == e.idOrganisateur) e.organisateur = u}
-        }
+        }*/
     }
 
     fun getÉvénementsParPrésence(utilisateur : Utilisateur) : List<Événement> {

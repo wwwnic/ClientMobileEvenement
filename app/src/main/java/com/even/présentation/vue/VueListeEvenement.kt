@@ -11,7 +11,7 @@ import com.even.présentation.modèle.ModèleÉvénements
 import com.even.ui.composants.ListeCarteÉvénements
 
 
-class liste_evenement(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_liste_evenement) {
+class VueListeEvenement(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_liste_evenement) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,7 +21,7 @@ class liste_evenement(val modèle : ModèleÉvénements) : Fragment(R.layout.fra
         composeView.setContent {
             MaterialTheme {
                 ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                    details_evenement(e)
+                    VueDetailsEvenement(e)
                 ) })
             }
         }
