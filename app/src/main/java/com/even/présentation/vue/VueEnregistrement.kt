@@ -1,7 +1,5 @@
 package com.even.présentation.vue
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,10 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.NavController
 import com.even.R
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.even.domaine.interacteur.IntEnregistrement
 import com.even.domaine.interacteur.IEnregistrement
@@ -26,7 +21,7 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        présentateurEnregistrement = PrésentateurEnregistrement(this,IntEnregistrement())
+        présentateurEnregistrement = PrésentateurEnregistrement(this, IntEnregistrement())
         var toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
         toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
         clickListenerBtnEnregistrement(view)
@@ -37,18 +32,37 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
     ) {
         val boutonEnregistrement = view.findViewById<Button>(R.id.enregistrement_creer_un_compte)
         boutonEnregistrement?.setOnClickListener {
-            var tvUsername = view.findViewById<TextView>(R.id.enregistrement_username)
-            var tvPassword = view.findViewById<TextView>(R.id.enregistrement_password)
-            var tvEmail = view.findViewById<TextView>(R.id.enregistrement_email)
-            var tvPhone = view.findViewById<TextView>(R.id.enregistrement_phone)
-
-            présentateurEnregistrement.traiterRequêteReclamerEnregistrement(
-                tvUsername.text.toString(),
-                tvPassword.text.toString(),
-                tvEmail.text.toString(),
-                tvPhone.text.toString()
-            )
+            val tvUsername = view.findViewById<TextView>(R.id.enregistrement_username)
+            val tvPassword = view.findViewById<TextView>(R.id.enregistrement_password)
+            val tvEmail = view.findViewById<TextView>(R.id.enregistrement_email)
+            val tvPhone = view.findViewById<TextView>(R.id.enregistrement_phone)
+            Log.i("input", "Les entrées sont " + validerLesEntrées().toString())
+            if (validerLesEntrées()) {
+                présentateurEnregistrement.traiterRequêteReclamerEnregistrement(
+                    tvUsername.text.toString(),
+                    tvPassword.text.toString(),
+                    tvEmail.text.toString(),
+                    tvPhone.text.toString()
+                )
+            }
         }
+    }
+
+    private fun validerLesEntrées(): Boolean {
+        val vue = requireView()
+        val username =
+            vue.findViewById<TextView>(R.id.enregistrement_username).text.toString()
+        val password =
+            vue.findViewById<TextView>(R.id.enregistrement_password).text.toString()
+        val email =
+            vue.findViewById<TextView>(R.id.enregistrement_email).text.toString()
+        val phone =
+            vue.findViewById<TextView>(R.id.enregistrement_phone).text.toString()
+        val estNomUsagerValide = présentateurEnregistrement.traiterRequêteValiderNomUsager(username)
+        val estMotPasseValide = présentateurEnregistrement.traiterRequêteValiderMotDePasse(password)
+        val estCourrielValide = présentateurEnregistrement.traiterRequêteValiderCourriel(email)
+        val estTelephoneValide = présentateurEnregistrement.traiterRequêteValiderTelephone(phone)
+        return estNomUsagerValide && estMotPasseValide && estCourrielValide && estTelephoneValide
     }
 
     override fun naviguerVersConnexion() {
@@ -63,6 +77,4 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
     override fun afficherToastErreurEnregistrement() {
         Toast.makeText(context, R.string.sign_up_incompleted, Toast.LENGTH_SHORT).show()
     }
-
-
 }
