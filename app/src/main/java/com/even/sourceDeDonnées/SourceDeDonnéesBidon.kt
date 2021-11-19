@@ -1,11 +1,8 @@
 package com.even.sourceDeDonnées
 
-import com.even.R
-import com.even.domaine.entité.ApiReponse
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 

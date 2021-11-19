@@ -1,17 +1,20 @@
 package com.even.présentation.modèle
 
 import com.even.domaine.entité.Utilisateur
-import com.even.domaine.entité.Événement
 import com.even.domaine.interacteur.IntGetAllUtilisateurs
-import com.even.domaine.interacteur.IntGetAllÉvénements
-import com.even.domaine.interacteur.IntGetUtilisateursDansÉvénement
 import com.even.sourceDeDonnées.ISourceDeDonnées
 
-class ModèleUtilisateurs(val source : ISourceDeDonnées) {
-    var Utilisateurs : List<Utilisateur> = ArrayList<Utilisateur>()
+class ModèleUtilisateurs {
 
-    init {
-        Utilisateurs = IntGetAllUtilisateurs(source).getAllUtilisateurs()
+    companion object {
+        lateinit var _source : ISourceDeDonnées
+        fun setSource(source : ISourceDeDonnées) {
+            _source = source
+        }
+    }
+
+    fun getUtilisateurs(): List<Utilisateur> {
+        return IntGetAllUtilisateurs(_source).getAllUtilisateurs()
     }
 
     /*fun getUtilisateursDansÉvénement(événement : Événement) : List<Utilisateur> {

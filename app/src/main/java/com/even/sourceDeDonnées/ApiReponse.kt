@@ -1,3 +1,3 @@
-package com.even.domaine.entité
+package com.even.sourceDeDonnées
 
 data class ApiReponse(val error : String)

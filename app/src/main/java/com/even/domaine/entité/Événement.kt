@@ -1,10 +1,5 @@
 package com.even.domaine.entité
 
-import android.graphics.Bitmap
-import android.media.Image
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.even.R
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
