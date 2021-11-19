@@ -1,5 +1,6 @@
 package com.even.présentation.vue
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat.getColor
 import com.even.R
 import androidx.navigation.fragment.findNavController
 import com.even.domaine.interacteur.IntEnregistrement
@@ -62,7 +64,29 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
         val estMotPasseValide = présentateurEnregistrement.traiterRequêteValiderMotDePasse(password)
         val estCourrielValide = présentateurEnregistrement.traiterRequêteValiderCourriel(email)
         val estTelephoneValide = présentateurEnregistrement.traiterRequêteValiderTelephone(phone)
+
+        afficherLesEntréesInvalides(estNomUsagerValide, estMotPasseValide, estCourrielValide, estTelephoneValide)
         return estNomUsagerValide && estMotPasseValide && estCourrielValide && estTelephoneValide
+    }
+
+    private fun afficherLesEntréesInvalides(
+        estNomUtilValide: Boolean,
+        estMotPassValide: Boolean,
+        estCourrielValide: Boolean,
+        estTelphoneValide: Boolean
+    ) {
+        if (!estNomUtilValide) {
+            afficherContourErreurNomUsager()
+        }
+        if (!estMotPassValide) {
+            afficherContourErreurMotDePasse()
+        }
+        if (!estCourrielValide) {
+            afficherContourErreurCourriel()
+        }
+        if (!estTelphoneValide) {
+            afficherContourErreurTelephone()
+        }
     }
 
     override fun naviguerVersConnexion() {
@@ -76,5 +100,41 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
 
     override fun afficherToastErreurEnregistrement() {
         Toast.makeText(context, R.string.sign_up_incompleted, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun afficherContourErreurNomUsager() {
+        var tvUsername =
+            requireView().findViewById<TextView>(R.id.enregistrement_username)
+        var tvHintUsername =
+            requireView().findViewById<TextView>(R.id.enregistrement_hint_nomUtilisateur)
+        tvHintUsername.setTextColor(getColor(requireContext(), R.color.rouge))
+        tvUsername.setBackgroundResource(R.drawable.login_plaintext_with_error)
+    }
+
+    override fun afficherContourErreurMotDePasse() {
+        var tvPassword =
+            requireView().findViewById<TextView>(R.id.enregistrement_password)
+        var tvHintPassword =
+            requireView().findViewById<TextView>(R.id.enregistrement_hint_password)
+        tvHintPassword.setTextColor(getColor(requireContext(), R.color.rouge))
+        tvPassword.setBackgroundResource(R.drawable.login_plaintext_with_error)
+    }
+
+    override fun afficherContourErreurCourriel() {
+        var tvEmail =
+            requireView().findViewById<TextView>(R.id.enregistrement_email)
+        var tvHintEmail =
+            requireView().findViewById<TextView>(R.id.enregistrement_hint_email)
+        tvHintEmail.setTextColor(getColor(requireContext(), R.color.rouge))
+        tvEmail.setBackgroundResource(R.drawable.login_plaintext_with_error)
+    }
+
+    override fun afficherContourErreurTelephone() {
+        var tvPhone =
+            requireView().findViewById<TextView>(R.id.enregistrement_phone)
+        var tvHintPhone =
+            requireView().findViewById<TextView>(R.id.enregistrement_hint_phone)
+        tvHintPhone.setTextColor(getColor(requireContext(), R.color.rouge))
+        tvPhone.setBackgroundResource(R.drawable.login_plaintext_with_error)
     }
 }

@@ -41,9 +41,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/enregistrement_hint_nomUtilisateur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nom utilisateur"
+                android:text="@string/username"
                 android:textColor="@color/figmaMauve"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,6 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
             <TextView
+                android:id="@+id/enregistrement_hint_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
@@ -109,6 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <TextView
+                android:id="@+id/enregistrement_hint_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
@@ -143,6 +146,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
             <TextView
+                android:id="@+id/enregistrement_hint_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/phone"
