@@ -11,11 +11,11 @@ import androidx.navigation.NavController
 import com.even.R
 import androidx.navigation.Navigation
 import com.even.domaine.interacteur.IntEnregistrement
-import com.even.domaine.interacteur.IEnregistrement
+import com.even.présentation.présenteur.IEnregistrement
 import com.even.présentation.présenteur.PrésentateurEnregistrement
 
 
-class Enregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistrement.IVue {
+class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistrement.IVue {
 
     lateinit var présentateurEnregistrement: PrésentateurEnregistrement
     lateinit var navController : NavController

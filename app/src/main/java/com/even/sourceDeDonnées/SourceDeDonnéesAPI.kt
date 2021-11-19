@@ -5,13 +5,11 @@ import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import com.even.domaine.interacteur.IntGetAllUtilisateurs
+import com.even.présentation.modèle.ModèleÉvénements
 import com.even.sourceDeDonnées.ApiClient.apiService
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,19 +17,25 @@ import retrofit2.Response
 
 class SourceDeDonnéesAPI : ISourceDeDonnées {
     override fun getAllUtilisateurs(): List<Utilisateur> {
-        var reponse = ""
         var liste : List<Utilisateur> = ArrayList<Utilisateur>()
-        CoroutineScope(Dispatchers.IO).launch {
-           reponse = apiService.getAllUtilisateurs().toString()
+
+        runBlocking {
+            var reponseApi = apiService.getAllUtilisateurs()
+            if (reponseApi.isSuccessful) {
+                liste = reponseApi.body() as List<Utilisateur>
+            }
         }
-        Gson().fromJson<Utilisateur>(reponse, object:TypeToken<List<Utilisateur>>() {}.type)
         return liste
     }
 
     override fun getAllEvenements(): List<Événement> {
         var liste : List<Événement> = ArrayList<Événement>()
-        CoroutineScope(Dispatchers.IO).launch {
-            liste = apiService.getAllEvenements().body() as List<Événement>
+
+        runBlocking {
+            var reponseApi = apiService.getAllEvenements()
+            if (reponseApi.isSuccessful) {
+                liste = reponseApi.body() as List<Événement>
+            }
         }
         return liste
     }

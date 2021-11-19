@@ -8,8 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private const val URL: String =
-        //"https://40d1c99b-3ca7-43af-8c31-c5f4554f0fcc.mock.pstmn.io"
-        "http://10.0.0.149:8080/"
+        // Changer pour l'adresse du service ou du postman
+        "https://40d1c99b-3ca7-43af-8c31-c5f4554f0fcc.mock.pstmn.io"
 
     private val gson: Gson by lazy {
         GsonBuilder().setLenient().create()

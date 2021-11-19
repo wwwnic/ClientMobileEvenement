@@ -14,12 +14,12 @@ class ModèleUtilisateurs(val source : ISourceDeDonnées) {
         Utilisateurs = IntGetAllUtilisateurs(source).getAllUtilisateurs()
     }
 
-    fun getUtilisateursDansÉvénement(événement : Événement) : List<Utilisateur> {
+    /*fun getUtilisateursDansÉvénement(événement : Événement) : List<Utilisateur> {
         var listeUtilEven = IntGetUtilisateursDansÉvénement(source).getUtilisateursDansÉvénement()
         var listeUtil = ArrayList<Utilisateur>()
         listeUtilEven.filter { it.idEvenement == événement.idEvenement}.forEach { li ->
             listeUtil.add(Utilisateurs.filter { it.idUtilisateur == li.idUtilisateur }.first())
         }
         return listeUtil
-    }
+    }*/
 }

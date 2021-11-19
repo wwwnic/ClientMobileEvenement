@@ -15,8 +15,8 @@ import retrofit2.http.*
 interface IApiService {
     @POST("enregistrement")
     suspend fun creerUtilisateur(@Body post: Utilisateur): Response<ApiReponse>
-    @GET("Utilisateur")
-    suspend fun getAllUtilisateurs() : ResponseBody
+    @GET("/api/Utilisateur/GetAll")
+    suspend fun getAllUtilisateurs() : Response<List<Utilisateur>>
     @GET("/api/Evenement")
     suspend fun getAllEvenements() : Response<List<Événement>>
 }

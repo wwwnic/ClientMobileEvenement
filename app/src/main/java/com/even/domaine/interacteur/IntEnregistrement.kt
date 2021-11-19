@@ -18,7 +18,8 @@ class IntEnregistrement() {
                 username,
                 password,
                 email,
-                phone
+                phone,
+                ""
             )
         )
         Log.i("Réponse POST", reponseRequete.toString()) //TODO: log

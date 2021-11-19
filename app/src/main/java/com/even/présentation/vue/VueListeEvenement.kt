@@ -7,24 +7,19 @@ import androidx.compose.material.MaterialTheme
 import com.even.domaine.entité.Événement
 import com.even.R
 import androidx.compose.ui.platform.ComposeView
-import com.even.présentation.modèle.ModèleÉvénements
+import com.even.présentation.présenteur.IListeEvenements
+import com.even.présentation.présenteur.PrésentateurListeÉvénements
 import com.even.ui.composants.ListeCarteÉvénements
 
 
-class VueListeEvenement(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_liste_evenement) {
+class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeEvenements.IVue {
+
+    lateinit var présentateur : IListeEvenements.IPrésentateur
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val listeEvens : List<Événement> = modèle.Événements
-        val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
-
-        composeView.setContent {
-            MaterialTheme {
-                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                    VueDetailsEvenement(e)
-                ) })
-            }
-        }
+        présentateur = PrésentateurListeÉvénements(this)
+        présentateur.traiterRequêteAfficherListeRecents()
     }
 
     // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
@@ -34,5 +29,17 @@ class VueListeEvenement(val modèle : ModèleÉvénements) : Fragment(R.layout.f
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    override fun afficherListeEvenementsRecents(listeEvens : List<Événement>) {
+        val composeView = view?.findViewById<ComposeView>(R.id.listeBlocsEven)
+
+        composeView?.setContent {
+            MaterialTheme {
+                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
+                    VueDetailsEvenement(e)
+                ) })
+            }
+        }
     }
 }

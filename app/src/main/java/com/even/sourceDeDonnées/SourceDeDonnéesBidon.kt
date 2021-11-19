@@ -6,33 +6,37 @@ import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.util.*
 
 class SourceDeDonnéesBidon : ISourceDeDonnées {
     override fun getAllUtilisateurs(): List<Utilisateur> {
-        var listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
-        var util : Utilisateur = Utilisateur(
+        val listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
+        val util : Utilisateur = Utilisateur(
             1,
             "Bob",
             "123",
             "bob@gmail.com",
             "(514)123-4567",
+            SimpleDateFormat("yyyy.MM").format(Date())
         )
 
-        var util2 : Utilisateur = Utilisateur(
+        val util2 : Utilisateur = Utilisateur(
             2,
             "Dude",
             "456",
             "dude@gmail.com",
             "(514)999-9999",
+            SimpleDateFormat("yyyy.MM").format(Date())
         )
 
-        var util3 : Utilisateur = Utilisateur(
+        val util3 : Utilisateur = Utilisateur(
             3,
             "Patrick",
             "789",
             "patrick@crosemont.qc.ca",
             "(514)111-1111",
+            SimpleDateFormat("yyyy.MM").format(Date())
         )
         listeUtils.add(util)
         listeUtils.add(util2)
@@ -41,8 +45,8 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     }
 
     override fun getAllEvenements(): List<Événement> {
-            var listeEvens : ArrayList<Événement> = ArrayList<Événement>()
-            var évén : Événement = Événement(
+            val listeEvens : ArrayList<Événement> = ArrayList<Événement>()
+            val évén : Événement = Événement(
                 1,
                 "Party chez Bob",
                 "Maison de Bob",
@@ -51,7 +55,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
                 "gros party chez Bob let's gooooooo!"
             )
 
-            var évén2 : Événement = Événement(
+            val évén2 : Événement = Événement(
                 2,
                 "Autre Party chez Bob",
                 "bbbbbb",
@@ -60,7 +64,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
                 "hey salut"
             )
 
-            var évén3 : Événement = Événement(
+            val évén3 : Événement = Événement(
                 3,
                 "Réunion des bricoleurs",
                 "Bricoville",
@@ -75,24 +79,24 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     }
 
     override fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
-        var listeUtilEven : ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
+        val listeUtilEven : ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
 
-        var utilEven : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven : UtilisateurÉvénement = UtilisateurÉvénement(
             2,
             1
         )
 
-        var utilEven2 : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven2 : UtilisateurÉvénement = UtilisateurÉvénement(
             3,
             1
         )
 
-        var utilEven3 : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven3 : UtilisateurÉvénement = UtilisateurÉvénement(
             1,
             3
         )
 
-        var utilEven4 : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven4 : UtilisateurÉvénement = UtilisateurÉvénement(
             3,
             3
         )

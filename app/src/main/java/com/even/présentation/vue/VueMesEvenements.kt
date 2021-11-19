@@ -15,12 +15,13 @@ import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
 
-class VueMesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_mes_evenements) {
+class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
-        var listeEvens : List<Événement> = setListeEvens(0)
+        //var listeEvens : List<Événement> = setListeEvens(0)
+        var listeEvens : List<Événement> = ArrayList<Événement>()
         val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
 
@@ -36,7 +37,7 @@ class VueMesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fr
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                listeEvens = setListeEvens(tab!!.position)
+                //listeEvens = setListeEvens(tab!!.position)
                 if (tab!!.position == 0) {
                     composeView.setContent {
                         MaterialTheme {
@@ -66,15 +67,15 @@ class VueMesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fr
         })
     }
 
-    private fun setListeEvens(tabSélectionée : Int) : List<Événement> {
+    /*private fun setListeEvens(tabSélectionée : Int) : List<Événement> {
         var liste : List<Événement>
         if (tabSélectionée == 0) {
-            liste = modèle.getÉvénementsParPrésence(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
+            //liste = modèle.getÉvénementsParPrésence(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
         } else {
-            liste = modèle.getÉvénementsParCréateur(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
+            //liste = modèle.getÉvénementsParCréateur(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
         }
         return liste
-    }
+    }*/
 
     // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
     private fun loadFragment(fragment: Fragment) {

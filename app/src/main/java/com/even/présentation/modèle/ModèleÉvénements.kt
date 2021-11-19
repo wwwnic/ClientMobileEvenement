@@ -11,19 +11,20 @@ class ModèleÉvénements(val source : ISourceDeDonnées) {
 
     init {
         Événements = IntGetAllÉvénements(source).getAllÉvénements()
-        /*Événements.forEach { e ->
+        Événements.forEach { e ->
             ModèleUtilisateurs(source).Utilisateurs.forEach { u ->
                 if(u.idUtilisateur == e.idOrganisateur) e.organisateur = u}
-        }*/
+            e.date = e.date.split("T").let {it.get(0)+" "+it.get(1)}
+        }
     }
 
     fun getÉvénementsParPrésence(utilisateur : Utilisateur) : List<Événement> {
-        var listeUtilEven = IntGetUtilisateursDansÉvénement(source).getUtilisateursDansÉvénement()
-        var listeEven = ArrayList<Événement>()
-        listeUtilEven.filter { it.idUtilisateur == utilisateur.idUtilisateur}.forEach { li ->
-            listeEven.add(Événements.filter { it.idEvenement == li.idEvenement }.first())
+        var listeUtilDansEven = IntGetUtilisateursDansÉvénement(source).getUtilisateursDansÉvénement()
+        var listeEvenPresents = ArrayList<Événement>()
+        listeUtilDansEven.filter { it.idUtilisateur == utilisateur.idUtilisateur}.forEach { li ->
+            listeEvenPresents.add(Événements.filter { it.idEvenement == li.idEvenement }.first())
         }
-        return listeEven
+        return listeEvenPresents
     }
 
     fun getÉvénementsParCréateur(utilisateur: Utilisateur) : List<Événement> {

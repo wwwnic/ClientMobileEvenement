@@ -33,9 +33,6 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         super.onViewCreated(view, savedInstanceState)
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navView = view.findViewById<NavigationView>(R.id.nav_view)
-
-        //val source = SourceDeDonnéesBidon()
-        val source = SourceDeDonnéesAPI()
         
         toolbar = view.findViewById(R.id.toolbar)
         drawerLayout = view.findViewById(R.id.drawer_layout)
@@ -43,7 +40,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         toolbar.title = resources.getString(R.string.my_event)
 
         setupDrawerToggle();
-        loadFragment(VueListeEvenement(ModèleÉvénements(source)))
+        loadFragment(VueListeEvenement())
         bottomNavOnClick(bottomNav)
         navViewOnClick(navView)
     }
@@ -75,7 +72,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuRecent -> {
-                    loadFragment(VueListeEvenement(ModèleÉvénements(source)))
+                    loadFragment(VueListeEvenement())
                     toolbar.title = resources.getString(R.string.recent_event)
                     true
                 }
@@ -85,7 +82,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
                     true
                 }
                 R.id.menuMesEvens -> {
-                    loadFragment(VueMesEvenements(ModèleÉvénements(source)))
+                    loadFragment(VueMesEvenements())
                     toolbar.title = resources.getString(R.string.my_event)
                     true
                 }
