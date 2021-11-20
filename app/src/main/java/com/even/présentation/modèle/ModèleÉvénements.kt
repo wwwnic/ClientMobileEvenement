@@ -13,7 +13,7 @@ class ModèleÉvénements {
         }
     }
 
-    fun getÉvénementsRécents() : List<Événement> {
+    suspend fun getÉvénementsRécents() : List<Événement> {
         return IntGetÉvénementsRécents(_source).getAllÉvénements()
     }
 

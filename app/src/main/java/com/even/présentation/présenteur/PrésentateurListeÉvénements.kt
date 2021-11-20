@@ -1,24 +1,21 @@
 package com.even.présentation.présenteur
 
 import com.even.présentation.modèle.ModèleÉvénements
-import com.even.sourceDeDonnées.SourceDeDonnéesAPI
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class PrésentateurListeÉvénements(
     val vue : IListeEvenements.IVue,
 ) : IListeEvenements.IPrésentateur {
 
-
     override fun traiterRequêteAfficherListeRecents() {
-        CoroutineScope(Dispatchers.IO).launch {
+        val handler = CoroutineExceptionHandler {
+            _, exception -> vue.afficherErreurConnexion()
+        }
+        CoroutineScope(Dispatchers.Main).launch(handler) {
             var liste = ModèleÉvénements().getÉvénementsRécents()
             withContext(Dispatchers.Main) {
                 vue.afficherListeEvenementsRecents(liste)
             }
         }
     }
-
 }

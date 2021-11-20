@@ -6,6 +6,7 @@ interface IListeEvenements {
 
     interface IVue {
         fun afficherListeEvenementsRecents(liste : List<Événement>)
+        fun afficherErreurConnexion()
     }
 
     interface IPrésentateur {

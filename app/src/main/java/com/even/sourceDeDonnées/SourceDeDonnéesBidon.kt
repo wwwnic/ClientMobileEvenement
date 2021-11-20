@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SourceDeDonnéesBidon : ISourceDeDonnées {
-    override fun getAllUtilisateurs(): List<Utilisateur> {
+    override suspend fun getAllUtilisateurs(): List<Utilisateur> {
         val listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
         val util : Utilisateur = Utilisateur(
             1,
@@ -41,7 +41,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtils
     }
 
-    override fun getAllEvenements(): List<Événement> {
+    override suspend fun getAllEvenements(): List<Événement> {
             val listeEvens : ArrayList<Événement> = ArrayList<Événement>()
             val évén : Événement = Événement(
                 1,

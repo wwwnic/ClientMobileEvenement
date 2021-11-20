@@ -8,13 +8,15 @@ import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 
 class IntGetÉvénementsRécents(var _source : ISourceDeDonnées) {
 
-    fun getAllÉvénements() : List<Événement> {
-        var liste = _source.getAllEvenements()
-        liste.forEach { e ->
-            IntGetAllUtilisateurs(_source).getAllUtilisateurs().forEach { u ->
-                if(u.idUtilisateur == e.idOrganisateur) e.organisateur = u}
-            e.date = e.date.split("T").let {it.get(0)+" "+it.get(1)}
+    suspend fun getAllÉvénements() : List<Événement> {
+        var listeEvenement = _source.getAllEvenements()
+        var utilisateurs = IntGetAllUtilisateurs(_source).getAllUtilisateurs()
+        listeEvenement.forEach { evenement ->
+            utilisateurs.forEach { utilisateur ->
+                if (utilisateur.idUtilisateur == evenement.idOrganisateur) evenement.organisateur = utilisateur
+            }
+            evenement.date = evenement.date.split("T").let { it[0] + " " + it[1] }
         }
-        return liste
+        return listeEvenement
     }
 }

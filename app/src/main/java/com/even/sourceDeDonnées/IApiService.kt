@@ -10,10 +10,14 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface IApiService {
+    interface OnConnectionTimeoutListener {
+        fun onConnectionTimeout()
+    }
+
     @POST("enregistrement")
     suspend fun creerUtilisateur(@Body post: Utilisateur): Response<ApiReponse>
-    @GET("/Utilisateurs")
+    @GET("api/Utilisateur/GetAll")
     suspend fun getAllUtilisateurs() : Response<List<Utilisateur>>
-    @GET("/Evenements")
+    @GET("api/Evenement")
     suspend fun getAllEvenements() : Response<List<Événement>>
 }

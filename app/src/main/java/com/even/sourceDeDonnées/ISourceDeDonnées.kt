@@ -5,8 +5,8 @@ import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 
 interface ISourceDeDonnées {
-    fun getAllUtilisateurs() : List<Utilisateur>
-    fun getAllEvenements() : List<Événement>
+    suspend fun getAllUtilisateurs() : List<Utilisateur>
+    suspend fun getAllEvenements() : List<Événement>
     fun getUtilisateursEvenement() : List<UtilisateurÉvénement>
     fun creerUtilisateur()
 }

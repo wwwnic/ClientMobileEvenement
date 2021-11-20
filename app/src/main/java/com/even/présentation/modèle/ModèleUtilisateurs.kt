@@ -13,7 +13,7 @@ class ModèleUtilisateurs {
         }
     }
 
-    fun getUtilisateurs(): List<Utilisateur> {
+    suspend fun getUtilisateurs(): List<Utilisateur> {
         return IntGetAllUtilisateurs(_source).getAllUtilisateurs()
     }
 
