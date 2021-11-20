@@ -13,11 +13,9 @@ import androidx.core.content.ContextCompat.getColor
 import com.even.R
 import androidx.navigation.fragment.findNavController
 import com.even.domaine.entité.ApiClient
-import com.even.domaine.interacteur.IntEnregistrement
 import com.even.domaine.interacteur.IEnregistrement
 import com.even.présentation.modèle.ModèleEnregistrement
 import com.even.présentation.présenteur.PrésentateurEnregistrement
-import com.even.sourceDeDonnées.IApiService
 
 
 class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistrement.IVue {
@@ -26,7 +24,8 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        présentateurEnregistrement = PrésentateurEnregistrement(this, ModèleEnregistrement(ApiClient.apiService))
+        présentateurEnregistrement =
+            PrésentateurEnregistrement(this, ModèleEnregistrement(ApiClient.apiService))
 
         val toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
@@ -47,6 +46,8 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
                     txtCourriel.toString(),
                     txtTelephone.toString()
                 )
+            } else {
+                afficherToastErreurEnregistrement()
             }
         }
     }
@@ -81,12 +82,11 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
         estCourrielValide: Boolean,
         estTelephoneValide: Boolean
     ) {
-        if (!estNomUsagerValide) afficherErreurNomUsager()
-        if (!estMotPasseValide) afficherErreurMotDePasse()
-        if (!estCourrielValide) afficherErreurCourriel()
-        if (!estTelephoneValide) afficherErreurTelephone()
+        afficherErreurNomUsager(!estNomUsagerValide)
+        afficherErreurMotDePasse(!estMotPasseValide)
+        afficherErreurCourriel(!estCourrielValide)
+        afficherErreurTéléphone(!estTelephoneValide)
     }
-
 
     override fun naviguerVersConnexion() {
         findNavController().navigate(R.id.action_enregistrement_to_connexion)
@@ -101,30 +101,43 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
         Toast.makeText(context, R.string.sign_up_incompleted, Toast.LENGTH_SHORT).show()
     }
 
-    override fun afficherErreurNomUsager() {
-        changerCouleurEnRouge(R.id.enregistrement_nomUsager, R.id.enregistrement_hint_nomUsager)
+
+    override fun afficherErreurNomUsager(afficherEnRouge: Boolean) {
+        changerCouleurValidation(
+            afficherEnRouge, R.id.enregistrement_nomUsager, R.id.enregistrement_hint_nomUsager
+        )
     }
 
-    override fun afficherErreurMotDePasse() {
-        changerCouleurEnRouge(R.id.enregistrement_motDePasse, R.id.enregistrement_hint_motDePasse)
+    override fun afficherErreurMotDePasse(afficherEnRouge: Boolean) {
+        changerCouleurValidation(
+            afficherEnRouge, R.id.enregistrement_motDePasse, R.id.enregistrement_hint_motDePasse
+        )
     }
 
-    override fun afficherErreurCourriel() {
-        changerCouleurEnRouge(R.id.enregistrement_courriel, R.id.enregistrement_hint_courriel)
+    override fun afficherErreurCourriel(afficherEnRouge: Boolean) {
+        changerCouleurValidation(
+            afficherEnRouge, R.id.enregistrement_courriel, R.id.enregistrement_hint_courriel
+        )
     }
 
-    override fun afficherErreurTelephone() {
-        changerCouleurEnRouge(R.id.enregistrement_telephone, R.id.enregistrement_hint_telephone)
+    override fun afficherErreurTéléphone(afficherEnRouge: Boolean) {
+        changerCouleurValidation(
+            afficherEnRouge, R.id.enregistrement_telephone, R.id.enregistrement_hint_telephone
+        )
     }
 
-    private fun changerCouleurEnRouge(
+    private fun changerCouleurValidation(
+        afficherEnRouge: Boolean,
         editTextId: Int,
         textViewId: Int
     ) {
         val vue = requireView()
         val editText = vue.findViewById<EditText>(editTextId)
         val textView = vue.findViewById<TextView>(textViewId)
-        editText.setBackgroundResource(R.drawable.login_plaintext_with_error)
-        textView.setTextColor(getColor(requireContext(), R.color.rouge))
+        val idArrièrePlan =
+            if (afficherEnRouge) R.drawable.login_plaintext_in_red else R.drawable.login_plaintext
+        val idCouleur = if (afficherEnRouge) R.color.rouge else R.color.figmaMauve
+        editText.setBackgroundResource(idArrièrePlan)
+        textView.setTextColor(getColor(requireContext(), idCouleur))
     }
 }

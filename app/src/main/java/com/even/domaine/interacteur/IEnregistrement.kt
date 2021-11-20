@@ -6,10 +6,10 @@ interface IEnregistrement {
         fun naviguerVersConnexion()
         fun afficherToastSuccesEnregistrement()
         fun afficherToastErreurEnregistrement()
-        fun afficherErreurNomUsager()
-        fun afficherErreurMotDePasse()
-        fun afficherErreurCourriel()
-        fun afficherErreurTelephone()
+        fun afficherErreurNomUsager(afficherEnRouge: Boolean)
+        fun afficherErreurMotDePasse(afficherEnRouge: Boolean)
+        fun afficherErreurCourriel(afficherEnRouge: Boolean)
+        fun afficherErreurTéléphone(afficherEnRouge: Boolean)
     }
 
     interface IPrésentateur {
