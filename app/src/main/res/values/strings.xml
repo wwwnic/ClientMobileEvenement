@@ -37,4 +37,5 @@
     <string name="recent_event">Évènements récent</string>
     <string name="sign_up_completed">Vous êtes maintenant enregistré</string>
     <string name="sign_up_incompleted">Veuillez vérifier les aires textuelles en rouge</string>
+    <string name="serveur_error">Un problème technique vous empêche de poursuivre</string>
 </resources>

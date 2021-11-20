@@ -83,6 +83,9 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
         Toast.makeText(context, R.string.sign_up_incompleted, Toast.LENGTH_LONG).show()
     }
 
+    override fun afficherToastErreurServeur() {
+        Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
+    }
 
     override fun afficherErreurNomUsager(afficherEnRouge: Boolean) {
         changerCouleurValidation(
