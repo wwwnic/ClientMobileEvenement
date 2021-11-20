@@ -42,18 +42,26 @@ class PrésentateurEnregistrement(
     }
 
     override fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
-        return ValidateurEntréesTextuel.validerNomUsager(nomUsager)
+        val estValide = ValidateurEntréesTextuel.validerNomUsager(nomUsager)
+        vue.afficherErreurNomUsager(!estValide)
+        return estValide
     }
 
     override fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
-        return  ValidateurEntréesTextuel.validerMotDePasse(motDePasse)
+        val estValide = ValidateurEntréesTextuel.validerMotDePasse(motDePasse)
+        vue.afficherErreurMotDePasse(!estValide)
+        return estValide
     }
 
     override fun traiterRequêteValiderCourriel(courriel: CharSequence): Boolean {
-        return ValidateurEntréesTextuel.validerCourriel(courriel)
+        val estValide = ValidateurEntréesTextuel.validerCourriel(courriel)
+        vue.afficherErreurCourriel(!estValide)
+        return estValide
     }
 
     override fun traiterRequêteValiderTelephone(telephone: CharSequence): Boolean {
-        return ValidateurEntréesTextuel.validerTelephone(telephone)
+        val estValide = ValidateurEntréesTextuel.validerTelephone(telephone)
+        vue.afficherErreurTéléphone(!estValide)
+        return estValide
     }
 }

@@ -67,25 +67,7 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
         val estTelephoneValide =
             présentateurEnregistrement.traiterRequêteValiderTelephone(txtTelephone)
 
-        afficherErreurValidationEntrées(
-            estNomUsagerValide,
-            estMotPasseValide,
-            estCourrielValide,
-            estTelephoneValide
-        )
         return estCourrielValide && estTelephoneValide && estNomUsagerValide && estMotPasseValide
-    }
-
-    private fun afficherErreurValidationEntrées(
-        estNomUsagerValide: Boolean,
-        estMotPasseValide: Boolean,
-        estCourrielValide: Boolean,
-        estTelephoneValide: Boolean
-    ) {
-        afficherErreurNomUsager(!estNomUsagerValide)
-        afficherErreurMotDePasse(!estMotPasseValide)
-        afficherErreurCourriel(!estCourrielValide)
-        afficherErreurTéléphone(!estTelephoneValide)
     }
 
     override fun naviguerVersConnexion() {
@@ -98,7 +80,7 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
     }
 
     override fun afficherToastErreurEnregistrement() {
-        Toast.makeText(context, R.string.sign_up_incompleted, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, R.string.sign_up_incompleted, Toast.LENGTH_LONG).show()
     }
 
 
