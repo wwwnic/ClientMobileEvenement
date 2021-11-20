@@ -6,10 +6,10 @@ interface IEnregistrement {
         fun naviguerVersConnexion()
         fun afficherToastSuccesEnregistrement()
         fun afficherToastErreurEnregistrement()
-        fun afficherContourErreurNomUsager()
-        fun afficherContourErreurMotDePasse()
-        fun afficherContourErreurCourriel()
-        fun afficherContourErreurTelephone()
+        fun afficherErreurNomUsager()
+        fun afficherErreurMotDePasse()
+        fun afficherErreurCourriel()
+        fun afficherErreurTelephone()
     }
 
     interface IPrésentateur {
@@ -20,12 +20,12 @@ interface IEnregistrement {
             phone: String
         )
 
-        fun traiterRequêteValiderNomUsager(username: String): Boolean
+        fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean
 
-        fun traiterRequêteValiderMotDePasse(password: String): Boolean
+        fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean
 
-        fun traiterRequêteValiderCourriel(email: String): Boolean
+        fun traiterRequêteValiderCourriel(courriel: CharSequence): Boolean
 
-        fun traiterRequêteValiderTelephone(phone: String): Boolean
+        fun traiterRequêteValiderTelephone(telephone: CharSequence): Boolean
     }
 }

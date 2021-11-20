@@ -42,23 +42,23 @@ class PrésentateurEnregistrement(
         }
     }
 
-    override fun traiterRequêteValiderNomUsager(username: String): Boolean {
+    override fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
         val usernamePattern = Pattern.compile(
             "^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"
         )
-        return !TextUtils.isEmpty(username) && usernamePattern.matcher(username).matches()
+        return !TextUtils.isEmpty(nomUsager) && usernamePattern.matcher(nomUsager).matches()
     }
 
-    override fun traiterRequêteValiderMotDePasse(password: String): Boolean {
+    override fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
         val passwordPattern = Pattern.compile("[a-zA-Z0-9\\!\\@\\#\\$]{4,24}")
-        return !TextUtils.isEmpty(password) && passwordPattern.matcher(password).matches()
+        return !TextUtils.isEmpty(motDePasse) && passwordPattern.matcher(motDePasse).matches()
     }
 
-    override fun traiterRequêteValiderCourriel(email: String): Boolean {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    override fun traiterRequêteValiderCourriel(courriel: CharSequence): Boolean {
+        return !TextUtils.isEmpty(courriel) && Patterns.EMAIL_ADDRESS.matcher(courriel).matches()
     }
 
-    override fun traiterRequêteValiderTelephone(phone: String): Boolean {
-        return !TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches()
+    override fun traiterRequêteValiderTelephone(telephone: CharSequence): Boolean {
+        return !TextUtils.isEmpty(telephone) && Patterns.PHONE.matcher(telephone).matches()
     }
 }

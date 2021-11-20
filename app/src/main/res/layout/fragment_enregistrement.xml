@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/enregistrement_hint_nomUtilisateur"
+                android:id="@+id/enregistrement_hint_nomUsager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username"
@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_username"
+                android:id="@+id/enregistrement_nomUsager"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"
@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
             <TextView
-                android:id="@+id/enregistrement_hint_password"
+                android:id="@+id/enregistrement_hint_motDePasse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
@@ -84,7 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_password"
+                android:id="@+id/enregistrement_motDePasse"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"
@@ -111,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <TextView
-                android:id="@+id/enregistrement_hint_email"
+                android:id="@+id/enregistrement_hint_courriel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
@@ -120,7 +120,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_email"
+                android:id="@+id/enregistrement_courriel"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"
@@ -146,7 +146,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
             <TextView
-                android:id="@+id/enregistrement_hint_phone"
+                android:id="@+id/enregistrement_hint_telephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/phone"
@@ -155,7 +155,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_phone"
+                android:id="@+id/enregistrement_telephone"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"

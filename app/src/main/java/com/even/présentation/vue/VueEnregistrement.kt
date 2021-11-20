@@ -1,11 +1,11 @@
 package com.even.présentation.vue
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -24,70 +24,65 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         présentateurEnregistrement = PrésentateurEnregistrement(this, IntEnregistrement())
-        var toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
-        toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
+        val toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
+        toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         clickListenerBtnEnregistrement(view)
     }
 
-    private fun clickListenerBtnEnregistrement(
-        view: View,
-    ) {
+    private fun clickListenerBtnEnregistrement(view: View) {
         val boutonEnregistrement = view.findViewById<Button>(R.id.enregistrement_creer_un_compte)
         boutonEnregistrement?.setOnClickListener {
-            val tvUsername = view.findViewById<TextView>(R.id.enregistrement_username)
-            val tvPassword = view.findViewById<TextView>(R.id.enregistrement_password)
-            val tvEmail = view.findViewById<TextView>(R.id.enregistrement_email)
-            val tvPhone = view.findViewById<TextView>(R.id.enregistrement_phone)
-            Log.i("input", "Les entrées sont " + validerLesEntrées().toString())
-            if (validerLesEntrées()) {
+            val txtNomUsager = view.findViewById<TextView>(R.id.enregistrement_nomUsager).text
+            val txtMotDePasse = view.findViewById<TextView>(R.id.enregistrement_motDePasse).text
+            val txtCourriel = view.findViewById<TextView>(R.id.enregistrement_courriel).text
+            val txtTelephone = view.findViewById<TextView>(R.id.enregistrement_telephone).text
+            if (validerLesEntrées(txtNomUsager, txtMotDePasse, txtCourriel, txtTelephone)) {
                 présentateurEnregistrement.traiterRequêteReclamerEnregistrement(
-                    tvUsername.text.toString(),
-                    tvPassword.text.toString(),
-                    tvEmail.text.toString(),
-                    tvPhone.text.toString()
+                    txtNomUsager.toString(),
+                    txtMotDePasse.toString(),
+                    txtCourriel.toString(),
+                    txtTelephone.toString()
                 )
             }
         }
     }
 
-    private fun validerLesEntrées(): Boolean {
-        val vue = requireView()
-        val username =
-            vue.findViewById<TextView>(R.id.enregistrement_username).text.toString()
-        val password =
-            vue.findViewById<TextView>(R.id.enregistrement_password).text.toString()
-        val email =
-            vue.findViewById<TextView>(R.id.enregistrement_email).text.toString()
-        val phone =
-            vue.findViewById<TextView>(R.id.enregistrement_phone).text.toString()
-        val estNomUsagerValide = présentateurEnregistrement.traiterRequêteValiderNomUsager(username)
-        val estMotPasseValide = présentateurEnregistrement.traiterRequêteValiderMotDePasse(password)
-        val estCourrielValide = présentateurEnregistrement.traiterRequêteValiderCourriel(email)
-        val estTelephoneValide = présentateurEnregistrement.traiterRequêteValiderTelephone(phone)
+    private fun validerLesEntrées(
+        txtNomUsager: CharSequence,
+        txtMotDePasse: CharSequence,
+        txtCourriel: CharSequence,
+        txtTelephone: CharSequence
+    ): Boolean {
+        val estNomUsagerValide =
+            présentateurEnregistrement.traiterRequêteValiderNomUsager(txtNomUsager)
+        val estMotPasseValide =
+            présentateurEnregistrement.traiterRequêteValiderMotDePasse(txtMotDePasse)
+        val estCourrielValide =
+            présentateurEnregistrement.traiterRequêteValiderCourriel(txtCourriel)
+        val estTelephoneValide =
+            présentateurEnregistrement.traiterRequêteValiderTelephone(txtTelephone)
 
-        afficherLesEntréesInvalides(estNomUsagerValide, estMotPasseValide, estCourrielValide, estTelephoneValide)
-        return estNomUsagerValide && estMotPasseValide && estCourrielValide && estTelephoneValide
+        afficherErreurValidationEntrées(
+            estNomUsagerValide,
+            estMotPasseValide,
+            estCourrielValide,
+            estTelephoneValide
+        )
+        return estCourrielValide && estTelephoneValide && estNomUsagerValide && estMotPasseValide
     }
 
-    private fun afficherLesEntréesInvalides(
-        estNomUtilValide: Boolean,
-        estMotPassValide: Boolean,
+    private fun afficherErreurValidationEntrées(
+        estNomUsagerValide: Boolean,
+        estMotPasseValide: Boolean,
         estCourrielValide: Boolean,
-        estTelphoneValide: Boolean
+        estTelephoneValide: Boolean
     ) {
-        if (!estNomUtilValide) {
-            afficherContourErreurNomUsager()
-        }
-        if (!estMotPassValide) {
-            afficherContourErreurMotDePasse()
-        }
-        if (!estCourrielValide) {
-            afficherContourErreurCourriel()
-        }
-        if (!estTelphoneValide) {
-            afficherContourErreurTelephone()
-        }
+        if (!estNomUsagerValide) afficherErreurNomUsager()
+        if (!estMotPasseValide) afficherErreurMotDePasse()
+        if (!estCourrielValide) afficherErreurCourriel()
+        if (!estTelephoneValide) afficherErreurTelephone()
     }
+
 
     override fun naviguerVersConnexion() {
         findNavController().navigate(R.id.action_enregistrement_to_connexion)
@@ -102,39 +97,30 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
         Toast.makeText(context, R.string.sign_up_incompleted, Toast.LENGTH_SHORT).show()
     }
 
-    override fun afficherContourErreurNomUsager() {
-        var tvUsername =
-            requireView().findViewById<TextView>(R.id.enregistrement_username)
-        var tvHintUsername =
-            requireView().findViewById<TextView>(R.id.enregistrement_hint_nomUtilisateur)
-        tvHintUsername.setTextColor(getColor(requireContext(), R.color.rouge))
-        tvUsername.setBackgroundResource(R.drawable.login_plaintext_with_error)
+    override fun afficherErreurNomUsager() {
+        changerCouleurEnRouge(R.id.enregistrement_nomUsager, R.id.enregistrement_hint_nomUsager)
     }
 
-    override fun afficherContourErreurMotDePasse() {
-        var tvPassword =
-            requireView().findViewById<TextView>(R.id.enregistrement_password)
-        var tvHintPassword =
-            requireView().findViewById<TextView>(R.id.enregistrement_hint_password)
-        tvHintPassword.setTextColor(getColor(requireContext(), R.color.rouge))
-        tvPassword.setBackgroundResource(R.drawable.login_plaintext_with_error)
+    override fun afficherErreurMotDePasse() {
+        changerCouleurEnRouge(R.id.enregistrement_motDePasse, R.id.enregistrement_hint_motDePasse)
     }
 
-    override fun afficherContourErreurCourriel() {
-        var tvEmail =
-            requireView().findViewById<TextView>(R.id.enregistrement_email)
-        var tvHintEmail =
-            requireView().findViewById<TextView>(R.id.enregistrement_hint_email)
-        tvHintEmail.setTextColor(getColor(requireContext(), R.color.rouge))
-        tvEmail.setBackgroundResource(R.drawable.login_plaintext_with_error)
+    override fun afficherErreurCourriel() {
+        changerCouleurEnRouge(R.id.enregistrement_courriel, R.id.enregistrement_hint_courriel)
     }
 
-    override fun afficherContourErreurTelephone() {
-        var tvPhone =
-            requireView().findViewById<TextView>(R.id.enregistrement_phone)
-        var tvHintPhone =
-            requireView().findViewById<TextView>(R.id.enregistrement_hint_phone)
-        tvHintPhone.setTextColor(getColor(requireContext(), R.color.rouge))
-        tvPhone.setBackgroundResource(R.drawable.login_plaintext_with_error)
+    override fun afficherErreurTelephone() {
+        changerCouleurEnRouge(R.id.enregistrement_telephone, R.id.enregistrement_hint_telephone)
+    }
+
+    private fun changerCouleurEnRouge(
+        editTextId: Int,
+        textViewId: Int
+    ) {
+        val vue = requireView()
+        val editText = vue.findViewById<EditText>(editTextId)
+        val textView = vue.findViewById<TextView>(textViewId)
+        editText.setBackgroundResource(R.drawable.login_plaintext_with_error)
+        textView.setTextColor(getColor(requireContext(), R.color.rouge))
     }
 }
