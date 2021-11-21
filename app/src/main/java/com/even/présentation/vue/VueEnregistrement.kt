@@ -20,13 +20,12 @@ import com.even.présentation.présenteur.PrésentateurEnregistrement
 
 class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistrement.IVue {
 
-    lateinit var présentateurEnregistrement: PrésentateurEnregistrement
+    lateinit var présentateurEnregistrement: IEnregistrement.IPrésentateur
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         présentateurEnregistrement =
             PrésentateurEnregistrement(this, ModèleEnregistrement(ApiClient.apiService))
-
         val toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         clickListenerBtnEnregistrement(view)
@@ -39,35 +38,21 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
             val txtMotDePasse = view.findViewById<TextView>(R.id.enregistrement_motDePasse).text
             val txtCourriel = view.findViewById<TextView>(R.id.enregistrement_courriel).text
             val txtTelephone = view.findViewById<TextView>(R.id.enregistrement_telephone).text
-            if (validerLesEntrées(txtNomUsager, txtMotDePasse, txtCourriel, txtTelephone)) {
+            val entréesValide = présentateurEnregistrement.traiterRequêteValiderTousLesEntrées(
+                txtNomUsager,
+                txtMotDePasse,
+                txtCourriel,
+                txtTelephone
+            )
+            if (entréesValide) {
                 présentateurEnregistrement.traiterRequêteReclamerEnregistrement(
-                    txtNomUsager.toString(),
-                    txtMotDePasse.toString(),
-                    txtCourriel.toString(),
-                    txtTelephone.toString()
+                    txtNomUsager,
+                    txtMotDePasse,
+                    txtCourriel,
+                    txtTelephone
                 )
-            } else {
-                afficherToastErreurEnregistrement()
             }
         }
-    }
-
-    private fun validerLesEntrées(
-        txtNomUsager: CharSequence,
-        txtMotDePasse: CharSequence,
-        txtCourriel: CharSequence,
-        txtTelephone: CharSequence
-    ): Boolean {
-        val estNomUsagerValide =
-            présentateurEnregistrement.traiterRequêteValiderNomUsager(txtNomUsager)
-        val estMotPasseValide =
-            présentateurEnregistrement.traiterRequêteValiderMotDePasse(txtMotDePasse)
-        val estCourrielValide =
-            présentateurEnregistrement.traiterRequêteValiderCourriel(txtCourriel)
-        val estTelephoneValide =
-            présentateurEnregistrement.traiterRequêteValiderTelephone(txtTelephone)
-
-        return estCourrielValide && estTelephoneValide && estNomUsagerValide && estMotPasseValide
     }
 
     override fun naviguerVersConnexion() {

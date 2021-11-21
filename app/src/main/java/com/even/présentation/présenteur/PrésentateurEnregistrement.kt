@@ -13,7 +13,6 @@ class PrésentateurEnregistrement(
     var vue: IEnregistrement.IVue,
     var modèleEnregistrment: ModèleEnregistrement
 ) : IEnregistrement.IPrésentateur {
-
     private val handlerRéponse: Handler
 
     private var coroutileEnregistrement: Job? = null
@@ -46,20 +45,19 @@ class PrésentateurEnregistrement(
     }
 
     override fun traiterRequêteReclamerEnregistrement(
-        username: String,
-        password: String,
-        email: String,
-        phone: String
+        nomUsager: CharSequence,
+        motDePasse: CharSequence,
+        courriel: CharSequence,
+        telephone: CharSequence
     ) {
         coroutileEnregistrement = CoroutineScope(Dispatchers.IO).launch {
             var msg: Message? = null
-
             try {
                 var reponseApi = modèleEnregistrment.effectuerEnregistrement(
-                    username,
-                    password,
-                    email,
-                    phone
+                    nomUsager.toString(),
+                    motDePasse.toString(),
+                    courriel.toString(),
+                    telephone.toString()
                 )
                 if (reponseApi.isSuccessful) {
                     withContext(Dispatchers.Main) {
@@ -73,6 +71,22 @@ class PrésentateurEnregistrement(
             }
             handlerRéponse.sendMessage(msg!!)
         }
+    }
+
+    override fun traiterRequêteValiderTousLesEntrées(
+        nomUsager: CharSequence,
+        motDePasse: CharSequence,
+        courriel: CharSequence,
+        telephone: CharSequence
+    ): Boolean {
+        val estNomUsagerValide = this.traiterRequêteValiderNomUsager(nomUsager)
+        val estMotDePasseValide = this.traiterRequêteValiderMotDePasse(motDePasse)
+        val estCourrielValide = this.traiterRequêteValiderCourriel(courriel)
+        val estTelephoneValide = this.traiterRequêteValiderTelephone(telephone)
+        val entréesValide =
+            estCourrielValide && estTelephoneValide && estNomUsagerValide && estMotDePasseValide
+        if (!entréesValide) vue.afficherToastErreurEnregistrement()
+        return (entréesValide)
     }
 
     override fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {

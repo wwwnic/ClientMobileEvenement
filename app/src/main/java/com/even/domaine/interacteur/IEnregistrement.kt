@@ -1,7 +1,6 @@
 package com.even.domaine.interacteur
 
 interface IEnregistrement {
-
     interface IVue {
         fun naviguerVersConnexion()
         fun afficherToastSuccesEnregistrement()
@@ -15,11 +14,18 @@ interface IEnregistrement {
 
     interface IPrésentateur {
         fun traiterRequêteReclamerEnregistrement(
-            username: String,
-            password: String,
-            email: String,
-            phone: String
+            nomUsager: CharSequence,
+            motDePasse: CharSequence,
+            courriel: CharSequence,
+            telephone: CharSequence
         )
+
+        fun traiterRequêteValiderTousLesEntrées(
+            nomUsager: CharSequence,
+            motDePasse: CharSequence,
+            courriel: CharSequence,
+            telephone: CharSequence
+        ): Boolean
 
         fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean
         fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean
