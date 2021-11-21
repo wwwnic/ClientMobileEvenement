@@ -11,10 +11,10 @@ class ModèleEnregistrement(val api: IApiService) {
     var responseBodyRequêteEnregistrement: Response<ApiReponse>? = null
 
     suspend fun effectuerEnregistrement(
-        username: String,
-        password: String,
-        email: String,
-        phone: String
+        username: CharSequence,
+        password: CharSequence,
+        email: CharSequence,
+        phone: CharSequence
     ): Response<ApiReponse> {
         val reponseBodyRequête = IntEnregistrement(api).enregisterNouvelUtilisateur(
             username,

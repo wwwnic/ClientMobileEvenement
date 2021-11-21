@@ -54,10 +54,10 @@ class PrésentateurEnregistrement(
             var msg: Message? = null
             try {
                 var reponseApi = modèleEnregistrment.effectuerEnregistrement(
-                    nomUsager.toString(),
-                    motDePasse.toString(),
-                    courriel.toString(),
-                    telephone.toString()
+                    nomUsager,
+                    motDePasse,
+                    courriel,
+                    telephone
                 )
                 if (reponseApi.isSuccessful) {
                     withContext(Dispatchers.Main) {

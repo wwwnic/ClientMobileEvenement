@@ -7,24 +7,20 @@ import com.even.sourceDeDonnées.IApiService
 
 import retrofit2.Response
 
-class IntEnregistrement(val api : IApiService) {
+class IntEnregistrement(val api: IApiService) {
 
     suspend fun enregisterNouvelUtilisateur(
-        username: String,
-        password: String,
-        email: String,
-        phone: String
+        username: CharSequence,
+        password: CharSequence,
+        email: CharSequence,
+        phone: CharSequence
     ): Response<ApiReponse> {
-        var reponseRequete = api.creerUtilisateur(
-            Utilisateur(
-                0,
-                username,
-                password,
-                email,
-                phone
-            )
+        val reponseRequete = api.creerUtilisateur(
+            username,
+            password,
+            email,
+            phone
         )
-        Log.i("Réponse POST", reponseRequete.body().toString()) //TODO: log
         return reponseRequete
     }
 }

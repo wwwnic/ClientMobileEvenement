@@ -57,7 +57,6 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
 
     override fun naviguerVersConnexion() {
         findNavController().navigate(R.id.action_enregistrement_to_connexion)
-        Log.i("Navigation", "Navigation vers la vue connexion") //TODO:log
     }
 
     override fun afficherToastSuccesEnregistrement() {
