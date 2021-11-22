@@ -15,6 +15,7 @@ object ApiClient {
         //"https://77ee61d4-ccf3-4da0-861e-baa339b0257e.mock.pstmn.io/"
         "http://10.0.0.149:23784/"
 
+
     private val gson: Gson by lazy {
         GsonBuilder().setLenient().create()
     }

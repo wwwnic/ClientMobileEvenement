@@ -25,36 +25,28 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
         val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
 
-        composeView.setContent {
-            MaterialTheme {
-                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                    VueDetailsEvenement(e)
-                ) })
-            }
-        }
-
         boutonCreer.setOnClickListener { loadFragment(VueCreationEvenement()) }
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //listeEvens = setListeEvens(tab!!.position)
                 if (tab!!.position == 0) {
-                    composeView.setContent {
+                    /*composeView.setContent {
                         MaterialTheme {
                             ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
                                 VueDetailsEvenement(e)
                             ) })
                         }
-                    }
+                    }*/
                     boutonCreer.visibility = View.INVISIBLE
                 } else {
-                    composeView.setContent {
+                    /*composeView.setContent {
                         MaterialTheme {
                             ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
                                 VueModifierEvenement()
                             ) })
                         }
-                    }
+                    }*/
                     boutonCreer.visibility = View.VISIBLE
                 }
             }

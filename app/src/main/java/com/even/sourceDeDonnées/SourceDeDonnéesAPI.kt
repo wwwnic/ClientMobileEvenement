@@ -4,7 +4,6 @@ import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ApiClient.apiService
-import kotlinx.coroutines.*
 
 class SourceDeDonnéesAPI : ISourceDeDonnées {
     override suspend fun getAllUtilisateurs(): List<Utilisateur> {
@@ -27,11 +26,30 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return liste
     }
 
-    override fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
+
+    override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
         TODO("Not yet implemented")
     }
 
-    override fun creerUtilisateur() {
+    override suspend fun creerUtilisateur() {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {
+        var liste : List<Événement> = ArrayList<Événement>()
+
+        var reponseApi = apiService.getEvenementsParRecherche(nom,mois,location,organisateur)
+        if (reponseApi.isSuccessful) {
+            liste = reponseApi.body() as List<Événement>
+        }
+        return liste
+    }
+
+    override fun getImageUtilisateur(id: Int): String {
+        return "http://10.0.0.149:23784/images/utilisateurs/${id}.jpg"
+    }
+
+    override fun getImageEvenement(id: Int): String {
+        return "http://10.0.0.149:23784/images/evenements/${id}.jpg"
     }
 }

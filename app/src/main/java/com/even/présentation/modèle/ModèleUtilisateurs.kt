@@ -25,4 +25,8 @@ class ModèleUtilisateurs {
         }
         return listeUtil
     }*/
+
+    fun getImageUtilisateur(id : Int) : String {
+        return _source.getImageUtilisateur(id)
+    }
 }

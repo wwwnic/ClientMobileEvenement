@@ -1,5 +1,8 @@
 package com.even.sourceDeDonnées
 
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
+import com.even.R
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
@@ -75,7 +78,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             return listeEvens
     }
 
-    override fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
+    override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
         val listeUtilEven : ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
 
         val utilEven : UtilisateurÉvénement = UtilisateurÉvénement(
@@ -104,8 +107,20 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtilEven
     }
 
-    override fun creerUtilisateur() {
+    override suspend fun creerUtilisateur() {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getImageEvenement(id: Int): String {
+        return R.drawable.imageevenementbidon.toString()
+    }
+
+    override fun getImageUtilisateur(id: Int): String{
+        return R.drawable.imageutilisateurbidon.toString()
     }
 
 }

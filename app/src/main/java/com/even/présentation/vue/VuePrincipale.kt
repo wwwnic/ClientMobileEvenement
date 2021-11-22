@@ -1,5 +1,6 @@
 package com.even.présentation.vue
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +38,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         toolbar = view.findViewById(R.id.toolbar)
         drawerLayout = view.findViewById(R.id.drawer_layout)
         toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_round_side_menu_24)
-        toolbar.title = resources.getString(R.string.my_event)
+        toolbar.title = resources.getString(R.string.recent_event)
 
         setupDrawerToggle();
         loadFragment(VueListeEvenement())
@@ -101,11 +102,11 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         )
     }
 
+    // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
     private fun loadFragment(fragment: Fragment) {
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
-
 }
