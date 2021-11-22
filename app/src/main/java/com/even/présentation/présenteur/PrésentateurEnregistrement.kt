@@ -10,8 +10,8 @@ import com.even.présentation.modèle.ModèleEnregistrement
 import kotlinx.coroutines.*
 
 class PrésentateurEnregistrement(
-    var vue: IEnregistrement.IVue,
-    var modèleEnregistrment: ModèleEnregistrement
+    val vue: IEnregistrement.IVue,
+    val modèleEnregistrment: ModèleEnregistrement
 ) : IEnregistrement.IPrésentateur {
     private val handlerRéponse: Handler
 
