@@ -17,7 +17,7 @@ interface IApiService {
     suspend fun getAllUtilisateurs() : Response<List<Utilisateur>>
     @GET("api/Evenement/GetAll")
     suspend fun getAllEvenements() : Response<List<Événement>>
-    @GET("/api/Evenement/GetParRecherche")
+    @GET("api/Evenement/GetParRecherche")
     suspend fun getEvenementsParRecherche(@Query("nom") nom : String,
                                           @Query("mois") mois : String,
                                           @Query("location") location : String,

@@ -8,10 +8,13 @@ import androidx.fragment.app.add
 import com.even.R
 import com.even.présentation.présenteur.IRecherche
 import com.even.présentation.présenteur.PrésentateurRecherche
+import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
 
 class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
+
+    val fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
 
     lateinit var présentateur : IRecherche.IPrésentateur
 
@@ -42,7 +45,7 @@ class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
     }
 
     override fun afficherRésultatsRecherche(tag : String) {
-        loadFragment(VueListeEvenement(),tag)
+        fragmentLoader.loadFragment(VueListeEvenement(),tag)
     }
 
     private fun afficherSelecteurDate() {
@@ -54,11 +57,4 @@ class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
         Toast.makeText(requireContext(),"Aucun mot-clé entré.",Toast.LENGTH_SHORT).show()
     }
 
-    // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
-    private fun loadFragment(fragment: Fragment,motcles : String) {
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView, fragment,motcles)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
 }
