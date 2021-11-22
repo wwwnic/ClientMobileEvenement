@@ -7,20 +7,8 @@ import retrofit2.Response
 
 
 import retrofit2.http.*
-import okhttp3.ResponseBody
-import retrofit2.Call
-import java.sql.Date
-
 
 interface IApiService {
-    @FormUrlEncoded
-    @POST("/api/Utilisateur/New")
-    suspend fun creerUtilisateur(
-        @Field("nomUtilisateur") nomUtilisateur: CharSequence,
-        @Field("motDePasse") motDePasse: CharSequence,
-        @Field("courriel") courriel: CharSequence,
-        @Field("telephone") telephone: CharSequence,
-        @Field("dateCreation") dateCreation: Date
-
-    ): Response<ApiReponse>
+    @POST("enregistrement")
+    suspend fun creerUtilisateur(@Body post: Utilisateur): Response<ApiReponse>
 }
