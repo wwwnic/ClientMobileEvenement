@@ -5,5 +5,9 @@ class IConnexion {
     }
 
     interface IPrésentateur {
+        fun traiterRequêteDemanderProfilPourConnexion(
+            nomUtilisateur: CharSequence,
+            motDePasse: CharSequence
+        )
     }
 }

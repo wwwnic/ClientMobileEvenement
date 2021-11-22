@@ -20,4 +20,11 @@ interface IApiService {
         @Field("courriel") courriel: CharSequence,
         @Field("telephone") telephone: CharSequence
     ): Response<ApiReponse>
+
+    @FormUrlEncoded
+    @POST("api/login")
+    suspend fun demanderProfil(
+        @Field("nomUtilisateur") nomUtilisateur: CharSequence,
+        @Field("motDePasse") motDePasse: CharSequence,
+    ): Response<ApiReponse>
 }

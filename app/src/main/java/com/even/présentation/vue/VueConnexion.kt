@@ -2,15 +2,12 @@ package com.even.présentation.vue
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.Navigation
 import com.even.R
 import com.even.domaine.entité.ApiClient
 import com.even.domaine.interacteur.IConnexion
-import com.even.domaine.interacteur.IEnregistrement
 import com.even.présentation.modèle.ModèleConnexion
 import com.even.présentation.présenteur.PrésentateurConnexion
 
@@ -25,7 +22,11 @@ class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
         var boutonEnregistrement = view.findViewById<Button>(R.id.connexion_boutonEnregistrement)
 
         var navController = Navigation.findNavController(view)
-        boutonConnexion?.setOnClickListener { navController.navigate(R.id.action_connexion_to_principal) }
+
+        boutonConnexion?.setOnClickListener {
+            //présentateurConnexion.traiterRequêteDemanderProfilPourConnexion("urnm", "pw")
+            navController.navigate(R.id.action_connexion_to_principal)
+        }
         boutonEnregistrement?.setOnClickListener { navController.navigate(R.id.action_connexion_to_enregistrement) }
     }
 }
