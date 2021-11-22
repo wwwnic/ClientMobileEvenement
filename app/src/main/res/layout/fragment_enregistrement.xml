@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.even.présentation.vue.VueEnregistrement">
+    tools:context="com.even.présentation.vue.Enregistrement">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/enregistrement_toolbar"
@@ -41,16 +41,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/enregistrement_hint_nomUsager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/username"
+                android:text="Nom utilisateur"
                 android:textColor="@color/figmaMauve"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_nomUsager"
+                android:id="@+id/enregistrement_username"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"
@@ -75,7 +74,6 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
             <TextView
-                android:id="@+id/enregistrement_hint_motDePasse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
@@ -84,7 +82,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_motDePasse"
+                android:id="@+id/enregistrement_password"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"
@@ -111,7 +109,6 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <TextView
-                android:id="@+id/enregistrement_hint_courriel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
@@ -120,7 +117,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_courriel"
+                android:id="@+id/enregistrement_email"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"
@@ -146,7 +143,6 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
             <TextView
-                android:id="@+id/enregistrement_hint_telephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/phone"
@@ -155,7 +151,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/enregistrement_telephone"
+                android:id="@+id/enregistrement_phone"
                 android:layout_width="@dimen/connexion_largeur_plainText"
                 android:layout_height="@dimen/connexion_hauteur_plainText"
                 android:background="@drawable/login_plaintext"
