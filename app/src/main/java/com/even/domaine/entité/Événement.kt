@@ -14,7 +14,8 @@ class Événement(
     var date: Date,
     var idOrganisateur: Int,
     var image: Int,
-    var description: String
+    var description: String,
+    var nbParticipant : Int
 ) {
     var organisateur : Utilisateur? = null
 }
