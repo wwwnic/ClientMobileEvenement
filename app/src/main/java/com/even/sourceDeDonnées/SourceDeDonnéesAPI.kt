@@ -4,6 +4,7 @@ import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ApiClient.apiService
+import retrofit2.Response
 
 class SourceDeDonnéesAPI : ISourceDeDonnées {
     override suspend fun getAllUtilisateurs(): List<Utilisateur> {
@@ -43,6 +44,16 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
             liste = reponseApi.body() as List<Événement>
         }
         return liste
+    }
+
+    override suspend fun getEvenementParId(id: Int): Événement {
+        lateinit var evenement : Événement
+
+        var reponseApi = apiService.getEvenementParId(id)
+        if (reponseApi.isSuccessful) {
+            evenement = reponseApi.body() as Événement
+        }
+        return evenement
     }
 
     override fun getImageUtilisateur(id: Int): String {

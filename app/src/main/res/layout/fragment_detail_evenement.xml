@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/detailEvenement_eventImage"
-            android:layout_width="394dp"
-            android:layout_height="224dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +70,8 @@
             android:layout_marginTop="52dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailEvenement_location"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/detailEvenement_organizer"

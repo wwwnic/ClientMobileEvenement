@@ -1,12 +1,20 @@
 package com.even.présentation.présenteur
 
-import com.even.domaine.interacteur.IDétailÉvenement
-import com.even.domaine.interacteur.IEnregistrement
 import com.even.domaine.interacteur.IntDétailÉvenement
-import com.even.présentation.modèle.ModèleDétailÉvenement
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+import okhttp3.Dispatcher
 
 class PrésentateurDétailÉvenement(
-    var vue : IDétailÉvenement,
-    var modèleDétailÉvenement : ModèleDétailÉvenement
+    var vue : IDétailÉvenement.IVue,
+    var interacteurDétailÉvenement : IntDétailÉvenement
     ) : IDétailÉvenement.IPrésentateur {
+
+    override fun traiterRequêteAfficherDétailÉvenement() {
+        CoroutineScope(Dispatchers.IO).launch {
+
+        }
+    }
 }

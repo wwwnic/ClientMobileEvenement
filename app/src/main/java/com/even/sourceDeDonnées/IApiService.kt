@@ -22,4 +22,6 @@ interface IApiService {
                                           @Query("mois") mois : String,
                                           @Query("location") location : String,
                                           @Query("organisateur") organisateur : String) : Response<List<Événement>>
+    @GET("/api/Evenement/{id}")
+    suspend fun getEvenementParId(id : Int) : Response<Événement>
 }

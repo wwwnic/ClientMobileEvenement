@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.even.R
-import com.even.domaine.entité.ApiClient
 import com.even.domaine.entité.Événement
-import com.even.domaine.interacteur.IDétailÉvenement
-import com.even.présentation.modèle.ModèleDétailÉvenement
+import com.even.domaine.interacteur.IntDétailÉvenement
+import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
+import com.even.sourceDeDonnées.ApiClient
 
-class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement) {
+class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue{
 
     lateinit var imageEvent : ImageView
     lateinit var texteNom : TextView
@@ -29,7 +29,7 @@ class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        présentateur = PrésentateurDétailÉvenement(this, ModèleDétailÉvenement(ApiClient.apiService))
+        présentateur = PrésentateurDétailÉvenement(this, IntDétailÉvenement())
 
         imageEvent = view?.findViewById<ImageView>(R.id.detailEvenement_eventImage)
         texteNom = view?.findViewById<TextView>(R.id.detailEvenement_nameEvent)
@@ -40,14 +40,13 @@ class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragm
         texteParticipant = view?.findViewById<TextView>(R.id.detailEvenement_nomber)
         btnParticipation = view?.findViewById<Button>(R.id.detailEvenement_participation)
 
-        imageEvent.setImageResource(R.drawable.wowimg)
-        imageEven.setImageResource(R.drawable.imageutilisateurbidon)
+        imageEvent.setImageResource(R.drawable.imageutilisateurbidon)
         texteNom?.text = evenement.nom
         texteLocation?.text = evenement.location
         texteDate?.text = evenement.date.toString()
         texteOrganisateur?.text = evenement.organisateur?.nomUtilisateur
         texteDescription?.text = evenement.description
-        texteParticipant?.text = evenement.nbParticipant.toString()
+        //texteParticipant?.text = evenement.nbParticipant.toString()
 
         clickListenerParticipation(view)
     }
