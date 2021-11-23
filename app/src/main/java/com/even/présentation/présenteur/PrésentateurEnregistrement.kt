@@ -5,7 +5,6 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import com.even.domaine.entité.ValidateurEntréesTextuel
-import com.even.domaine.interacteur.IEnregistrement
 import com.even.présentation.modèle.ModèleEnregistrement
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
@@ -55,10 +54,10 @@ class PrésentateurEnregistrement(
             var msg: Message? = null
             try {
                 var reponseApi = modèleEnregistrment.effectuerEnregistrement(
-                    nomUsager.toString(),
-                    motDePasse.toString(),
-                    courriel.toString(),
-                    telephone.toString()
+                    nomUsager,
+                    motDePasse,
+                    courriel,
+                    telephone
                 )
                 if (reponseApi.isSuccessful) {
                     withContext(Dispatchers.Main) {

@@ -1,9 +1,5 @@
 package com.even.présentation.modèle
 
-import android.util.Log
-import com.even.domaine.entité.ApiClient
-import com.even.domaine.entité.ApiReponse
-import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.interacteur.IntEnregistrement
 import com.even.sourceDeDonnées.IApiService
@@ -11,21 +7,20 @@ import retrofit2.Response
 
 class ModèleEnregistrement(val api: IApiService) {
 
-    var responseBodyRequêteEnregistrement: Response<ApiReponse>? = null
-
     suspend fun effectuerEnregistrement(
-        username: CharSequence,
-        password: CharSequence,
-        email: CharSequence,
-        phone: CharSequence
-    ): Response<ApiReponse> {
+        nomUsager: CharSequence,
+        motDePasse: CharSequence,
+        courriel: CharSequence,
+        telephone: CharSequence
+    ): Response<Void> {
         val reponseBodyRequête = IntEnregistrement(api).enregisterNouvelUtilisateur(
-            username,
-            password,
-            email,
-            phone
+            Utilisateur(
+                nomUsager.toString(),
+                motDePasse.toString(),
+                courriel.toString(),
+                telephone.toString()
+            )
         )
-        responseBodyRequêteEnregistrement = reponseBodyRequête
         return reponseBodyRequête
     }
 }

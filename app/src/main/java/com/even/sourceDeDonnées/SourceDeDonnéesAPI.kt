@@ -1,9 +1,9 @@
 package com.even.sourceDeDonnées
 
+import com.even.domaine.entité.ApiClient.apiService
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
-import com.even.sourceDeDonnées.ApiClient.apiService
 
 class SourceDeDonnéesAPI : ISourceDeDonnées {
     override suspend fun getAllUtilisateurs(): List<Utilisateur> {

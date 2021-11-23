@@ -1,14 +1,18 @@
 package com.even.domaine.entité
 
-import com.google.gson.annotations.SerializedName
-import java.util.*
-
 data class Utilisateur(
-    val idUtilisateur : Int,
-    var nomUtilisateur : String,
-    var motDePasse : String,
-    var courriel : String,
-    var telephone : String,
-    var dateCreation : String
+    val idUtilisateur: Int?,
+    var nomUtilisateur: String,
+    var motDePasse: String,
+    var courriel: String,
+    var telephone: String,
+    var dateCreation: String?
+
 ) {
+    constructor(
+        nomUtilisateur: String,
+        motDePasse: String,
+        courriel: String,
+        telephone: String,
+    ) : this(null, nomUtilisateur, motDePasse, courriel, telephone, null)
 }
