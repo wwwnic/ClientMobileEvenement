@@ -6,5 +6,5 @@ data class Commentaire(
     val idUtilisateur: Long,
     val date: String,
     val texte: String,
-    val idEvenementNavigation: Evenement
+    val idEvenementNavigation: Événement
 )
