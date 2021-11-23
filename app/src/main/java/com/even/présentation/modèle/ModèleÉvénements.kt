@@ -12,7 +12,7 @@ class ModèleÉvénements(val source : ISourceDeDonnées) {
     init {
         Événements = IntGetAllÉvénements(source).getAllÉvénements()
         Événements.forEach { e ->
-            ModèleUtilisateurs(source).Utilisateurs.forEach { u ->
+            ModèleUtilisateurs(source).Utilisateurs?.forEach { u ->
                 if(u.idUtilisateur == e.idOrganisateur) e.organisateur = u}
         }
     }

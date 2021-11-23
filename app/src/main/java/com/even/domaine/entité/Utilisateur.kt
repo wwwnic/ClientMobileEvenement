@@ -5,20 +5,21 @@ import java.lang.reflect.Constructor
 import java.util.*
 
 data class Utilisateur(
+    val idUtilisateur: Int?,
     val nomUtilisateur: String,
     val motDePasse: String,
     val courriel: String,
     val telephone: String,
+    val dateCreation: String?,
+    val commentaires: List<Commentaire>?,
+    val evenements: List<Événement>?,
+    val utilisateurevenements: List<UtilisateurÉvénement>?
 ) {
+
     constructor(
-        idUtilisateur: Int,
         nomUtilisateur: String,
         motDePasse: String,
         courriel: String,
         telephone: String,
-        dateCreation: String,
-        commentaires: List<Commentaire>?,
-        evenements: List<Evenement>?,
-        utilisateurevenements: List<Utilisateurevenement>?
-    ) : this(nomUtilisateur, motDePasse, courriel, telephone)
+    ) : this(null,nomUtilisateur, motDePasse, courriel, telephone,null,null,null,null)
 }

@@ -1,6 +1,6 @@
 package com.even.domaine.entité
 
-class UtilisateurÉvénement(
+data class UtilisateurÉvénement(
     val idUtilisateur : Int,
     val idEvenement : Int
 ) {

@@ -69,9 +69,9 @@ class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragm
     private fun setListeEvens(tabSélectionée : Int) : List<Événement> {
         var liste : List<Événement>
         if (tabSélectionée == 0) {
-            liste = modèle.getÉvénementsParPrésence(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
+            liste = modèle.getÉvénementsParPrésence(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs!!.get(0))
         } else {
-            liste = modèle.getÉvénementsParCréateur(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
+            liste = modèle.getÉvénementsParCréateur(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs!!.get(0))
         }
         return liste
     }

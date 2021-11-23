@@ -7,18 +7,16 @@ import com.even.domaine.interacteur.IntGetAllÉvénements
 import com.even.domaine.interacteur.IntGetUtilisateursDansÉvénement
 import com.even.sourceDeDonnées.ISourceDeDonnées
 
-class ModèleUtilisateurs(val source : ISourceDeDonnées) {
-    var Utilisateurs : List<Utilisateur> = ArrayList<Utilisateur>()
+class ModèleUtilisateurs(val source: ISourceDeDonnées) {
+    
+    var Utilisateurs: List<Utilisateur>? = null
 
-    init {
+    fun getUtilisateursDansÉvénement(événement: Événement): List<Utilisateur> {
         Utilisateurs = IntGetAllUtilisateurs(source).getAllUtilisateurs()
-    }
-
-    fun getUtilisateursDansÉvénement(événement : Événement) : List<Utilisateur> {
-        var listeUtilEven = IntGetUtilisateursDansÉvénement(source).getUtilisateursDansÉvénement()
-        var listeUtil = ArrayList<Utilisateur>()
-        listeUtilEven.filter { it.idEvenement == événement.idEvenement}.forEach { li ->
-            listeUtil.add(Utilisateurs.filter { it.idUtilisateur == li.idUtilisateur }.first())
+        val listeUtilEven = IntGetUtilisateursDansÉvénement(source).getUtilisateursDansÉvénement()
+        val listeUtil = ArrayList<Utilisateur>()
+        listeUtilEven.filter { it.idEvenement == événement.idEvenement }.forEach { li ->
+            listeUtil.add(Utilisateurs?.filter { it.idUtilisateur == li.idUtilisateur }!!.first())
         }
         return listeUtil
     }

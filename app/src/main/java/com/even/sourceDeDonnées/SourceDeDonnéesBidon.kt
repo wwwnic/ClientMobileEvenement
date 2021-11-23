@@ -10,24 +10,39 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     override fun getAllUtilisateurs(): List<Utilisateur> {
         var listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
         var util : Utilisateur = Utilisateur(
+            1,
             "Bob",
             "123",
             "bob@gmail.com",
             "(514)123-4567",
+            "s",
+            null,
+            null,
+            null
         )
 
         var util2 : Utilisateur = Utilisateur(
+            2,
             "Dude",
             "456",
             "dude@gmail.com",
             "(514)999-9999",
+            "s",
+            null,
+            null,
+            null
         )
 
         var util3 : Utilisateur = Utilisateur(
+            3,
             "Patrick",
             "789",
             "patrick@crosemont.qc.ca",
             "(514)111-1111",
+            "s",
+            null,
+            null,
+            null
         )
         listeUtils.add(util)
         listeUtils.add(util2)
