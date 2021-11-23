@@ -1,7 +1,6 @@
 package com.even.présentation.présenteur
 
 import com.even.domaine.interacteur.IntEnregistrement
-import com.even.domaine.interacteur.IEnregistrement
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

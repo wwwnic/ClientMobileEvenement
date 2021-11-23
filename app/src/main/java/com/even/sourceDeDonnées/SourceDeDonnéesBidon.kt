@@ -1,36 +1,42 @@
 package com.even.sourceDeDonnées
 
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
 import com.even.R
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
+import java.text.SimpleDateFormat
 import java.util.*
 
 class SourceDeDonnéesBidon : ISourceDeDonnées {
-    override fun getAllUtilisateurs(): List<Utilisateur> {
-        var listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
-        var util : Utilisateur = Utilisateur(
+    override suspend fun getAllUtilisateurs(): List<Utilisateur> {
+        val listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
+        val util : Utilisateur = Utilisateur(
             1,
             "Bob",
             "123",
             "bob@gmail.com",
             "(514)123-4567",
+            SimpleDateFormat("yyyy.MM").format(Date())
         )
 
-        var util2 : Utilisateur = Utilisateur(
+        val util2 : Utilisateur = Utilisateur(
             2,
             "Dude",
             "456",
             "dude@gmail.com",
             "(514)999-9999",
+            SimpleDateFormat("yyyy.MM").format(Date())
         )
 
-        var util3 : Utilisateur = Utilisateur(
+        val util3 : Utilisateur = Utilisateur(
             3,
             "Patrick",
             "789",
             "patrick@crosemont.qc.ca",
             "(514)111-1111",
+            SimpleDateFormat("yyyy.MM").format(Date())
         )
         listeUtils.add(util)
         listeUtils.add(util2)
@@ -38,32 +44,32 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtils
     }
 
-    override fun getAllEvenements(): List<Événement> {
-            var listeEvens : ArrayList<Événement> = ArrayList<Événement>()
-            var évén : Événement = Événement(
+    override suspend fun getAllEvenements(): List<Événement> {
+            val listeEvens : ArrayList<Événement> = ArrayList<Événement>()
+            val évén : Événement = Événement(
                 1,
                 "Party chez Bob",
                 "Maison de Bob",
-                Calendar.getInstance().time,
-                1, R.drawable.wowimg,
+                Calendar.getInstance().time.toString(),
+                1,
                 "gros party chez Bob let's gooooooo!"
             )
 
-            var évén2 : Événement = Événement(
+            val évén2 : Événement = Événement(
                 2,
                 "Autre Party chez Bob",
                 "bbbbbb",
-                Calendar.getInstance().time,
-                1, R.drawable.wowimg,
+                Calendar.getInstance().time.toString(),
+                1,
                 "hey salut"
             )
 
-            var évén3 : Événement = Événement(
+            val évén3 : Événement = Événement(
                 3,
                 "Réunion des bricoleurs",
                 "Bricoville",
-                Calendar.getInstance().time,
-                2, R.drawable.wowimg,
+                Calendar.getInstance().time.toString(),
+                2,
                 "ayoyeeeeeeeee"
             )
             listeEvens.add(évén)
@@ -72,25 +78,25 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             return listeEvens
     }
 
-    override fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
-        var listeUtilEven : ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
+    override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
+        val listeUtilEven : ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
 
-        var utilEven : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven : UtilisateurÉvénement = UtilisateurÉvénement(
             2,
             1
         )
 
-        var utilEven2 : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven2 : UtilisateurÉvénement = UtilisateurÉvénement(
             3,
             1
         )
 
-        var utilEven3 : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven3 : UtilisateurÉvénement = UtilisateurÉvénement(
             1,
             3
         )
 
-        var utilEven4 : UtilisateurÉvénement = UtilisateurÉvénement(
+        val utilEven4 : UtilisateurÉvénement = UtilisateurÉvénement(
             3,
             3
         )
@@ -100,4 +106,21 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         listeUtilEven.add(utilEven4)
         return listeUtilEven
     }
+
+    override suspend fun creerUtilisateur() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getImageEvenement(id: Int): String {
+        return R.drawable.imageevenementbidon.toString()
+    }
+
+    override fun getImageUtilisateur(id: Int): String{
+        return R.drawable.imageutilisateurbidon.toString()
+    }
+
 }
