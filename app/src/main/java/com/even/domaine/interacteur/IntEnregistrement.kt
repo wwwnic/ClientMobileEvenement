@@ -6,21 +6,15 @@ import com.even.domaine.entité.Utilisateur
 import com.even.sourceDeDonnées.IApiService
 
 import retrofit2.Response
+import retrofit2.http.PATCH
 
 class IntEnregistrement(val api: IApiService) {
 
+
     suspend fun enregisterNouvelUtilisateur(
-        username: CharSequence,
-        password: CharSequence,
-        email: CharSequence,
-        phone: CharSequence
-    ): Response<ApiReponse> {
-        val reponseRequete = api.creerUtilisateur(
-            username,
-            password,
-            email,
-            phone
-        )
+        utilisateurAEnregistrer: Utilisateur
+    ): Response<Void> {
+        val reponseRequete = api.creerUtilisateur(utilisateurAEnregistrer)
         return reponseRequete
     }
 }

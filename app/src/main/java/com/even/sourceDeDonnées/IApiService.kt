@@ -13,14 +13,7 @@ import java.sql.Date
 
 
 interface IApiService {
-    @FormUrlEncoded
-    @POST("/api/Utilisateur/New")
-    suspend fun creerUtilisateur(
-        @Field("nomUtilisateur") nomUtilisateur: CharSequence,
-        @Field("motDePasse") motDePasse: CharSequence,
-        @Field("courriel") courriel: CharSequence,
-        @Field("telephone") telephone: CharSequence,
-        @Field("dateCreation") dateCreation: Date
 
-    ): Response<ApiReponse>
+    @POST("api/Utilisateur/New")
+    suspend fun creerUtilisateur(@Body utilisateur: Utilisateur): Response<Void>
 }

@@ -10,7 +10,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     override fun getAllUtilisateurs(): List<Utilisateur> {
         var listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
         var util : Utilisateur = Utilisateur(
-            1,
             "Bob",
             "123",
             "bob@gmail.com",
@@ -18,7 +17,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         )
 
         var util2 : Utilisateur = Utilisateur(
-            2,
             "Dude",
             "456",
             "dude@gmail.com",
@@ -26,7 +24,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         )
 
         var util3 : Utilisateur = Utilisateur(
-            3,
             "Patrick",
             "789",
             "patrick@crosemont.qc.ca",

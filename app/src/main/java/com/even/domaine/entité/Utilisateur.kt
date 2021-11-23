@@ -1,16 +1,24 @@
 package com.even.domaine.entité
 
 import com.google.gson.annotations.SerializedName
+import java.lang.reflect.Constructor
 import java.util.*
 
 data class Utilisateur(
-    val idUtilisateur: Long,
     val nomUtilisateur: String,
     val motDePasse: String,
     val courriel: String,
     val telephone: String,
-    val dateCreation: String,
-    val commentaires: List<Commentaire>,
-    val evenements: List<Evenement>,
-    val utilisateurevenements: List<Utilisateurevenement>
-)
+) {
+    constructor(
+        idUtilisateur: Int,
+        nomUtilisateur: String,
+        motDePasse: String,
+        courriel: String,
+        telephone: String,
+        dateCreation: String,
+        commentaires: List<Commentaire>?,
+        evenements: List<Evenement>?,
+        utilisateurevenements: List<Utilisateurevenement>?
+    ) : this(nomUtilisateur, motDePasse, courriel, telephone)
+}

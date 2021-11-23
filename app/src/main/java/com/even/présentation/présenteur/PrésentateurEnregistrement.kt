@@ -38,7 +38,7 @@ class PrésentateurEnregistrement(
                 } else {
                     coroutileEnregistrement?.cancel()
                     vue.afficherToastErreurServeur()
-                    Log.e("handler enregistrement", "La requête a rencontré une erreur")
+                    Log.e("handler enregistrement", "La requête a rencontrée une erreur")
                 }
             }
         }
@@ -54,10 +54,10 @@ class PrésentateurEnregistrement(
             var msg: Message? = null
             try {
                 var reponseApi = modèleEnregistrment.effectuerEnregistrement(
-                    nomUsager,
-                    motDePasse,
-                    courriel,
-                    telephone
+                    nomUsager.toString(),
+                    motDePasse.toString(),
+                    courriel.toString(),
+                    telephone.toString()
                 )
                 if (reponseApi.isSuccessful) {
                     withContext(Dispatchers.Main) {
