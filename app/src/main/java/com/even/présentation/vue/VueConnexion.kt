@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.even.R
 
-class connexion : Fragment(R.layout.fragment_connexion) {
+class VueConnexion : Fragment(R.layout.fragment_connexion) {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +23,7 @@ class connexion : Fragment(R.layout.fragment_connexion) {
         super.onViewCreated(view, savedInstanceState)
         var boutonConnexion = view.findViewById<Button>(R.id.connexion_boutonConnexion)
         var boutonEnregistrement = view.findViewById<Button>(R.id.connexion_boutonEnregistrement)
+
 
         var navController = Navigation.findNavController(view)
         boutonConnexion?.setOnClickListener { navController.navigate(R.id.action_connexion_to_principal) }

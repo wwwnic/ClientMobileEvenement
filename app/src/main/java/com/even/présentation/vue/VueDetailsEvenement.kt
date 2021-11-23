@@ -13,7 +13,7 @@ import com.even.domaine.interacteur.IDétailÉvenement
 import com.even.présentation.modèle.ModèleDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
 
-class details_evenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement) {
+class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement) {
 
     lateinit var imageEvent : ImageView
     lateinit var texteNom : TextView
@@ -41,6 +41,7 @@ class details_evenement(var evenement : Événement) : Fragment(R.layout.fragmen
         btnParticipation = view?.findViewById<Button>(R.id.detailEvenement_participation)
 
         imageEvent.setImageResource(R.drawable.wowimg)
+        imageEven.setImageResource(R.drawable.imageutilisateurbidon)
         texteNom?.text = evenement.nom
         texteLocation?.text = evenement.location
         texteDate?.text = evenement.date.toString()

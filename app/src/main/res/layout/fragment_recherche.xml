@@ -5,12 +5,13 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.even.présentation.vue.recherche">
+    android:theme="@style/Theme.Évén"
+    tools:context="com.even.présentation.vue.VueRecherche">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout12"
-        android:layout_width="339dp"
-        android:layout_height="326dp"
+        android:layout_width="363dp"
+        android:layout_height="490dp"
         app:layout_constraintBottom_toTopOf="@+id/rechercher_bouton_rechercher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -97,23 +98,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
-            <EditText
-                android:id="@+id/rechercher_par_mois"
+            <View
+                android:id="@+id/view"
                 android:layout_width="@dimen/defaut_largeur_plainText"
                 android:layout_height="@dimen/defaut_hauteur_plainText"
                 android:background="@drawable/default_plaintext"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/rechercher_par_mois"
+                android:layout_width="@dimen/defaut_largeur_plainText"
+                android:layout_height="@dimen/defaut_hauteur_plainText"
+                android:layout_marginTop="16dp"
                 android:ems="10"
-                android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                app:layout_constraintVertical_bias="0.2"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/byMonth"

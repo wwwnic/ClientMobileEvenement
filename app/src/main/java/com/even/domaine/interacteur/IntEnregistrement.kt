@@ -1,13 +1,8 @@
 package com.even.domaine.interacteur
 
 import android.util.Log
-import com.even.domaine.entité.ApiClient
-import com.even.domaine.entité.ApiClient.apiService
+import com.even.sourceDeDonnées.ApiClient.apiService
 import com.even.domaine.entité.Utilisateur
-import com.even.sourceDeDonnées.IApiService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class IntEnregistrement() {
 
@@ -23,7 +18,8 @@ class IntEnregistrement() {
                 username,
                 password,
                 email,
-                phone
+                phone,
+                ""
             )
         )
         Log.i("Réponse POST", reponseRequete.toString()) //TODO: log
