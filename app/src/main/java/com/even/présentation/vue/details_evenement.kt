@@ -7,7 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.even.R
+import com.even.domaine.entité.ApiClient
 import com.even.domaine.entité.Événement
+import com.even.domaine.interacteur.IDétailÉvenement
+import com.even.présentation.modèle.ModèleDétailÉvenement
+import com.even.présentation.présenteur.PrésentateurDétailÉvenement
 
 class details_evenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement) {
 
@@ -20,8 +24,12 @@ class details_evenement(var evenement : Événement) : Fragment(R.layout.fragmen
     lateinit var texteParticipant : TextView
     lateinit var btnParticipation : Button
 
+    lateinit var présentateur : IDétailÉvenement.IPrésentateur
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        présentateur = PrésentateurDétailÉvenement(this, ModèleDétailÉvenement(ApiClient.apiService))
 
         imageEvent = view?.findViewById<ImageView>(R.id.detailEvenement_eventImage)
         texteNom = view?.findViewById<TextView>(R.id.detailEvenement_nameEvent)
