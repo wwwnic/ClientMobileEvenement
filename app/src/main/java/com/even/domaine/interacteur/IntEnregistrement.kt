@@ -1,27 +1,19 @@
 package com.even.domaine.interacteur
 
 import android.util.Log
-import com.even.sourceDeDonnées.ApiClient.apiService
+import com.even.domaine.entité.ApiReponse
 import com.even.domaine.entité.Utilisateur
+import com.even.sourceDeDonnées.IApiService
 
-class IntEnregistrement() {
+import retrofit2.Response
+import retrofit2.http.PATCH
+
+class IntEnregistrement(val api: IApiService) {
 
     suspend fun enregisterNouvelUtilisateur(
-        username: String,
-        password: String,
-        email: String,
-        phone: String
-    ) {
-        var reponseRequete = apiService.creerUtilisateur(
-            Utilisateur(
-                0,
-                username,
-                password,
-                email,
-                phone,
-                ""
-            )
-        )
-        Log.i("Réponse POST", reponseRequete.toString()) //TODO: log
+        utilisateurAEnregistrer: Utilisateur
+    ): Response<Void> {
+        val reponseRequete = api.creerUtilisateur(utilisateurAEnregistrer)
+        return reponseRequete
     }
 }
