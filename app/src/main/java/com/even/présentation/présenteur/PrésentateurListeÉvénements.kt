@@ -17,9 +17,11 @@ class PrésentateurListeÉvénements(
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 liste = ModèleÉvénements().getÉvénementsRécents()
-                if (!liste.isEmpty()) {
-                    withContext(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
+                    if (!liste.isEmpty()) {
                         vue.afficherListeEvenements(liste,{ i -> ModèleÉvénements().getImageÉvénement(i)})
+                    } else {
+                        vue.afficherErreurConnexion()
                     }
                 }
             } catch (e: SocketTimeoutException) {

@@ -21,7 +21,7 @@ import com.google.android.material.navigation.NavigationView
 
 class VuePrincipale : Fragment(R.layout.fragment_principal) {
 
-    lateinit var fragmentLoader :FragmentLoader
+    lateinit var fragmentLoader : FragmentLoader
 
     lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -35,9 +35,10 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navView = view.findViewById<NavigationView>(R.id.nav_view)
-        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
         
         toolbar = view.findViewById(R.id.toolbar)
         drawerLayout = view.findViewById(R.id.drawer_layout)

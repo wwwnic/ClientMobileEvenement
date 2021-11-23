@@ -18,10 +18,12 @@ import com.google.android.material.tabs.TabLayout
 
 class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
 
-    val fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+    lateinit var fragmentLoader : FragmentLoader
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+
         val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
         //var listeEvens : List<Événement> = setListeEvens(0)
         var listeEvens : List<Événement> = ArrayList<Événement>()

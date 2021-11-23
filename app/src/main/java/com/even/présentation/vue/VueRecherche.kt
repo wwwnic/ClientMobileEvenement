@@ -14,7 +14,7 @@ import com.even.ui.composants.SelecteurDate
 
 class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
 
-    val fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+    lateinit var fragmentLoader : FragmentLoader
 
     lateinit var présentateur : IRecherche.IPrésentateur
 
@@ -26,6 +26,8 @@ class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+
         présentateur = PrésentateurRecherche(this)
 
         texteMotCle = view.findViewById(R.id.rechercher_par_mot_cle)
