@@ -17,7 +17,7 @@ class ModèleConnexion(val api: IApiService) {
         val estRequêteComplète = reponseApi.isSuccessful
         if (estRequêteComplète) {
             val gson = Gson()
-            val infoUtilisateur = gson.fromJson(reponseApi.body()!!.data, Utilisateur::class.java)
+            val infoUtilisateur = gson.fromJson(reponseApi.body()!!.error, Utilisateur::class.java)
             utilisateur = infoUtilisateur
         }
         return estRequêteComplète

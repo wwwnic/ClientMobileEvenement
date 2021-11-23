@@ -1,25 +1,27 @@
 package com.even.ui.composants
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.even.R
+import coil.compose.rememberImagePainter
 import com.even.domaine.entité.Événement
 
 @Composable
-fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit) {
+fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl: (Int) -> String) {
+    var urlImg = imageUrl(événement.idEvenement)
     Column(modifier = Modifier
         .clickable(onClick = clickEvent)
         .clip(RectangleShape)
@@ -27,11 +29,16 @@ fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit) {
         .fillMaxWidth()
         .height(300.dp)) {
         Row(modifier = Modifier
-            .height(150.dp)) {
+            .height(150.dp)
+            .fillMaxWidth()
+            .clip(RectangleShape)
+            .background(MaterialTheme.colors.primaryVariant)) {
             Image(
-                painter = painterResource(id = R.drawable.wowimg),
+                painter = rememberImagePainter(if(urlImg.contains("http")) urlImg else urlImg.toInt()),
                 contentDescription = "Image",
-                contentScale = ContentScale.FillBounds
+                modifier = Modifier
+                    .graphicsLayer { scaleX = 2.5F;scaleY = 1.3F;clip = true; }
+                    .fillMaxSize()
             )
         }
         Column(modifier = Modifier
@@ -70,10 +77,10 @@ fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit) {
 }
 
 @Composable
-fun ListeCarteÉvénements(événements: List<Événement>,clickEvent : (Événement) -> Unit) {
+fun ListeCarteÉvénements(événements: List<Événement>, clickEvent : (Événement) -> Unit, imageUrl : (Int) -> String) {
     LazyColumn {
         items(événements) { e ->
-            CarteÉvénement(événement = e,clickEvent = { clickEvent(e) })
+            CarteÉvénement(événement = e,clickEvent = { clickEvent(e) },{ imageUrl(e.idEvenement) })
         }
     }
 }

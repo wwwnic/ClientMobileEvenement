@@ -28,6 +28,6 @@
     </fragment>
     <fragment
         android:id="@+id/principal"
-        android:name="com.even.présentation.vue.principal"
+        android:name="com.even.présentation.vue.VuePrincipale"
         android:label="principal" />
 </navigation>

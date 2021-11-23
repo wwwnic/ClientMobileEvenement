@@ -1,8 +1,6 @@
 package com.even.présentation.vue
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -10,11 +8,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat.getColor
-import com.even.R
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.even.R
 import com.even.domaine.entité.ApiClient
-import com.even.domaine.interacteur.IEnregistrement
 import com.even.présentation.modèle.ModèleEnregistrement
+import com.even.présentation.présenteur.IEnregistrement
 import com.even.présentation.présenteur.PrésentateurEnregistrement
 
 

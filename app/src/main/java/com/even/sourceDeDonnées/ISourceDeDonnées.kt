@@ -5,7 +5,11 @@ import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 
 interface ISourceDeDonnées {
-    fun getAllUtilisateurs() : List<Utilisateur>
-    fun getAllEvenements() : List<Événement>
-    fun getUtilisateursEvenement() : List<UtilisateurÉvénement>
+    suspend fun getAllUtilisateurs() : List<Utilisateur>
+    suspend fun getAllEvenements() : List<Événement>
+    suspend fun getUtilisateursEvenement() : List<UtilisateurÉvénement>
+    suspend fun creerUtilisateur()
+    suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String) : List<Événement>
+    fun getImageUtilisateur(id:Int) : String
+    fun getImageEvenement(id:Int) : String
 }

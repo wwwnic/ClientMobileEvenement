@@ -5,20 +5,20 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import com.even.domaine.entité.ValidateurEntréesTextuel
-import com.even.domaine.interacteur.IEnregistrement
 import com.even.présentation.modèle.ModèleEnregistrement
 import kotlinx.coroutines.*
+import java.net.SocketTimeoutException
 
 class PrésentateurEnregistrement(
-    var vue: IEnregistrement.IVue,
-    var modèleEnregistrment: ModèleEnregistrement
+    val vue: IEnregistrement.IVue,
+    val modèleEnregistrment: ModèleEnregistrement
 ) : IEnregistrement.IPrésentateur {
     private val handlerRéponse: Handler
 
     private var coroutileEnregistrement: Job? = null
 
     private val MSG_RÉUSSI = 0
-    private val MSG_ERREUR = 1
+    private val MSG_ECHEC = 1
     private val MSG_ANNULER = 2
 
     init {
@@ -29,16 +29,16 @@ class PrésentateurEnregistrement(
                     vue.naviguerVersConnexion()
                     vue.afficherToastSuccesEnregistrement()
 
-                } else if (msg.what == MSG_ERREUR) {
+                } else if (msg.what == MSG_ECHEC) {
                     vue.afficherToastErreurServeur()
                     Log.e(
-                        "handler enregistrement",
-                        "Erreur de connexion au serveur / réponse incompatible"
+                        "Évèn",
+                        "Le serveur a retourné une erreur"
                     )
                 } else {
                     coroutileEnregistrement?.cancel()
                     vue.afficherToastErreurServeur()
-                    Log.e("handler enregistrement", "La requête a rencontré une erreur")
+                    Log.e("Évèn", "Erreur d'accès à l'API", msg.obj as Throwable)
                 }
             }
         }
@@ -54,20 +54,22 @@ class PrésentateurEnregistrement(
             var msg: Message? = null
             try {
                 var reponseApi = modèleEnregistrment.effectuerEnregistrement(
-                    nomUsager,
-                    motDePasse,
-                    courriel,
-                    telephone
+                    nomUsager.toString(),
+                    motDePasse.toString(),
+                    courriel.toString(),
+                    telephone.toString()
                 )
                 if (reponseApi.isSuccessful) {
                     withContext(Dispatchers.Main) {
                         msg = handlerRéponse.obtainMessage(MSG_RÉUSSI)
                     }
                 } else {
-                    msg = handlerRéponse.obtainMessage(MSG_ERREUR)
+                    msg = handlerRéponse.obtainMessage(MSG_ECHEC)
                 }
+            } catch (e: SocketTimeoutException) {
+                msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
             } catch (e: InterruptedException) {
-                msg = handlerRéponse.obtainMessage(MSG_ANNULER)
+                msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
             }
             handlerRéponse.sendMessage(msg!!)
         }

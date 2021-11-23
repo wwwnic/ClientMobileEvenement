@@ -30,4 +30,5 @@ object ApiClient {
     val apiService: IApiService by lazy {
         retrofit.create(IApiService::class.java)
     }
+
 }

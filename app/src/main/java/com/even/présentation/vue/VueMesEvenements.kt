@@ -1,59 +1,47 @@
 package com.even.présentation.vue
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleUtilisateurs
-import com.even.présentation.modèle.ModèleÉvénements
-import com.even.sourceDeDonnées.SourceDeDonnéesBidon
-import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
 
-class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragment_mes_evenements) {
+class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
-        var listeEvens : List<Événement> = setListeEvens(0)
+        //var listeEvens : List<Événement> = setListeEvens(0)
+        var listeEvens : List<Événement> = ArrayList<Événement>()
         val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
 
-        composeView.setContent {
-            MaterialTheme {
-                ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                    details_evenement(e)
-                ) })
-            }
-        }
-
-        boutonCreer.setOnClickListener { loadFragment(creation_evenement()) }
+        boutonCreer.setOnClickListener { loadFragment(VueCreationEvenement()) }
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                listeEvens = setListeEvens(tab!!.position)
+                //listeEvens = setListeEvens(tab!!.position)
                 if (tab!!.position == 0) {
-                    composeView.setContent {
+                    /*composeView.setContent {
                         MaterialTheme {
                             ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                                details_evenement(e)
+                                VueDetailsEvenement(e)
                             ) })
                         }
-                    }
+                    }*/
                     boutonCreer.visibility = View.INVISIBLE
                 } else {
-                    composeView.setContent {
+                    /*composeView.setContent {
                         MaterialTheme {
                             ListeCarteÉvénements(événements = listeEvens, clickEvent = {e -> loadFragment(
-                                modifier_evenement()
+                                VueModifierEvenement()
                             ) })
                         }
-                    }
+                    }*/
                     boutonCreer.visibility = View.VISIBLE
                 }
             }
@@ -66,15 +54,15 @@ class mesEvenements(val modèle : ModèleÉvénements) : Fragment(R.layout.fragm
         })
     }
 
-    private fun setListeEvens(tabSélectionée : Int) : List<Événement> {
+    /*private fun setListeEvens(tabSélectionée : Int) : List<Événement> {
         var liste : List<Événement>
         if (tabSélectionée == 0) {
-            liste = modèle.getÉvénementsParPrésence(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
+            //liste = modèle.getÉvénementsParPrésence(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
         } else {
-            liste = modèle.getÉvénementsParCréateur(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
+            //liste = modèle.getÉvénementsParCréateur(ModèleUtilisateurs(SourceDeDonnéesBidon()).Utilisateurs.get(0))
         }
         return liste
-    }
+    }*/
 
     // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
     private fun loadFragment(fragment: Fragment) {

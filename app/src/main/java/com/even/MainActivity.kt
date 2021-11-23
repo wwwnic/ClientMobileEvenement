@@ -1,22 +1,21 @@
 package com.even
 
-import android.content.ClipData
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import com.even.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.even.présentation.modèle.ModèleUtilisateurs
+import com.even.présentation.modèle.ModèleÉvénements
+import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val source = SourceDeDonnéesAPI()
+        ModèleUtilisateurs.setSource(source)
+        ModèleÉvénements.setSource(source)
     }
 
     //permet de fermer le drawer quand il est ouvert en appuyant sur back

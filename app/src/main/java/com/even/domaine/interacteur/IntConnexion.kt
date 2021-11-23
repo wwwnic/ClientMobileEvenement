@@ -1,6 +1,6 @@
 package com.even.domaine.interacteur
 
-import com.even.domaine.entité.ApiReponse
+import com.even.sourceDeDonnées.ApiReponse
 import com.even.sourceDeDonnées.IApiService
 import retrofit2.Response
 
