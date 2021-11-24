@@ -1,14 +1,16 @@
 package com.even.présentation.vue
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.even.R
-import com.even.domaine.interacteur.IConnexion
+import com.even.présentation.présenteur.IConnexion
 import com.even.présentation.modèle.ModèleConnexion
 import com.even.présentation.présenteur.PrésentateurConnexion
 import com.even.sourceDeDonnées.SourceDeDonnéesAPI
@@ -16,29 +18,76 @@ import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
     lateinit var présentateurConnexion: IConnexion.IPrésentateur
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        présentateurConnexion = PrésentateurConnexion(this, ModèleConnexion(SourceDeDonnéesAPI()))
-        return inflater.inflate(R.layout.fragment_connexion, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var boutonConnexion = view.findViewById<Button>(R.id.connexion_boutonConnexion)
-        var boutonEnregistrement = view.findViewById<Button>(R.id.connexion_boutonEnregistrement)
+        présentateurConnexion = PrésentateurConnexion(this, ModèleConnexion(SourceDeDonnéesAPI()))
+        clickListenerBtnConnexion(view)
+        clickListenerBtnCreerUnCompte(view)
+    }
 
+    private fun clickListenerBtnCreerUnCompte(view: View) {
+        val boutonEnregistrement = view.findViewById<Button>(R.id.connexion_boutonEnregistrement)
+        boutonEnregistrement?.setOnClickListener { naviguerVersFragmentEnregistgrement() }
+    }
+
+    private fun clickListenerBtnConnexion(view: View) {
+        val boutonConnexion = view.findViewById<Button>(R.id.connexion_boutonConnexion)
+        val txtNomUsager = view.findViewById<TextView>(R.id.connexion_textNomUtilisateur).text
+        val txtMotDePasse = view.findViewById<TextView>(R.id.connexion_textMotDePasse).text
         boutonConnexion?.setOnClickListener {
-            présentateurConnexion.traiterRequêteDemanderProfilPourConnexion("nicolas", "all2o")
+            présentateurConnexion.traiterRequêteDemanderProfilPourConnexion(
+                txtNomUsager,
+                txtMotDePasse
+            )
         }
-        boutonEnregistrement?.setOnClickListener { findNavController().navigate(R.id.action_connexion_to_enregistrement) }
+    }
 
+    override fun afficherToastSuccesConnexion() {
+        Toast.makeText(context, R.string.login_completed, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun afficherToastErreurConnexion() {
+        Toast.makeText(context, R.string.login_incompleted, Toast.LENGTH_LONG).show()
+    }
+
+    override fun afficherToastErreurServeur() {
+        Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
     }
 
     override fun naviguerVersFragmentPrincipal() {
         findNavController().navigate(R.id.action_connexion_to_principal)
     }
 
+    override fun naviguerVersFragmentEnregistgrement() {
+        findNavController().navigate(R.id.action_connexion_to_enregistrement)
+    }
+
+    override fun afficherErreurNomUtilisateur(afficherEnRouge: Boolean) {
+        changerCouleurValidation(
+            afficherEnRouge, R.id.connexion_textNomUtilisateur, R.id.connexion_hint_nomUtilisateur
+        )
+    }
+    override fun afficherErreurMotDePasse(afficherEnRouge: Boolean) {
+
+        changerCouleurValidation(
+            afficherEnRouge, R.id.connexion_textMotDePasse, R.id.connexion_hint_motDePasse
+        )
+    }
+
+    private fun changerCouleurValidation(
+        afficherEnRouge: Boolean,
+        editTextId: Int,
+        textViewId: Int
+    ) {
+        val vue = requireView()
+        val editText = vue.findViewById<EditText>(editTextId)
+        val textView = vue.findViewById<TextView>(textViewId)
+        val idArrièrePlan =
+            if (afficherEnRouge) R.drawable.login_plaintext_in_red else R.drawable.login_plaintext
+        val idCouleur = if (afficherEnRouge) R.color.rouge else R.color.figmaMauve
+        editText.setBackgroundResource(idArrièrePlan)
+        textView.setTextColor(ContextCompat.getColor(requireContext(), idCouleur))
+    }
 
 }

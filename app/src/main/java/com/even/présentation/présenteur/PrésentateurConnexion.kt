@@ -1,9 +1,8 @@
 package com.even.présentation.présenteur
 
 import android.util.Log
-import com.even.domaine.interacteur.IConnexion
+import com.even.domaine.entité.ValidateurEntréesTextuel
 import com.even.présentation.modèle.ModèleConnexion
-import com.google.gson.stream.MalformedJsonException
 import kotlinx.coroutines.*
 
 class PrésentateurConnexion(
@@ -16,29 +15,58 @@ class PrésentateurConnexion(
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ) {
+        val entréesValide = validerLesEntréesConnexion(nomUtilisateur, motDePasse)
+        if (entréesValide) {
+            lancerRequeteConnexionApi(nomUtilisateur, motDePasse)
+        } else{
+            vue.afficherToastErreurConnexion()
+        }
+    }
+
+    private fun lancerRequeteConnexionApi(
+        nomUtilisateur: CharSequence,
+        motDePasse: CharSequence
+    ) {
         coroutileLogin = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val estUtilisateurExistant =
                     modèleEnregistrment.demanderProfilUtilisateur(nomUtilisateur, motDePasse)
-                if (estUtilisateurExistant) {
-                    withContext(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
+                    if (estUtilisateurExistant) {
                         vue.naviguerVersFragmentPrincipal()
+                        vue.afficherToastSuccesConnexion()
+                    } else {
+                        vue.afficherToastErreurConnexion()
+                        vue.afficherErreurNomUtilisateur(!estUtilisateurExistant)
+                        vue.afficherErreurMotDePasse(!estUtilisateurExistant)
                     }
-                    Log.e(
-                        "api",
-                        "Succès 100%"
-                    )
-                } else {
-                    Log.e(
-                        "api",
-                        "Erreur de connexion au serveur / réponse incompatible"
-                    )
                 }
-            } catch (e: MalformedJsonException) {
-                Log.e("json", "Erreur dans la réponse json, format non respecté.")
             } catch (e: Exception) {
-                Log.e("api", "La requête a rencontré une erreur", e)
+                Log.e("Évèn", "La requête a rencontré une erreur", e)
+                vue.afficherToastErreurServeur()
             }
         }
+    }
+
+    private fun validerLesEntréesConnexion(
+        nomUsager: CharSequence,
+        motDePasse: CharSequence,
+    ): Boolean {
+        val estNomUsagerValide = this.traiterRequêteValiderNomUsager(nomUsager)
+        val estMotDePasseValide = this.traiterRequêteValiderMotDePasse(motDePasse)
+        val entréesValide = estNomUsagerValide && estMotDePasseValide
+        return entréesValide
+    }
+
+    private fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
+        val estValide = ValidateurEntréesTextuel.validerNomUsager(nomUsager)
+        vue.afficherErreurNomUtilisateur(!estValide)
+        return estValide
+    }
+
+    private fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
+        val estValide = ValidateurEntréesTextuel.validerMotDePasse(motDePasse)
+        vue.afficherErreurMotDePasse(!estValide)
+        return estValide
     }
 }

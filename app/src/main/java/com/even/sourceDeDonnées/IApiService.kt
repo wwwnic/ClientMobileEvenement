@@ -1,6 +1,5 @@
 package com.even.sourceDeDonnées
 
-import com.even.domaine.entité.InfoConnexion
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
 import retrofit2.Response

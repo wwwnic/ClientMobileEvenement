@@ -48,6 +48,7 @@
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
+                    android:id="@+id/connexion_hint_nomUtilisateur"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/username"
@@ -78,6 +79,7 @@
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
+                    android:id="@+id/connexion_hint_motDePasse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/password"
