@@ -12,8 +12,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat.getColor
 import com.even.R
 import androidx.navigation.fragment.findNavController
-import com.even.domaine.entité.ApiClient
-import com.even.présentation.modèle.ModèleEnregistrement
 import com.even.présentation.présenteur.IEnregistrement
 import com.even.présentation.présenteur.PrésentateurEnregistrement
 
@@ -25,7 +23,7 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         présentateurEnregistrement =
-            PrésentateurEnregistrement(this, ModèleEnregistrement(ApiClient.apiService))
+            PrésentateurEnregistrement(this)
         val toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         clickListenerBtnEnregistrement(view)

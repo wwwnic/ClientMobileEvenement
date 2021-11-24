@@ -1,6 +1,5 @@
-package com.even.domaine.entité
+package com.even.sourceDeDonnées
 
-import com.even.sourceDeDonnées.IApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

@@ -4,6 +4,7 @@ import com.even.R
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -105,7 +106,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtilEven
     }
 
-    override suspend fun creerUtilisateur() {
+    override suspend fun creerUtilisateur(utilisateur: Utilisateur): Response<Void> {
         TODO("Not yet implemented")
     }
 
