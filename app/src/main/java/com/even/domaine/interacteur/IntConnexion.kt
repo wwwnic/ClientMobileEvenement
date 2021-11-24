@@ -1,15 +1,14 @@
 package com.even.domaine.interacteur
 
-import com.even.sourceDeDonnées.ApiReponse
-import com.even.sourceDeDonnées.IApiService
-import retrofit2.Response
+import com.even.domaine.entité.Utilisateur
+import com.even.sourceDeDonnées.ISourceDeDonnées
 
-class IntConnexion(val api: IApiService) {
+class IntConnexion(val api: ISourceDeDonnées) {
 
     suspend fun connexionDemanderProfil(
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
-    ): Response<ApiReponse> {
+    ): Utilisateur? {
         return api.demanderProfil(nomUtilisateur, motDePasse)
     }
 }

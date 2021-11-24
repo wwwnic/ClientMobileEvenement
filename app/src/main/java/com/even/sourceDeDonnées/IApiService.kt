@@ -1,11 +1,10 @@
 package com.even.sourceDeDonnées
 
-
+import com.even.domaine.entité.InfoConnexion
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
 import retrofit2.Response
 import retrofit2.http.*
-
 
 interface IApiService {
 
@@ -26,10 +25,9 @@ interface IApiService {
         @Query("organisateur") organisateur: String
     ): Response<List<Événement>>
 
-    @FormUrlEncoded
-    @POST("api/login")
+    @POST("/api/Utilisateur/Login")
     suspend fun demanderProfil(
-        @Field("nomUtilisateur") nomUtilisateur: CharSequence,
-        @Field("motDePasse") motDePasse: CharSequence,
-    ): Response<ApiReponse>
+        @Query("userName") nomUtilisateur: CharSequence,
+        @Query("password") motDePasse: CharSequence,
+    ): Response<Utilisateur?>
 }

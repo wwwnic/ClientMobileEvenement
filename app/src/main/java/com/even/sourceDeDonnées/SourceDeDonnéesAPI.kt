@@ -1,6 +1,6 @@
 package com.even.sourceDeDonnées
 
-import com.even.domaine.entité.ApiClient.apiService
+import com.even.sourceDeDonnées.ApiClient.apiService
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
@@ -35,6 +35,12 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
+
+    override suspend fun demanderProfil(nomUtilisateur: CharSequence, motDePasse: CharSequence): Utilisateur? {
+        var reponseApi = apiService.demanderProfil(nomUtilisateur, motDePasse)
+        return reponseApi.body()
+    }
+
     override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {
         var liste : List<Événement> = ArrayList<Événement>()
 
@@ -52,4 +58,9 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
     override fun getImageEvenement(id: Int): String {
         return "http://10.0.0.149:23784/images/evenements/${id}.jpg"
     }
+
 }
+
+
+
+

@@ -2,10 +2,9 @@ package com.even.présentation.modèle
 
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.interacteur.IntConnexion
-import com.even.sourceDeDonnées.IApiService
-import com.google.gson.Gson
+import com.even.sourceDeDonnées.ISourceDeDonnées
 
-class ModèleConnexion(val api: IApiService) {
+class ModèleConnexion(val api: ISourceDeDonnées) {
 
     var utilisateur: Utilisateur? = null
 
@@ -13,13 +12,7 @@ class ModèleConnexion(val api: IApiService) {
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ): Boolean {
-        val reponseApi = IntConnexion(api).connexionDemanderProfil(nomUtilisateur, motDePasse)
-        val estRequêteComplète = reponseApi.isSuccessful
-        if (estRequêteComplète) {
-            val gson = Gson()
-            val infoUtilisateur = gson.fromJson(reponseApi.body()!!.error, Utilisateur::class.java)
-            utilisateur = infoUtilisateur
-        }
-        return estRequêteComplète
+        val utilisateur = IntConnexion(api).connexionDemanderProfil(nomUtilisateur, motDePasse)
+        return utilisateur?.nomUtilisateur != null
     }
 }

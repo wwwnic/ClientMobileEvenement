@@ -4,10 +4,7 @@ import android.util.Log
 import com.even.domaine.interacteur.IConnexion
 import com.even.présentation.modèle.ModèleConnexion
 import com.google.gson.stream.MalformedJsonException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class PrésentateurConnexion(
     val vue: IConnexion.IVue,
@@ -21,22 +18,26 @@ class PrésentateurConnexion(
     ) {
         coroutileLogin = CoroutineScope(Dispatchers.IO).launch {
             try {
-                val requeteComplete =
+                val estUtilisateurExistant =
                     modèleEnregistrment.demanderProfilUtilisateur(nomUtilisateur, motDePasse)
-                if (requeteComplete) {
+                if (estUtilisateurExistant) {
+                    withContext(Dispatchers.Main) {
+                        vue.naviguerVersFragmentPrincipal()
+                    }
                     Log.e(
                         "api",
                         "Succès 100%"
                     )
+                } else {
+                    Log.e(
+                        "api",
+                        "Erreur de connexion au serveur / réponse incompatible"
+                    )
                 }
-                Log.e(
-                    "api",
-                    "Erreur de connexion au serveur / réponse incompatible"
-                )
             } catch (e: MalformedJsonException) {
                 Log.e("json", "Erreur dans la réponse json, format non respecté.")
             } catch (e: Exception) {
-                Log.e("api", "La requête a rencontré une erreur")
+                Log.e("api", "La requête a rencontré une erreur", e)
             }
         }
     }
