@@ -10,8 +10,7 @@ import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
 class PrésentateurEnregistrement(
-    val vue: IEnregistrement.IVue,
-    val modèleEnregistrment: ModèleEnregistrement
+    val vue: IEnregistrement.IVue
 ) : IEnregistrement.IPrésentateur {
     private val handlerRéponse: Handler
 
@@ -53,7 +52,7 @@ class PrésentateurEnregistrement(
         coroutileEnregistrement = CoroutineScope(Dispatchers.IO).launch {
             var msg: Message? = null
             try {
-                var reponseApi = modèleEnregistrment.effectuerEnregistrement(
+                var reponseApi = ModèleEnregistrement().effectuerEnregistrement(
                     nomUsager.toString(),
                     motDePasse.toString(),
                     courriel.toString(),

@@ -21,7 +21,7 @@ class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        présentateurConnexion = PrésentateurConnexion(this, ModèleConnexion(SourceDeDonnéesAPI()))
+        présentateurConnexion = PrésentateurConnexion(this)
         clickListenerBtnConnexion(view)
         clickListenerBtnCreerUnCompte(view)
     }

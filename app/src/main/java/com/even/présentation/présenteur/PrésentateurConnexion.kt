@@ -6,8 +6,7 @@ import com.even.présentation.modèle.ModèleConnexion
 import kotlinx.coroutines.*
 
 class PrésentateurConnexion(
-    val vue: IConnexion.IVue,
-    val modèleEnregistrment: ModèleConnexion
+    val vue: IConnexion.IVue
 ) : IConnexion.IPrésentateur {
     private var coroutileLogin: Job? = null
 
@@ -30,7 +29,7 @@ class PrésentateurConnexion(
         coroutileLogin = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val estUtilisateurExistant =
-                    modèleEnregistrment.demanderProfilUtilisateur(nomUtilisateur, motDePasse)
+                    ModèleConnexion().demanderProfilUtilisateur(nomUtilisateur, motDePasse)
                 withContext(Dispatchers.Main) {
                     if (estUtilisateurExistant) {
                         vue.naviguerVersFragmentPrincipal()
