@@ -1,6 +1,6 @@
 package com.even.présentation.présenteur
 
-class IConnexion {
+interface IConnexion {
     interface IVue {
         fun naviguerVersFragmentPrincipal()
         fun naviguerVersFragmentEnregistgrement()

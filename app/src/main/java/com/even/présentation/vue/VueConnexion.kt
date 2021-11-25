@@ -31,8 +31,8 @@ class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
 
     private fun clickListenerBtnConnexion(view: View) {
         val boutonConnexion = view.findViewById<Button>(R.id.connexion_boutonConnexion)
-        val txtNomUsager = view.findViewById<TextView>(R.id.connexion_textNomUtilisateur).text
-        val txtMotDePasse = view.findViewById<TextView>(R.id.connexion_textMotDePasse).text
+        val txtNomUsager = view.findViewById<EditText>(R.id.connexion_textNomUtilisateur).text
+        val txtMotDePasse = view.findViewById<EditText>(R.id.connexion_textMotDePasse).text
         boutonConnexion?.setOnClickListener {
             présentateurConnexion.traiterRequêteDemanderProfilPourConnexion(
                 txtNomUsager,

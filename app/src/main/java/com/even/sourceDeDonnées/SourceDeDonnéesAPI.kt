@@ -37,7 +37,8 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
     }
 
     override suspend fun demanderProfil(nomUtilisateur: CharSequence, motDePasse: CharSequence): Utilisateur? {
-        var reponseApi = apiService.demanderProfil(nomUtilisateur, motDePasse)
+        var utilisateur = Utilisateur(nomUtilisateur.toString(),motDePasse.toString())
+        var reponseApi = apiService.demanderProfil(utilisateur)
         return reponseApi.body()
     }
 

@@ -9,8 +9,4 @@ class Événement(
     var description: String
 ) {
     var organisateur : Utilisateur? = null
-
-    fun setOrganisateura(u : Utilisateur) {
-        organisateur = u
-    }
 }

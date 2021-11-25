@@ -16,7 +16,7 @@ interface IApiService {
     @GET("api/Utilisateur/GetAll")
     suspend fun getAllUtilisateurs(): Response<List<Utilisateur>>
 
-    @GET("api/Evenement/GetAll")
+    @GET("api/Evenement/GetRecent")
     suspend fun getAllEvenements(): Response<List<Événement>>
 
     @GET("/api/Utilisateur/GetById")
@@ -34,8 +34,5 @@ interface IApiService {
     suspend fun creerEvenement(@Body evenement: Événement): Response<Événement>
 
     @POST("/api/Utilisateur/Login")
-    suspend fun demanderProfil(
-        @Query("userName") nomUtilisateur: CharSequence,
-        @Query("password") motDePasse: CharSequence,
-    ): Response<Utilisateur?>
+    suspend fun demanderProfil(@Body utilisateur : Utilisateur): Response<Utilisateur?>
 }
