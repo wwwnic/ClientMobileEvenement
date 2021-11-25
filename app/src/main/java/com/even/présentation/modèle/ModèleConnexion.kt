@@ -7,13 +7,11 @@ import com.even.sourceDeDonnées.ISourceDeDonnées
 class ModèleConnexion() {
 
     companion object {
+        var utilisateurConnecté: Utilisateur? = null
+
         lateinit var _source: ISourceDeDonnées
-        var _utilisateurConnecté : Utilisateur? = null
         fun setSource(source: ISourceDeDonnées) {
             _source = source
-        }
-        fun setUtilisateurConnecté(utilisateur : Utilisateur?) {
-            _utilisateurConnecté = utilisateur
         }
     }
 
@@ -21,9 +19,10 @@ class ModèleConnexion() {
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ): Boolean {
+        val identifiantUtilisateur = Utilisateur(nomUtilisateur.toString(), motDePasse.toString())
         val utilisateurRecuperé =
-            IntConnexion(_source).connexionDemanderProfil(nomUtilisateur, motDePasse)
-        setUtilisateurConnecté(utilisateurRecuperé)
+            IntConnexion(_source).connexionDemanderProfil(identifiantUtilisateur)
+        utilisateurConnecté = utilisateurRecuperé
         return utilisateurRecuperé?.nomUtilisateur != null
     }
 }

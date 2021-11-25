@@ -27,7 +27,6 @@
             android:id="@+id/barreTabMesEvens"
             android:layout_width="413dp"
             android:layout_height="65dp"
-            android:layout_marginTop="4dp"
             android:background="@color/figmaMauve"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -53,7 +52,7 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.compose.ui.platform.ComposeView
-            android:id="@+id/listeBlocsEven"
+            android:id="@+id/mesEven_listeBlocsEven"
             android:layout_width="match_parent"
             android:layout_height="583dp"
             app:layout_constraintBottom_toBottomOf="parent"

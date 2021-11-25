@@ -36,9 +36,8 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return apiService.creerUtilisateur(utilisateur)
     }
 
-    override suspend fun demanderProfil(nomUtilisateur: CharSequence, motDePasse: CharSequence): Utilisateur? {
-        var utilisateur = Utilisateur(nomUtilisateur.toString(),motDePasse.toString())
-        var reponseApi = apiService.demanderProfil(utilisateur)
+    override suspend fun demanderProfil(identifiantUtilisateur: Utilisateur): Utilisateur? {
+        var reponseApi = apiService.demanderProfil(identifiantUtilisateur)
         return reponseApi.body()
     }
 
@@ -68,6 +67,12 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
             utilisateur = reponseApi.body() as Utilisateur
         }
         return utilisateur
+    }
+
+    override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
+        val reponseApi = apiService.getEvenementParParticipation(id)
+        val test = reponseApi.body()
+        return if(reponseApi.isSuccessful) reponseApi.body()!! else listOf()
     }
 
     override fun getImageUtilisateur(id: Int): String {

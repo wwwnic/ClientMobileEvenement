@@ -4,10 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.even.présentation.modèle.ModèleConnexion
-import com.even.présentation.modèle.ModèleEnregistrement
-import com.even.présentation.modèle.ModèleUtilisateurs
-import com.even.présentation.modèle.ModèleÉvénements
+import com.even.présentation.modèle.*
 import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 
@@ -25,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         ModèleÉvénements.setSource(source)
         ModèleEnregistrement.setSource(source)
         ModèleConnexion.setSource(source)
+        ModèleMesÉvènements.setSource(source)
     }
 
     //permet de fermer le drawer quand il est ouvert en appuyant sur back

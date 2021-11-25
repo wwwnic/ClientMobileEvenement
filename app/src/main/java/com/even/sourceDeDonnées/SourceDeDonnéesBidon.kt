@@ -123,9 +123,12 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun demanderProfil(
-        nomUtilisateur: CharSequence,
-        motDePasse: CharSequence
+        identifiantUtilisateur: Utilisateur
     ): Utilisateur? {
         TODO("Not yet implemented")
     }
