@@ -2,9 +2,11 @@ package com.even.présentation.vue
 
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.add
 import com.even.R
 import com.even.présentation.présenteur.IRecherche
 import com.even.présentation.présenteur.PrésentateurRecherche

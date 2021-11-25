@@ -1,17 +1,15 @@
 package com.even.présentation.vue
 
 import android.os.Bundle
-import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.compose.material.MaterialTheme
-import com.even.domaine.entité.Événement
-import com.even.R
 import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
+import com.even.R
+import com.even.domaine.entité.Événement
 import com.even.présentation.présenteur.IListeEvenements
 import com.even.présentation.présenteur.PrésentateurListeÉvénements
 import com.even.ui.composants.FragmentLoader
@@ -45,7 +43,7 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
         imageErreur = view.findViewById(R.id.imageErreur)
     }
 
-    override fun afficherListeEvenements(listeEvens : List<Événement>,imageUrl : (Int) -> String) {
+    override fun afficherListeEvenements(listeEvens : List<Événement>, imageUrl : (Int) -> String) {
         if (!listeEvens.isEmpty()) {
             chargement.visibility = View.INVISIBLE
             composeView.setContent {

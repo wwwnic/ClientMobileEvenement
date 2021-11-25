@@ -1,6 +1,6 @@
 <resources>
+
     <string name="app_name">Évén</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="username">Nom utilisateur</string>
     <string name="password">Mot de passe</string>
@@ -36,5 +36,8 @@
     <string name="my_event">Mes évènements</string>
     <string name="recent_event">Évènements récent</string>
     <string name="sign_up_completed">Vous êtes maintenant enregistré</string>
-
+    <string name="sign_up_incompleted">Veuillez vérifier les aires textuelles en rouge</string>
+    <string name="login_completed">Vous êtes maintenant connecté</string>
+    <string name="login_incompleted">Erreur de connexion, veuillez vérifier que les informations entrées sont les bonnes.</string>
+    <string name="serveur_error">Un problème technique vous empêche de poursuivre</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.even.présentation.présenteur
 
+import android.util.Log
 import com.even.domaine.entité.Événement
 import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.CoroutineScope
@@ -39,7 +40,8 @@ class PrésentateurCreation(
                         vue.afficherErreurConnexion()
                     }
                 }
-            } catch (e: SocketTimeoutException) {
+            } catch (e: Exception) {
+                Log.e("Évèn", "La requête a rencontré une erreur", e)
                 withContext(Dispatchers.Main) {
                     vue.afficherErreurConnexion()
                 }

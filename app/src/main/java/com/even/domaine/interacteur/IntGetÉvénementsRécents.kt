@@ -1,10 +1,7 @@
 package com.even.domaine.interacteur
 
-import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.sourceDeDonnées.ISourceDeDonnées
-import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 
 class IntGetÉvénementsRécents(var _source : ISourceDeDonnées) {
 

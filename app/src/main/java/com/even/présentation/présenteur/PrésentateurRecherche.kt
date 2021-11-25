@@ -1,12 +1,5 @@
 package com.even.présentation.présenteur
 
-import com.even.présentation.modèle.ModèleÉvénements
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.net.SocketTimeoutException
-
 class PrésentateurRecherche(
     val vue : IRecherche.IVue
 ) : IRecherche.IPrésentateur{
