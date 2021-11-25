@@ -26,13 +26,30 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return liste
     }
 
-
     override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
         TODO("Not yet implemented")
     }
 
     override suspend fun creerUtilisateur() {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun creerEvenement(evenement : Événement): Événement? {
+        var reponseApi = apiService.creerEvenement(evenement = evenement)
+        var newEvenement : Événement? = null
+        if (reponseApi.isSuccessful) {
+            newEvenement = reponseApi.body() as Événement
+        }
+        return newEvenement
+    }
+
+    override suspend fun getUtilisateurParId(id: Int): Utilisateur? {
+        var reponseApi = apiService.getUtilisateurParId(id)
+        var utilisateur : Utilisateur? = null
+        if (reponseApi.isSuccessful) {
+           utilisateur = reponseApi.body() as Utilisateur
+        }
+        return utilisateur
     }
 
     override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {

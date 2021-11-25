@@ -11,6 +11,8 @@ interface ISourceDeDonnées {
     suspend fun getAllEvenements() : List<Événement>
     suspend fun getUtilisateursEvenement() : List<UtilisateurÉvénement>
     suspend fun creerUtilisateur()
+    suspend fun creerEvenement(evenement : Événement) : Événement?
+    suspend fun getUtilisateurParId(id : Int) : Utilisateur?
     suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String) : List<Événement>
     fun getImageUtilisateur(id:Int) : String
     fun getImageEvenement(id:Int) : String

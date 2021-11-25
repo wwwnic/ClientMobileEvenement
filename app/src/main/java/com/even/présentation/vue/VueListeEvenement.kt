@@ -51,7 +51,7 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
             composeView.setContent {
                 MaterialTheme {
                     ListeCarteÉvénements(événements = listeEvens,
-                        clickEvent = {e -> fragmentLoader.loadFragment(VueDetailsEvenement(e))},
+                        clickEvent = {e -> fragmentLoader.loadFragment(VueDetailsEvenement(),e.idEvenement.toString())},
                         imageUrl = { i -> imageUrl(i) }
                     )
                 }

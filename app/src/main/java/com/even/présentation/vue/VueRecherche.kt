@@ -51,8 +51,8 @@ class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
     }
 
     private fun afficherSelecteurDate() {
-        val selecteur = SelecteurDate(texteMois = texteMois)
-        selecteur.show(requireActivity().supportFragmentManager,"selecteurDate")
+        val selecteur = SelecteurDate(texteDate = texteMois,"recherche")
+        selecteur.show(requireActivity().supportFragmentManager,null)
     }
 
     override fun afficherMessageAucunMotCle() {

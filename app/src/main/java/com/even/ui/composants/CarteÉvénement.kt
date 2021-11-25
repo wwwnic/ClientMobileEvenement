@@ -4,25 +4,17 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.Coil
 import coil.compose.rememberImagePainter
-import coil.size.Scale
-import coil.transform.CircleCropTransformation
-import com.even.R
 import com.even.domaine.entité.Événement
 
 @Composable
@@ -53,7 +45,7 @@ fun CarteÉvénement(événement: Événement,clickEvent: () -> Unit,imageUrl: (
             .background(MaterialTheme.colors.primary)) {
             Row {
                 Text(
-                    text = événement.nom,
+                    text = événement.nomEvenement,
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     color = MaterialTheme.colors.onPrimary

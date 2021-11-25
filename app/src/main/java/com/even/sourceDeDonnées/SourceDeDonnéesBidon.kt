@@ -10,8 +10,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SourceDeDonnéesBidon : ISourceDeDonnées {
-    override suspend fun getAllUtilisateurs(): List<Utilisateur> {
-        val listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
+    val listeUtils : ArrayList<Utilisateur> = ArrayList<Utilisateur>()
+    val listeEvens : ArrayList<Événement> = ArrayList<Événement>()
+    val listeUtilEven : ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
+
+    init {
         val util : Utilisateur = Utilisateur(
             1,
             "Bob",
@@ -41,46 +44,35 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         listeUtils.add(util)
         listeUtils.add(util2)
         listeUtils.add(util3)
-        return listeUtils
-    }
+        val évén : Événement = Événement(
+            1,
+            "Party chez Bob",
+            "Maison de Bob",
+            Calendar.getInstance().time.toString(),
+            1,
+            "gros party chez Bob let's gooooooo!"
+        )
 
-    override suspend fun getAllEvenements(): List<Événement> {
-            val listeEvens : ArrayList<Événement> = ArrayList<Événement>()
-            val évén : Événement = Événement(
-                1,
-                "Party chez Bob",
-                "Maison de Bob",
-                Calendar.getInstance().time.toString(),
-                1,
-                "gros party chez Bob let's gooooooo!"
-            )
+        val évén2 : Événement = Événement(
+            2,
+            "Autre Party chez Bob",
+            "bbbbbb",
+            Calendar.getInstance().time.toString(),
+            1,
+            "hey salut"
+        )
 
-            val évén2 : Événement = Événement(
-                2,
-                "Autre Party chez Bob",
-                "bbbbbb",
-                Calendar.getInstance().time.toString(),
-                1,
-                "hey salut"
-            )
-
-            val évén3 : Événement = Événement(
-                3,
-                "Réunion des bricoleurs",
-                "Bricoville",
-                Calendar.getInstance().time.toString(),
-                2,
-                "ayoyeeeeeeeee"
-            )
-            listeEvens.add(évén)
-            listeEvens.add(évén2)
-            listeEvens.add(évén3)
-            return listeEvens
-    }
-
-    override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
-        val listeUtilEven : ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
-
+        val évén3 : Événement = Événement(
+            3,
+            "Réunion des bricoleurs",
+            "Bricoville",
+            Calendar.getInstance().time.toString(),
+            2,
+            "ayoyeeeeeeeee"
+        )
+        listeEvens.add(évén)
+        listeEvens.add(évén2)
+        listeEvens.add(évén3)
         val utilEven : UtilisateurÉvénement = UtilisateurÉvénement(
             2,
             1
@@ -104,10 +96,30 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         listeUtilEven.add(utilEven2)
         listeUtilEven.add(utilEven3)
         listeUtilEven.add(utilEven4)
+    }
+
+
+    override suspend fun getAllUtilisateurs(): List<Utilisateur> {
+        return listeUtils
+    }
+
+    override suspend fun getAllEvenements(): List<Événement> {
+            return listeEvens
+    }
+
+    override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
         return listeUtilEven
     }
 
     override suspend fun creerUtilisateur() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun creerEvenement(evenement : Événement): Événement? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUtilisateurParId(id: Int): Utilisateur? {
         TODO("Not yet implemented")
     }
 
