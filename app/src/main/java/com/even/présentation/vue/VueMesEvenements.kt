@@ -7,12 +7,17 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
+import com.even.présentation.présenteur.IListeEvenements
+import com.even.présentation.présenteur.IMesÉvènements
+import com.even.présentation.présenteur.PrésentateurMesÉvènements
 import com.even.ui.composants.FragmentLoader
 import com.google.android.material.tabs.TabLayout
 
-class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
+class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvènements.IVue {
 
-    lateinit var fragmentLoader : FragmentLoader
+    lateinit var fragmentLoader: FragmentLoader
+    lateinit var présentateur: IMesÉvènements.IPrésentateur
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,9 +25,10 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
 
         val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
         //var listeEvens : List<Événement> = setListeEvens(0)
-        var listeEvens : List<Événement> = ArrayList<Événement>()
+        var listeEvens: List<Événement> = ArrayList<Événement>()
         val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
+        présentateur = PrésentateurMesÉvènements(this)
 
         boutonCreer.setOnClickListener { fragmentLoader.loadFragment(VueCreationEvenement()) }
 
