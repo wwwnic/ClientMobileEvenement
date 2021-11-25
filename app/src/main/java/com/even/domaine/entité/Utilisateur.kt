@@ -4,8 +4,8 @@ data class Utilisateur(
     var idUtilisateur: Int?,
     var nomUtilisateur: String,
     var motDePasse: String,
-    var courriel: String,
-    var telephone: String,
+    var courriel: String?,
+    var telephone: String?,
     var dateCreation: String?,
     var commentaires: List<Commentaire>?,
     var evenements: List<Événement>?,
@@ -27,4 +27,10 @@ data class Utilisateur(
         courriel: String,
         telephone: String,
     ) : this(null, nomUtilisateur, motDePasse, courriel, telephone, null, null, null, null)
+
+    constructor(
+        nomUtilisateur: String,
+        motDePasse: String,
+    ) : this(null, nomUtilisateur, motDePasse, null, null, null, null, null, null)
+
 }

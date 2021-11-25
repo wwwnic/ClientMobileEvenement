@@ -128,8 +128,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     }
 
     override suspend fun demanderProfil(
-        nomUtilisateur: CharSequence,
-        motDePasse: CharSequence
+        identifiantUtilisateur: Utilisateur
     ): Utilisateur? {
         TODO("Not yet implemented")
     }

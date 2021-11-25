@@ -6,9 +6,8 @@ import com.even.sourceDeDonnées.ISourceDeDonnées
 class IntConnexion(val api: ISourceDeDonnées) {
 
     suspend fun connexionDemanderProfil(
-        nomUtilisateur: CharSequence,
-        motDePasse: CharSequence
+        identifiantUtilisateur: Utilisateur
     ): Utilisateur? {
-        return api.demanderProfil(nomUtilisateur, motDePasse)
+        return api.demanderProfil(identifiantUtilisateur)
     }
 }

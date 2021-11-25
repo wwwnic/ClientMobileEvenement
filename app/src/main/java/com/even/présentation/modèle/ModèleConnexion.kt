@@ -20,8 +20,9 @@ class ModèleConnexion() {
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ): Boolean {
+        val identifiantUtilisateur = Utilisateur(nomUtilisateur.toString(),motDePasse.toString())
         val utilisateurRecuperé =
-            IntConnexion(_source).connexionDemanderProfil(nomUtilisateur, motDePasse)
+            IntConnexion(_source).connexionDemanderProfil(identifiantUtilisateur)
         utilisateur = utilisateurRecuperé
         return utilisateurRecuperé?.nomUtilisateur != null
     }

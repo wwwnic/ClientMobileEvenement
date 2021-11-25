@@ -31,9 +31,7 @@ interface IApiService {
     suspend fun creerEvenement(@Body evenement: Événement): Response<Événement>
 
     @POST("/api/Utilisateur/Login")
-    suspend fun demanderProfil(
-        @Query("userName") nomUtilisateur: CharSequence,
-        @Query("password") motDePasse: CharSequence,
+    suspend fun demanderProfil(@Body utilisateur: Utilisateur
     ): Response<Utilisateur?>
 
     @GET("/api/Evenement/GetParParticipant/{id}")

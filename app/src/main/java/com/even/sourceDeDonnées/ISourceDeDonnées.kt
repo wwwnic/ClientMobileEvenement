@@ -10,7 +10,7 @@ interface ISourceDeDonnées {
     suspend fun getAllEvenements(): List<Événement>
     suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement>
     suspend fun creerUtilisateur(utilisateur: Utilisateur): Response<Void>
-    suspend fun demanderProfil(nomUtilisateur: CharSequence, motDePasse: CharSequence): Utilisateur?
+    suspend fun demanderProfil(utilisateur: Utilisateur): Utilisateur?
     suspend fun creerEvenement(evenement: Événement): Événement?
     suspend fun getUtilisateurParId(id: Int): Utilisateur?
     suspend fun getEvenementParParticipation(id: Int) : List <Événement>

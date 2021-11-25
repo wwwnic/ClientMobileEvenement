@@ -36,8 +36,8 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return apiService.creerUtilisateur(utilisateur)
     }
 
-    override suspend fun demanderProfil(nomUtilisateur: CharSequence, motDePasse: CharSequence): Utilisateur? {
-        var reponseApi = apiService.demanderProfil(nomUtilisateur, motDePasse)
+    override suspend fun demanderProfil(identifiantUtilisateur: Utilisateur): Utilisateur? {
+        var reponseApi = apiService.demanderProfil(identifiantUtilisateur)
         return reponseApi.body()
     }
 
