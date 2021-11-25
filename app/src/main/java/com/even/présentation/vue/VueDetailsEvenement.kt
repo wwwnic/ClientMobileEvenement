@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
+import com.even.présentation.modèle.ModèleÉvénements
 
-class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragment_detail_evenement) {
+class VueDetailsEvenement() : Fragment(R.layout.fragment_detail_evenement) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -19,10 +20,11 @@ class VueDetailsEvenement(var evenement : Événement) : Fragment(R.layout.fragm
         var texteOrg = view?.findViewById<TextView>(R.id.detailEvenement_organizer)
         var texteDesc = view?.findViewById<TextView>(R.id.detailEvenement_description)
 
-        imageEven.setImageResource(R.drawable.imageutilisateurbidon)
-        texteNom?.text = evenement.nom
+        imageEven.setImageResource(R.drawable.imageevenementbidon)
+        var evenement = ModèleÉvénements.newÉvénement!!
+        texteNom?.text = evenement.nomEvenement
         texteLocation?.text = evenement.location
-        texteDate?.text = evenement.date.toString()
+        texteDate?.text = evenement.date
         texteOrg?.text = evenement.organisateur?.nomUtilisateur
         texteDesc?.text = evenement.description
     }

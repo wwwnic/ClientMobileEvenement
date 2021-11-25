@@ -3,7 +3,10 @@ package com.even.sourceDeDonnées
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface IApiService {
 
@@ -13,8 +16,11 @@ interface IApiService {
     @GET("api/Utilisateur/GetAll")
     suspend fun getAllUtilisateurs(): Response<List<Utilisateur>>
 
-    @GET("api/Evenement/GetAll")
+    @GET("api/Evenement/GetRecent")
     suspend fun getAllEvenements(): Response<List<Événement>>
+
+    @GET("/api/Utilisateur/GetById")
+    suspend fun getUtilisateurParId(@Query("id") id: Int): Response<Utilisateur>
 
     @GET("/api/Evenement/GetParRecherche")
     suspend fun getEvenementsParRecherche(
@@ -24,9 +30,9 @@ interface IApiService {
         @Query("organisateur") organisateur: String
     ): Response<List<Événement>>
 
+    @POST("api/Evenement/New")
+    suspend fun creerEvenement(@Body evenement: Événement): Response<Événement>
+
     @POST("/api/Utilisateur/Login")
-    suspend fun demanderProfil(
-        @Query("userName") nomUtilisateur: CharSequence,
-        @Query("password") motDePasse: CharSequence,
-    ): Response<Utilisateur?>
+    suspend fun demanderProfil(@Body utilisateur : Utilisateur): Response<Utilisateur?>
 }

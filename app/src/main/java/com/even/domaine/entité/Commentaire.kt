@@ -1,9 +1,13 @@
 package com.even.domaine.entité
 
-data class Commentaire(
+import com.google.gson.annotations.SerializedName
+
+class Commentaire(
     val idCommentaire : Int,
     val idEvenement : Int,
     val idUtilisateur : Int,
-    val date : String,
+    @SerializedName("date")
+    val dateCommentaire : String,
     var texte : String
-)
+) {
+}

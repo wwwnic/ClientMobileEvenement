@@ -7,20 +7,24 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
+import com.even.ui.composants.FragmentLoader
 import com.google.android.material.tabs.TabLayout
-
 
 class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
 
+    lateinit var fragmentLoader : FragmentLoader
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+
         val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
         //var listeEvens : List<Événement> = setListeEvens(0)
         var listeEvens : List<Événement> = ArrayList<Événement>()
         val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
 
-        boutonCreer.setOnClickListener { loadFragment(VueCreationEvenement()) }
+        boutonCreer.setOnClickListener { fragmentLoader.loadFragment(VueCreationEvenement()) }
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -64,12 +68,4 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
         return liste
     }*/
 
-    // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
-    private fun loadFragment(fragment: Fragment) {
-        // load fragment
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
 }

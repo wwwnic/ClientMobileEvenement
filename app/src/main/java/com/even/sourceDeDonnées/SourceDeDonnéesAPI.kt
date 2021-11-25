@@ -1,9 +1,9 @@
 package com.even.sourceDeDonnées
 
-import com.even.sourceDeDonnées.ApiClient.apiService
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
+import com.even.sourceDeDonnées.ApiClient.apiService
 import retrofit2.Response
 
 class SourceDeDonnéesAPI : ISourceDeDonnées {
@@ -37,23 +37,37 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
     }
 
     override suspend fun demanderProfil(nomUtilisateur: CharSequence, motDePasse: CharSequence): Utilisateur? {
-        var reponseApi = apiService.demanderProfil(nomUtilisateur, motDePasse)
+        var utilisateur = Utilisateur(nomUtilisateur.toString(),motDePasse.toString())
+        var reponseApi = apiService.demanderProfil(utilisateur)
         return reponseApi.body()
     }
 
-    override suspend fun getEvenementsParRecherche(
-        nom: String,
-        mois: String,
-        location: String,
-        organisateur: String
-    ): List<Événement> {
-        var liste: List<Événement> = ArrayList<Événement>()
+    override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {
+        var liste : List<Événement> = ArrayList<Événement>()
 
         var reponseApi = apiService.getEvenementsParRecherche(nom, mois, location, organisateur)
         if (reponseApi.isSuccessful) {
             liste = reponseApi.body() as List<Événement>
         }
         return liste
+    }
+
+    override suspend fun creerEvenement(evenement : Événement): Événement? {
+        var reponseApi = apiService.creerEvenement(evenement = evenement)
+        var newEvenement : Événement? = null
+        if (reponseApi.isSuccessful) {
+            newEvenement = reponseApi.body() as Événement
+        }
+        return newEvenement
+    }
+
+    override suspend fun getUtilisateurParId(id: Int): Utilisateur? {
+        var reponseApi = apiService.getUtilisateurParId(id)
+        var utilisateur : Utilisateur? = null
+        if (reponseApi.isSuccessful) {
+            utilisateur = reponseApi.body() as Utilisateur
+        }
+        return utilisateur
     }
 
     override fun getImageUtilisateur(id: Int): String {

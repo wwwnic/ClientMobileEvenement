@@ -47,7 +47,7 @@ fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl:
             .background(MaterialTheme.colors.primary)) {
             Row {
                 Text(
-                    text = événement.nom,
+                    text = événement.nomEvenement,
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     color = MaterialTheme.colors.onPrimary

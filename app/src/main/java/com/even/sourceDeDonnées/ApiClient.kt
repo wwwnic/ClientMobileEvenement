@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object ApiClient {
     private const val URL: String =
@@ -15,7 +16,10 @@ object ApiClient {
     }
 
     private val httpClient: OkHttpClient by lazy {
-        OkHttpClient.Builder().build()
+        OkHttpClient.Builder()
+            .connectTimeout(5,TimeUnit.SECONDS)
+            .readTimeout(5,TimeUnit.SECONDS)
+            .build()
     }
 
     private val retrofit: Retrofit by lazy {
@@ -29,5 +33,4 @@ object ApiClient {
     val apiService: IApiService by lazy {
         retrofit.create(IApiService::class.java)
     }
-
 }

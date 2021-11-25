@@ -8,16 +8,14 @@ class ModèleConnexion() {
 
     companion object {
         lateinit var _source: ISourceDeDonnées
+        var _utilisateurConnecté : Utilisateur? = null
         fun setSource(source: ISourceDeDonnées) {
             _source = source
         }
-    }
-
-    var utilisateur: Utilisateur? = null
-        get() = field
-        set(value) {
-            field = value
+        fun setUtilisateurConnecté(utilisateur : Utilisateur?) {
+            _utilisateurConnecté = utilisateur
         }
+    }
 
     suspend fun demanderProfilUtilisateur(
         nomUtilisateur: CharSequence,
@@ -25,7 +23,7 @@ class ModèleConnexion() {
     ): Boolean {
         val utilisateurRecuperé =
             IntConnexion(_source).connexionDemanderProfil(nomUtilisateur, motDePasse)
-        utilisateur = utilisateurRecuperé
+        setUtilisateurConnecté(utilisateurRecuperé)
         return utilisateurRecuperé?.nomUtilisateur != null
     }
 }
