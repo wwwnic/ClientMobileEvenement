@@ -1,6 +1,5 @@
 package com.even.présentation.vue
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.even.présentation.modèle.ModèleÉvénements
+import com.even.R
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.even.R
-import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 import com.google.android.material.navigation.NavigationView
 
 

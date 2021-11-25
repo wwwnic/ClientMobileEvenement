@@ -1,17 +1,12 @@
 package com.even.présentation.vue
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleUtilisateurs
-import com.even.présentation.modèle.ModèleÉvénements
-import com.even.sourceDeDonnées.SourceDeDonnéesBidon
-import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
 
