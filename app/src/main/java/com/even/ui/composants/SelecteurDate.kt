@@ -2,15 +2,12 @@ package com.even.ui.composants
 
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.view.View
 import android.widget.DatePicker
 import android.widget.TextView
-import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 

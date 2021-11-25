@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
-import com.even.R
 
 class SelecteurTemps(texteDate : TextView) : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     var texteDate = texteDate

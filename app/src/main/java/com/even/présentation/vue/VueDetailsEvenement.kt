@@ -6,7 +6,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.even.R
-import com.even.domaine.entité.Événement
 import com.even.présentation.modèle.ModèleÉvénements
 
 class VueDetailsEvenement() : Fragment(R.layout.fragment_detail_evenement) {

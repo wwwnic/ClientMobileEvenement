@@ -3,10 +3,7 @@ package com.even.sourceDeDonnées
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface IApiService {
 
@@ -16,7 +13,7 @@ interface IApiService {
     @GET("api/Utilisateur/GetAll")
     suspend fun getAllUtilisateurs(): Response<List<Utilisateur>>
 
-    @GET("api/Evenement/GetRecent")
+    @GET("api/Evenement/GetAll")
     suspend fun getAllEvenements(): Response<List<Événement>>
 
     @GET("/api/Utilisateur/GetById")
@@ -34,5 +31,9 @@ interface IApiService {
     suspend fun creerEvenement(@Body evenement: Événement): Response<Événement>
 
     @POST("/api/Utilisateur/Login")
-    suspend fun demanderProfil(@Body utilisateur : Utilisateur): Response<Utilisateur?>
+    suspend fun demanderProfil(@Body utilisateur: Utilisateur
+    ): Response<Utilisateur?>
+
+    @GET("/api/Evenement/GetParParticipant/{id}")
+    suspend fun getEvenementParParticipation(@Path("id") id: Int): Response<List<Événement>>
 }
