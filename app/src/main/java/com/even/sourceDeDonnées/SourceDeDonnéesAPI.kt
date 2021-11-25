@@ -36,6 +36,11 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return apiService.creerUtilisateur(utilisateur)
     }
 
+    override suspend fun demanderProfil(nomUtilisateur: CharSequence, motDePasse: CharSequence): Utilisateur? {
+        var reponseApi = apiService.demanderProfil(nomUtilisateur, motDePasse)
+        return reponseApi.body()
+    }
+
     override suspend fun getEvenementsParRecherche(
         nom: String,
         mois: String,

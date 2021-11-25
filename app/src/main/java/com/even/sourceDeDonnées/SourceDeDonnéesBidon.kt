@@ -110,6 +110,13 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
+    override suspend fun demanderProfil(
+        nomUtilisateur: CharSequence,
+        motDePasse: CharSequence
+    ): Utilisateur? {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getEvenementsParRecherche(
         nom: String,
         mois: String,

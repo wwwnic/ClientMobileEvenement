@@ -23,4 +23,10 @@ interface IApiService {
         @Query("location") location: String,
         @Query("organisateur") organisateur: String
     ): Response<List<Événement>>
+
+    @POST("/api/Utilisateur/Login")
+    suspend fun demanderProfil(
+        @Query("userName") nomUtilisateur: CharSequence,
+        @Query("password") motDePasse: CharSequence,
+    ): Response<Utilisateur?>
 }
