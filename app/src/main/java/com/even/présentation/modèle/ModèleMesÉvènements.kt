@@ -1,5 +1,7 @@
 package com.even.présentation.modèle
 
+import com.even.domaine.entité.Événement
+import com.even.domaine.interacteur.IntGetÉvènementParParticipant
 import com.even.sourceDeDonnées.ISourceDeDonnées
 
 class ModèleMesÉvènements {
@@ -9,4 +11,11 @@ class ModèleMesÉvènements {
             _source = source
         }
     }
+
+    suspend fun demanderLesParticipationsParId(id: Int): List<Événement> {
+        val participations = IntGetÉvènementParParticipant(_source).enregisterNouvelUtilisateur(id)
+        return participations
+    }
+
+
 }

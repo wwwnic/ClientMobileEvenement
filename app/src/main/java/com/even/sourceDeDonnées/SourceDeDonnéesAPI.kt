@@ -69,6 +69,12 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return utilisateur
     }
 
+    override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
+        val reponseApi = apiService.getEvenementParParticipation(id)
+        val test = reponseApi.body()
+        return if(reponseApi.isSuccessful) reponseApi.body()!! else listOf()
+    }
+
     override fun getImageUtilisateur(id: Int): String {
         return "http://10.0.0.149:23784/images/utilisateurs/${id}.jpg"
     }

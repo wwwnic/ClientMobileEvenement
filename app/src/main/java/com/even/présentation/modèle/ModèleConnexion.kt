@@ -7,17 +7,14 @@ import com.even.sourceDeDonnées.ISourceDeDonnées
 class ModèleConnexion() {
 
     companion object {
+        var utilisateur: Utilisateur? = null
+
         lateinit var _source: ISourceDeDonnées
         fun setSource(source: ISourceDeDonnées) {
             _source = source
         }
     }
 
-    var utilisateur: Utilisateur? = null
-        get() = field
-        set(value) {
-            field = value
-        }
 
     suspend fun demanderProfilUtilisateur(
         nomUtilisateur: CharSequence,

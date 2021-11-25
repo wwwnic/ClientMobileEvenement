@@ -3,10 +3,7 @@ package com.even.sourceDeDonnées
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface IApiService {
 
@@ -38,4 +35,7 @@ interface IApiService {
         @Query("userName") nomUtilisateur: CharSequence,
         @Query("password") motDePasse: CharSequence,
     ): Response<Utilisateur?>
+
+    @GET("/api/Evenement/GetParParticipant/{id}")
+    suspend fun getEvenementParParticipation(@Path("id") id: Int): Response<List<Événement>>
 }
