@@ -20,7 +20,7 @@ interface ISourceDeDonnées {
         location: String,
         organisateur: String
     ): List<Événement>
-
+    suspend fun getEvenementParId(id : Int)
     fun getImageUtilisateur(id: Int): String
     fun getImageEvenement(id: Int): String
 }

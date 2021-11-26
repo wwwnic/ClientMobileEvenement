@@ -1,13 +1,16 @@
 package com.even.domaine.interacteur
 
 import android.util.Log
+import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ApiClient.apiService
+import com.even.sourceDeDonnées.ISourceDeDonnées
+import retrofit2.Response
 
-class IntDétailÉvenement {
+class IntDétailÉvenement(val api : ISourceDeDonnées) {
 
-    suspend fun getInfoÉvenement(id : Int) {
-        var reponseRequête = apiService.getÉvenementParId(id)
-        Log.i("Réponse GET", reponseRequête.toString())
+    suspend fun getInfoÉvenement(id : Int) : Response<Événement> {
+        val reponseRequête = apiService.getEvenementParId(id)
+        return reponseRequête
     }
 
 }
