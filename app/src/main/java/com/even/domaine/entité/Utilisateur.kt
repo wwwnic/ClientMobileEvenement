@@ -6,19 +6,15 @@ data class Utilisateur(
     var motDePasse: String,
     var courriel: String?,
     var telephone: String?,
-    var dateCreation: String?,
-    var commentaires: List<Commentaire>?,
-    var evenements: List<Événement>?,
-    var utilisateurevenements: List<UtilisateurÉvénement>?
+    var dateCreation: String?
 ) {
     constructor(
-        idUtilisateur: Int?,
         nomUtilisateur: String,
         motDePasse: String,
         courriel: String,
         telephone: String,
         dateCreation: String?
-    ) : this(null, nomUtilisateur, motDePasse, courriel, telephone, dateCreation, null, null, null)
+    ) : this(null, nomUtilisateur, motDePasse, courriel, telephone, dateCreation)
 
 
     constructor(
@@ -26,11 +22,11 @@ data class Utilisateur(
         motDePasse: String,
         courriel: String,
         telephone: String,
-    ) : this(null, nomUtilisateur, motDePasse, courriel, telephone, null, null, null, null)
+    ) : this(null, nomUtilisateur, motDePasse, courriel, telephone, null)
 
     constructor(
         nomUtilisateur: String,
         motDePasse: String,
-    ) : this(null, nomUtilisateur, motDePasse, null, null, null, null, null, null)
+    ) : this(null, nomUtilisateur, motDePasse, null, null, null)
 
 }

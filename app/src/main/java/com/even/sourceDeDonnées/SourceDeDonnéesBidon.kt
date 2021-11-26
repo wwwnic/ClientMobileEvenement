@@ -131,7 +131,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     override suspend fun demanderProfil(
         identifiantUtilisateur: Utilisateur
     ): Utilisateur? {
-        return listeUtils.filter { u -> u.nomUtilisateur == nomUtilisateur.toString() }[0]
+        return listeUtils.filter { u -> u.nomUtilisateur == identifiantUtilisateur.nomUtilisateur }[0]
     }
 
     override suspend fun getEvenementsParRecherche(

@@ -2,7 +2,7 @@ package com.even.présentation.présenteur
 
 import com.even.domaine.entité.Événement
 
-class IMesÉvènements {
+interface IMesÉvènements {
     interface IVue {
         fun afficherListeEvenements(listeEvens: List<Événement>, imageUrl: (Int) -> String)
     }
