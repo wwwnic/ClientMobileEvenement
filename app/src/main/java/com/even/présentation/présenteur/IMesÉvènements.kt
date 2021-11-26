@@ -9,7 +9,6 @@ class IMesÉvènements {
     }
 
     interface IPrésentateur {
-        fun traiterRequêteAfficherLesParticipations()
-        fun traiterRequêteAfficherSesPropreÉvènements()
+        fun traiterRequêtelancerCoroutine(estSurOngletMesÉvènement: Boolean)
     }
 }

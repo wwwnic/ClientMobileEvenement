@@ -28,19 +28,21 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
         composeView = view.findViewById(R.id.mesEven_listeBlocsEven)
         présentateur = PrésentateurMesÉvènements(this)
-        présentateur.traiterRequêteAfficherLesParticipations()
+        présentateur.traiterRequêtelancerCoroutine(false)
         boutonCreer.setOnClickListener { fragmentLoader.loadFragment(VueCreationEvenement()) }
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tab?.position == 0) {
                     estSurMesÉvènement = false
                     boutonCreer.visibility = View.INVISIBLE
-                    présentateur.traiterRequêteAfficherLesParticipations()
+                    présentateur.traiterRequêtelancerCoroutine(estSurMesÉvènement)
                 } else {
                     estSurMesÉvènement = true
                     boutonCreer.visibility = View.VISIBLE
-                    présentateur.traiterRequêteAfficherSesPropreÉvènements()
+                    présentateur.traiterRequêtelancerCoroutine(estSurMesÉvènement)
                 }
+
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
@@ -67,14 +69,13 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
             MaterialTheme {
                 ListeCarteÉvénements(lstÉvènenement, clickEvent = {
                     fragmentLoader.loadFragment(
-                        if (estSurMesÉvènement) VueDetailsEvenement() else VueModifierEvenement(),
+                        if (estSurMesÉvènement) VueModifierEvenement() else VueDetailsEvenement(),
                         it.idEvenement.toString()
                     )
                 }, imageUrl = { img -> imageUrl(img) })
             }
         }
     }
-
 
     override fun afficherAucunRésultatRecherche(estErreurConnexion: Boolean) {
         val vue = requireView()

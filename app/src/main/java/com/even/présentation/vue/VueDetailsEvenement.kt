@@ -20,7 +20,7 @@ class VueDetailsEvenement() : Fragment(R.layout.fragment_detail_evenement) {
         var texteDesc = view?.findViewById<TextView>(R.id.detailEvenement_description)
 
         imageEven.setImageResource(R.drawable.imageevenementbidon)
-        var evenement = ModèleÉvénements.newÉvénement!!
+        var evenement = ModèleÉvénements.newÉvénement!! //TODO: passer par le présentateur
         texteNom?.text = evenement.nomEvenement
         texteLocation?.text = evenement.location
         texteDate?.text = evenement.date
