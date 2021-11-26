@@ -1,6 +1,5 @@
 package com.even.présentation.vue
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +9,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.even.présentation.modèle.ModèleÉvénements
-import com.even.sourceDeDonnées.SourceDeDonnéesBidon
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.even.R
-import com.even.sourceDeDonnées.SourceDeDonnéesAPI
+import com.even.sourceDeDonnées.SourceDeDonnéesBidon
+import com.even.ui.composants.FragmentLoader
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
 class VuePrincipale : Fragment(R.layout.fragment_principal) {
+
+    lateinit var fragmentLoader : FragmentLoader
 
     lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -32,6 +32,8 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navView = view.findViewById<NavigationView>(R.id.nav_view)
         
@@ -41,7 +43,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         toolbar.title = resources.getString(R.string.recent_event)
 
         setupDrawerToggle();
-        loadFragment(VueListeEvenement())
+        fragmentLoader.loadFragment(VueListeEvenement())
         bottomNavOnClick(bottomNav)
         navViewOnClick(navView)
     }
@@ -50,7 +52,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.account_management -> {
-                    loadFragment(modification_compte())
+                    fragmentLoader.loadFragment(modification_compte())
                     toolbar.title = resources.getString(R.string.account_management)
                     drawerLayout.close()
                     true
@@ -73,17 +75,17 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuRecent -> {
-                    loadFragment(VueListeEvenement())
+                    fragmentLoader.loadFragment(VueListeEvenement())
                     toolbar.title = resources.getString(R.string.recent_event)
                     true
                 }
                 R.id.menuRecherche -> {
-                    loadFragment(VueRecherche())
+                    fragmentLoader.loadFragment(VueRecherche())
                     toolbar.title = resources.getString(R.string.search)
                     true
                 }
                 R.id.menuMesEvens -> {
-                    loadFragment(VueMesEvenements())
+                    fragmentLoader.loadFragment(VueMesEvenements())
                     toolbar.title = resources.getString(R.string.my_event)
                     true
                 }
@@ -100,13 +102,5 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
             R.string.drawer_open,
             R.string.drawer_close
         )
-    }
-
-    // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
 }

@@ -1,31 +1,37 @@
 package com.even.présentation.vue
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleUtilisateurs
-import com.even.présentation.modèle.ModèleÉvénements
-import com.even.sourceDeDonnées.SourceDeDonnéesBidon
+import com.even.présentation.présenteur.IMesÉvènements
+import com.even.présentation.présenteur.PrésentateurMesÉvènements
+import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
+class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvènements.IVue {
 
-class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
+    lateinit var fragmentLoader: FragmentLoader
+    lateinit var présentateur: IMesÉvènements.IPrésentateur
+    lateinit var composeView: ComposeView
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
         val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
-        //var listeEvens : List<Événement> = setListeEvens(0)
-        var listeEvens : List<Événement> = ArrayList<Événement>()
-        val composeView = view.findViewById<ComposeView>(R.id.listeBlocsEven)
         val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
+        composeView = view.findViewById(R.id.mesEven_listeBlocsEven)
+        présentateur = PrésentateurMesÉvènements(this)
 
-        boutonCreer.setOnClickListener { loadFragment(VueCreationEvenement()) }
+        présentateur.traiterRequêteAfficherLesParticipations()
+
+        boutonCreer.setOnClickListener { fragmentLoader.loadFragment(VueCreationEvenement()) }
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -69,12 +75,24 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements) {
         return liste
     }*/
 
-    // https://stackoverflow.com/questions/44424985/switch-between-fragments-in-bottomnavigationview
-    private fun loadFragment(fragment: Fragment) {
-        // load fragment
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    override fun afficherListeEvenements(listeEvens: List<Événement>, imageUrl: (Int) -> String) {
+        if (!listeEvens.isEmpty()) {
+            //todo:faire? chargement.visibility = View.INVISIBLE
+            composeView.setContent {
+                MaterialTheme {
+                    ListeCarteÉvénements(événements = listeEvens,
+                        clickEvent = { e ->
+                            fragmentLoader.loadFragment(
+                                VueDetailsEvenement(),
+                                e.idEvenement.toString()
+                            )
+                        },
+                        imageUrl = { i -> imageUrl(i) }
+                    )
+                }
+            }
+        }
     }
+
+
 }
