@@ -11,33 +11,58 @@ class PrésentateurMesÉvènements(
 ) : IMesÉvènements.IPrésentateur {
 
     private var coroutileParticipation: Job? = null
+    private var coroutileÉvènements: Job? = null
+
 
     override fun traiterRequêteAfficherLesParticipations() {
+        coroutileÉvènements?.cancel()
         val idUtilisateur = ModèleConnexion.utilisateurConnecté?.idUtilisateur!!
-
         coroutileParticipation = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val lstÉvènement =
-                    ModèleMesÉvènements().demanderLesParticipationsParId(idUtilisateur)
+                    ModèleMesÉvènements().demanderLesParticipations(idUtilisateur)
                 withContext(Dispatchers.Main) {
-                    if (lstÉvènement.size != 0) {
+                    if (lstÉvènement.isNotEmpty()) {
                         vue.afficherListeEvenements(
-                            lstÉvènement,
-                            { i -> ModèleÉvénements().getImageÉvénement(i) })
+                            lstÉvènement
+                        ) { i -> ModèleÉvénements().getImageÉvénement(i) }
                         Log.i("Évèn", "Affichage des évènements")
                     } else {
-                        //todo:afficher aucun évènements
+                        vue.afficherAucunRésultatRecherche(estErreurConnexion = false)
                         Log.e("Évèn", "Aucun évènement")
-
                     }
                 }
             } catch (e: Exception) {
-                //todo:afficher aucun évènements AVEC toast erreur serveur
+                vue.afficherAucunRésultatRecherche(estErreurConnexion = true)
                 Log.e("Évèn", "La requête a rencontré une erreur", e)
             }
         }
+    }
 
 
+    override fun traiterRequêteAfficherSesPropreÉvènements() {
+        coroutileParticipation?.cancel()
+        val idUtilisateur = ModèleConnexion.utilisateurConnecté?.idUtilisateur!!
+        coroutileÉvènements = CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val lstÉvènement =
+                    ModèleMesÉvènements().demanderSesPropreÉvènement(idUtilisateur)
+                withContext(Dispatchers.Main) {
+                    if (lstÉvènement.isNotEmpty()) {
+                        vue.afficherListeEvenements(
+                            lstÉvènement
+                        ) { i -> ModèleÉvénements().getImageÉvénement(i) }
+                        Log.i("Évèn", "Affichage des évènements")
+                    } else {
+                        vue.afficherAucunRésultatRecherche(estErreurConnexion = false)
+                        Log.e("Évèn", "Aucun évènement")
+                    }
+                }
+            } catch (e: Exception) {
+                vue.afficherAucunRésultatRecherche(estErreurConnexion = true)
+                Log.e("Évèn", "La requête a rencontré une erreur", e)
+            }
+        }
     }
 
 }
