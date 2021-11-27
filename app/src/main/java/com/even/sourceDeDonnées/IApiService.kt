@@ -31,11 +31,15 @@ interface IApiService {
     suspend fun creerEvenement(@Body evenement: Événement): Response<Événement>
 
     @POST("/api/Utilisateur/Login")
-    suspend fun demanderProfil(@Body utilisateur: Utilisateur
+    suspend fun demanderProfil(
+        @Body utilisateur: Utilisateur
     ): Response<Utilisateur?>
 
     @GET("/api/Evenement/GetParParticipant/{id}")
-    suspend fun getEvenementParParticipation(@Path("id") id: Int): Response<List<Événement>>
+    suspend fun getEvenementsParParticipation(@Path("id") id: Int): Response<List<Événement>>
+
+    @GET("/api/Evenement/GetParOrganisateur/{id}")
+    suspend fun getEvenementsParOrganisateur(@Path("id") id: Int): Response<List<Événement>>
 
     @GET("/api/Evenement/{id}")
     suspend fun getEvenementParId(@Path("id") id : Int) : Response<Événement>

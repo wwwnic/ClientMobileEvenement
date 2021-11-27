@@ -127,6 +127,10 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getEvenementsParOrganisateur(id: Int): List<Événement> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun demanderProfil(
         identifiantUtilisateur: Utilisateur
     ): Utilisateur? {
