@@ -11,6 +11,7 @@ import com.even.R
 import com.even.domaine.entité.Événement
 import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
+import retrofit2.Response
 
 class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue{
 
@@ -22,7 +23,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     lateinit var texteDescription : TextView
     lateinit var texteParticipant : TextView
     lateinit var btnParticipation : Button
-    lateinit var evenement : Événement
+    lateinit var evenement : Response<Événement>
 
     lateinit var présentateur : IDétailÉvenement.IPrésentateur
 
@@ -30,7 +31,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         super.onViewCreated(view, savedInstanceState)
 
         présentateur = PrésentateurDétailÉvenement(this)
-        evenement = présentateur.traiterRequêteAfficherDétailÉvenement(this.tag!!.toInt())
+        evenement = présentateur.traiterRequêteAfficherDétailÉvenement(this.tag!!.toInt())!!
 
         imageEvent = view?.findViewById(R.id.detailEvenement_eventImage)
         texteNom = view?.findViewById(R.id.detailEvenement_nameEvent)
@@ -57,11 +58,11 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     }
 
     override fun setInfo() {
-        texteNom?.text = evenement.nomEvenement
-        texteLocation?.text = evenement.location
-        texteDate?.text = evenement.date
-        texteOrganisateur?.text = evenement.organisateur?.nomUtilisateur
-        texteDescription?.text = evenement.description
+        texteNom?.text = evenement.body()!!.nomEvenement
+        texteLocation?.text = evenement.body()!!.location
+        texteDate?.text = evenement.body()!!.date
+        texteOrganisateur?.text = evenement.body()!!.organisateur!!.nomUtilisateur
+        texteDescription?.text = evenement.body()!!.description
     }
 
 

@@ -10,6 +10,7 @@ import com.even.présentation.modèle.ModèleDétailÉvenement
 import kotlinx.coroutines.*
 
 import okhttp3.Dispatcher
+import retrofit2.Response
 import java.net.SocketTimeoutException
 
 class PrésentateurDétailÉvenement(
@@ -44,15 +45,17 @@ class PrésentateurDétailÉvenement(
         }
     }
 
-    override fun traiterRequêteAfficherDétailÉvenement(id : Int) {
+    override fun traiterRequêteAfficherDétailÉvenement(id : Int) : Response<Événement>? {
+        var reponseApi : Response<Événement>? = null
         coroutileDétailÉvenement = CoroutineScope(Dispatchers.IO).launch {
             var msg: Message? = null
             try {
-                var reponseApi = ModèleDétailÉvenement().allerChercherInfoÉvenement(id)
+                reponseApi = ModèleDétailÉvenement().allerChercherInfoÉvenement(id)
 
-                if (reponseApi.isSuccessful) {
+                if (reponseApi!!.isSuccessful) {
                     withContext(Dispatchers.Main) {
                         msg = handlerRéponse.obtainMessage(MSG_RÉUSSI)
+                        return@withContext reponseApi
                     }
                 } else {
                     msg = handlerRéponse.obtainMessage(MSG_ECHEC)
@@ -64,6 +67,7 @@ class PrésentateurDétailÉvenement(
             }
             handlerRéponse.sendMessage(msg!!)
         }
+        return reponseApi
     }
 
 }

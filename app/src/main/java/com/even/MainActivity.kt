@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         ModèleÉvénements.setSource(source)
         ModèleEnregistrement.setSource(source)
         ModèleConnexion.setSource(source)
-        ModèleMesÉvènements.setSource(source)
         ModèleDétailÉvenement.setSource(source)
     }
 

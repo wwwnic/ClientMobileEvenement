@@ -1,6 +1,7 @@
 package com.even.présentation.présenteur
 
 import com.even.domaine.entité.Événement
+import retrofit2.Response
 
 interface IDétailÉvenement {
 
@@ -10,7 +11,7 @@ interface IDétailÉvenement {
     }
 
     interface IPrésentateur {
-        fun traiterRequêteAfficherDétailÉvenement(id : Int)
+        fun traiterRequêteAfficherDétailÉvenement(id : Int) : Response<Événement>?
     }
 
 }
