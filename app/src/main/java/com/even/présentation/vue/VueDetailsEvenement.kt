@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
+import com.even.domaine.interacteur.IntGetÉvènementParParticipant
 import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
 
@@ -29,15 +30,15 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         super.onViewCreated(view, savedInstanceState)
 
         présentateur = PrésentateurDétailÉvenement(this)
-        imageEvent = view?.findViewById(R.id.detailEvenement_eventImage)
-        texteNom = view?.findViewById(R.id.detailEvenement_nameEvent)
-        texteLocation = view?.findViewById(R.id.detailEvenement_location)
-        texteDate = view?.findViewById(R.id.detailEvenement_date)
-        texteOrganisateur = view?.findViewById(R.id.detailEvenement_organizer)
-        texteDescription = view?.findViewById(R.id.detailEvenement_description)
-        texteParticipant = view?.findViewById(R.id.detailEvenement_nomber)
-        btnParticipation = view?.findViewById(R.id.detailEvenement_participation)
-        présentateur.traiterRequêteAfficherDétailÉvenement(tag!!.toInt())!!
+        imageEvent = view.findViewById(R.id.detailEvenement_eventImage)
+        texteNom = view.findViewById(R.id.detailEvenement_nameEvent)
+        texteLocation = view.findViewById(R.id.detailEvenement_location)
+        texteDate = view.findViewById(R.id.detailEvenement_date)
+        texteOrganisateur = view.findViewById(R.id.detailEvenement_organizer)
+        texteDescription = view.findViewById(R.id.detailEvenement_description)
+        texteParticipant = view.findViewById(R.id.detailEvenement_nomber)
+        btnParticipation = view.findViewById(R.id.detailEvenement_participation)
+        présentateur.traiterRequêteAfficherDétailÉvenement(tag!!.toInt())
 
         clickListenerParticipation()
     }
@@ -45,7 +46,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     private fun clickListenerParticipation() {
 
         btnParticipation.setOnClickListener {
-
+            présentateur.traiterRequêteAjouterParticipation(tag!!.toInt())
         }
 
     }
@@ -54,12 +55,28 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
     }
 
-    override fun setInfo(evenement : Événement) {
+    override fun afficherToastParticipationAjouté() {
+        Toast.makeText(context, "Votre participation a été ajouté", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setInfo(evenement : Événement, participant: Boolean) {
         texteNom?.text = evenement.nomEvenement
         texteLocation?.text = evenement.location
         texteDate?.text = evenement.date
         texteOrganisateur?.text = evenement.organisateur?.nomUtilisateur
         texteDescription?.text = evenement.description
+
+        if ( !participant ) {
+            btnParticipation.text = "Je ne participe pas"
+        }
+    }
+
+    override fun afficherNePlusParticiper() {
+        btnParticipation.text = "Je ne participe pas"
+    }
+
+    override fun afficherParticipation() {
+        btnParticipation.text = "Je participe"
     }
 
 

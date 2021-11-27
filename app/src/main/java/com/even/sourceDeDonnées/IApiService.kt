@@ -1,6 +1,7 @@
 package com.even.sourceDeDonnées
 
 import com.even.domaine.entité.Utilisateur
+import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import retrofit2.Response
 import retrofit2.http.*
@@ -43,4 +44,10 @@ interface IApiService {
 
     @GET("/api/Evenement/GetById")
     suspend fun getEvenementParId(@Query("id") id : Int) : Événement
+
+    @POST("/api/Utilisateur/addParticipation")
+    suspend fun ajouterParticipation(@Body utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>
+
+    @DELETE("/api/Utilisateur/deleteParticipation")
+    suspend fun retirerParticipation(@Body utilisateurÉvenement: UtilisateurÉvénement) : Response<Void>
 }

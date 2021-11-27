@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         ModèleÉvénements.setSource(source)
         ModèleEnregistrement.setSource(source)
         ModèleConnexion.setSource(source)
-        ModèleDétailÉvenement.setSource(source)
     }
 
     //permet de fermer le drawer quand il est ouvert en appuyant sur back

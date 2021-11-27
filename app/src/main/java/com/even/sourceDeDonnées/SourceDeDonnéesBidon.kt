@@ -150,6 +150,10 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
+    override suspend fun ajouterParticipation(utilisateurÉvenement: UtilisateurÉvénement): Response<Void> {
+        TODO("Not yet implemented")
+    }
+
     override fun getImageEvenement(id: Int): String {
         return R.drawable.imageevenementbidon.toString()
     }
