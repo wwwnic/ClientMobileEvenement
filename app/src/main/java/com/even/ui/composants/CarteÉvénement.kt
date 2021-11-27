@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.even.domaine.entité.Événement
-
+//TODO: string.xml getString(id)
 @Composable
 fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl: (Int) -> String) {
     var urlImg = imageUrl(événement.idEvenement)

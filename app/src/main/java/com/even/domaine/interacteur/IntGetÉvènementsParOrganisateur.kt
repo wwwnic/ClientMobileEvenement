@@ -3,12 +3,12 @@ package com.even.domaine.interacteur
 import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ISourceDeDonnées
 
-class IntGetÉvènementParParticipant(var _source : ISourceDeDonnées) {
+class IntGetÉvènementsParOrganisateur(var _source : ISourceDeDonnées) {
 
-    suspend fun demanderMesParticipations(
+    suspend fun demanderMesÉvènements(
         id: Int
     ): List<Événement> {
-        val reponseRequete = _source.getEvenementParParticipation(id)
+        val reponseRequete = _source.getEvenementsParOrganisateur(id)
         return reponseRequete
     }
 }
