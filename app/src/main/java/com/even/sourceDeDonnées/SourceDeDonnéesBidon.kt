@@ -103,6 +103,10 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeEvens
     }
 
+    override suspend fun getEvenementParId(id: Int): Événement? {
+        return listeEvens.filter { u -> u.idEvenement == id }[0]
+    }
+
     override suspend fun getAllUtilisateurs(): List<Utilisateur> {
         return listeUtils
     }
@@ -120,8 +124,20 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return evenement
     }
 
+    override suspend fun modifierEvenement(evenement: Événement): Response<Void> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun supprimerEvenement(id: Int): Response<Void> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUtilisateurParId(id: Int): Utilisateur? {
         return listeUtils.filter { u -> u.idUtilisateur == id }[0]
+    }
+
+    override suspend fun getUtilisateursParNom(nom: String): List<Utilisateur> {
+        return listeUtils.filter { u -> u.nomUtilisateur == nom }
     }
 
     override suspend fun getEvenementParParticipation(id: Int): List<Événement> {

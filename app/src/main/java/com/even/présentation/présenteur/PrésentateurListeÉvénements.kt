@@ -61,5 +61,20 @@ class PrésentateurListeÉvénements(
         }
     }
 
+    override fun traiterRequêteAfficherDétailsÉvénement(idÉvénement : Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                ModèleÉvénements.setÉvénementPrésenté(idÉvénement)
+                withContext(Dispatchers.Main) {
+                    vue.afficherDétailsÉvénement()
+                }
+            } catch (e: SocketTimeoutException) {
+                withContext(Dispatchers.Main) {
+                    vue.afficherErreurConnexion()
+                }
+            }
+        }
+    }
+
 
 }
