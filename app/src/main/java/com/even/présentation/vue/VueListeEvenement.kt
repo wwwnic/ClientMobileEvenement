@@ -18,14 +18,14 @@ import com.even.ui.composants.ListeCarteÉvénements
 
 class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeEvenements.IVue {
 
-    lateinit var fragmentLoader : FragmentLoader
+    lateinit var fragmentLoader: FragmentLoader
 
-    lateinit var présentateur : IListeEvenements.IPrésentateur
+    lateinit var présentateur: IListeEvenements.IPrésentateur
 
     lateinit var composeView: ComposeView
-    lateinit var chargement : ProgressBar
+    lateinit var chargement: ProgressBar
     lateinit var textErreur: TextView
-    lateinit var imageErreur : ImageView
+    lateinit var imageErreur: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,13 +43,17 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
         imageErreur = view.findViewById(R.id.imageErreur)
     }
 
-    override fun afficherListeEvenements(listeEvens : List<Événement>, imageUrl : (Int) -> String) {
+    override fun afficherListeEvenements(listeEvens: List<Événement>, imageUrl: (Int) -> String) {
         if (!listeEvens.isEmpty()) {
             chargement.visibility = View.INVISIBLE
             composeView.setContent {
                 MaterialTheme {
                     ListeCarteÉvénements(événements = listeEvens,
-                        clickEvent = {e -> fragmentLoader.loadFragment(VueDetailsEvenement(),e.idEvenement.toString())},
+                        clickEvent = { e ->
+                            fragmentLoader.loadFragment(
+                                VueDetailsEvenement(),
+                                e.idEvenement.toString()
+                            ) },
                         imageUrl = { i -> imageUrl(i) }
                     )
                 }

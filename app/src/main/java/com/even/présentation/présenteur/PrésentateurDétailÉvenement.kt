@@ -5,17 +5,12 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import com.even.domaine.entité.Événement
-import com.even.domaine.interacteur.IntDétailÉvenement
 import com.even.présentation.modèle.ModèleDétailÉvenement
 import kotlinx.coroutines.*
 
-import okhttp3.Dispatcher
-import retrofit2.Response
-import java.net.SocketTimeoutException
-
 class PrésentateurDétailÉvenement(
-    var vue : IDétailÉvenement.IVue,
-    ) : IDétailÉvenement.IPrésentateur {
+    var vue: IDétailÉvenement.IVue,
+) : IDétailÉvenement.IPrésentateur {
     private val handlerRéponse: Handler
 
     private var coroutileDétailÉvenement: Job? = null
@@ -29,7 +24,8 @@ class PrésentateurDétailÉvenement(
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
                 if (msg.what == MSG_RÉUSSI) {
-                    vue.setInfo()
+
+
                 } else if (msg.what == MSG_ECHEC) {
                     vue.afficherToastErreurServeur()
                     Log.e(
@@ -45,29 +41,22 @@ class PrésentateurDétailÉvenement(
         }
     }
 
-    override fun traiterRequêteAfficherDétailÉvenement(id : Int) : Response<Événement>? {
-        var reponseApi : Response<Événement>? = null
+    override fun traiterRequêteAfficherDétailÉvenement(idEvenement: Int) {
+        var evenement: Événement? = null
         coroutileDétailÉvenement = CoroutineScope(Dispatchers.IO).launch {
             var msg: Message? = null
             try {
-                reponseApi = ModèleDétailÉvenement().allerChercherInfoÉvenement(id)
-
-                if (reponseApi!!.isSuccessful) {
-                    withContext(Dispatchers.Main) {
-                        msg = handlerRéponse.obtainMessage(MSG_RÉUSSI)
-                        return@withContext reponseApi
-                    }
-                } else {
+                evenement = ModèleDétailÉvenement().allerChercherInfoÉvenement(idEvenement)
+                withContext(Dispatchers.Main) {
+                    msg = handlerRéponse.obtainMessage(MSG_RÉUSSI)
                     msg = handlerRéponse.obtainMessage(MSG_ECHEC)
+                    vue.setInfo(evenement!!)
                 }
-            } catch (e: SocketTimeoutException) {
-                msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
-            } catch (e: InterruptedException) {
+            } catch (e: Exception) {
                 msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
             }
             handlerRéponse.sendMessage(msg!!)
         }
-        return reponseApi
     }
 
 }

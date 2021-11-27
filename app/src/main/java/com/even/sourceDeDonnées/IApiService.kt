@@ -41,6 +41,6 @@ interface IApiService {
     @GET("/api/Evenement/GetParOrganisateur/{id}")
     suspend fun getEvenementsParOrganisateur(@Path("id") id: Int): Response<List<Événement>>
 
-    @GET("/api/Evenement/{id}")
-    suspend fun getEvenementParId(@Path("id") id : Int) : Response<Événement>
+    @GET("/api/Evenement/GetById")
+    suspend fun getEvenementParId(@Query("id") id : Int) : Événement
 }

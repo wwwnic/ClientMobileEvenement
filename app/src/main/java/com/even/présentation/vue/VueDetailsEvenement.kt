@@ -11,7 +11,6 @@ import com.even.R
 import com.even.domaine.entité.Événement
 import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
-import retrofit2.Response
 
 class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue{
 
@@ -23,7 +22,6 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     lateinit var texteDescription : TextView
     lateinit var texteParticipant : TextView
     lateinit var btnParticipation : Button
-    lateinit var evenement : Response<Événement>
 
     lateinit var présentateur : IDétailÉvenement.IPrésentateur
 
@@ -31,8 +29,6 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         super.onViewCreated(view, savedInstanceState)
 
         présentateur = PrésentateurDétailÉvenement(this)
-        evenement = présentateur.traiterRequêteAfficherDétailÉvenement(this.tag!!.toInt())!!
-
         imageEvent = view?.findViewById(R.id.detailEvenement_eventImage)
         texteNom = view?.findViewById(R.id.detailEvenement_nameEvent)
         texteLocation = view?.findViewById(R.id.detailEvenement_location)
@@ -41,6 +37,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         texteDescription = view?.findViewById(R.id.detailEvenement_description)
         texteParticipant = view?.findViewById(R.id.detailEvenement_nomber)
         btnParticipation = view?.findViewById(R.id.detailEvenement_participation)
+        présentateur.traiterRequêteAfficherDétailÉvenement(tag!!.toInt())!!
 
         clickListenerParticipation()
     }
@@ -57,12 +54,12 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
     }
 
-    override fun setInfo() {
-        texteNom?.text = evenement.body()!!.nomEvenement
-        texteLocation?.text = evenement.body()!!.location
-        texteDate?.text = evenement.body()!!.date
-        texteOrganisateur?.text = evenement.body()!!.organisateur!!.nomUtilisateur
-        texteDescription?.text = evenement.body()!!.description
+    override fun setInfo(evenement : Événement) {
+        texteNom?.text = evenement.nomEvenement
+        texteLocation?.text = evenement.location
+        texteDate?.text = evenement.date
+        texteOrganisateur?.text = evenement.organisateur?.nomUtilisateur
+        texteDescription?.text = evenement.description
     }
 
 

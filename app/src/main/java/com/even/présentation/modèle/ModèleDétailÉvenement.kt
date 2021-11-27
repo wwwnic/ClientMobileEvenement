@@ -14,8 +14,8 @@ class ModèleDétailÉvenement {
         }
     }
 
-    suspend fun allerChercherInfoÉvenement(id : Int) : Response<Événement> {
-        val reponseBodyRequete = IntDétailÉvenement(_source).getInfoÉvenement(id)
-        return reponseBodyRequete
+    suspend fun allerChercherInfoÉvenement(id : Int) : Événement {
+        val evenement = IntDétailÉvenement(_source).getInfoÉvenement(id)
+        return evenement
     }
 }
