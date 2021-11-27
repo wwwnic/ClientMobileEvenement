@@ -27,8 +27,10 @@ class PrésentateurMesÉvènements(
                     afficherlstÉvènement(lstÉvènement)
                 }
             } catch (e: Exception) {
-                vue.afficherAucunRésultatRecherche(estErreurConnexion = true)
                 Log.e("Évèn", "La requête a rencontré une erreur", e)
+                withContext(Dispatchers.Main) {
+                    vue.afficherAucunRésultatRecherche(estErreurConnexion = true)
+                }
             }
         }
     }

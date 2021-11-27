@@ -17,7 +17,7 @@ class PrésentateurConnexion(
         val entréesValide = validerLesEntréesConnexion(nomUtilisateur, motDePasse)
         if (entréesValide) {
             lancerRequeteConnexionApi(nomUtilisateur, motDePasse)
-        } else{
+        } else {
             vue.afficherToastErreurConnexion()
         }
     }
@@ -42,7 +42,9 @@ class PrésentateurConnexion(
                 }
             } catch (e: Exception) {
                 Log.e("Évèn", "La requête a rencontré une erreur", e)
-                vue.afficherToastErreurServeur()
+                withContext(Dispatchers.Main) {
+                    vue.afficherToastErreurServeur()
+                }
             }
         }
     }
