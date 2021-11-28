@@ -3,19 +3,21 @@ package com.even.présentation.modèle
 import com.even.domaine.entité.Événement
 import com.even.domaine.interacteur.*
 import com.even.sourceDeDonnées.ISourceDeDonnées
+import retrofit2.Response
 
 class ModèleÉvénements {
 
     companion object {
         lateinit var _source: ISourceDeDonnées
-        var newÉvénement: Événement? = null
+        var événementPrésenté: Événement? = null
         fun setSource(source: ISourceDeDonnées) {
             _source = source
         }
-
-        suspend fun setNouvelÉvénement(événement: Événement) {
-            événement.organisateur = IntGetUtilisateur(_source).getParId(événement.idOrganisateur)
-            newÉvénement = événement
+        suspend fun setÉvénementPrésenté(id : Int) {
+            var événement = IntGetÉvénement(_source).getÉvénementParId(id)
+            événement!!.organisateur = IntGetUtilisateur(_source).getParId(événement.idOrganisateur)
+            événement.date = événement.date.split("T").let { it[0] + " " + it[1] }
+            événementPrésenté = événement
         }
     }
 
@@ -41,6 +43,14 @@ class ModèleÉvénements {
         return IntCreerÉvénement(_source).creerÉvénement(événement)
     }
 
+    suspend fun modifierÉvénement(événement: Événement) : Response<Void> {
+        return IntModifierÉvénement(_source).modifierÉvénement(événement = événement)
+    }
+
+    suspend fun annulerÉvénement(id : Int) : Response<Void> {
+        return IntAnnulerÉvénement(_source).annulerÉvénement(id)
+    }
+
     suspend fun demanderLesParticipations(idUtilisateur: Int): List<Événement> {
         val participations =
             IntGetÉvènementParParticipant(_source).demanderMesParticipations(idUtilisateur)
@@ -52,7 +62,6 @@ class ModèleÉvénements {
             IntGetÉvènementsParOrganisateur(_source).demanderMesÉvènements(idUtilisateur)
         return mesÉvènements
     }
-
 
     fun getImageÉvénement(id: Int): String {
         return _source.getImageEvenement(id)

@@ -57,7 +57,7 @@ class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
     }
 
     override fun afficherNouvelÉvénement() {
-        fragmentLoader.loadFragment(VueDetailsEvenement(), "new")
+        fragmentLoader.loadFragment(VueDetailsEvenement())
     }
 
     override fun afficherErreurConnexion() {

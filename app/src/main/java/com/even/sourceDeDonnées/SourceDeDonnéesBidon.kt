@@ -48,7 +48,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             1,
             "Party chez Bob",
             "Maison de Bob",
-            Calendar.getInstance().time.toString(),
+            "2021-11-24T18:00",
             1,
             "gros party chez Bob let's gooooooo!"
         )
@@ -57,7 +57,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             2,
             "Autre Party chez Bob",
             "bbbbbb",
-            Calendar.getInstance().time.toString(),
+            "2021-11-24T18:00",
             1,
             "hey salut"
         )
@@ -66,7 +66,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
             3,
             "Réunion des bricoleurs",
             "Bricoville",
-            Calendar.getInstance().time.toString(),
+            "2021-11-24T18:00",
             2,
             "ayoyeeeeeeeee"
         )
@@ -99,9 +99,13 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     }
 
     override suspend fun getAllEvenements(): List<Événement> {
+        resetEvenements()
         return listeEvens
     }
 
+    override suspend fun getEvenementParId(id: Int): Événement? {
+        return listeEvens.filter { u -> u.idEvenement == id }[0]
+    }
 
     override suspend fun getAllUtilisateurs(): List<Utilisateur> {
         return listeUtils
@@ -116,11 +120,24 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     }
 
     override suspend fun creerEvenement(evenement: Événement): Événement? {
+        listeEvens.add(evenement)
+        return evenement
+    }
+
+    override suspend fun modifierEvenement(evenement: Événement): Response<Void> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun supprimerEvenement(id: Int): Response<Void> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getUtilisateurParId(id: Int): Utilisateur? {
-        TODO("Not yet implemented")
+        return listeUtils.filter { u -> u.idUtilisateur == id }[0]
+    }
+
+    override suspend fun getUtilisateursParNom(nom: String): List<Utilisateur> {
+        return listeUtils.filter { u -> u.nomUtilisateur == nom }
     }
 
     override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
@@ -134,7 +151,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     override suspend fun demanderProfil(
         identifiantUtilisateur: Utilisateur
     ): Utilisateur? {
-        TODO("Not yet implemented")
+        return listeUtils.filter { u -> u.nomUtilisateur == identifiantUtilisateur.nomUtilisateur }[0]
     }
 
     override suspend fun getEvenementsParRecherche(
@@ -143,7 +160,8 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         location: String,
         organisateur: String
     ): List<Événement> {
-        TODO("Not yet implemented")
+        resetEvenements()
+        return listeEvens.filter { e -> e.nomEvenement.contains(nom) }
     }
 
     override fun getImageEvenement(id: Int): String {
@@ -152,5 +170,11 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
 
     override fun getImageUtilisateur(id: Int): String {
         return R.drawable.imageutilisateurbidon.toString()
+    }
+
+    private fun resetEvenements() {
+        for(e : Événement in listeEvens) {
+            e.date = "2021-11-24T18:00"
+        }
     }
 }

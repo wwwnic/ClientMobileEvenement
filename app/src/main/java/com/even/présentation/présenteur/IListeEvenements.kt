@@ -8,10 +8,12 @@ interface IListeEvenements {
         fun afficherListeEvenements(liste : List<Événement>, imageUrl : (Int) -> String)
         fun afficherErreurConnexion()
         fun afficherAucunRésultatRecherche()
+        fun afficherDétailsÉvénement()
     }
 
     interface IPrésentateur {
         fun traiterRequêteAfficherListeRecents()
         fun traiterRequêteAfficherListeRecherche(tag : String)
+        fun traiterRequêteAfficherDétailsÉvénement(idÉvénement : Int)
     }
 }

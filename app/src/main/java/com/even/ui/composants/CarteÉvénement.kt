@@ -61,7 +61,7 @@ fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl:
             }
             Row {
                 Text(
-                    text = événement.date.toString(),
+                    text = événement.date,
                     fontSize = 20.sp,
                     color = MaterialTheme.colors.onPrimary
                 )
