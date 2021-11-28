@@ -16,8 +16,8 @@ interface IApiService {
     @GET("api/Evenement/GetAll")
     suspend fun getAllEvenements(): Response<List<Événement>>
 
-    @GET("api/Evenement/GetById")
-    suspend fun getEvenementParId(@Query("id") id: Int): Response<Événement>
+    @GET("api/Evenement/{id}")
+    suspend fun getEvenementParId(@Path("id") id: Int): Response<Événement>
 
     @GET("api/Utilisateur/GetById")
     suspend fun getUtilisateurParId(@Query("id") id: Int): Response<Utilisateur>
@@ -39,8 +39,8 @@ interface IApiService {
     @PUT("api/Evenement/Update")
     suspend fun updateEvenement(@Body evenement: Événement): Response<Void>
 
-    @DELETE("api/Evenement/Delete/secret")
-    suspend fun deleteEvenement(@Query ("id")id : Int): Response<Void>
+    @DELETE("delete/{id}/secret")
+    suspend fun deleteEvenement(@Path ("id")id : Int): Response<Void>
 
     @POST("api/Utilisateur/Login")
     suspend fun demanderProfil(
