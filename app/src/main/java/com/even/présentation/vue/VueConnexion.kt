@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.even.R
+import com.even.domaine.entité.UnCoroutineDispatcher
 import com.even.domaine.entité.ValidateurTextuel
 import com.even.présentation.modèle.ModèleConnexion
 import com.even.présentation.présenteur.IConnexion
@@ -21,7 +22,7 @@ class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        présentateurConnexion = PrésentateurConnexion(this, ModèleConnexion(), ValidateurTextuel())
+        présentateurConnexion = PrésentateurConnexion(this, ModèleConnexion(), ValidateurTextuel(), UnCoroutineDispatcher())
         clickListenerBtnConnexion(view)
         clickListenerBtnCreerUnCompte(view)
     }

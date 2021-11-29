@@ -1,12 +1,12 @@
 package com.even.présentation.présenteur
 
-import android.util.Log
+import com.even.domaine.entité.UnCoroutineDispatcher
 import com.even.domaine.entité.ValidateurTextuel
 import com.even.présentation.modèle.ModèleConnexion
 import kotlinx.coroutines.*
 
 class PrésentateurConnexion(
-    val vue: IConnexion.IVue, val modele: ModèleConnexion, val validateur: ValidateurTextuel
+    val vue: IConnexion.IVue, val modele: ModèleConnexion, val validateur: ValidateurTextuel, val dispatcher: UnCoroutineDispatcher
 ) : IConnexion.IPrésentateur {
     private var coroutileLogin: Job? = null
 
@@ -26,11 +26,11 @@ class PrésentateurConnexion(
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ) {
-        coroutileLogin = CoroutineScope(Dispatchers.IO).launch {
+        coroutileLogin = CoroutineScope(dispatcher.io).launch {
             try {
                 val estUtilisateurExistant =
                     modele.demanderProfilUtilisateur(nomUtilisateur, motDePasse)
-                withContext(Dispatchers.Main) {
+                withContext(dispatcher.main) {
                     if (estUtilisateurExistant) {
                         vue.naviguerVersFragmentPrincipal()
                         vue.afficherToastSuccesConnexion()
@@ -42,7 +42,7 @@ class PrésentateurConnexion(
                 }
             } catch (e: Exception) {
                 //Log.e("Évèn", "La requête a rencontré une erreur", e) // todo: mock le log ? (sinon ça fonctionne pas)
-                withContext(Dispatchers.Main) {
+                withContext(dispatcher.main) {
                     vue.afficherToastErreurServeur()
                 }
             }
