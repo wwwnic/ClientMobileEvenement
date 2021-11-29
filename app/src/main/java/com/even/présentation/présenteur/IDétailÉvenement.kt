@@ -7,7 +7,8 @@ interface IDétailÉvenement {
     interface IVue {
         fun afficherToastErreurServeur()
         fun afficherToastParticipationAjouté()
-        fun setInfo(evenement: Événement, participant : Boolean)
+        fun afficherToastParticipationRetiré()
+        fun setInfo(evenement: Événement)
         fun afficherNePlusParticiper()
         fun afficherParticipation()
     }

@@ -10,17 +10,17 @@ import retrofit2.Response
 class IntDétailÉvenement(val api : ISourceDeDonnées) {
 
     suspend fun getInfoÉvenement(id : Int) : Événement {
-        val reponseRequête = apiService.getEvenementParId(id)
+        val reponseRequête = api.getEvenementParId(id)
         return reponseRequête
     }
 
     suspend fun ajouterParticipation(utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>{
-        val reponseRequête = apiService.ajouterParticipation(utilisateurÉvenement)
+        val reponseRequête = api.ajouterParticipation(utilisateurÉvenement)
         return reponseRequête
     }
 
     suspend fun retirerParticipation(utilisateurÉvenement: UtilisateurÉvénement) : Response<Void> {
-        val reponseRequête = apiService.retirerParticipation(utilisateurÉvenement)
+        val reponseRequête = api.retirerParticipation(utilisateurÉvenement)
         return reponseRequête
     }
 

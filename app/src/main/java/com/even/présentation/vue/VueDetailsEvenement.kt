@@ -30,6 +30,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         super.onViewCreated(view, savedInstanceState)
 
         présentateur = PrésentateurDétailÉvenement(this)
+
         imageEvent = view.findViewById(R.id.detailEvenement_eventImage)
         texteNom = view.findViewById(R.id.detailEvenement_nameEvent)
         texteLocation = view.findViewById(R.id.detailEvenement_location)
@@ -59,16 +60,16 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         Toast.makeText(context, "Votre participation a été ajouté", Toast.LENGTH_SHORT).show()
     }
 
-    override fun setInfo(evenement : Événement, participant: Boolean) {
+    override fun afficherToastParticipationRetiré() {
+        Toast.makeText(context, "Votre participation a été retiré", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setInfo(evenement : Événement) {
         texteNom?.text = evenement.nomEvenement
         texteLocation?.text = evenement.location
         texteDate?.text = evenement.date
         texteOrganisateur?.text = evenement.organisateur?.nomUtilisateur
         texteDescription?.text = evenement.description
-
-        if ( !participant ) {
-            btnParticipation.text = "Je ne participe pas"
-        }
     }
 
     override fun afficherNePlusParticiper() {

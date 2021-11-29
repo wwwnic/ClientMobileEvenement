@@ -43,11 +43,11 @@ interface IApiService {
     suspend fun getEvenementsParOrganisateur(@Path("id") id: Int): Response<List<Événement>>
 
     @GET("/api/Evenement/GetById")
-    suspend fun getEvenementParId(@Query("id") id : Int) : Événement
+    suspend fun getEvenementParId(@Query("id") id : Int) : Response<Événement>
 
     @POST("/api/Utilisateur/addParticipation")
     suspend fun ajouterParticipation(@Body utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>
 
-    @DELETE("/api/Utilisateur/deleteParticipation")
+    @POST("/api/Utilisateur/deleteParticipation")
     suspend fun retirerParticipation(@Body utilisateurÉvenement: UtilisateurÉvénement) : Response<Void>
 }
