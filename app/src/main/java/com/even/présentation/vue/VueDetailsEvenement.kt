@@ -46,7 +46,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     private fun clickListenerParticipation() {
 
         btnParticipation.setOnClickListener {
-            présentateur.traiterRequêteAjouterParticipation(tag!!.toInt())
+
         }
 
     }
@@ -55,28 +55,13 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
     }
 
-    override fun afficherToastParticipationAjouté() {
-        Toast.makeText(context, "Votre participation a été ajouté", Toast.LENGTH_SHORT).show()
-    }
 
-    override fun setInfo(evenement : Événement, participant: Boolean) {
+    override fun setInfo(evenement : Événement) {
         texteNom?.text = evenement.nomEvenement
         texteLocation?.text = evenement.location
         texteDate?.text = evenement.date
         texteOrganisateur?.text = evenement.organisateur?.nomUtilisateur
         texteDescription?.text = evenement.description
-
-        if ( !participant ) {
-            btnParticipation.text = "Je ne participe pas"
-        }
-    }
-
-    override fun afficherNePlusParticiper() {
-        btnParticipation.text = "Je ne participe pas"
-    }
-
-    override fun afficherParticipation() {
-        btnParticipation.text = "Je participe"
     }
 
 

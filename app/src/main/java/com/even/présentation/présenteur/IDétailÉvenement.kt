@@ -6,15 +6,11 @@ interface IDétailÉvenement {
 
     interface IVue {
         fun afficherToastErreurServeur()
-        fun afficherToastParticipationAjouté()
-        fun setInfo(evenement: Événement, participant : Boolean)
-        fun afficherNePlusParticiper()
-        fun afficherParticipation()
+        fun setInfo(evenement: Événement)
     }
 
     interface IPrésentateur {
         fun traiterRequêteAfficherDétailÉvenement(id : Int)
-        fun traiterRequêteAjouterParticipation(idEvenement: Int)
     }
 
 }

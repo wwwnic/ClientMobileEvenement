@@ -35,7 +35,7 @@ class PrésentateurCreation(
                 withContext(Dispatchers.Main) {
                     if (nouvelÉvénement != null) {
                         ModèleÉvénements.setNouvelÉvénement(nouvelÉvénement!!)
-                        vue.afficherNouvelÉvénement()
+                        vue.afficherNouvelÉvénement(nouvelÉvénement!!)
                     } else {
                         vue.afficherErreurConnexion()
                     }
