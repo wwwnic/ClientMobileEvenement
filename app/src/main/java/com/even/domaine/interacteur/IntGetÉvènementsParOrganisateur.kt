@@ -8,7 +8,11 @@ class IntGetÉvènementsParOrganisateur(var _source : ISourceDeDonnées) {
     suspend fun demanderMesÉvènements(
         id: Int
     ): List<Événement> {
-        val reponseRequete = _source.getEvenementsParOrganisateur(id)
-        return reponseRequete
+        val listeEvenement = _source.getEvenementsParOrganisateur(id)
+        listeEvenement.forEach { evenement ->
+            evenement.organisateur = IntGetUtilisateur(_source).getParId(evenement.idOrganisateur)
+            evenement.date = evenement.date.split("T").let { it[0] + " " + it[1] }
+        }
+        return listeEvenement
     }
 }

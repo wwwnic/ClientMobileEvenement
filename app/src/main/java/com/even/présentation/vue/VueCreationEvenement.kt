@@ -57,6 +57,7 @@ class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
         selecteur.show(requireActivity().supportFragmentManager, null)
     }
 
+
     override fun afficherNouvelÉvénement(evenement : Événement) {
         fragmentLoader.loadFragment(VueDetailsEvenement(), evenement.idEvenement.toString())
     }
