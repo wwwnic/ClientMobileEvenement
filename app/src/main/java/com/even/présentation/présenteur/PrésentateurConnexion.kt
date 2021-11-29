@@ -1,12 +1,12 @@
 package com.even.présentation.présenteur
 
 import android.util.Log
-import com.even.domaine.entité.ValidateurEntréesTextuel
+import com.even.domaine.entité.ValidateurTextuel
 import com.even.présentation.modèle.ModèleConnexion
 import kotlinx.coroutines.*
 
 class PrésentateurConnexion(
-    val vue: IConnexion.IVue
+    val vue: IConnexion.IVue, val modele: ModèleConnexion, val validateur: ValidateurTextuel
 ) : IConnexion.IPrésentateur {
     private var coroutileLogin: Job? = null
 
@@ -14,8 +14,8 @@ class PrésentateurConnexion(
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ) {
-        val entréesValide = validerLesEntréesConnexion(nomUtilisateur, motDePasse)
-        if (entréesValide) {
+        //val entréesValide = validerLesEntréesConnexion(nomUtilisateur, motDePasse)
+        if (true) { //entréesValide
             lancerRequeteConnexionApi(nomUtilisateur, motDePasse)
         } else {
             vue.afficherToastErreurConnexion()
@@ -29,7 +29,7 @@ class PrésentateurConnexion(
         coroutileLogin = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val estUtilisateurExistant =
-                    ModèleConnexion().demanderProfilUtilisateur(nomUtilisateur, motDePasse)
+                    modele.demanderProfilUtilisateur(nomUtilisateur, motDePasse)
                 withContext(Dispatchers.Main) {
                     if (estUtilisateurExistant) {
                         vue.naviguerVersFragmentPrincipal()
@@ -60,13 +60,13 @@ class PrésentateurConnexion(
     }
 
     private fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerNomUsager(nomUsager)
+        val estValide = validateur.validerNomUsager(nomUsager)
         vue.afficherErreurNomUtilisateur(!estValide)
         return estValide
     }
 
     private fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerMotDePasse(motDePasse)
+        val estValide = validateur.validerMotDePasse(motDePasse)
         vue.afficherErreurMotDePasse(!estValide)
         return estValide
     }

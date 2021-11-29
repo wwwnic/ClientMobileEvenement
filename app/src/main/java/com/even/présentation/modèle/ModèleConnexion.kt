@@ -3,7 +3,9 @@ package com.even.présentation.modèle
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.interacteur.IntConnexion
 import com.even.sourceDeDonnées.ISourceDeDonnées
+import com.even.testOuvert
 
+@testOuvert
 class ModèleConnexion() {
 
     companion object {

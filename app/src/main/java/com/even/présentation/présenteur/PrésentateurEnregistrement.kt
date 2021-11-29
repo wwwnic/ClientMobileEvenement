@@ -4,13 +4,13 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Log
-import com.even.domaine.entité.ValidateurEntréesTextuel
+import com.even.domaine.entité.ValidateurTextuel
 import com.even.présentation.modèle.ModèleEnregistrement
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
 class PrésentateurEnregistrement(
-    val vue: IEnregistrement.IVue
+    val vue: IEnregistrement.IVue, val modeleEnregistrement: ModèleEnregistrement, val validateur: ValidateurTextuel
 ) : IEnregistrement.IPrésentateur {
     private val handlerRéponse: Handler
 
@@ -91,25 +91,25 @@ class PrésentateurEnregistrement(
     }
 
     override fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerNomUsager(nomUsager)
+        val estValide = validateur.validerNomUsager(nomUsager)
         vue.afficherErreurNomUsager(!estValide)
         return estValide
     }
 
     override fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerMotDePasse(motDePasse)
+        val estValide = validateur.validerMotDePasse(motDePasse)
         vue.afficherErreurMotDePasse(!estValide)
         return estValide
     }
 
     override fun traiterRequêteValiderCourriel(courriel: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerCourriel(courriel)
+        val estValide = validateur.validerCourriel(courriel)
         vue.afficherErreurCourriel(!estValide)
         return estValide
     }
 
     override fun traiterRequêteValiderTelephone(telephone: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerTelephone(telephone)
+        val estValide = validateur.validerTelephone(telephone)
         vue.afficherErreurTéléphone(!estValide)
         return estValide
     }
