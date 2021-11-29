@@ -14,8 +14,8 @@ class PrésentateurConnexion(
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ) {
-        //val entréesValide = validerLesEntréesConnexion(nomUtilisateur, motDePasse)
-        if (true) { //entréesValide
+        val entréesValide = validerLesEntréesConnexion(nomUtilisateur, motDePasse)
+        if (entréesValide) {
             lancerRequeteConnexionApi(nomUtilisateur, motDePasse)
         } else {
             vue.afficherToastErreurConnexion()
