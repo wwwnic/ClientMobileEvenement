@@ -1,30 +1,32 @@
 package com.even.présentation.présenteur
 
-import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.ValidateurTextuel
 import com.even.présentation.modèle.ModèleConnexion
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
-import kotlinx.coroutines.*
-import okhttp3.internal.wait
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.*
 
-// https://github.com/mockito/mockito-kotlin/blob/main/mockito-kotlin/src/test/kotlin/test/CoroutinesTest.kt
+// les tests sont basés sur https://github.com/mockito/mockito-kotlin/blob/main/mockito-kotlin/src/test/kotlin/test/CoroutinesTest.kt
 class PrésentateurConnexionTest {
 
     val invocationUnique = 1
-    lateinit var présentateurTruqué: PrésentateurConnexion
     var sourceBidon = SourceDeDonnéesBidon()
-    val mockVue = mock<IConnexion.IVue>()
-    val mockModele = mock<ModèleConnexion>()
-    val mockValidateur = mock<ValidateurTextuel>()
+
+    lateinit var présentateurTruqué: PrésentateurConnexion
+    lateinit var mockVue: IConnexion.IVue
+    lateinit var mockModele: ModèleConnexion
+    lateinit var mockValidateur: ValidateurTextuel
 
     @Before
     fun setUp() {
+        mockVue = mock()
+        mockModele = mock()
+        mockValidateur = mock()
         présentateurTruqué = PrésentateurConnexion(mockVue, mockModele, mockValidateur)
-
     }
 
     @Test
@@ -33,7 +35,7 @@ class PrésentateurConnexionTest {
     }
 
     @Test
-    fun `Étant donné un présentateur lorsqu'il vérifie les identifiants entrés dans la vue, les méthodes sont appelées uniquement 1 fois avec ce qui a été entré`() {
+    fun `Etant donne un presentateur lorsqu'il verifie les identifiants entres dans la vue, la methode de verification dans le modele est appelee 1 fois avec les bons parametres`() {
         val utilisateur = sourceBidon.listeUtils[0]
         présentateurTruqué.traiterRequêteDemanderProfilPourConnexion(
             utilisateur.nomUtilisateur,
@@ -44,9 +46,9 @@ class PrésentateurConnexionTest {
     }
 
     @Test
-    fun `Étant donné un présentateur lorsqu'il demande au modèle le profil de l'utilisateur, il envoie le nom et le mot de passe de l'utilisateur correctement`() {
+    fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur, il envoie le nom et le mot de passe de l'utilisateur correctement car la verificatrion reussi`() {
         val utilisateur = sourceBidon.listeUtils[0]
-        runBlocking {
+        runBlocking(Dispatchers.IO) {
             doReturn(true).whenever(mockValidateur).validerNomUsager(utilisateur.nomUtilisateur)
             doReturn(true).whenever(mockValidateur).validerMotDePasse(utilisateur.motDePasse)
             présentateurTruqué.traiterRequêteDemanderProfilPourConnexion(
@@ -57,6 +59,58 @@ class PrésentateurConnexionTest {
         verifyBlocking(
             mockModele,
             times(invocationUnique)
+        ) { demanderProfilUtilisateur(utilisateur.nomUtilisateur, utilisateur.motDePasse) }
+    }
+
+
+    @Test
+    fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur, il n'envoie pas la requete car la verification echoue via nom utilisateur`() {
+        val utilisateur = sourceBidon.listeUtils[0]
+        runBlocking(Dispatchers.IO) {
+            doReturn(false).whenever(mockValidateur).validerNomUsager(utilisateur.nomUtilisateur)
+            doReturn(true).whenever(mockValidateur).validerMotDePasse(utilisateur.motDePasse)
+            présentateurTruqué.traiterRequêteDemanderProfilPourConnexion(
+                utilisateur.nomUtilisateur,
+                utilisateur.motDePasse
+            )
+        }
+        verifyBlocking(
+            mockModele,
+            never()
+        ) { demanderProfilUtilisateur(utilisateur.nomUtilisateur, utilisateur.motDePasse) }
+    }
+
+    @Test
+    fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur, il n'envoie pas la requete car la verification echoue via mot de passe`() {
+        val utilisateur = sourceBidon.listeUtils[0]
+        runBlocking(Dispatchers.IO) {
+            doReturn(true).whenever(mockValidateur).validerNomUsager(utilisateur.nomUtilisateur)
+            doReturn(false).whenever(mockValidateur).validerMotDePasse(utilisateur.motDePasse)
+            présentateurTruqué.traiterRequêteDemanderProfilPourConnexion(
+                utilisateur.nomUtilisateur,
+                utilisateur.motDePasse
+            )
+        }
+        verifyBlocking(
+            mockModele,
+            never()
+        ) { demanderProfilUtilisateur(utilisateur.nomUtilisateur, utilisateur.motDePasse) }
+    }
+
+    @Test
+    fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur, il n'envoie pas la requete car la verification echoue via le nom utilisateur et le mot de passe`() {
+        val utilisateur = sourceBidon.listeUtils[0]
+        runBlocking(Dispatchers.IO) {
+            doReturn(false).whenever(mockValidateur).validerNomUsager(utilisateur.nomUtilisateur)
+            doReturn(false).whenever(mockValidateur).validerMotDePasse(utilisateur.motDePasse)
+            présentateurTruqué.traiterRequêteDemanderProfilPourConnexion(
+                utilisateur.nomUtilisateur,
+                utilisateur.motDePasse
+            )
+        }
+        verifyBlocking(
+            mockModele,
+            never()
         ) { demanderProfilUtilisateur(utilisateur.nomUtilisateur, utilisateur.motDePasse) }
     }
 }

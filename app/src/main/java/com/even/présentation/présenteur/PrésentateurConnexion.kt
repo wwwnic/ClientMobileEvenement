@@ -41,7 +41,7 @@ class PrésentateurConnexion(
                     }
                 }
             } catch (e: Exception) {
-                Log.e("Évèn", "La requête a rencontré une erreur", e)
+                //Log.e("Évèn", "La requête a rencontré une erreur", e) // todo: mock le log ? (sinon ça fonctionne pas)
                 withContext(Dispatchers.Main) {
                     vue.afficherToastErreurServeur()
                 }
