@@ -103,7 +103,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeEvens
     }
 
-    override suspend fun getEvenementParId(id: Int): Événement? {
+    override suspend fun getÉvenementParId(id: Int): Événement? {
         return listeEvens.filter { u -> u.idEvenement == id }[0]
     }
 
@@ -162,14 +162,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     ): List<Événement> {
         resetEvenements()
         return listeEvens.filter { e -> e.nomEvenement.contains(nom) }
-    }
-
-    override suspend fun getEvenementParId(id: Int): Événement? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun ajouterParticipation(utilisateurÉvenement: UtilisateurÉvénement): Response<Void> {
-        TODO("Not yet implemented")
     }
 
     override fun getImageEvenement(id: Int): String {

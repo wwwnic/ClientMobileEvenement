@@ -17,9 +17,6 @@ interface IApiService {
     @GET("api/Evenement/GetAll")
     suspend fun getAllEvenements(): Response<List<Événement>>
 
-    @GET("api/Evenement/{id}")
-    suspend fun getEvenementParId(@Path("id") id: Int): Response<Événement>
-
     @GET("api/Utilisateur/GetById")
     suspend fun getUtilisateurParId(@Query("id") id: Int): Response<Utilisateur>
 
@@ -55,7 +52,7 @@ interface IApiService {
     suspend fun getEvenementsParOrganisateur(@Path("id") id: Int): Response<List<Événement>>
 
     @GET("/api/Evenement/GetById")
-    suspend fun getEvenementParId(@Query("id") id : Int) : Événement
+    suspend fun getEvenementParId(@Query("id") id : Int) : Response<Événement>
 
     @POST("/api/Utilisateur/addParticipation")
     suspend fun ajouterParticipation(@Body utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>

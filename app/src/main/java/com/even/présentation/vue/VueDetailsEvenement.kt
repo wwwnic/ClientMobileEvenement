@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
 import com.even.domaine.interacteur.IntGetÉvènementParParticipant
+import com.even.présentation.modèle.ModèleÉvénements
 import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
 
@@ -38,7 +39,8 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         texteDescription = view.findViewById(R.id.detailEvenement_description)
         texteParticipant = view.findViewById(R.id.detailEvenement_nomber)
         btnParticipation = view.findViewById(R.id.detailEvenement_participation)
-        présentateur.traiterRequêteAfficherDétailÉvenement(tag!!.toInt())
+
+        présentateur.traiterRequêteAfficherDétailÉvenement(ModèleÉvénements.événementPrésenté!!.idEvenement)
 
         clickListenerParticipation()
     }

@@ -6,6 +6,6 @@ import com.even.sourceDeDonnées.ISourceDeDonnées
 class IntGetÉvénement(var _source : ISourceDeDonnées) {
 
     suspend fun getÉvénementParId(id : Int) : Événement? {
-        return _source.getEvenementParId(id)
+        return _source.getÉvenementParId(id)
     }
 }

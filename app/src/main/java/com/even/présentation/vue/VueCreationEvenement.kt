@@ -65,5 +65,4 @@ class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
     override fun afficherErreurConnexion() {
         Toast.makeText(requireContext(), R.string.serveur_error, Toast.LENGTH_SHORT).show()
     }
-
 }

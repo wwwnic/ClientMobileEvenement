@@ -64,15 +64,7 @@ class ModèleÉvénements {
         return mesÉvènements
     }
 
-    suspend fun ajouterParticipation(utilisateurÉvénement: UtilisateurÉvénement): Response<Void> {
-        return IntDétailÉvenement(_source).ajouterParticipation(utilisateurÉvénement)
-    }
-
-    suspend fun retirerParticipation(utilisateurÉvénement: UtilisateurÉvénement) : Response<Void> {
-        return IntDétailÉvenement(_source).retirerParticipation(utilisateurÉvénement)
-    }
-
-    suspend fun allerChercherInfoÉvenement(id : Int) : Événement {
+    suspend fun allerChercherInfoÉvenement(id : Int) : Événement? {
         val evenement = IntDétailÉvenement(_source).getInfoÉvenement(id)
         return evenement
     }

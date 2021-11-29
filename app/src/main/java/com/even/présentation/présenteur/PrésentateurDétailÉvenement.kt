@@ -22,7 +22,6 @@ class PrésentateurDétailÉvenement(
     private val MSG_ECHEC = 0
     private val MSG_ANNULER = 1
     private val MSG_RÉUSSI_GET_INFO = 2
-    private val MSG_RÉUSSI_AJOUTER_PARTICIPATION = 3
 
     init {
         handlerRéponse = object : Handler(Looper.getMainLooper()) {
