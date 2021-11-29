@@ -17,10 +17,13 @@ interface IApiService {
     @GET("api/Evenement/GetAll")
     suspend fun getAllEvenements(): Response<List<Événement>>
 
-    @GET("/api/Utilisateur/GetById")
+    @GET("api/Utilisateur/GetById")
     suspend fun getUtilisateurParId(@Query("id") id: Int): Response<Utilisateur>
 
-    @GET("/api/Evenement/GetParRecherche")
+    @GET("api/Utilisateur/GetByName")
+    suspend fun getUtilisateursParNom(@Query("name") nom : String): Response<List<Utilisateur>>
+
+    @GET("api/Evenement/GetParRecherche")
     suspend fun getEvenementsParRecherche(
         @Query("nom") nom: String,
         @Query("mois") mois: String,
@@ -31,15 +34,21 @@ interface IApiService {
     @POST("api/Evenement/New")
     suspend fun creerEvenement(@Body evenement: Événement): Response<Événement>
 
-    @POST("/api/Utilisateur/Login")
+    @PUT("api/Evenement/Update")
+    suspend fun updateEvenement(@Body evenement: Événement): Response<Void>
+
+    @DELETE("delete/{id}/secret")
+    suspend fun deleteEvenement(@Path ("id")id : Int): Response<Void>
+
+    @POST("api/Utilisateur/Login")
     suspend fun demanderProfil(
         @Body utilisateur: Utilisateur
     ): Response<Utilisateur?>
 
-    @GET("/api/Evenement/GetParParticipant/{id}")
+    @GET("api/Evenement/GetParParticipant/{id}")
     suspend fun getEvenementsParParticipation(@Path("id") id: Int): Response<List<Événement>>
 
-    @GET("/api/Evenement/GetParOrganisateur/{id}")
+    @GET("api/Evenement/GetParOrganisateur/{id}")
     suspend fun getEvenementsParOrganisateur(@Path("id") id: Int): Response<List<Événement>>
 
     @GET("/api/Evenement/GetById")

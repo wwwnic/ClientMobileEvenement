@@ -2,18 +2,21 @@ package com.even.présentation.présenteur
 
 import com.even.domaine.entité.Événement
 
-interface ICreationEvenement {
+interface IModificationÉvénement {
     interface IVue {
-        fun afficherNouvelÉvénement(evenement : Événement)
+        fun afficherÉvénementModifiéOuRetourMenu(modification : Boolean)
+        fun remplirChamps(événement : Événement)
         fun afficherErreurConnexion()
     }
 
     interface IPrésentateur {
-        fun traiterRequêteCréerÉvénement(
+        fun traiterRequêteModifierÉvénement(
             nom : String,
             date : String,
             location : String,
             description : String
         )
+        fun traiterRequêteAnnulerÉvénement()
+        fun traiterRequêteRemplirChamps()
     }
 }

@@ -67,14 +67,17 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
     ) {
         composeView.setContent {
             MaterialTheme {
-                ListeCarteÉvénements(lstÉvènenement, clickEvent = {
-                    fragmentLoader.loadFragment(
-                        if (estSurMesÉvènement) VueModifierEvenement() else VueDetailsEvenement(),
-                        it.idEvenement.toString()
-                    )
+                ListeCarteÉvénements(lstÉvènenement, clickEvent = { e ->
+                    présentateur.traiterRequêteAfficherÉvénement(e.idEvenement)
                 }, imageUrl = { img -> imageUrl(img) })
             }
         }
+    }
+
+    override fun afficherÉvénementSelectionné() {
+        fragmentLoader.loadFragment(
+            if (estSurMesÉvènement) VueModifierEvenement() else VueDetailsEvenement()
+        )
     }
 
     override fun afficherAucunRésultatRecherche(estErreurConnexion: Boolean) {

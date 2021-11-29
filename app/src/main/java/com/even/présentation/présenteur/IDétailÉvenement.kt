@@ -15,7 +15,6 @@ interface IDétailÉvenement {
 
     interface IPrésentateur {
         fun traiterRequêteAfficherDétailÉvenement(id : Int)
-        fun traiterRequêteAjouterParticipation(idEvenement: Int)
     }
 
 }

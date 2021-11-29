@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.even.R
+import com.even.domaine.entité.Événement
 import com.even.présentation.présenteur.ICreationEvenement
 import com.even.présentation.présenteur.PrésentateurCreation
 import com.even.ui.composants.FragmentLoader
@@ -56,12 +57,12 @@ class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
         selecteur.show(requireActivity().supportFragmentManager, null)
     }
 
-    override fun afficherNouvelÉvénement() {
-        fragmentLoader.loadFragment(VueDetailsEvenement(), "new")
+
+    override fun afficherNouvelÉvénement(evenement : Événement) {
+        fragmentLoader.loadFragment(VueDetailsEvenement(), evenement.idEvenement.toString())
     }
 
     override fun afficherErreurConnexion() {
         Toast.makeText(requireContext(), R.string.serveur_error, Toast.LENGTH_SHORT).show()
     }
-
 }

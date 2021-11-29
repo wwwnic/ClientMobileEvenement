@@ -49,16 +49,16 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
             composeView.setContent {
                 MaterialTheme {
                     ListeCarteÉvénements(événements = listeEvens,
-                        clickEvent = { e ->
-                            fragmentLoader.loadFragment(
-                                VueDetailsEvenement(),
-                                e.idEvenement.toString()
-                            ) },
+                        clickEvent = {e -> présentateur.traiterRequêteAfficherDétailsÉvénement(e.idEvenement)},
                         imageUrl = { i -> imageUrl(i) }
                     )
                 }
             }
         }
+    }
+
+    override fun afficherDétailsÉvénement() {
+        fragmentLoader.loadFragment(VueDetailsEvenement())
     }
 
     override fun afficherErreurConnexion() {

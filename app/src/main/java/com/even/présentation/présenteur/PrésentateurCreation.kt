@@ -34,8 +34,8 @@ class PrésentateurCreation(
                 nouvelÉvénement = ModèleÉvénements().créerÉvénement(événementCrée)
                 withContext(Dispatchers.Main) {
                     if (nouvelÉvénement != null) {
-                        ModèleÉvénements.setNouvelÉvénement(nouvelÉvénement!!)
-                        vue.afficherNouvelÉvénement()
+                        ModèleÉvénements.setÉvénementPrésenté(nouvelÉvénement!!.idEvenement)
+                        vue.afficherNouvelÉvénement(nouvelÉvénement!!)
                     } else {
                         vue.afficherErreurConnexion()
                     }

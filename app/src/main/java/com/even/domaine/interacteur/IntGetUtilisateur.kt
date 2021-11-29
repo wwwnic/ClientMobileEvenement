@@ -8,7 +8,7 @@ class IntGetUtilisateur(var _source : ISourceDeDonnées) {
         return _source.getUtilisateurParId(id)
     }
 
-    suspend fun getParNom(nom : String) : Utilisateur? {
-        TODO("Not yet implemented")
+    suspend fun getParNom(nom : String) : List<Utilisateur> {
+        return _source.getUtilisateursParNom(nom)
     }
 }

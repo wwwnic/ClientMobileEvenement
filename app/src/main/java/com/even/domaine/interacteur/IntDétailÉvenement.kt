@@ -9,8 +9,8 @@ import retrofit2.Response
 
 class IntDétailÉvenement(val api : ISourceDeDonnées) {
 
-    suspend fun getInfoÉvenement(id : Int) : Événement {
-        val reponseRequête = api.getEvenementParId(id)
+    suspend fun getInfoÉvenement(id : Int) : Événement? {
+        val reponseRequête = api.getÉvenementParId(id)
         return reponseRequête
     }
 

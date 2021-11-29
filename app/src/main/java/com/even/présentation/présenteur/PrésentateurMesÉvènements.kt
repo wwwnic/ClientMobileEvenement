@@ -5,6 +5,7 @@ import com.even.domaine.entité.Événement
 import com.even.présentation.modèle.ModèleConnexion
 import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.*
+import java.net.SocketTimeoutException
 
 class PrésentateurMesÉvènements(
     val vue: IMesÉvènements.IVue,
@@ -28,6 +29,21 @@ class PrésentateurMesÉvènements(
                 }
             } catch (e: Exception) {
                 Log.e("Évèn", "La requête a rencontré une erreur", e)
+                withContext(Dispatchers.Main) {
+                    vue.afficherAucunRésultatRecherche(estErreurConnexion = true)
+                }
+            }
+        }
+    }
+
+    override fun traiterRequêteAfficherÉvénement(idÉvénement: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                ModèleÉvénements.setÉvénementPrésenté(idÉvénement)
+                withContext(Dispatchers.Main) {
+                    vue.afficherÉvénementSelectionné()
+                }
+            } catch (e: SocketTimeoutException) {
                 withContext(Dispatchers.Main) {
                     vue.afficherAucunRésultatRecherche(estErreurConnexion = true)
                 }

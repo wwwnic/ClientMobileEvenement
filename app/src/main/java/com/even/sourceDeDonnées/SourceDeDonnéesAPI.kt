@@ -27,7 +27,6 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return liste
     }
 
-
     override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
         TODO("Not yet implemented")
     }
@@ -51,7 +50,7 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return liste
     }
 
-    override suspend fun getEvenementParId(id: Int): Événement {
+    override suspend fun getÉvenementParId(id: Int): Événement {
         var evenement: Événement? = null
 
         var reponseApi = apiService.getEvenementParId(id)
@@ -78,6 +77,14 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return newEvenement
     }
 
+    override suspend fun modifierEvenement(evenement: Événement): Response<Void> {
+        return apiService.updateEvenement(evenement = evenement)
+    }
+
+    override suspend fun supprimerEvenement(id: Int): Response<Void> {
+        return apiService.deleteEvenement(id)
+    }
+
     override suspend fun getUtilisateurParId(id: Int): Utilisateur? {
         var reponseApi = apiService.getUtilisateurParId(id)
         var utilisateur : Utilisateur? = null
@@ -85,6 +92,15 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
             utilisateur = reponseApi.body() as Utilisateur
         }
         return utilisateur
+    }
+
+    override suspend fun getUtilisateursParNom(nom: String): List<Utilisateur> {
+        var reponseApi = apiService.getUtilisateursParNom(nom)
+        var utilisateurs : List<Utilisateur> = ArrayList<Utilisateur>()
+        if (reponseApi.isSuccessful) {
+            utilisateurs = reponseApi.body() as List<Utilisateur>
+        }
+        return utilisateurs
     }
 
     override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
