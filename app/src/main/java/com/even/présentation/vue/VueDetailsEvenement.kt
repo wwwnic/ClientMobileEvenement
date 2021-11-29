@@ -49,7 +49,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     private fun clickListenerParticipation() {
 
         btnParticipation.setOnClickListener {
-
+            présentateur.traiterRequêteAjouterParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
         }
 
     }
@@ -58,9 +58,13 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
     }
 
+    override fun afficherToastParticipationAjouté() {
+        Toast.makeText(context, "Votre participation a été ajouté.", Toast.LENGTH_SHORT).show()
+    }
+
 
     override fun afficherToastParticipationRetiré() {
-        Toast.makeText(context, "Votre participation a été retiré", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Votre participation a été retiré.", Toast.LENGTH_SHORT).show()
     }
 
     override fun setInfo(evenement : Événement) {

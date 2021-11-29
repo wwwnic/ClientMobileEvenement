@@ -69,6 +69,14 @@ class ModèleÉvénements {
         return evenement
     }
 
+    suspend fun ajouterParticipation(utilisateurÉvénement: UtilisateurÉvénement): Response<Void> {
+        return IntDétailÉvenement(_source).ajouterParticipation(utilisateurÉvénement)
+    }
+
+    suspend fun retirerParticipation(utilisateurÉvénement: UtilisateurÉvénement): Response<Void> {
+        return IntDétailÉvenement(_source).retirerParticipation(utilisateurÉvénement)
+    }
+
 
     fun getImageÉvénement(id: Int): String {
         return _source.getImageEvenement(id)

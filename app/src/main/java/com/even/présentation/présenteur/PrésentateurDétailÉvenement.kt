@@ -22,12 +22,15 @@ class PrésentateurDétailÉvenement(
     private var coroutileDétailÉvenement: Job? = null
 
     private var participation : Boolean? = null
+
     var listeÉvénementsClient : List<Événement>? = null
     val idUtilisateurConnecté = ModèleConnexion.utilisateurConnecté?.idUtilisateur!!
 
     private val MSG_ECHEC = 0
     private val MSG_ANNULER = 1
     private val MSG_RÉUSSI_GET_INFO = 2
+    private val MSG_RÉUSSI_AJOUTER_PARTICIPATION = 3
+    private val MSG_RÉUSSI_RETIRER_PARTICIPATION = 4
 
     init {
         handlerRéponse = object : Handler(Looper.getMainLooper()) {

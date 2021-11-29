@@ -163,10 +163,6 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getEvenementParId(id: Int): Événement {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun ajouterParticipation(utilisateurÉvenement: UtilisateurÉvénement): Response<Void> {
         TODO("Not yet implemented")
     }

@@ -26,7 +26,6 @@ interface ISourceDeDonnées {
         location: String,
         organisateur: String
     ): List<Événement>
-    suspend fun getEvenementParId(id : Int): Événement
     suspend fun ajouterParticipation(utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>
     suspend fun retirerParticipation(utilisateurÉvenement: UtilisateurÉvénement) : Response<Void>
     fun getImageUtilisateur(id: Int): String
