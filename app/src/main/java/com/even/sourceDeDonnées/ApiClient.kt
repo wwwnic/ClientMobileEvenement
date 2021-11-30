@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
     private const val URL: String =
-        "http://192.168.50.164:23784/"
+        "http://192.168.0.107:44312/"
 
     private val gson: Gson by lazy {
         GsonBuilder().setLenient().create()
