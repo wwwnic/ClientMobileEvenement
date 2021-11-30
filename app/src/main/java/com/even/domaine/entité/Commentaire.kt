@@ -10,4 +10,5 @@ class Commentaire(
     val dateCommentaire : String,
     var texte : String
 ) {
+    var utilisateur : Utilisateur? = null
 }

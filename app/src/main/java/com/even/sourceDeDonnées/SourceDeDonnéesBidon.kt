@@ -17,8 +17,8 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     init {
         val util = Utilisateur(
             1,
-            "Bob",
-            "123",
+            "BobB",
+            "pw123",
             "bob@gmail.com",
             "(514)123-4567",
             SimpleDateFormat("yyyy.MM").format(Date())
@@ -27,7 +27,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         val util2 = Utilisateur(
             2,
             "Dude",
-            "456",
+            "4567",
             "dude@gmail.com",
             "(514)999-9999",
             SimpleDateFormat("yyyy.MM").format(Date())
@@ -36,7 +36,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         val util3 = Utilisateur(
             3,
             "Patrick",
-            "789",
+            "7891",
             "patrick@crosemont.qc.ca",
             "(514)111-1111",
             SimpleDateFormat("yyyy.MM").format(Date())

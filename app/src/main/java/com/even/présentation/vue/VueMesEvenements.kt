@@ -19,13 +19,16 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
     lateinit var fragmentLoader: FragmentLoader
     lateinit var présentateur: IMesÉvènements.IPrésentateur
     lateinit var composeView: ComposeView
+    lateinit var barreTab : TabLayout
+    lateinit var boutonCreer : Button
+
     private var estSurMesÉvènement = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
-        val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
-        val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
+        barreTab = view.findViewById(R.id.barreTabMesEvens)
+        boutonCreer = view.findViewById(R.id.boutonCreer)
         composeView = view.findViewById(R.id.mesEven_listeBlocsEven)
         présentateur = PrésentateurMesÉvènements(this)
         présentateur.traiterRequêtelancerCoroutine(false)
