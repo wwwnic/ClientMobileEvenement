@@ -29,7 +29,7 @@ fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl:
     Column(modifier = Modifier
         .clickable(onClick = clickEvent)
         .clip(RectangleShape)
-        .border(6.dp, figmaMauve, RoundedCornerShape(6.dp))
+        .border(4.dp, figmaMauve, RoundedCornerShape(6.dp))
         .padding(all = 8.dp)
         .fillMaxWidth()
         .height(300.dp)) {

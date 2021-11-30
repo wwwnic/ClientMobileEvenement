@@ -40,6 +40,7 @@
     <string name="login_completed">Vous êtes maintenant connecté</string>
     <string name="login_incompleted">Erreur de connexion, veuillez vérifier que les informations entrées sont les bonnes.</string>
     <string name="serveur_error">Un problème technique vous empêche de poursuivre</string>
+    <string name="no_comments">Il y a aucun commentaire pour cet événement</string>
     <string name="no_result">Aucun résultat...</string>
     <string name="not_going_to_any_event">Vous n\'avez pas annoncé votre participation à aucun évènement</string>
 </resources>

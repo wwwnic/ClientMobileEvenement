@@ -1,6 +1,7 @@
 package com.even.sourceDeDonnées
 
 import com.even.R
+import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
@@ -115,6 +116,10 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtilEven
     }
 
+    override suspend fun getUtilisateursDansEvenement(idEvenement: Int): List<Utilisateur> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun creerUtilisateur(utilisateur: Utilisateur): Response<Void> {
         TODO("Not yet implemented")
     }
@@ -160,6 +165,10 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         location: String,
         organisateur: String
     ): List<Événement> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCommentairesParEvenement(id: Int): List<Commentaire> {
         TODO("Not yet implemented")
     }
 

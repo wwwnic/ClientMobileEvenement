@@ -7,7 +7,7 @@ class Commentaire(
     val idEvenement : Int,
     val idUtilisateur : Int,
     @SerializedName("date")
-    val dateCommentaire : String,
+    var dateCommentaire : String,
     var texte : String
 ) {
     var utilisateur : Utilisateur? = null

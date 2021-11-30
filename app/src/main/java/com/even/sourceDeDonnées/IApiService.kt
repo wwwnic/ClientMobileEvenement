@@ -1,5 +1,6 @@
 package com.even.sourceDeDonnées
 
+import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
@@ -22,6 +23,9 @@ interface IApiService {
 
     @GET("api/Utilisateur/GetByName")
     suspend fun getUtilisateursParNom(@Query("name") nom : String): Response<List<Utilisateur>>
+
+    @GET("api/Utilisateur/GetByEvent")
+    suspend fun getUtilisateursDansEvenement(@Query("idEvenement")idEvenement : Int) : Response<List<Utilisateur>>
 
     @GET("api/Evenement/GetParRecherche")
     suspend fun getEvenementsParRecherche(
@@ -53,6 +57,9 @@ interface IApiService {
 
     @GET("/api/Evenement/GetById")
     suspend fun getEvenementParId(@Query("id") id : Int) : Response<Événement>
+
+    @GET("/api/Commentaire/GetByEvenement")
+    suspend fun getCommentairesParEvenement(@Query("id") id : Int) : Response<List<Commentaire>>
 
     @POST("/api/Utilisateur/addParticipation")
     suspend fun ajouterParticipation(@Body utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>

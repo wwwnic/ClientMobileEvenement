@@ -6,20 +6,28 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import coil.load
 import com.even.R
+import com.even.domaine.entité.Commentaire
+import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
 import com.even.domaine.interacteur.IntGetÉvènementParParticipant
 import com.even.présentation.modèle.ModèleÉvénements
 import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
+import com.even.ui.composants.ListeCarteCommentaires
+import com.even.ui.composants.ListeCarteUtilisateurs
+import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
 class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue{
 
     lateinit var imageEvent : ImageView
+    lateinit var imageOrganisateur : ImageView
     lateinit var texteNom : TextView
     lateinit var texteLocation : TextView
     lateinit var texteDate : TextView
@@ -41,6 +49,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
         barreTab = view.findViewById(R.id.barreTabDetailsEven)
         imageEvent = view.findViewById(R.id.detailEvenement_eventImage)
+        imageOrganisateur = view.findViewById(R.id.detailEvenement_organizerAvatar)
         texteNom = view.findViewById(R.id.detailEvenement_nameEvent)
         texteLocation = view.findViewById(R.id.detailEvenement_location)
         texteDate = view.findViewById(R.id.detailEvenement_date)
@@ -57,13 +66,14 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tab?.position == 0) {
                     setVisibilitéVues(false)
+                    présentateur.traiterRequêteAfficherDétailÉvenement(ModèleÉvénements.événementPrésenté!!.idEvenement)
                 } else if (tab?.position == 1) {
                     setVisibilitéVues(true)
+                    présentateur.traiterRequêteAfficherParticipants()
                 } else {
                     setVisibilitéVues(true)
+                    présentateur.traiterRequêteAfficherCommentaires()
                 }
-
-
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
@@ -94,7 +104,6 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     }
 
     private fun clickListenerParticipation() {
-
         btnParticipation.setOnClickListener {
             présentateur.traiterRequêteAjouterParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
         }
@@ -103,6 +112,10 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
     override fun afficherToastErreurServeur() {
         Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
+    }
+
+    override fun afficherToastAucunCommentaire() {
+        Toast.makeText(context, R.string.no_comments, Toast.LENGTH_LONG).show()
     }
 
     override fun afficherToastParticipationAjouté() {
@@ -115,11 +128,13 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     }
 
     override fun setInfo(evenement : Événement) {
-        texteNom?.text = evenement.nomEvenement
-        texteLocation?.text = evenement.location
-        texteDate?.text = evenement.date
-        texteOrganisateur?.text = evenement.organisateur?.nomUtilisateur
-        texteDescription?.text = evenement.description
+        texteNom.text = evenement.nomEvenement
+        texteLocation.text = evenement.location
+        texteDate.text = evenement.date
+        texteOrganisateur.text = evenement.organisateur?.nomUtilisateur
+        texteDescription.text = evenement.description
+        imageEvent.load(evenement.urlImage)
+        imageOrganisateur.load(evenement.organisateur!!.urlImage)
     }
 
     override fun afficherNePlusParticiper() {
@@ -128,6 +143,31 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
     override fun afficherParticipation() {
         btnParticipation.text = "Je participe"
+    }
+
+    override fun afficherListeParticipants(
+        participants: List<Utilisateur>,
+        imageUrl: (Int) -> String
+    ) {
+        if (participants.isNotEmpty()) {
+            listeComposables.setContent {
+                MaterialTheme {
+                    ListeCarteUtilisateurs(participants,
+                        imageUrl = { i -> imageUrl(i) }
+                    )
+                }
+            }
+        }
+    }
+
+    override fun afficherListeCommentaires(commentaires: List<Commentaire>) {
+        if (commentaires.isNotEmpty()) {
+            listeComposables.setContent {
+                MaterialTheme {
+                    ListeCarteCommentaires(commentaires = commentaires)
+                }
+            }
+        }
     }
 
 

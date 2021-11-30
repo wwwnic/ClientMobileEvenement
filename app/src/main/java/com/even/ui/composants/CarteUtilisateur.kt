@@ -28,7 +28,7 @@ fun CarteUtilisateur(utilisateur: Utilisateur, imageUrl: (Int) -> String) {
             .padding(all = 8.dp)
             .fillMaxWidth()
             .height(100.dp)
-            .border(6.dp, figmaMauve, CircleShape)
+            .border(4.dp, figmaMauve, CircleShape)
     ) {
         Column (
             Modifier

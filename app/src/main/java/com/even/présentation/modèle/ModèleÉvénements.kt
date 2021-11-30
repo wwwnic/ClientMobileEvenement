@@ -1,5 +1,6 @@
 package com.even.présentation.modèle
 
+import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import com.even.domaine.interacteur.*
@@ -17,6 +18,7 @@ class ModèleÉvénements {
         suspend fun setÉvénementPrésenté(id : Int) {
             var événement = IntGetÉvénement(_source).getÉvénementParId(id)
             événement!!.organisateur = IntGetUtilisateur(_source).getParId(événement.idOrganisateur)
+            événement.organisateur!!.urlImage = ModèleUtilisateurs().getImageUtilisateur(événement.organisateur!!.idUtilisateur!!)
             événement.date = événement.date.split("T").let { it[0] + " " + it[1] }
             événementPrésenté = événement
         }
@@ -77,6 +79,9 @@ class ModèleÉvénements {
         return IntDétailÉvenement(_source).retirerParticipation(utilisateurÉvénement)
     }
 
+    suspend fun getCommentairesDansÉvénement(id : Int) : List<Commentaire> {
+        return IntGetCommentaires(_source).getCommentairesParÉvénement(id)
+    }
 
     fun getImageÉvénement(id: Int): String {
         return _source.getImageEvenement(id)

@@ -9,4 +9,5 @@ class Événement(
     var description: String
 ) {
     var organisateur : Utilisateur? = null
+    var urlImage : String = ""
 }
