@@ -71,6 +71,10 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return liste
     }
 
+    override suspend fun creerCommentaire(commentaire: Commentaire): Response<Void> {
+        return apiService.creerCommentaire(commentaire)
+    }
+
     override suspend fun getÉvenementParId(id: Int): Événement {
         var evenement: Événement? = null
 

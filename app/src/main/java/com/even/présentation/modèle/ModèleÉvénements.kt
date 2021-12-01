@@ -83,6 +83,11 @@ class ModèleÉvénements {
         return IntGetCommentaires(_source).getCommentairesParÉvénement(id)
     }
 
+    suspend fun créerCommentaire(commentaire: Commentaire) : Response<Void>
+    {
+        return IntCreerCommentaire(_source = _source).CreerCommentaire(commentaire = commentaire)
+    }
+
     fun getImageÉvénement(id: Int): String {
         return _source.getImageEvenement(id)
     }

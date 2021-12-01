@@ -16,6 +16,7 @@ interface IDétailÉvenement {
         fun afficherParticipation()
         fun afficherListeParticipants(participants : List<Utilisateur>,imageUrl : (Int) -> String)
         fun afficherListeCommentaires(commentaires : List<Commentaire>)
+        fun afficherVueAjoutCommentaire()
     }
 
     interface IPrésentateur {

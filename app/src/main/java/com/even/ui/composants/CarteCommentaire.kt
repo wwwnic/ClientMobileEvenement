@@ -50,7 +50,8 @@ fun CarteCommentaire(commentaire: Commentaire) {
             Text(commentaire.utilisateur!!.nomUtilisateur,fontSize = 20.sp,
                 textAlign = TextAlign.Start,
                 fontWeight = FontWeight.Bold)
-            Text(commentaire.dateCommentaire,fontSize = 18.sp,
+            Text(
+                commentaire.dateCommentaire!!,fontSize = 18.sp,
                 fontStyle = FontStyle.Italic)
             Spacer(modifier = Modifier.width(4.dp))
             Surface(

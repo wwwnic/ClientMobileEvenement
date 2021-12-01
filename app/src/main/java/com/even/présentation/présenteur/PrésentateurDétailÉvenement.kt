@@ -166,11 +166,7 @@ class PrésentateurDétailÉvenement(
                 val idEvenement = ModèleÉvénements.événementPrésenté!!.idEvenement
                 liste = ModèleÉvénements().getCommentairesDansÉvénement(idEvenement)
                 withContext(Dispatchers.Main) {
-                    if (liste.isNotEmpty()) {
-                        vue.afficherListeCommentaires(liste)
-                    } else {
-                        vue.afficherToastAucunCommentaire()
-                    }
+                    vue.afficherListeCommentaires(liste)
                 }
             } catch (e: SocketTimeoutException) {
                 withContext(Dispatchers.Main) {

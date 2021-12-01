@@ -15,16 +15,17 @@ import com.even.R
 import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
-import com.even.domaine.interacteur.IntGetÉvènementParParticipant
 import com.even.présentation.modèle.ModèleÉvénements
 import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
+import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.ListeCarteCommentaires
 import com.even.ui.composants.ListeCarteUtilisateurs
-import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
 class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue{
+
+    lateinit var fragmentLoader: FragmentLoader
 
     lateinit var imageEvent : ImageView
     lateinit var imageOrganisateur : ImageView
@@ -35,6 +36,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     lateinit var texteDescription : TextView
     lateinit var texteParticipant : TextView
     lateinit var btnParticipation : Button
+    lateinit var btnAddCommentaire : Button
     lateinit var barreTab : TabLayout
     lateinit var groupeDetails : ConstraintLayout
     lateinit var groupeParticipation : ConstraintLayout
@@ -45,9 +47,12 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
+
         présentateur = PrésentateurDétailÉvenement(this)
 
         barreTab = view.findViewById(R.id.barreTabDetailsEven)
+
         imageEvent = view.findViewById(R.id.detailEvenement_eventImage)
         imageOrganisateur = view.findViewById(R.id.detailEvenement_organizerAvatar)
         texteNom = view.findViewById(R.id.detailEvenement_nameEvent)
@@ -57,6 +62,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         texteDescription = view.findViewById(R.id.detailEvenement_description)
         texteParticipant = view.findViewById(R.id.detailEvenement_nomber)
         btnParticipation = view.findViewById(R.id.detailEvenement_participation)
+        btnAddCommentaire = view.findViewById(R.id.detailEvenement_btnAddCommentaire)
 
         groupeDetails = view.findViewById(R.id.groupeDetails)
         groupeParticipation = view.findViewById(R.id.groupeParticipations)
@@ -64,14 +70,14 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                if (tab?.position == 0) {
-                    setVisibilitéVues(false)
+                if (tab.position == 0) {
+                    setVisibilitéVues("details")
                     présentateur.traiterRequêteAfficherDétailÉvenement(ModèleÉvénements.événementPrésenté!!.idEvenement)
-                } else if (tab?.position == 1) {
-                    setVisibilitéVues(true)
+                } else if (tab.position == 1) {
+                    setVisibilitéVues("participants")
                     présentateur.traiterRequêteAfficherParticipants()
                 } else {
-                    setVisibilitéVues(true)
+                    setVisibilitéVues("commentaires")
                     présentateur.traiterRequêteAfficherCommentaires()
                 }
             }
@@ -83,23 +89,27 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         présentateur.traiterRequêteAfficherDétailÉvenement(ModèleÉvénements.événementPrésenté!!.idEvenement)
 
         clickListenerParticipation()
+
+        btnAddCommentaire.setOnClickListener { afficherVueAjoutCommentaire() }
     }
 
-    private fun setVisibilitéVues(showComposables : Boolean) {
-        if (showComposables) {
-            groupeDetails.visibility = View.INVISIBLE
-            groupeParticipation.visibility = View.INVISIBLE
-            btnParticipation.visibility = View.INVISIBLE
-            imageEvent.visibility = View.INVISIBLE
-
-            listeComposables.visibility = View.VISIBLE
-        } else {
+    private fun setVisibilitéVues(pageÀgénérer : String) {
+        if (pageÀgénérer == "details") {
             groupeDetails.visibility = View.VISIBLE
             groupeParticipation.visibility = View.VISIBLE
             btnParticipation.visibility = View.VISIBLE
             imageEvent.visibility = View.VISIBLE
 
             listeComposables.visibility = View.INVISIBLE
+            btnAddCommentaire.visibility = View.INVISIBLE
+        } else {
+            groupeDetails.visibility = View.INVISIBLE
+            groupeParticipation.visibility = View.INVISIBLE
+            btnParticipation.visibility = View.INVISIBLE
+            imageEvent.visibility = View.INVISIBLE
+
+            listeComposables.visibility = View.VISIBLE
+            if (pageÀgénérer == "commentaires") btnAddCommentaire.visibility = View.VISIBLE else btnAddCommentaire.visibility = View.INVISIBLE
         }
     }
 
@@ -161,14 +171,15 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     }
 
     override fun afficherListeCommentaires(commentaires: List<Commentaire>) {
-        if (commentaires.isNotEmpty()) {
-            listeComposables.setContent {
-                MaterialTheme {
-                    ListeCarteCommentaires(commentaires = commentaires)
-                }
+        listeComposables.setContent {
+            MaterialTheme {
+                ListeCarteCommentaires(commentaires = commentaires)
             }
         }
+        if (commentaires.isEmpty()) afficherToastAucunCommentaire()
     }
 
-
+    override fun afficherVueAjoutCommentaire() {
+        fragmentLoader.loadFragment(VueCreationCommentaire())
+    }
 }

@@ -172,6 +172,10 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
+    override suspend fun creerCommentaire(commentaire: Commentaire): Response<Void> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun ajouterParticipation(utilisateurÉvenement: UtilisateurÉvénement): Response<Void> {
         TODO("Not yet implemented")
     }

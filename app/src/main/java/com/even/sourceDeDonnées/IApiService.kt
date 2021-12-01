@@ -41,8 +41,8 @@ interface IApiService {
     @PUT("api/Evenement/Update")
     suspend fun updateEvenement(@Body evenement: Événement): Response<Void>
 
-    @DELETE("delete/{id}/secret")
-    suspend fun deleteEvenement(@Path ("id")id : Int): Response<Void>
+    @DELETE("delete/secret")
+    suspend fun deleteEvenement(@Query ("id")id : Int): Response<Void>
 
     @POST("api/Utilisateur/Login")
     suspend fun demanderProfil(
@@ -60,6 +60,9 @@ interface IApiService {
 
     @GET("/api/Commentaire/GetByEvenement")
     suspend fun getCommentairesParEvenement(@Query("id") id : Int) : Response<List<Commentaire>>
+
+    @POST("api/Commentaire/New")
+    suspend fun creerCommentaire(@Body commentaire : Commentaire) : Response<Void>
 
     @POST("/api/Utilisateur/addParticipation")
     suspend fun ajouterParticipation(@Body utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>

@@ -29,6 +29,7 @@ interface ISourceDeDonnées {
         organisateur: String
     ): List<Événement>
     suspend fun getCommentairesParEvenement(id : Int) : List<Commentaire>
+    suspend fun creerCommentaire(commentaire: Commentaire) : Response<Void>
     suspend fun ajouterParticipation(utilisateurÉvenement : UtilisateurÉvénement) : Response<Void>
     suspend fun retirerParticipation(utilisateurÉvenement: UtilisateurÉvénement) : Response<Void>
     fun getImageUtilisateur(id: Int): String

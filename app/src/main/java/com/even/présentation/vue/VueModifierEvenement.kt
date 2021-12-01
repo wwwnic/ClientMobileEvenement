@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
 import com.even.présentation.présenteur.IModificationÉvénement
-import com.even.présentation.présenteur.PrésentateurCreation
 import com.even.présentation.présenteur.PrésentateurModification
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate

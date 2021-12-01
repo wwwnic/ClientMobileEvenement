@@ -9,7 +9,7 @@ class IntGetCommentaires(var _source : ISourceDeDonnées) {
         if (listeCommentaires.isNotEmpty()) {
             listeCommentaires.forEach { commentaire ->
                 commentaire.utilisateur = IntGetUtilisateur(_source).getParId(commentaire.idUtilisateur)
-                commentaire.dateCommentaire = commentaire.dateCommentaire.split("T").let { it[0] + " " + it[1] }
+                commentaire.dateCommentaire = commentaire.dateCommentaire!!.split("T").let { it[0] + " " + it[1] }
             }
         }
         return listeCommentaires
