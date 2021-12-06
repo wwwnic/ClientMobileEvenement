@@ -44,6 +44,9 @@ android {
     allOpen {
         annotation("com.even.testOuvert")
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {

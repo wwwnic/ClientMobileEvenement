@@ -5,12 +5,12 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import com.even.domaine.entité.ValidateurTextuel
-import com.even.présentation.modèle.ModèleEnregistrement
+import com.even.présentation.modèle.ModèleAuthentification
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
 class PrésentateurEnregistrement(
-    val vue: IEnregistrement.IVue, val modeleEnregistrement: ModèleEnregistrement, val validateur: ValidateurTextuel
+    val vue: IEnregistrement.IVue, val modeleAuthentification: ModèleAuthentification, val validateur: ValidateurTextuel
 ) : IEnregistrement.IPrésentateur {
     private val handlerRéponse: Handler
 
@@ -52,7 +52,7 @@ class PrésentateurEnregistrement(
         coroutileEnregistrement = CoroutineScope(Dispatchers.IO).launch {
             var msg: Message? = null
             try {
-                var reponseApi = ModèleEnregistrement().effectuerEnregistrement(
+                var reponseApi = modeleAuthentification.effectuerEnregistrement(
                     nomUsager.toString(),
                     motDePasse.toString(),
                     courriel.toString(),

@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
     private fun instancierLesModèles(source: ISourceDeDonnées) {
         ModèleUtilisateurs.setSource(source)
         ModèleÉvénements.setSource(source)
-        ModèleEnregistrement.setSource(source)
-        ModèleConnexion.setSource(source)
+        ModèleAuthentification.setSource(source)
     }
 
     //permet de fermer le drawer quand il est ouvert en appuyant sur back
