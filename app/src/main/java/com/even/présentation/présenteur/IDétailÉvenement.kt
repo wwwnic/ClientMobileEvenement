@@ -14,6 +14,7 @@ interface IDétailÉvenement {
         fun setInfo(evenement: Événement)
         fun afficherNePlusParticiper()
         fun afficherParticipation()
+        fun cacherBoutonParticipation()
         fun afficherListeParticipants(participants : List<Utilisateur>,imageUrl : (Int) -> String)
         fun afficherListeCommentaires(commentaires : List<Commentaire>)
         fun afficherVueAjoutCommentaire()

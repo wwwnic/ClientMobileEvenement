@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import coil.load
 import com.even.R
@@ -190,6 +191,10 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
     override fun afficherParticipation() {
         btnParticipation.text = "Je participe"
+    }
+
+    override fun cacherBoutonParticipation() {
+        btnParticipation.isVisible = false
     }
 
     override fun afficherListeParticipants(
