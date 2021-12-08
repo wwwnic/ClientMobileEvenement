@@ -12,17 +12,26 @@ import androidx.navigation.fragment.findNavController
 import com.even.R
 import com.even.domaine.entité.UnCoroutineDispatcher
 import com.even.domaine.entité.ValidateurTextuel
+import com.even.domaine.interacteur.IntConnexion
+import com.even.domaine.interacteur.IntEnregistrement
 import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.présenteur.IConnexion
 import com.even.présentation.présenteur.PrésentateurConnexion
+import com.even.sourceDeDonnées.ApiClient.apiService
+import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 
 class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
     lateinit var présentateurConnexion: IConnexion.IPrésentateur
-
+    val source = SourceDeDonnéesAPI(apiService)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        présentateurConnexion = PrésentateurConnexion(this, ModèleAuthentification(), ValidateurTextuel(), UnCoroutineDispatcher())
+        présentateurConnexion = PrésentateurConnexion(
+            this, ModèleAuthentification(
+                IntConnexion(source),
+                IntEnregistrement(source)
+            ), ValidateurTextuel(), UnCoroutineDispatcher()
+        )
         clickListenerBtnConnexion(view)
         clickListenerBtnCreerUnCompte(view)
     }
@@ -69,6 +78,7 @@ class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
             afficherEnRouge, R.id.connexion_textNomUtilisateur, R.id.connexion_hint_nomUtilisateur
         )
     }
+
     override fun afficherErreurMotDePasse(afficherEnRouge: Boolean) {
 
         changerCouleurValidation(
@@ -90,5 +100,4 @@ class VueConnexion : Fragment(R.layout.fragment_connexion), IConnexion.IVue {
         editText.setBackgroundResource(idArrièrePlan)
         textView.setTextColor(ContextCompat.getColor(requireContext(), idCouleur))
     }
-
 }

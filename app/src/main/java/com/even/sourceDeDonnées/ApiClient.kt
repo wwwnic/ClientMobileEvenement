@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
     private const val URL: String =
-        "http://192.168.50.164:23784/"
+        "http://140.82.8.101/"
 
     private val gson: Gson by lazy {
         GsonBuilder().setLenient().create()
@@ -17,8 +17,8 @@ object ApiClient {
 
     private val httpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
-            .connectTimeout(5,TimeUnit.SECONDS)
-            .readTimeout(5,TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
             .build()
     }
 

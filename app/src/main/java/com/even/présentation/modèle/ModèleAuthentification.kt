@@ -3,22 +3,20 @@ package com.even.présentation.modèle
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.interacteur.IntConnexion
 import com.even.domaine.interacteur.IntEnregistrement
-import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.testOuvert
 import retrofit2.Response
 
 @testOuvert
-class ModèleAuthentification() {
+class ModèleAuthentification(
+    val intConnexion: IntConnexion,
+    val intEregistrement: IntEnregistrement
+) {
 
     companion object {
         var utilisateurConnecté: Utilisateur? = null
-        lateinit var _source: ISourceDeDonnées
-        fun setSource(source: ISourceDeDonnées) {
-            _source = source
-        }
     }
 
-    fun ajouterUnUtilisateur(utilisateur: Utilisateur?){
+    fun ajouterUnUtilisateur(utilisateur: Utilisateur?) {
         utilisateurConnecté = utilisateur
     }
 
@@ -28,8 +26,7 @@ class ModèleAuthentification() {
     ): Utilisateur? {
         val identifiantUtilisateur = Utilisateur(nomUtilisateur.toString(), motDePasse.toString())
         val utilisateurRecuperé =
-            IntConnexion(_source).connexionDemanderProfil(identifiantUtilisateur)
-        utilisateurConnecté = utilisateurRecuperé
+            intConnexion.connexionDemanderProfil(identifiantUtilisateur)
         return utilisateurRecuperé
     }
 
@@ -39,7 +36,7 @@ class ModèleAuthentification() {
         courriel: CharSequence,
         telephone: CharSequence
     ): Response<Void> {
-        val reponseBodyRequête = IntEnregistrement(_source).enregisterNouvelUtilisateur(
+        val reponseBodyRequête = intEregistrement.enregisterNouvelUtilisateur(
             Utilisateur(
                 nomUsager.toString(),
                 motDePasse.toString(),
@@ -49,5 +46,4 @@ class ModèleAuthentification() {
         )
         return reponseBodyRequête
     }
-
 }

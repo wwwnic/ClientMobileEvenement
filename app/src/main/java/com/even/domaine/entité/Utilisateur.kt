@@ -21,12 +21,12 @@ data class Utilisateur(
         nomUtilisateur: String?,
         motDePasse: String?,
         courriel: String?,
-        telephone: String?,
+        telephone: String?
     ) : this(null, nomUtilisateur, motDePasse, courriel, telephone, null)
 
     constructor(
         nomUtilisateur: String?,
-        motDePasse: String?,
+        motDePasse: String?
     ) : this(null, nomUtilisateur, motDePasse, null, null, null)
 
 }

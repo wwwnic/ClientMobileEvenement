@@ -6,7 +6,9 @@ import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ApiClient.apiService
 import retrofit2.Response
 
-class SourceDeDonnéesAPI : ISourceDeDonnées {
+class SourceDeDonnéesAPI(val serviceApi: IApiService) : ISourceDeDonnées {
+    constructor() : this(apiService)
+
     override suspend fun getAllUtilisateurs(): List<Utilisateur> {
         var liste: List<Utilisateur> = ArrayList<Utilisateur>()
 
@@ -29,7 +31,7 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
 
     override suspend fun getEvenementParId(id: Int): Événement? {
         var reponseApi = apiService.getEvenementParId(id)
-        var événement : Événement? = null
+        var événement: Événement? = null
         if (reponseApi.isSuccessful) {
             événement = reponseApi.body() as Événement
         }
@@ -46,12 +48,16 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
     }
 
     override suspend fun demanderProfil(identifiantUtilisateur: Utilisateur): Utilisateur? {
-        var reponseApi = apiService.demanderProfil(identifiantUtilisateur)
-        return reponseApi.body()
+        return serviceApi.demanderProfil(identifiantUtilisateur).body()
     }
 
-    override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {
-        var liste : List<Événement> = ArrayList<Événement>()
+    override suspend fun getEvenementsParRecherche(
+        nom: String,
+        mois: String,
+        location: String,
+        organisateur: String
+    ): List<Événement> {
+        var liste: List<Événement> = ArrayList<Événement>()
 
         var reponseApi = apiService.getEvenementsParRecherche(nom, mois, location, organisateur)
         if (reponseApi.isSuccessful) {
@@ -60,9 +66,9 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return liste
     }
 
-    override suspend fun creerEvenement(evenement : Événement): Événement? {
+    override suspend fun creerEvenement(evenement: Événement): Événement? {
         var reponseApi = apiService.creerEvenement(evenement = evenement)
-        var newEvenement : Événement? = null
+        var newEvenement: Événement? = null
         if (reponseApi.isSuccessful) {
             newEvenement = reponseApi.body() as Événement
         }
@@ -79,7 +85,7 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
 
     override suspend fun getUtilisateurParId(id: Int): Utilisateur? {
         var reponseApi = apiService.getUtilisateurParId(id)
-        var utilisateur : Utilisateur? = null
+        var utilisateur: Utilisateur? = null
         if (reponseApi.isSuccessful) {
             utilisateur = reponseApi.body() as Utilisateur
         }
@@ -88,7 +94,7 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
 
     override suspend fun getUtilisateursParNom(nom: String): List<Utilisateur> {
         var reponseApi = apiService.getUtilisateursParNom(nom)
-        var utilisateurs : List<Utilisateur> = ArrayList<Utilisateur>()
+        var utilisateurs: List<Utilisateur> = ArrayList<Utilisateur>()
         if (reponseApi.isSuccessful) {
             utilisateurs = reponseApi.body() as List<Utilisateur>
         }
@@ -97,12 +103,13 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
 
     override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
         val reponseApi = apiService.getEvenementsParParticipation(id)
-        return if(reponseApi.isSuccessful) reponseApi.body()!! else listOf()
+        return if (reponseApi.isSuccessful) reponseApi.body()!! else listOf()
     }
 
     override suspend fun getEvenementsParOrganisateur(id: Int): List<Événement> {
         val reponseApi = apiService.getEvenementsParOrganisateur(id)
-        return if(reponseApi.isSuccessful) reponseApi.body()!! else listOf()    }
+        return if (reponseApi.isSuccessful) reponseApi.body()!! else listOf()
+    }
 
     override fun getImageUtilisateur(id: Int): String {
         return "http://10.0.0.149:23784/images/utilisateurs/${id}.jpg"
