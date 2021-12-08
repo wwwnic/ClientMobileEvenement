@@ -53,11 +53,13 @@ class PrésentateurDétailÉvenement(
                     participation = true
                     vue.afficherNePlusParticiper()
                     vue.afficherToastParticipationAjouté()
+                    vue.afficherApplicationCalendrierPourAjouter(setDatePourCalendrier())
 
                 } else if  (msg.what == MSG_RÉUSSI_RETIRER_PARTICIPATION) {
                     participation = false
                     vue.afficherParticipation()
                     vue.afficherToastParticipationRetiré()
+                    vue.afficherApplicationCalendrierPourEffacer(setDatePourCalendrier())
 
                 } else if (msg.what == MSG_ECHEC) {
                     vue.afficherToastErreurServeur()
@@ -189,6 +191,17 @@ class PrésentateurDétailÉvenement(
         } else {
             participation = false
         }
+    }
+
+    private fun setDatePourCalendrier() : IntArray {
+        val array = IntArray(5)
+        val date = evenementEnCours!!.date
+        array[0] = date.substring(0,4).toInt()
+        array[1] = date.substring(5,7).toInt()
+        array[2] = date.substring(8,10).toInt()
+        array[3] = date.substring(11,13).toInt()
+        array[4] = date.substring(14,16).toInt()
+        return array
     }
 
 }

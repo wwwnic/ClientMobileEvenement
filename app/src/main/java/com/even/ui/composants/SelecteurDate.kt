@@ -22,11 +22,9 @@ class SelecteurDate(texteDate : TextView,type : String) : DialogFragment(), Date
         var day = c.get(Calendar.DAY_OF_MONTH)
         if (!texteDate.text.isNullOrBlank()) {
             year = texteDate.text.substring(0,4).toInt()
-            var writtenMonth = texteDate.text.substring(5,7)
-            month = if (writtenMonth[0].equals("0")) writtenMonth[1].digitToInt() else writtenMonth.toInt()
+            month = texteDate.text.substring(5,7).toInt()
             if (type != "recherche") {
-                var writtenDay = texteDate.text.substring(8,10)
-                if (writtenDay.toInt() >= 10) day = writtenDay.toInt() else day = writtenDay[1].digitToInt()
+                day = texteDate.text.substring(8,10).toInt()
             }
         }
 

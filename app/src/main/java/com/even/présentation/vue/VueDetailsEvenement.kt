@@ -1,6 +1,11 @@
 package com.even.présentation.vue
 
+
+import android.content.ContentUris
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -22,6 +27,10 @@ import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.ListeCarteCommentaires
 import com.even.ui.composants.ListeCarteUtilisateurs
 import com.google.android.material.tabs.TabLayout
+import java.util.*
+
+
+
 
 class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue{
 
@@ -118,6 +127,34 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
             présentateur.traiterRequêteAjouterParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
         }
 
+    }
+
+    override fun afficherApplicationCalendrierPourAjouter(date : IntArray) {
+        val startMillis: Long = Calendar.getInstance().run {
+            set(date[0], date[1]-1, date[2], date[3], date[4])
+            timeInMillis
+        }
+        val intent = Intent(Intent.ACTION_INSERT)
+            .setData(CalendarContract.Events.CONTENT_URI)
+            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
+            .putExtra(CalendarContract.Events.TITLE, texteNom.text)
+            .putExtra(CalendarContract.Events.DESCRIPTION, texteDescription.text)
+            .putExtra(CalendarContract.Events.EVENT_LOCATION, texteLocation.text)
+            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+        startActivity(intent)
+    }
+
+    override fun afficherApplicationCalendrierPourEffacer(date : IntArray) {
+        val startMillis: Long = Calendar.getInstance().run {
+            set(date[0], date[1]-1, date[2], date[3], date[4])
+            timeInMillis
+        }
+        val builder: Uri.Builder = CalendarContract.CONTENT_URI.buildUpon()
+            .appendPath("time")
+        ContentUris.appendId(builder, startMillis)
+        val intent = Intent(Intent.ACTION_VIEW)
+            .setData(builder.build())
+        startActivity(intent)
     }
 
     override fun afficherToastErreurServeur() {
