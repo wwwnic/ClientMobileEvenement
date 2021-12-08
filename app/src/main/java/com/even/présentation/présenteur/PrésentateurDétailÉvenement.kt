@@ -144,8 +144,7 @@ class PrésentateurDétailÉvenement(
         var liste : List<Utilisateur> = ArrayList<Utilisateur>()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val idEvenement = ModèleÉvénements.événementPrésenté!!.idEvenement
-                liste = ModèleUtilisateurs().getUtilisateursDansÉvénement(idEvenement)
+                liste = ModèleUtilisateurs().getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement)
                 withContext(Dispatchers.Main) {
                     if (liste.isNotEmpty()) {
                         vue.afficherListeParticipants(liste,{ i -> ModèleUtilisateurs().getImageUtilisateur(i)})
