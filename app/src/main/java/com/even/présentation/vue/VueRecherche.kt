@@ -14,17 +14,17 @@ import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
 
-class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
+class VueRecherche : Fragment(R.layout.fragment_recherche), IRecherche.IVue {
 
-    lateinit var fragmentLoader : FragmentLoader
+    lateinit var fragmentLoader: FragmentLoader
 
-    lateinit var présentateur : IRecherche.IPrésentateur
+    lateinit var présentateur: IRecherche.IPrésentateur
 
-    lateinit var texteMotCle : EditText
-    lateinit var texteMois : TextView
-    lateinit var texteLocation : EditText
-    lateinit var texteOrganisateur : EditText
-    lateinit var boutonRechercher : Button
+    lateinit var texteMotCle: EditText
+    lateinit var texteMois: TextView
+    lateinit var texteLocation: EditText
+    lateinit var texteOrganisateur: EditText
+    lateinit var boutonRechercher: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,27 +38,29 @@ class VueRecherche : Fragment(R.layout.fragment_recherche),IRecherche.IVue {
         texteOrganisateur = view.findViewById(R.id.rechercher_par_organisateur)
 
         boutonRechercher = view.findViewById(R.id.rechercher_bouton_rechercher)
-        boutonRechercher.setOnClickListener { présentateur.traiterRequêteRechercheÉvénement(
-            texteMotCle.text.toString(),
-            texteMois.text.toString(),
-            texteLocation.text.toString(),
-            texteOrganisateur.text.toString()
-        ) }
+        boutonRechercher.setOnClickListener {
+            présentateur.traiterRequêteRechercheÉvénement(
+                texteMotCle.text.toString(),
+                texteMois.text.toString(),
+                texteLocation.text.toString(),
+                texteOrganisateur.text.toString()
+            )
+        }
 
         texteMois.setOnClickListener { afficherSelecteurDate() }
     }
 
-    override fun afficherRésultatsRecherche(tag : String) {
-        fragmentLoader.loadFragment(VueListeEvenement(),tag)
+    override fun afficherRésultatsRecherche(tag: String) {
+        fragmentLoader.loadFragment(VueListeEvenement(), tag)
     }
 
     private fun afficherSelecteurDate() {
-        val selecteur = SelecteurDate(texteDate = texteMois,"recherche")
-        selecteur.show(requireActivity().supportFragmentManager,null)
+        val selecteur = SelecteurDate(texteDate = texteMois, "recherche")
+        selecteur.show(requireActivity().supportFragmentManager, null)
     }
 
     override fun afficherMessageAucunMotCle() {
-        Toast.makeText(requireContext(),"Aucun mot-clé entré.",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Aucun mot-clé entré.", Toast.LENGTH_SHORT).show()
     }
 
 }

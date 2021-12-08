@@ -8,5 +8,6 @@ class Événement(
     var idOrganisateur: Int,
     var description: String
 ) {
-    var organisateur : Utilisateur? = null
+    var organisateur: Utilisateur? = null
+    var urlImage: String = ""
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PrésentateurCreation(
+class PrésentateurCreationÉvénement(
     val vue: ICreationEvenement.IVue
 ) : ICreationEvenement.IPrésentateur {
 
@@ -35,7 +35,7 @@ class PrésentateurCreation(
                 withContext(Dispatchers.Main) {
                     if (nouvelÉvénement != null) {
                         ModèleÉvénements.setÉvénementPrésenté(nouvelÉvénement!!.idEvenement)
-                        vue.afficherNouvelÉvénement()
+                        vue.afficherNouvelÉvénement(nouvelÉvénement!!)
                     } else {
                         vue.afficherErreurConnexion()
                     }

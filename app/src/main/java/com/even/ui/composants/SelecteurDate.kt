@@ -11,9 +11,11 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 
-class SelecteurDate(texteDate : TextView,type : String) : DialogFragment(), DatePickerDialog.OnDateSetListener {
+class SelecteurDate(texteDate: TextView, type: String) : DialogFragment(),
+    DatePickerDialog.OnDateSetListener {
     val texteDate = texteDate
     val type = type
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
@@ -21,19 +23,19 @@ class SelecteurDate(texteDate : TextView,type : String) : DialogFragment(), Date
         var month = c.get(Calendar.MONTH)
         var day = c.get(Calendar.DAY_OF_MONTH)
         if (!texteDate.text.isNullOrBlank()) {
-            year = texteDate.text.substring(0,4).toInt()
-            var writtenMonth = texteDate.text.substring(5,7)
-            month = if (writtenMonth[0].equals("0")) writtenMonth[1].digitToInt() else writtenMonth.toInt()
+            year = texteDate.text.substring(0, 4).toInt()
+            month = texteDate.text.substring(5, 7).toInt()
             if (type != "recherche") {
-                var writtenDay = texteDate.text.substring(8,10)
-                if (writtenDay.toInt() >= 10) day = writtenDay.toInt() else day = writtenDay[1].digitToInt()
+                day = texteDate.text.substring(8, 10).toInt()
             }
         }
 
         // https://stackoverflow.com/a/41348240/17406108
-        val dialog = DatePickerDialog(requireContext(),android.R.style.Theme_Holo_Dialog,this,year,
-            if (!texteDate.text.isNullOrBlank()) month-1 else month,
-            day)
+        val dialog = DatePickerDialog(
+            requireContext(), android.R.style.Theme_Holo_Dialog, this, year,
+            if (!texteDate.text.isNullOrBlank()) month - 1 else month,
+            day
+        )
         if (type == "recherche") {
             dialog.datePicker.findViewById<View>(resources.getIdentifier("day", "id", "android"))
                 .visibility = View.GONE
@@ -44,16 +46,16 @@ class SelecteurDate(texteDate : TextView,type : String) : DialogFragment(), Date
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        var moisFormaté : String = if(month+1<10) "0${month+1}" else "${month+1}"
+        var moisFormaté: String = if (month + 1 < 10) "0${month + 1}" else "${month + 1}"
         if (type != "recherche") {
             var jourFormaté: String = if (day < 10) "0${day}" else "${day}"
-            texteDate.setText("${year}-${moisFormaté}-${jourFormaté}")
+            texteDate.text = "${year}-${moisFormaté}-${jourFormaté}"
             SelecteurTemps(texteDate).show(
                 requireActivity().supportFragmentManager,
                 "selecteurTemps"
             )
         } else {
-            texteDate.setText("${year}-${moisFormaté}")
+            texteDate.text = "${year}-${moisFormaté}"
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.even.présentation.présenteur
 
+import com.even.domaine.entité.Événement
+
 interface ICreationEvenement {
     interface IVue {
-        fun afficherNouvelÉvénement()
+        fun afficherNouvelÉvénement(evenement : Événement)
         fun afficherErreurConnexion()
     }
 

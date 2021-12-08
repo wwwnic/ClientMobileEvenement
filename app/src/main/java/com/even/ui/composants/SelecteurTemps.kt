@@ -11,7 +11,7 @@ import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 
-class SelecteurTemps(texteDate : TextView) : DialogFragment(), TimePickerDialog.OnTimeSetListener {
+class SelecteurTemps(texteDate: TextView) : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     var texteDate = texteDate
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -20,7 +20,14 @@ class SelecteurTemps(texteDate : TextView) : DialogFragment(), TimePickerDialog.
         var hour = c.get(Calendar.HOUR_OF_DAY)
         var minute = c.get(Calendar.MINUTE)
 
-        val dialog = TimePickerDialog(requireContext(), android.R.style.Theme_Holo_Dialog,this,hour,minute,true)
+        val dialog = TimePickerDialog(
+            requireContext(),
+            android.R.style.Theme_Holo_Dialog,
+            this,
+            hour,
+            minute,
+            true
+        )
         return dialog
     }
 

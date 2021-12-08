@@ -2,6 +2,7 @@ package com.even.présentation.modèle
 
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.interacteur.IntGetAllUtilisateurs
+import com.even.domaine.interacteur.IntGetUtilisateursDansÉvénement
 import com.even.sourceDeDonnées.ISourceDeDonnées
 
 class ModèleUtilisateurs {
@@ -17,14 +18,9 @@ class ModèleUtilisateurs {
         return IntGetAllUtilisateurs(_source).getAllUtilisateurs()
     }
 
-    /*fun getUtilisateursDansÉvénement(événement : Événement) : List<Utilisateur> {
-        var listeUtilEven = IntGetUtilisateursDansÉvénement(source).getUtilisateursDansÉvénement()
-        var listeUtil = ArrayList<Utilisateur>()
-        listeUtilEven.filter { it.idEvenement == événement.idEvenement}.forEach { li ->
-            listeUtil.add(Utilisateurs.filter { it.idUtilisateur == li.idUtilisateur }.first())
-        }
-        return listeUtil
-    }*/
+    suspend fun getUtilisateursDansÉvénement(idÉvénement : Int) : List<Utilisateur> {
+        return IntGetUtilisateursDansÉvénement(_source).getUtilisateursDansÉvénement(idÉvénement)
+    }
 
     fun getImageUtilisateur(id : Int) : String {
         return _source.getImageUtilisateur(id)
