@@ -17,6 +17,8 @@ interface IDétailÉvenement {
         fun afficherListeParticipants(participants : List<Utilisateur>,imageUrl : (Int) -> String)
         fun afficherListeCommentaires(commentaires : List<Commentaire>)
         fun afficherVueAjoutCommentaire()
+        fun afficherApplicationCalendrierPourAjouter(date : IntArray)
+        fun afficherApplicationCalendrierPourEffacer(date : IntArray)
     }
 
     interface IPrésentateur {

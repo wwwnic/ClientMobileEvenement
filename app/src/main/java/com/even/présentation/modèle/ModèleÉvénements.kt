@@ -19,7 +19,7 @@ class ModèleÉvénements {
             var événement = IntGetÉvénement(_source).getÉvénementParId(id)
             événement!!.organisateur = IntGetUtilisateur(_source).getParId(événement.idOrganisateur)
             événement.organisateur!!.urlImage = ModèleUtilisateurs().getImageUtilisateur(événement.organisateur!!.idUtilisateur!!)
-            événement.date = événement.date.split("T").let { it[0] + " " + it[1] }
+            événement.date = événement.date.split("T").let { it[0] + " " + it[1] }.substring(0,16)
             événementPrésenté = événement
         }
     }

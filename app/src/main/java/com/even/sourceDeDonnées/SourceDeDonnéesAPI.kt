@@ -138,10 +138,10 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         return if(reponseApi.isSuccessful) reponseApi.body()!! else listOf()    }
 
     override fun getImageUtilisateur(id: Int): String {
-        return "http://10.0.0.149:23784/images/utilisateurs/${id}.jpg"
+        return "http://140.82.8.101/images/utilisateurs/${id}.jpg"
     }
 
     override fun getImageEvenement(id: Int): String {
-        return "http://10.0.0.149:23784/images/evenements/${id}.jpg"
+        return "http://140.82.8.101/images/evenements/${id}.jpg"
     }
 }

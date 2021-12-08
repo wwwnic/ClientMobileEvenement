@@ -105,6 +105,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     }
 
     override suspend fun getÉvenementParId(id: Int): Événement? {
+        resetEvenements()
         return listeEvens.filter { u -> u.idEvenement == id }[0]
     }
 

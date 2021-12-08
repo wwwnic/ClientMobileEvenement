@@ -27,7 +27,7 @@ class PrésentateurModification(
                 val reponse = ModèleÉvénements().modifierÉvénement(événementModifié)
                 withContext(Dispatchers.Main) {
                     if (reponse.isSuccessful) {
-                        ModèleÉvénements.événementPrésenté = événementModifié
+                        ModèleÉvénements.setÉvénementPrésenté(événementModifié.idEvenement)
                         vue.afficherÉvénementModifiéOuRetourMenu(true)
                     } else {
                         vue.afficherErreurConnexion()
