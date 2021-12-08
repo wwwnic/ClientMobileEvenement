@@ -1,5 +1,6 @@
 package com.even.sourceDeDonnées
 
+import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
@@ -31,6 +32,16 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getUtilisateursDansEvenement(idEvenement: Int): List<Utilisateur> {
+        var liste: List<Utilisateur> = ArrayList<Utilisateur>()
+
+        var reponseApi = apiService.getUtilisateursDansEvenement(idEvenement = idEvenement)
+        if (reponseApi.isSuccessful) {
+            liste = reponseApi.body() as List<Utilisateur>
+        }
+        return liste
+    }
+
     override suspend fun creerUtilisateur(utilisateur: Utilisateur): Response<Void> {
         return apiService.creerUtilisateur(utilisateur)
     }
@@ -48,6 +59,20 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
             liste = reponseApi.body() as List<Événement>
         }
         return liste
+    }
+
+    override suspend fun getCommentairesParEvenement(id: Int): List<Commentaire> {
+        var liste : List<Commentaire> = ArrayList<Commentaire>()
+
+        var reponseApi = apiService.getCommentairesParEvenement(id)
+        if (reponseApi.isSuccessful) {
+            liste = reponseApi.body() as List<Commentaire>
+        }
+        return liste
+    }
+
+    override suspend fun creerCommentaire(commentaire: Commentaire): Response<Void> {
+        return apiService.creerCommentaire(commentaire)
     }
 
     override suspend fun getÉvenementParId(id: Int): Événement {

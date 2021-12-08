@@ -8,6 +8,8 @@ data class Utilisateur(
     var telephone: String?,
     var dateCreation: String?
 ) {
+    var urlImage : String = ""
+
     constructor(
         nomUtilisateur: String,
         motDePasse: String,

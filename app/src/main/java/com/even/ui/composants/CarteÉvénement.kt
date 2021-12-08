@@ -2,10 +2,12 @@ package com.even.ui.composants
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,21 +20,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.even.domaine.entité.Événement
+
 //TODO: string.xml getString(id)
+
 @Composable
 fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl: (Int) -> String) {
     var urlImg = imageUrl(événement.idEvenement)
     Column(modifier = Modifier
         .clickable(onClick = clickEvent)
         .clip(RectangleShape)
+        .border(4.dp, figmaMauve, RoundedCornerShape(6.dp))
         .padding(all = 8.dp)
         .fillMaxWidth()
         .height(300.dp)) {
         Row(modifier = Modifier
             .height(150.dp)
             .fillMaxWidth()
-            .clip(RectangleShape)
-            .background(MaterialTheme.colors.primaryVariant)) {
+            .clip(RectangleShape)) {
             Image(
                 painter = rememberImagePainter(if(urlImg.contains("http")) urlImg else urlImg.toInt()),
                 contentDescription = "Image",

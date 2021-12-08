@@ -1,140 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.even.présentation.vue.VueDetailsEvenement" >
+    android:layoutMode="opticalBounds">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.even.présentation.vue.VueDetailsEvenement">
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/listeComposablesDetails"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barreTabDetailsEven">
+
+        </androidx.compose.ui.platform.ComposeView>
 
         <ImageView
             android:id="@+id/detailEvenement_eventImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="154dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="154dp"
+            android:layout_marginBottom="52dp"
+            app:layout_constraintBottom_toTopOf="@+id/groupeDetails"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barreTabDetailsEven"
+            tools:src="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/detailEvenement_btnAddCommentaire"
+            android:layout_width="65dp"
+            android:layout_height="71dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="+"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/barreTabDetailsEven"
+            android:layout_width="413dp"
+            android:layout_height="65dp"
+            android:background="@color/figmaMauve"
+            android:layoutMode="opticalBounds"
+            android:paddingRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:tabGravity="center"
+            app:tabIconTint="@color/white"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="5dp"
+            app:tabMaxWidth="200dp"
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="16dp"
+            app:tabPaddingStart="16dp"
+            app:tabTextColor="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout14">
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabInfos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Infos" />
 
-        <TextView
-            android:id="@+id/detailEvenement_nameEvent"
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Participants" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabCommentaires"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Commentaires"
+                android:textAlignment="center" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/groupeDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nameEvent"
-            android:textColor="@color/black"
-            android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/detailEvenement_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/location"
-            android:textColor="@color/black"
-            android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_nameEvent" />
-
-        <TextView
-            android:id="@+id/detailEvenement_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date"
-            android:textColor="@color/black"
-            android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_location" />
-
-        <ImageView
-            android:id="@+id/detailEvenement_organizerAvatar"
-            android:layout_width="86dp"
-            android:layout_height="85dp"
-            android:layout_marginTop="52dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_location"
-            tools:src="@tools:sample/avatars"
-            android:contentDescription="TODO" />
-
-        <TextView
-            android:id="@+id/detailEvenement_organizer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/organizer"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/detailEvenement_organizerAvatar"
-            app:layout_constraintTop_toTopOf="@+id/detailEvenement_organizerAvatar" />
-
-        <TextView
-            android:id="@+id/detailEvenement_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/description"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_organizerAvatar" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout19">
-
-        <TextView
-            android:id="@+id/detailEvenement_nomber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/number"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_eventImage">
 
-        <TextView
-            android:id="@+id/detailEvenement_participant"
+            <TextView
+                android:id="@+id/detailEvenement_nameEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nameEvent"
+                android:textColor="@color/black"
+                android:textSize="34sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detailEvenement_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location"
+                android:textColor="@color/black"
+                android:textSize="34sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailEvenement_nameEvent" />
+
+            <TextView
+                android:id="@+id/detailEvenement_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textColor="@color/black"
+                android:textSize="34sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailEvenement_location" />
+
+            <ImageView
+                android:id="@+id/detailEvenement_organizerAvatar"
+                android:layout_width="86dp"
+                android:layout_height="85dp"
+                android:layout_marginTop="52dp"
+                android:contentDescription="TODO"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailEvenement_location"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/detailEvenement_organizer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/organizer"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/detailEvenement_organizerAvatar"
+                app:layout_constraintTop_toTopOf="@+id/detailEvenement_organizerAvatar" />
+
+            <TextView
+                android:id="@+id/detailEvenement_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/description"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailEvenement_organizerAvatar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/groupeParticipations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/participant"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:layout_marginEnd="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupeDetails">
+
+            <TextView
+                android:id="@+id/detailEvenement_nomber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detailEvenement_participant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/participant"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailEvenement_nomber" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/detailEvenement_participation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:text="@string/participation"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailEvenement_nomber" />
+            app:layout_constraintTop_toBottomOf="@+id/groupeDetails" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/detailEvenement_participation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:text="@string/participation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

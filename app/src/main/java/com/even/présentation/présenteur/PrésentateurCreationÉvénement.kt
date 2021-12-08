@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PrésentateurCreation(
+class PrésentateurCreationÉvénement(
     val vue: ICreationEvenement.IVue
 ) : ICreationEvenement.IPrésentateur {
 

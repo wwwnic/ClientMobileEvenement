@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
     private const val URL: String =
-        "http://192.168.0.107:44312/"
+        //"http://192.168.0.107:44312/"
+        "http://10.0.0.149:23784/"
 
     private val gson: Gson by lazy {
         GsonBuilder().setLenient().create()
@@ -19,7 +20,11 @@ object ApiClient {
         OkHttpClient.Builder()
             .connectTimeout(5,TimeUnit.SECONDS)
             .readTimeout(5,TimeUnit.SECONDS)
-            .build()
+            //https://stackoverflow.com/questions/41078866/retrofit2-authorization-global-interceptor-for-access-token
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder().addHeader("ApiKey","e159d3d9-cbfe-44c4-8699-c75c8ae30cc9").build()
+                chain.proceed(request = request)
+            }.build()
     }
 
     private val retrofit: Retrofit by lazy {

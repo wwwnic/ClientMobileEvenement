@@ -19,13 +19,24 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
     lateinit var fragmentLoader: FragmentLoader
     lateinit var présentateur: IMesÉvènements.IPrésentateur
     lateinit var composeView: ComposeView
+    lateinit var barreTab : TabLayout
+    lateinit var boutonCreer : Button
+    lateinit var chargement : ProgressBar
+    lateinit var emojiTriste : ImageView
+    lateinit var textErreur : TextView
+
     private var estSurMesÉvènement = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
-        val barreTab = view.findViewById<TabLayout>(R.id.barreTabMesEvens)
-        val boutonCreer = view.findViewById<Button>(R.id.boutonCreer)
+
+        chargement = view.findViewById(R.id.mesEvenement_chargement)
+        emojiTriste = view.findViewById(R.id.mesEvenement_imageErreur)
+        textErreur = view.findViewById(R.id.mesEvenement_textErreur)
+
+        barreTab = view.findViewById(R.id.barreTabMesEvens)
+        boutonCreer = view.findViewById(R.id.boutonCreer)
         composeView = view.findViewById(R.id.mesEven_listeBlocsEven)
         présentateur = PrésentateurMesÉvènements(this)
         présentateur.traiterRequêtelancerCoroutine(false)
@@ -81,10 +92,6 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
     }
 
     override fun afficherAucunRésultatRecherche(estErreurConnexion: Boolean) {
-        val vue = requireView()
-        val chargement = vue.findViewById<ProgressBar>(R.id.mesEvenement_chargement)
-        val emojiTriste = vue.findViewById<ImageView>(R.id.mesEvenement_imageErreur)
-        val textErreur = vue.findViewById<TextView>(R.id.mesEvenement_textErreur)
         chargement.visibility = View.INVISIBLE
         emojiTriste.visibility = View.VISIBLE
         textErreur.text =

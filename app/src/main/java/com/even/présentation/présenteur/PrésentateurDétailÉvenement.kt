@@ -4,20 +4,24 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Log
+import com.even.domaine.entité.Commentaire
+import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import com.even.présentation.modèle.ModèleConnexion
+import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 class PrésentateurDétailÉvenement(
     var vue: IDétailÉvenement.IVue,
 ) : IDétailÉvenement.IPrésentateur {
     private val handlerRéponse: Handler
 
-    private var evenementEnCours: Événement? = null
+    private var evenementEnCours: Événement? = ModèleÉvénements.événementPrésenté
 
     private var coroutileDétailÉvenement: Job? = null
 
@@ -39,7 +43,6 @@ class PrésentateurDétailÉvenement(
 
                 if (msg.what == MSG_RÉUSSI_GET_INFO) {
                     vue.setInfo(evenementEnCours!!)
-
                     if (participation == true) {
                         vue.afficherNePlusParticiper()
                     } else {
@@ -76,7 +79,8 @@ class PrésentateurDétailÉvenement(
         coroutileDétailÉvenement = CoroutineScope(Dispatchers.IO).launch {
             var msg: Message?
             try {
-                evenementEnCours = ModèleÉvénements().allerChercherInfoÉvenement(idEvenement)
+                evenementEnCours!!.urlImage = ModèleÉvénements().getImageÉvénement(evenementEnCours!!.idEvenement)
+
                 listeÉvénementsClient = ModèleÉvénements().demanderLesParticipations(idUtilisateurConnecté)
 
                 withContext(Dispatchers.Main) {
@@ -131,6 +135,44 @@ class PrésentateurDétailÉvenement(
                 }
             }
             handlerRéponse.sendMessage(msg!!)
+        }
+    }
+
+    override fun traiterRequêteAfficherParticipants() {
+        var liste : List<Utilisateur> = ArrayList<Utilisateur>()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val idEvenement = ModèleÉvénements.événementPrésenté!!.idEvenement
+                liste = ModèleUtilisateurs().getUtilisateursDansÉvénement(idEvenement)
+                withContext(Dispatchers.Main) {
+                    if (liste.isNotEmpty()) {
+                        vue.afficherListeParticipants(liste,{ i -> ModèleUtilisateurs().getImageUtilisateur(i)})
+                    } else {
+                        vue.afficherToastErreurServeur()
+                    }
+                }
+            } catch (e: SocketTimeoutException) {
+                withContext(Dispatchers.Main) {
+                    vue.afficherToastErreurServeur()
+                }
+            }
+        }
+    }
+
+    override fun traiterRequêteAfficherCommentaires() {
+        var liste : List<Commentaire> = ArrayList<Commentaire>()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val idEvenement = ModèleÉvénements.événementPrésenté!!.idEvenement
+                liste = ModèleÉvénements().getCommentairesDansÉvénement(idEvenement)
+                withContext(Dispatchers.Main) {
+                    vue.afficherListeCommentaires(liste)
+                }
+            } catch (e: SocketTimeoutException) {
+                withContext(Dispatchers.Main) {
+                    vue.afficherToastErreurServeur()
+                }
+            }
         }
     }
 

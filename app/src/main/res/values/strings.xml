@@ -13,7 +13,10 @@
     <string name="date">Date</string>
     <string name="location">Location</string>
     <string name="description">Description</string>
+    <string name="addCommentLabel">Commentaire</string>
+    <string name="addCommentButton">Ajouter commentaire</string>
     <string name="create">Créer</string>
+    <string name="commentCreated">Commentaire ajouté avec succès</string>
     <string name="save">Enregistrer</string>
     <string name="cancelEvent">Annuler l\'évènement</string>
     <string name="iconMenuRecent">Recent events</string>
@@ -40,6 +43,7 @@
     <string name="login_completed">Vous êtes maintenant connecté</string>
     <string name="login_incompleted">Erreur de connexion, veuillez vérifier que les informations entrées sont les bonnes.</string>
     <string name="serveur_error">Un problème technique vous empêche de poursuivre</string>
+    <string name="no_comments">Il y a aucun commentaire pour cet événement</string>
     <string name="no_result">Aucun résultat...</string>
     <string name="not_going_to_any_event">Vous n\'avez pas annoncé votre participation à aucun évènement</string>
 </resources>

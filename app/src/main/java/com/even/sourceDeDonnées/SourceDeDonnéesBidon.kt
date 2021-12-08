@@ -1,6 +1,7 @@
 package com.even.sourceDeDonnées
 
 import com.even.R
+import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
@@ -17,8 +18,8 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     init {
         val util = Utilisateur(
             1,
-            "Bob",
-            "123",
+            "BobB",
+            "pw123",
             "bob@gmail.com",
             "(514)123-4567",
             SimpleDateFormat("yyyy.MM").format(Date())
@@ -27,7 +28,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         val util2 = Utilisateur(
             2,
             "Dude",
-            "456",
+            "4567",
             "dude@gmail.com",
             "(514)999-9999",
             SimpleDateFormat("yyyy.MM").format(Date())
@@ -36,7 +37,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         val util3 = Utilisateur(
             3,
             "Patrick",
-            "789",
+            "7891",
             "patrick@crosemont.qc.ca",
             "(514)111-1111",
             SimpleDateFormat("yyyy.MM").format(Date())
@@ -115,6 +116,10 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtilEven
     }
 
+    override suspend fun getUtilisateursDansEvenement(idEvenement: Int): List<Utilisateur> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun creerUtilisateur(utilisateur: Utilisateur): Response<Void> {
         TODO("Not yet implemented")
     }
@@ -160,6 +165,14 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         location: String,
         organisateur: String
     ): List<Événement> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCommentairesParEvenement(id: Int): List<Commentaire> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun creerCommentaire(commentaire: Commentaire): Response<Void> {
         TODO("Not yet implemented")
     }
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
 import com.even.présentation.présenteur.ICreationEvenement
-import com.even.présentation.présenteur.PrésentateurCreation
+import com.even.présentation.présenteur.PrésentateurCreationÉvénement
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
@@ -20,7 +20,7 @@ class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
 
     lateinit var fragmentLoader: FragmentLoader
 
-    lateinit var présentateur: PrésentateurCreation
+    lateinit var présentateur: PrésentateurCreationÉvénement
 
     lateinit var texteNom: EditText
     lateinit var texteDate: TextView
@@ -32,7 +32,7 @@ class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
         super.onViewCreated(view, savedInstanceState)
         fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
 
-        présentateur = PrésentateurCreation(this)
+        présentateur = PrésentateurCreationÉvénement(this)
 
         texteNom = view.findViewById(R.id.creer_evenement_nom)
         texteDate = view.findViewById(R.id.creer_evenement_date)
@@ -59,7 +59,7 @@ class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
 
 
     override fun afficherNouvelÉvénement(evenement : Événement) {
-        fragmentLoader.loadFragment(VueDetailsEvenement(), evenement.idEvenement.toString())
+        fragmentLoader.loadFragment(VueDetailsEvenement())
     }
 
     override fun afficherErreurConnexion() {
