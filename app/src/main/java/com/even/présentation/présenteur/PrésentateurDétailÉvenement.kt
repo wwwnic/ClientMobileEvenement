@@ -43,8 +43,13 @@ class PrésentateurDétailÉvenement(
 
                 if (msg.what == MSG_RÉUSSI_GET_INFO) {
                     vue.setInfo(evenementEnCours!!)
-                    if (participation == true) {
+
+                    if (evenementEnCours!!.idOrganisateur == idUtilisateurConnecté) {
+                        vue.cacherBoutonParticipation()
+
+                    } else if (participation == true) {
                         vue.afficherNePlusParticiper()
+
                     } else {
                         vue.afficherParticipation()
                     }
