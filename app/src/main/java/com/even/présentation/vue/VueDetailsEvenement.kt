@@ -185,6 +185,10 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         imageOrganisateur.load(evenement.organisateur!!.urlImage)
     }
 
+    override fun setNombreParticipant(nombreParticipant: Int) {
+        texteParticipant.text = nombreParticipant.toString()
+    }
+
     override fun afficherNePlusParticiper() {
         btnParticipation.text = "Je ne participe pas"
     }
