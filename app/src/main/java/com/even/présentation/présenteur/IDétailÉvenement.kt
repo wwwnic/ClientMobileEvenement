@@ -3,6 +3,7 @@ package com.even.présentation.présenteur
 import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
+import com.even.domaine.interacteur.IntGetÉvènementParParticipant
 
 interface IDétailÉvenement {
 
@@ -12,6 +13,7 @@ interface IDétailÉvenement {
         fun afficherToastParticipationAjouté()
         fun afficherToastParticipationRetiré()
         fun setInfo(evenement: Événement)
+        fun setNombreParticipant(nombreParticipant: Int)
         fun afficherNePlusParticiper()
         fun afficherParticipation()
         fun cacherBoutonParticipation()

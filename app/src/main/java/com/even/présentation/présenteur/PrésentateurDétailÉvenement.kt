@@ -29,6 +29,7 @@ class PrésentateurDétailÉvenement(
 
     var listeÉvénementsClient : List<Événement>? = null
     val idUtilisateurConnecté = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
+    var nombreParticipant = 0
 
     private val MSG_ECHEC = 0
     private val MSG_ANNULER = 1
@@ -43,6 +44,7 @@ class PrésentateurDétailÉvenement(
 
                 if (msg.what == MSG_RÉUSSI_GET_INFO) {
                     vue.setInfo(evenementEnCours!!)
+                    vue.setNombreParticipant(nombreParticipant)
 
                     if (evenementEnCours!!.idOrganisateur == idUtilisateurConnecté) {
                         vue.cacherBoutonParticipation()
@@ -90,9 +92,11 @@ class PrésentateurDétailÉvenement(
 
                 listeÉvénementsClient = ModèleÉvénements().demanderLesParticipations(idUtilisateurConnecté)
 
+                nombreParticipant = ModèleUtilisateurs().getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement).count()
+
                 withContext(Dispatchers.Main) {
                     vérifierParticipation()
-                    if (evenementEnCours != null && participation != null) {
+                    if (evenementEnCours != null && participation != null && nombreParticipant != 0) {
                         msg = handlerRéponse.obtainMessage(MSG_RÉUSSI_GET_INFO)
                     } else {
                         msg = handlerRéponse.obtainMessage(MSG_ECHEC)
