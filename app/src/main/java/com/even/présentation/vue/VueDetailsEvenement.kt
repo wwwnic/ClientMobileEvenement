@@ -130,6 +130,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
     }
 
+    // https://developer.android.com/guide/topics/providers/calendar-provider#intents
     override fun afficherApplicationCalendrierPourAjouter(date : IntArray) {
         val startMillis: Long = Calendar.getInstance().run {
             set(date[0], date[1]-1, date[2], date[3], date[4])
@@ -145,6 +146,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         startActivity(intent)
     }
 
+    // https://developer.android.com/guide/topics/providers/calendar-provider#intents
     override fun afficherApplicationCalendrierPourEffacer(date : IntArray) {
         val startMillis: Long = Calendar.getInstance().run {
             set(date[0], date[1]-1, date[2], date[3], date[4])
