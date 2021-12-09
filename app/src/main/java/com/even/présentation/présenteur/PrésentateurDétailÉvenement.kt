@@ -8,7 +8,7 @@ import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleConnexion
+import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.*
@@ -28,7 +28,7 @@ class PrésentateurDétailÉvenement(
     private var participation : Boolean? = null
 
     var listeÉvénementsClient : List<Événement>? = null
-    val idUtilisateurConnecté = ModèleConnexion.utilisateurConnecté?.idUtilisateur!!
+    val idUtilisateurConnecté = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
 
     private val MSG_ECHEC = 0
     private val MSG_ANNULER = 1

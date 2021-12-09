@@ -7,7 +7,9 @@ import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ApiClient.apiService
 import retrofit2.Response
 
-class SourceDeDonnéesAPI : ISourceDeDonnées {
+class SourceDeDonnéesAPI(val serviceApi: IApiService ) : ISourceDeDonnées {
+    constructor() : this(apiService)
+
     override suspend fun getAllUtilisateurs(): List<Utilisateur> {
         var liste: List<Utilisateur> = ArrayList<Utilisateur>()
 
@@ -47,7 +49,7 @@ class SourceDeDonnéesAPI : ISourceDeDonnées {
     }
 
     override suspend fun demanderProfil(identifiantUtilisateur: Utilisateur): Utilisateur? {
-        var reponseApi = apiService.demanderProfil(identifiantUtilisateur)
+        var reponseApi = serviceApi.demanderProfil(identifiantUtilisateur)
         return reponseApi.body()
     }
 

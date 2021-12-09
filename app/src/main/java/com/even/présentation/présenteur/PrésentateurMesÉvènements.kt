@@ -2,7 +2,7 @@ package com.even.présentation.présenteur
 
 import android.util.Log
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleConnexion
+import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
@@ -15,7 +15,7 @@ class PrésentateurMesÉvènements(
 
 
     override fun traiterRequêtelancerCoroutine(estSurOngletMesÉvènement: Boolean) {
-        val idUtilisateur = ModèleConnexion.utilisateurConnecté?.idUtilisateur!!
+        val idUtilisateur = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
         coroutine?.cancel()
         coroutine = CoroutineScope(Dispatchers.IO).launch {
             try {

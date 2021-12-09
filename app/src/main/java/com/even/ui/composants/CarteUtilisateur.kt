@@ -30,7 +30,7 @@ fun CarteUtilisateur(utilisateur: Utilisateur, imageUrl: (Int) -> String) {
             .height(100.dp)
             .border(4.dp, figmaMauve, CircleShape)
     ) {
-        Column (
+        Column(
             Modifier
                 .width(100.dp)
                 .fillMaxHeight()
@@ -38,32 +38,40 @@ fun CarteUtilisateur(utilisateur: Utilisateur, imageUrl: (Int) -> String) {
                 .padding(4.dp)
         ) {
             Image(
-                painter = rememberImagePainter(if(urlImg.contains("http")) urlImg else urlImg.toInt()),//painterResource(id = R.drawable.imageutilisateurbidon)
+                painter = rememberImagePainter(if (urlImg.contains("http")) urlImg else urlImg.toInt()),//painterResource(id = R.drawable.imageutilisateurbidon)
                 contentDescription = "Image",
-                Modifier.clip(CircleShape)
+                Modifier
+                    .clip(CircleShape)
                     .graphicsLayer { clip = true; }
                     .fillMaxSize()
 
             )
         }
-        Column(Modifier.fillMaxWidth()
-            .fillMaxHeight()) {
-            Column (){
-                Text(utilisateur.nomUtilisateur,fontSize = 30.sp,
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+        ) {
+            Column {
+                Text(
+                    utilisateur.nomUtilisateur!!, fontSize = 30.sp,
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.fillMaxWidth().fillMaxHeight()
-                        .padding(vertical = 25.dp,horizontal = 16.dp))
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(vertical = 25.dp, horizontal = 16.dp)
+                )
             }
         }
     }
 }
 
 @Composable
-fun ListeCarteUtilisateurs(utilisateurs: List<Utilisateur>,imageUrl: (Int) -> String) {
+fun ListeCarteUtilisateurs(utilisateurs: List<Utilisateur>, imageUrl: (Int) -> String) {
     LazyColumn {
         items(utilisateurs) { u ->
-            CarteUtilisateur(utilisateur = u,{ imageUrl(u.idUtilisateur!!) } )
+            CarteUtilisateur(utilisateur = u, { imageUrl(u.idUtilisateur!!) })
         }
     }
 }

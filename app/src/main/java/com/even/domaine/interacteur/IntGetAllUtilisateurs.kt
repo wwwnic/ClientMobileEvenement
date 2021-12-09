@@ -1,12 +1,11 @@
-
 package com.even.domaine.interacteur
 
 import com.even.domaine.entité.Utilisateur
 import com.even.sourceDeDonnées.ISourceDeDonnées
 
-class IntGetAllUtilisateurs(var _source : ISourceDeDonnées) {
+class IntGetAllUtilisateurs(var _source: ISourceDeDonnées) {
 
-    suspend fun getAllUtilisateurs() : List<Utilisateur> {
+    suspend fun getAllUtilisateurs(): List<Utilisateur> {
         return _source.getAllUtilisateurs()
     }
 }

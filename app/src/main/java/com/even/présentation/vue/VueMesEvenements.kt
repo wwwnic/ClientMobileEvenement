@@ -19,11 +19,11 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
     lateinit var fragmentLoader: FragmentLoader
     lateinit var présentateur: IMesÉvènements.IPrésentateur
     lateinit var composeView: ComposeView
-    lateinit var barreTab : TabLayout
-    lateinit var boutonCreer : Button
-    lateinit var chargement : ProgressBar
-    lateinit var emojiTriste : ImageView
-    lateinit var textErreur : TextView
+    lateinit var barreTab: TabLayout
+    lateinit var boutonCreer: Button
+    lateinit var chargement: ProgressBar
+    lateinit var emojiTriste: ImageView
+    lateinit var textErreur: TextView
 
     private var estSurMesÉvènement = false
 

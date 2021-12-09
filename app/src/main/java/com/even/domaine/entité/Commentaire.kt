@@ -1,7 +1,6 @@
 package com.even.domaine.entité
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 class Commentaire(
     val idCommentaire: Int?,
@@ -11,11 +10,11 @@ class Commentaire(
     var dateCommentaire: String?,
     var texte: String
 ) {
-    var utilisateur : Utilisateur? = null
+    var utilisateur: Utilisateur? = null
 
     constructor(
-        idEvenement : Int,
-        idUtilisateur : Int,
-        texte : String
-    ) : this(null,idEvenement,idUtilisateur,null,texte)
+        idEvenement: Int,
+        idUtilisateur: Int,
+        texte: String
+    ) : this(null, idEvenement, idUtilisateur, null, texte)
 }

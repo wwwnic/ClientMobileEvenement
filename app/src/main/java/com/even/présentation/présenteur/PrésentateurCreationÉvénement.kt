@@ -2,7 +2,7 @@ package com.even.présentation.présenteur
 
 import android.util.Log
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleConnexion
+import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,7 @@ class PrésentateurCreationÉvénement(
             nom,
             location,
             dateÉvénement,
-            ModèleConnexion.utilisateurConnecté!!.idUtilisateur!!,
+            ModèleAuthentification.utilisateurConnecté!!.idUtilisateur!!,
             description
         )
         var nouvelÉvénement: Événement?

@@ -1,12 +1,16 @@
 package com.even.présentation.présenteur
 
 import android.util.Log
-import com.even.domaine.entité.ValidateurEntréesTextuel
-import com.even.présentation.modèle.ModèleConnexion
+import com.even.domaine.entité.UnCoroutineDispatcher
+import com.even.domaine.entité.ValidateurTextuel
+import com.even.présentation.modèle.ModèleAuthentification
 import kotlinx.coroutines.*
 
 class PrésentateurConnexion(
-    val vue: IConnexion.IVue
+    val vue: IConnexion.IVue,
+    val modele: ModèleAuthentification,
+    val validateur: ValidateurTextuel,
+    val dispatcher: UnCoroutineDispatcher
 ) : IConnexion.IPrésentateur {
     private var coroutileLogin: Job? = null
 
@@ -26,11 +30,13 @@ class PrésentateurConnexion(
         nomUtilisateur: CharSequence,
         motDePasse: CharSequence
     ) {
-        coroutileLogin = CoroutineScope(Dispatchers.IO).launch {
+        coroutileLogin = CoroutineScope(dispatcher.io).launch {
             try {
-                val estUtilisateurExistant =
-                    ModèleConnexion().demanderProfilUtilisateur(nomUtilisateur, motDePasse)
-                withContext(Dispatchers.Main) {
+                val utilisateurRecuperé =
+                    modele.demanderProfilUtilisateur(nomUtilisateur, motDePasse)
+                    modele.ajouterUnUtilisateur(utilisateurRecuperé)
+                val estUtilisateurExistant = utilisateurRecuperé?.nomUtilisateur != null
+                withContext(dispatcher.main) {
                     if (estUtilisateurExistant) {
                         vue.naviguerVersFragmentPrincipal()
                         vue.afficherToastSuccesConnexion()
@@ -42,7 +48,7 @@ class PrésentateurConnexion(
                 }
             } catch (e: Exception) {
                 Log.e("Évèn", "La requête a rencontré une erreur", e)
-                withContext(Dispatchers.Main) {
+                withContext(dispatcher.main) {
                     vue.afficherToastErreurServeur()
                 }
             }
@@ -60,13 +66,13 @@ class PrésentateurConnexion(
     }
 
     private fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerNomUsager(nomUsager)
+        val estValide = validateur.validerNomUsager(nomUsager)
         vue.afficherErreurNomUtilisateur(!estValide)
         return estValide
     }
 
     private fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
-        val estValide = ValidateurEntréesTextuel.validerMotDePasse(motDePasse)
+        val estValide = validateur.validerMotDePasse(motDePasse)
         vue.afficherErreurMotDePasse(!estValide)
         return estValide
     }

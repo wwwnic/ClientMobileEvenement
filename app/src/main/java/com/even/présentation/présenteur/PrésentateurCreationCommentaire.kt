@@ -3,7 +3,7 @@ package com.even.présentation.présenteur
 import android.util.Log
 import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Événement
-import com.even.présentation.modèle.ModèleConnexion
+import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.CoroutineScope
@@ -21,7 +21,7 @@ class PrésentateurCreationCommentaire(
 
     override fun traiterRequêteAjouterCommentaire(texte: String) {
         val événementCommenté = ModèleÉvénements.événementPrésenté
-        val utilisateur = ModèleConnexion.utilisateurConnecté
+        val utilisateur = ModèleAuthentification.utilisateurConnecté
         var commentaireCrée: Commentaire = Commentaire(
             événementCommenté!!.idEvenement,
             utilisateur!!.idUtilisateur!!,

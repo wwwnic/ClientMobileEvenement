@@ -28,8 +28,8 @@ import java.util.*
 
 @Composable
 fun CarteCommentaire(commentaire: Commentaire) {
-    var isExpanded by remember { mutableStateOf(false)}
-    val surfaceColor : Color by animateColorAsState(
+    var isExpanded by remember { mutableStateOf(false) }
+    val surfaceColor: Color by animateColorAsState(
         Color.Transparent
     )
     Surface(
@@ -42,17 +42,20 @@ fun CarteCommentaire(commentaire: Commentaire) {
             .border(4.dp, figmaMauve, RoundedCornerShape(6.dp))
             .animateContentSize()
     ) {
-        Column (
+        Column(
             Modifier
                 .clickable { isExpanded = !isExpanded }
                 .padding(8.dp)
         ) {
-            Text(commentaire.utilisateur!!.nomUtilisateur,fontSize = 20.sp,
-                textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Bold)
             Text(
-                commentaire.dateCommentaire!!,fontSize = 18.sp,
-                fontStyle = FontStyle.Italic)
+                commentaire.utilisateur!!.nomUtilisateur!!, fontSize = 20.sp,
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                commentaire.dateCommentaire!!, fontSize = 18.sp,
+                fontStyle = FontStyle.Italic
+            )
             Spacer(modifier = Modifier.width(4.dp))
             Surface(
                 shape = MaterialTheme.shapes.medium,
@@ -61,9 +64,11 @@ fun CarteCommentaire(commentaire: Commentaire) {
                     .animateContentSize()
                     .padding(1.dp)
             ) {
-                Text(commentaire.texte,fontSize = 18.sp,
+                Text(
+                    commentaire.texte, fontSize = 18.sp,
                     maxLines = if (isExpanded) Int.MAX_VALUE else 2,
-                    overflow = TextOverflow.Ellipsis)
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
     }
@@ -99,7 +104,7 @@ fun Preview() {
                 "hey saluthey saluthey saluthey saluthey salut"
     )
     comm.utilisateur = util
-    MaterialTheme() {
+    MaterialTheme {
         CarteCommentaire(commentaire = comm)
     }
 }

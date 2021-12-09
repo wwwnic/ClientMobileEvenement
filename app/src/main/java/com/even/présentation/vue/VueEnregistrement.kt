@@ -11,18 +11,29 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.even.R
+import com.even.domaine.entité.ValidateurTextuel
+import com.even.domaine.interacteur.IntConnexion
+import com.even.domaine.interacteur.IntEnregistrement
+import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.présenteur.IEnregistrement
 import com.even.présentation.présenteur.PrésentateurEnregistrement
+import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 
 
 class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistrement.IVue {
 
     lateinit var présentateurEnregistrement: IEnregistrement.IPrésentateur
+    val source = SourceDeDonnéesAPI()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         présentateurEnregistrement =
-            PrésentateurEnregistrement(this)
+            PrésentateurEnregistrement(
+                this,
+                ModèleAuthentification(IntConnexion(source), IntEnregistrement(source)),
+                ValidateurTextuel()
+            )
         val toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         clickListenerBtnEnregistrement(view)

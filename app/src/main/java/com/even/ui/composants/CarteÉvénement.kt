@@ -26,29 +26,35 @@ import com.even.domaine.entité.Événement
 @Composable
 fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl: (Int) -> String) {
     var urlImg = imageUrl(événement.idEvenement)
-    Column(modifier = Modifier
-        .clickable(onClick = clickEvent)
-        .clip(RectangleShape)
-        .border(4.dp, figmaMauve, RoundedCornerShape(6.dp))
-        .padding(all = 8.dp)
-        .fillMaxWidth()
-        .height(300.dp)) {
-        Row(modifier = Modifier
-            .height(150.dp)
+    Column(
+        modifier = Modifier
+            .clickable(onClick = clickEvent)
+            .clip(RectangleShape)
+            .border(4.dp, figmaMauve, RoundedCornerShape(6.dp))
+            .padding(all = 8.dp)
             .fillMaxWidth()
-            .clip(RectangleShape)) {
+            .height(300.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .height(150.dp)
+                .fillMaxWidth()
+                .clip(RectangleShape)
+        ) {
             Image(
-                painter = rememberImagePainter(if(urlImg.contains("http")) urlImg else urlImg.toInt()),
+                painter = rememberImagePainter(if (urlImg.contains("http")) urlImg else urlImg.toInt()),
                 contentDescription = "Image",
                 modifier = Modifier
                     .graphicsLayer { scaleX = 2.5F;scaleY = 1.3F;clip = true; }
                     .fillMaxSize()
             )
         }
-        Column(modifier = Modifier
-            .height(150.dp)
-            .fillMaxWidth()
-            .background(MaterialTheme.colors.primary)) {
+        Column(
+            modifier = Modifier
+                .height(150.dp)
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.primary)
+        ) {
             Row {
                 Text(
                     text = événement.nomEvenement,
@@ -81,10 +87,17 @@ fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl:
 }
 
 @Composable
-fun ListeCarteÉvénements(événements: List<Événement>, clickEvent : (Événement) -> Unit, imageUrl : (Int) -> String) {
+fun ListeCarteÉvénements(
+    événements: List<Événement>,
+    clickEvent: (Événement) -> Unit,
+    imageUrl: (Int) -> String
+) {
     LazyColumn {
         items(événements) { e ->
-            CarteÉvénement(événement = e,clickEvent = { clickEvent(e) },{ imageUrl(e.idEvenement) })
+            CarteÉvénement(
+                événement = e,
+                clickEvent = { clickEvent(e) },
+                { imageUrl(e.idEvenement) })
         }
     }
 }

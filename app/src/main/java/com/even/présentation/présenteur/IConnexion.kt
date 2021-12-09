@@ -1,5 +1,8 @@
 package com.even.présentation.présenteur
 
+import com.even.testOuvert
+
+@testOuvert
 interface IConnexion {
     interface IVue {
         fun naviguerVersFragmentPrincipal()
