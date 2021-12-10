@@ -11,13 +11,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.even.R
 import coil.compose.rememberImagePainter
 import com.even.domaine.entité.Événement
 
@@ -78,7 +81,7 @@ fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl:
             }
             Row {
                 Text(
-                    text = "Organisé par: ${événement.organisateur?.nomUtilisateur}",
+                    text =  "${LocalContext.current.resources.getString(R.string.organizedBy)} ${événement.organisateur?.nomUtilisateur}",
                     color = MaterialTheme.colors.onPrimary
                 )
             }

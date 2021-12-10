@@ -15,6 +15,7 @@
             android:id="@+id/mesEvenement_imageErreur"
             android:layout_width="107dp"
             android:layout_height="101dp"
+            android:contentDescription="@string/connection_error"
             android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +27,7 @@
             android:id="@+id/mesEvenement_textErreur"
             android:layout_width="282dp"
             android:layout_height="149dp"
-            android:text="Erreur de connexion"
+            android:text="@string/connection_error"
             android:textSize="24sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +63,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/barreTabMesEvens"
-            android:layout_width="413dp"
+            android:layout_width="0dp"
             android:layout_height="65dp"
             android:background="@color/figmaMauve"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,13 +79,13 @@
                 android:id="@+id/tabPresences"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Présences" />
+                android:text="@string/presences" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabCrees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Crées" />
+                android:text="@string/created" />
 
         </com.google.android.material.tabs.TabLayout>
 
