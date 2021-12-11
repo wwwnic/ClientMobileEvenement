@@ -13,6 +13,7 @@ class PrésentateurMesÉvènements(
 
     private var coroutine: Job? = null
 
+    val modèleÉvénements = ModèleÉvénements()
 
     override fun traiterRequêtelancerCoroutine(estSurOngletMesÉvènement: Boolean) {
         val idUtilisateur = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
@@ -20,9 +21,9 @@ class PrésentateurMesÉvènements(
         coroutine = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val lstÉvènement = if (estSurOngletMesÉvènement) {
-                    ModèleÉvénements().demanderSesPropreÉvènement(idUtilisateur)
+                    modèleÉvénements.demanderSesPropreÉvènement(idUtilisateur)
                 } else {
-                    ModèleÉvénements().demanderLesParticipations(idUtilisateur)
+                    modèleÉvénements.demanderLesParticipations(idUtilisateur)
                 }
                 withContext(Dispatchers.Main) {
                     afficherlstÉvènement(lstÉvènement)
@@ -39,7 +40,7 @@ class PrésentateurMesÉvènements(
     override fun traiterRequêteAfficherÉvénement(idÉvénement: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                ModèleÉvénements.setÉvénementPrésenté(idÉvénement)
+                modèleÉvénements.setÉvénementPrésenté(idÉvénement)
                 withContext(Dispatchers.Main) {
                     vue.afficherÉvénementSelectionné()
                 }
@@ -55,7 +56,7 @@ class PrésentateurMesÉvènements(
         if (lstÉvènement.isNotEmpty()) {
             vue.afficherListeEvenements(
                 lstÉvènement
-            ) { i -> ModèleÉvénements().getImageÉvénement(i) }
+            ) { i -> modèleÉvénements.getImageÉvénement(i) }
         } else {
             vue.afficherAucunRésultatRecherche(estErreurConnexion = false)
         }

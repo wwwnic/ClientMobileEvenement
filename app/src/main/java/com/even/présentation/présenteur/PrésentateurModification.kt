@@ -10,6 +10,9 @@ import kotlinx.coroutines.withContext
 class PrésentateurModification(
     val vue : IModificationÉvénement.IVue
 ) : IModificationÉvénement.IPrésentateur {
+
+    val modèleÉvénements = ModèleÉvénements()
+
     override fun traiterRequêteModifierÉvénement(
         nom: String,
         date: String,
@@ -24,10 +27,10 @@ class PrésentateurModification(
         événementModifié!!.description = description
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val reponse = ModèleÉvénements().modifierÉvénement(événementModifié)
+                val reponse = modèleÉvénements.modifierÉvénement(événementModifié)
                 withContext(Dispatchers.Main) {
                     if (reponse.isSuccessful) {
-                        ModèleÉvénements.setÉvénementPrésenté(événementModifié.idEvenement)
+                        modèleÉvénements.setÉvénementPrésenté(événementModifié.idEvenement)
                         vue.afficherÉvénementModifiéOuRetourMenu(true)
                     } else {
                         vue.afficherErreurConnexion()
@@ -46,7 +49,7 @@ class PrésentateurModification(
         var événementAnnulé = ModèleÉvénements.événementPrésenté
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val reponse = ModèleÉvénements().annulerÉvénement(événementAnnulé!!.idEvenement)
+                val reponse = modèleÉvénements.annulerÉvénement(événementAnnulé!!.idEvenement)
                 withContext(Dispatchers.Main) {
                     if (reponse.isSuccessful) {
                         ModèleÉvénements.événementPrésenté = null

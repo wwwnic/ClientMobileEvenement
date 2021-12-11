@@ -14,11 +14,12 @@ class PrésentateurListeÉvénements(
 ) : IListeEvenements.IPrésentateur {
 
     lateinit var liste : List<Événement>
+    val modèleÉvénements = ModèleÉvénements()
 
     override fun traiterRequêteAfficherListeRecents() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                liste = ModèleÉvénements().getÉvénementsRécents()
+                liste = modèleÉvénements.getÉvénementsRécents()
                 withContext(Dispatchers.Main) {
                     if (!liste.isEmpty()) {
                         vue.afficherListeEvenements(liste,{ i -> ModèleÉvénements().getImageÉvénement(i)})
@@ -38,7 +39,7 @@ class PrésentateurListeÉvénements(
         var motCles = tag.split(":")
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                liste = ModèleÉvénements().getÉvénementsParRecherche(
+                liste = modèleÉvénements.getÉvénementsParRecherche(
                     motCles[0],
                     motCles[1],
                     motCles[2],
@@ -64,7 +65,7 @@ class PrésentateurListeÉvénements(
     override fun traiterRequêteAfficherDétailsÉvénement(idÉvénement : Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                ModèleÉvénements.setÉvénementPrésenté(idÉvénement)
+                modèleÉvénements.setÉvénementPrésenté(idÉvénement)
                 withContext(Dispatchers.Main) {
                     vue.afficherDétailsÉvénement()
                 }

@@ -13,6 +13,8 @@ class PrésentateurCreationÉvénement(
     val vue: ICreationEvenement.IVue
 ) : ICreationEvenement.IPrésentateur {
 
+    val modèleÉvénements = ModèleÉvénements()
+
     override fun traiterRequêteCréerÉvénement(
         nom: String,
         date: String,
@@ -31,10 +33,10 @@ class PrésentateurCreationÉvénement(
         var nouvelÉvénement: Événement?
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                nouvelÉvénement = ModèleÉvénements().créerÉvénement(événementCrée)
+                nouvelÉvénement = modèleÉvénements.créerÉvénement(événementCrée)
                 withContext(Dispatchers.Main) {
                     if (nouvelÉvénement != null) {
-                        ModèleÉvénements.setÉvénementPrésenté(nouvelÉvénement!!.idEvenement)
+                        modèleÉvénements.setÉvénementPrésenté(nouvelÉvénement!!.idEvenement)
                         vue.afficherNouvelÉvénement(nouvelÉvénement!!)
                     } else {
                         vue.afficherErreurConnexion()

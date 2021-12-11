@@ -23,6 +23,9 @@ class PrésentateurDétailÉvenement(
 
     private var evenementEnCours: Événement? = ModèleÉvénements.événementPrésenté
 
+    val modèleÉvénements = ModèleÉvénements()
+    val modèleUtilisateurs = ModèleUtilisateurs()
+
     private var coroutileDétailÉvenement: Job? = null
 
     private var participation : Boolean? = null
@@ -88,11 +91,11 @@ class PrésentateurDétailÉvenement(
         coroutileDétailÉvenement = CoroutineScope(Dispatchers.IO).launch {
             var msg: Message?
             try {
-                evenementEnCours!!.urlImage = ModèleÉvénements().getImageÉvénement(evenementEnCours!!.idEvenement)
+                evenementEnCours!!.urlImage = modèleÉvénements.getImageÉvénement(evenementEnCours!!.idEvenement)
 
-                listeÉvénementsClient = ModèleÉvénements().demanderLesParticipations(idUtilisateurConnecté)
+                listeÉvénementsClient = modèleÉvénements.demanderLesParticipations(idUtilisateurConnecté)
 
-                nombreParticipant = ModèleUtilisateurs().getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement).count()
+                nombreParticipant = modèleUtilisateurs.getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement).count()
 
                 withContext(Dispatchers.Main) {
                     vérifierParticipation()
@@ -118,7 +121,7 @@ class PrésentateurDétailÉvenement(
 
             if (participation == false) {
                 try {
-                    reponseApi = ModèleÉvénements().ajouterParticipation(utilisateurÉvenement)
+                    reponseApi = modèleÉvénements.ajouterParticipation(utilisateurÉvenement)
 
                     withContext(Dispatchers.Main) {
                         if (reponseApi.isSuccessful) {
@@ -132,7 +135,7 @@ class PrésentateurDétailÉvenement(
                 }
             } else {
                 try {
-                    reponseApi = ModèleÉvénements().retirerParticipation(utilisateurÉvenement)
+                    reponseApi = modèleÉvénements.retirerParticipation(utilisateurÉvenement)
 
                     withContext(Dispatchers.Main) {
                         if (reponseApi.isSuccessful) {
@@ -153,10 +156,10 @@ class PrésentateurDétailÉvenement(
         var liste : List<Utilisateur> = ArrayList<Utilisateur>()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                liste = ModèleUtilisateurs().getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement)
+                liste = modèleUtilisateurs.getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement)
                 withContext(Dispatchers.Main) {
                     if (liste.isNotEmpty()) {
-                        vue.afficherListeParticipants(liste,{ i -> ModèleUtilisateurs().getImageUtilisateur(i)})
+                        vue.afficherListeParticipants(liste,{ i -> modèleUtilisateurs.getImageUtilisateur(i)})
                     } else {
                         vue.afficherToastErreurServeur()
                     }
@@ -174,7 +177,7 @@ class PrésentateurDétailÉvenement(
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val idEvenement = ModèleÉvénements.événementPrésenté!!.idEvenement
-                liste = ModèleÉvénements().getCommentairesDansÉvénement(idEvenement)
+                liste = modèleÉvénements.getCommentairesDansÉvénement(idEvenement)
                 withContext(Dispatchers.Main) {
                     vue.afficherListeCommentaires(liste)
                 }

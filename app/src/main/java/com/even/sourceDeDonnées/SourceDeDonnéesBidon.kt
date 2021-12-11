@@ -14,6 +14,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     val listeUtils: ArrayList<Utilisateur> = ArrayList<Utilisateur>()
     val listeEvens: ArrayList<Événement> = ArrayList<Événement>()
     val listeUtilEven: ArrayList<UtilisateurÉvénement> = ArrayList<UtilisateurÉvénement>()
+    val listeComm : ArrayList<Commentaire> = ArrayList<Commentaire>()
 
     init {
         val util = Utilisateur(
@@ -97,6 +98,22 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         listeUtilEven.add(utilEven2)
         listeUtilEven.add(utilEven3)
         listeUtilEven.add(utilEven4)
+        val comm1 = Commentaire(
+            1,
+            1,
+            1,
+            "2021-12-01T17:00",
+            "hey salut"
+        )
+        val comm2 = Commentaire(
+            2,
+            1,
+            2,
+            "2021-12-01T18:00",
+            "bonjour"
+        )
+        listeComm.add(comm1)
+        listeComm.add(comm2)
     }
 
     override suspend fun getAllEvenements(): List<Événement> {
@@ -104,7 +121,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeEvens
     }
 
-    override suspend fun getÉvenementParId(id: Int): Événement? {
+    override suspend fun getÉvénementParId(id: Int): Événement? {
         resetEvenements()
         return listeEvens.filter { u -> u.idEvenement == id }[0]
     }
@@ -146,11 +163,11 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtils.filter { u -> u.nomUtilisateur == nom }
     }
 
-    override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
+    override suspend fun getÉvénementsParParticipation(id: Int): List<Événement> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getEvenementsParOrganisateur(id: Int): List<Événement> {
+    override suspend fun getÉvénementsParOrganisateur(id: Int): List<Événement> {
         TODO("Not yet implemented")
     }
 
@@ -160,7 +177,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtils.filter { u -> u.nomUtilisateur == identifiantUtilisateur.nomUtilisateur }[0]
     }
 
-    override suspend fun getEvenementsParRecherche(
+    override suspend fun getÉvénementsParRecherche(
         nom: String,
         mois: String,
         location: String,
@@ -196,6 +213,12 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     private fun resetEvenements() {
         for(e : Événement in listeEvens) {
             e.date = "2021-11-24T18:00"
+        }
+    }
+
+    private fun resetCommentaires() {
+        for(c : Commentaire in listeComm) {
+            c.dateCommentaire = "2021-12-01T18:00"
         }
     }
 }

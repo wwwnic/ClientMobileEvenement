@@ -23,15 +23,13 @@ import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistrement.IVue {
 
     lateinit var présentateurEnregistrement: IEnregistrement.IPrésentateur
-    val source = SourceDeDonnéesAPI()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         présentateurEnregistrement =
             PrésentateurEnregistrement(
                 this,
-                ModèleAuthentification(IntConnexion(source), IntEnregistrement(source)),
+                ModèleAuthentification(),
                 ValidateurTextuel()
             )
         val toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
