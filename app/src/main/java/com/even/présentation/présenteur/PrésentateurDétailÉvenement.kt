@@ -4,27 +4,29 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Log
-import com.even.domaine.entité.Commentaire
-import com.even.domaine.entité.Utilisateur
-import com.even.domaine.entité.UtilisateurÉvénement
-import com.even.domaine.entité.Événement
+import com.even.domaine.entité.*
 import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
+import com.even.testOuvert
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
 import retrofit2.Response
 import java.net.SocketTimeoutException
 
+@testOuvert
 class PrésentateurDétailÉvenement(
     var vue: IDétailÉvenement.IVue,
+    var modeleAu : ModèleAuthentification,
+    var modèleUtilisateurs : ModèleUtilisateurs,
+    var modèleÉvénements : ModèleÉvénements,
+    val dispatcher: UnCoroutineDispatcher
+
 ) : IDétailÉvenement.IPrésentateur {
     private val handlerRéponse: Handler
 
     private var evenementEnCours: Événement? = ModèleÉvénements.événementPrésenté
 
-    val modèleÉvénements = ModèleÉvénements()
-    val modèleUtilisateurs = ModèleUtilisateurs()
 
     private var coroutileDétailÉvenement: Job? = null
 
@@ -88,7 +90,7 @@ class PrésentateurDétailÉvenement(
     }
 
     override fun traiterRequêteAfficherDétailÉvenement(idEvenement: Int) {
-        coroutileDétailÉvenement = CoroutineScope(Dispatchers.IO).launch {
+        coroutileDétailÉvenement = CoroutineScope(dispatcher.io).launch {
             var msg: Message?
             try {
                 evenementEnCours!!.urlImage = modèleÉvénements.getImageÉvénement(evenementEnCours!!.idEvenement)
@@ -108,6 +110,7 @@ class PrésentateurDétailÉvenement(
                     }
                 }
             } catch (e: Exception) {
+                Log.e("Évèn", "La requête a rencontré une erreur", e)
                 msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
             }
             handlerRéponse.sendMessage(msg!!)
