@@ -10,7 +10,7 @@ interface ISourceDeDonnées {
 
     suspend fun getAllUtilisateurs(): List<Utilisateur>
     suspend fun getAllEvenements(): List<Événement>
-    suspend fun getÉvenementParId(id : Int): Événement?
+    suspend fun getÉvénementParId(id : Int): Événement?
     suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement>
     suspend fun getUtilisateursDansEvenement(idEvenement : Int) : List<Utilisateur>
     suspend fun creerUtilisateur(utilisateur: Utilisateur): Response<Void>
@@ -20,9 +20,9 @@ interface ISourceDeDonnées {
     suspend fun supprimerEvenement(id : Int) : Response<Void>
     suspend fun getUtilisateurParId(id: Int): Utilisateur?
     suspend fun getUtilisateursParNom(nom : String) : List<Utilisateur>
-    suspend fun getEvenementParParticipation(id: Int): List<Événement>
-    suspend fun getEvenementsParOrganisateur(id: Int): List<Événement>
-    suspend fun getEvenementsParRecherche(
+    suspend fun getÉvénementsParParticipation(id: Int): List<Événement>
+    suspend fun getÉvénementsParOrganisateur(id: Int): List<Événement>
+    suspend fun getÉvénementsParRecherche(
         nom: String,
         mois: String,
         location: String,

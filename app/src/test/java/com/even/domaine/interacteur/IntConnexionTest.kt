@@ -36,7 +36,7 @@ class IntConnexionTest : CouroutineTestHelper() {
         verifyBlocking(
             mockSourceDeDonnées,
             times(invocationUnique)
-        ) { demanderProfil(utilisateur) }
+        ) { interacteurTruqué.connexionDemanderProfil(utilisateur) }
     }
 
     @Test

@@ -3,7 +3,6 @@ package com.even.présentation.présenteur
 import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
-import com.even.domaine.interacteur.IntGetÉvènementParParticipant
 
 interface IDétailÉvenement {
 

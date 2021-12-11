@@ -53,7 +53,7 @@ class SourceDeDonnéesAPI(val serviceApi: IApiService ) : ISourceDeDonnées {
         return reponseApi.body()
     }
 
-    override suspend fun getEvenementsParRecherche(nom : String,mois : String,location : String,organisateur : String): List<Événement> {
+    override suspend fun getÉvénementsParRecherche(nom : String, mois : String, location : String, organisateur : String): List<Événement> {
         var liste : List<Événement> = ArrayList<Événement>()
 
         var reponseApi = apiService.getEvenementsParRecherche(nom, mois, location, organisateur)
@@ -77,7 +77,7 @@ class SourceDeDonnéesAPI(val serviceApi: IApiService ) : ISourceDeDonnées {
         return apiService.creerCommentaire(commentaire)
     }
 
-    override suspend fun getÉvenementParId(id: Int): Événement {
+    override suspend fun getÉvénementParId(id: Int): Événement {
         var evenement: Événement? = null
 
         var reponseApi = apiService.getEvenementParId(id)
@@ -130,12 +130,12 @@ class SourceDeDonnéesAPI(val serviceApi: IApiService ) : ISourceDeDonnées {
         return utilisateurs
     }
 
-    override suspend fun getEvenementParParticipation(id: Int): List<Événement> {
+    override suspend fun getÉvénementsParParticipation(id: Int): List<Événement> {
         val reponseApi = apiService.getEvenementsParParticipation(id)
         return if(reponseApi.isSuccessful) reponseApi.body()!! else listOf()
     }
 
-    override suspend fun getEvenementsParOrganisateur(id: Int): List<Événement> {
+    override suspend fun getÉvénementsParOrganisateur(id: Int): List<Événement> {
         val reponseApi = apiService.getEvenementsParOrganisateur(id)
         return if(reponseApi.isSuccessful) reponseApi.body()!! else listOf()    }
 

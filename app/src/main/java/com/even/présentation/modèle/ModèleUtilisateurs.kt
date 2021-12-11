@@ -1,11 +1,14 @@
 package com.even.présentation.modèle
 
 import com.even.domaine.entité.Utilisateur
-import com.even.domaine.interacteur.IntGetAllUtilisateurs
-import com.even.domaine.interacteur.IntGetUtilisateursDansÉvénement
+import com.even.domaine.interacteur.IntGetUtilisateur
 import com.even.sourceDeDonnées.ISourceDeDonnées
 
-class ModèleUtilisateurs {
+class ModèleUtilisateurs(
+    val intGetUtilisateur : IntGetUtilisateur
+) {
+
+    constructor() : this(IntGetUtilisateur(_source))
 
     companion object {
         lateinit var _source : ISourceDeDonnées
@@ -14,15 +17,11 @@ class ModèleUtilisateurs {
         }
     }
 
-    suspend fun getUtilisateurs(): List<Utilisateur> {
-        return IntGetAllUtilisateurs(_source).getAllUtilisateurs()
-    }
-
     suspend fun getUtilisateursDansÉvénement(idÉvénement : Int) : List<Utilisateur> {
-        return IntGetUtilisateursDansÉvénement(_source).getUtilisateursDansÉvénement(idÉvénement)
+        return intGetUtilisateur.getUtilisateursDansÉvénement(idÉvénement)
     }
 
     fun getImageUtilisateur(id : Int) : String {
-        return _source.getImageUtilisateur(id)
+        return intGetUtilisateur.getImageUtilisateur(id)
     }
 }

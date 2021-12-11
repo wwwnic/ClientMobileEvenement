@@ -41,7 +41,7 @@ interface IApiService {
     @PUT("api/Evenement/Update")
     suspend fun updateEvenement(@Body evenement: Événement): Response<Void>
 
-    @DELETE("delete/secret")
+    @DELETE("api/Evenement/Delete/secret")
     suspend fun deleteEvenement(@Query ("id")id : Int): Response<Void>
 
     @POST("api/Utilisateur/Login")

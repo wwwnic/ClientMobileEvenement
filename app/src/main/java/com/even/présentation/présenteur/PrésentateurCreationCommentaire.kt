@@ -15,6 +15,8 @@ class PrésentateurCreationCommentaire(
     val vue : ICreationCommentaire.IVue
     ) : ICreationCommentaire.IPrésentateur {
 
+    val modèleÉvénements = ModèleÉvénements()
+
     override fun traiterRequêteAfficherNomÉvénement() {
         vue.afficherNomÉvénement(ModèleÉvénements.événementPrésenté!!.nomEvenement)
     }
@@ -29,7 +31,7 @@ class PrésentateurCreationCommentaire(
         )
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                var reponse = ModèleÉvénements().créerCommentaire(commentaireCrée)
+                var reponse = modèleÉvénements.créerCommentaire(commentaireCrée)
                 withContext(Dispatchers.Main) {
                     if (reponse.isSuccessful) {
                         vue.afficherVueDétailsÉvénement()
