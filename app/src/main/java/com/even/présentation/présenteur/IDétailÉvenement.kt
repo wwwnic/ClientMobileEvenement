@@ -21,6 +21,7 @@ interface IDétailÉvenement {
         fun afficherVueAjoutCommentaire()
         fun afficherApplicationCalendrierPourAjouter(date : IntArray)
         fun afficherApplicationCalendrierPourEffacer(date : IntArray)
+        fun montrerLesDetailsEvenement()
     }
 
     interface IPrésentateur {

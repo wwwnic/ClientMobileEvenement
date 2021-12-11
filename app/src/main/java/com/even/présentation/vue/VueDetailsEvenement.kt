@@ -31,28 +31,28 @@ import com.google.android.material.tabs.TabLayout
 import java.util.*
 
 
-
-
-class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue{
+class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue {
 
     lateinit var fragmentLoader: FragmentLoader
 
-    lateinit var imageEvent : ImageView
-    lateinit var imageOrganisateur : ImageView
-    lateinit var texteNom : TextView
-    lateinit var texteLocation : TextView
-    lateinit var texteDate : TextView
-    lateinit var texteOrganisateur : TextView
-    lateinit var texteDescription : TextView
-    lateinit var texteParticipant : TextView
-    lateinit var btnParticipation : Button
-    lateinit var btnAddCommentaire : Button
-    lateinit var barreTab : TabLayout
-    lateinit var groupeDetails : ConstraintLayout
-    lateinit var groupeParticipation : ConstraintLayout
-    lateinit var listeComposables : ComposeView
+    lateinit var imageEvent: ImageView
+    lateinit var imageOrganisateur: ImageView
+    lateinit var texteNom: TextView
+    lateinit var texteLocation: TextView
+    lateinit var texteDate: TextView
+    lateinit var texteOrganisateur: TextView
+    lateinit var texteDescription: TextView
+    lateinit var texteParticipant: TextView
+    lateinit var btnParticipation: Button
+    lateinit var btnAddCommentaire: Button
+    lateinit var barreTab: TabLayout
+    lateinit var groupeDetails: ConstraintLayout
+    lateinit var groupeParticipation: ConstraintLayout
+    lateinit var listeComposables: ComposeView
 
-    lateinit var présentateur : IDétailÉvenement.IPrésentateur
+    lateinit var chargement: View
+
+    lateinit var présentateur: IDétailÉvenement.IPrésentateur
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,6 +73,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         texteParticipant = view.findViewById(R.id.detailEvenement_nomber)
         btnParticipation = view.findViewById(R.id.detailEvenement_participation)
         btnAddCommentaire = view.findViewById(R.id.detailEvenement_btnAddCommentaire)
+        chargement = view.findViewById(R.id.detailEvenement_progressBar)
 
         groupeDetails = view.findViewById(R.id.groupeDetails)
         groupeParticipation = view.findViewById(R.id.groupeParticipations)
@@ -103,7 +104,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         btnAddCommentaire.setOnClickListener { afficherVueAjoutCommentaire() }
     }
 
-    private fun setVisibilitéVues(pageÀgénérer : String) {
+    private fun setVisibilitéVues(pageÀgénérer: String) {
         if (pageÀgénérer == "details") {
             groupeDetails.visibility = View.VISIBLE
             groupeParticipation.visibility = View.VISIBLE
@@ -119,7 +120,8 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
             imageEvent.visibility = View.INVISIBLE
 
             listeComposables.visibility = View.VISIBLE
-            if (pageÀgénérer == "commentaires") btnAddCommentaire.visibility = View.VISIBLE else btnAddCommentaire.visibility = View.INVISIBLE
+            if (pageÀgénérer == "commentaires") btnAddCommentaire.visibility =
+                View.VISIBLE else btnAddCommentaire.visibility = View.INVISIBLE
         }
     }
 
@@ -131,9 +133,9 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     }
 
     // https://developer.android.com/guide/topics/providers/calendar-provider#intents
-    override fun afficherApplicationCalendrierPourAjouter(date : IntArray) {
+    override fun afficherApplicationCalendrierPourAjouter(date: IntArray) {
         val startMillis: Long = Calendar.getInstance().run {
-            set(date[0], date[1]-1, date[2], date[3], date[4])
+            set(date[0], date[1] - 1, date[2], date[3], date[4])
             timeInMillis
         }
         val intent = Intent(Intent.ACTION_INSERT)
@@ -142,14 +144,17 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
             .putExtra(CalendarContract.Events.TITLE, texteNom.text)
             .putExtra(CalendarContract.Events.DESCRIPTION, texteDescription.text)
             .putExtra(CalendarContract.Events.EVENT_LOCATION, texteLocation.text)
-            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+            .putExtra(
+                CalendarContract.Events.AVAILABILITY,
+                CalendarContract.Events.AVAILABILITY_BUSY
+            )
         startActivity(intent)
     }
 
     // https://developer.android.com/guide/topics/providers/calendar-provider#intents
-    override fun afficherApplicationCalendrierPourEffacer(date : IntArray) {
+    override fun afficherApplicationCalendrierPourEffacer(date: IntArray) {
         val startMillis: Long = Calendar.getInstance().run {
-            set(date[0], date[1]-1, date[2], date[3], date[4])
+            set(date[0], date[1] - 1, date[2], date[3], date[4])
             timeInMillis
         }
         val builder: Uri.Builder = CalendarContract.CONTENT_URI.buildUpon()
@@ -177,7 +182,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         Toast.makeText(context, "Votre participation a été retiré.", Toast.LENGTH_SHORT).show()
     }
 
-    override fun setInfo(evenement : Événement) {
+    override fun setInfo(evenement: Événement) {
         texteNom.text = evenement.nomEvenement
         texteLocation.text = evenement.location
         texteDate.text = evenement.date
@@ -216,6 +221,11 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
                 }
             }
         }
+    }
+
+    override fun montrerLesDetailsEvenement() {
+        chargement.isVisible = false
+        groupeDetails.isVisible = true
     }
 
     override fun afficherListeCommentaires(commentaires: List<Commentaire>) {

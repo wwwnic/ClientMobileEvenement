@@ -97,7 +97,9 @@ class PrésentateurDétailÉvenement(
 
                 nombreParticipant = modèleUtilisateurs.getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement).count()
 
+
                 withContext(Dispatchers.Main) {
+                    vue.montrerLesDetailsEvenement()
                     vérifierParticipation()
                     if (evenementEnCours != null && participation != null && nombreParticipant != 0) {
                         msg = handlerRéponse.obtainMessage(MSG_RÉUSSI_GET_INFO)
