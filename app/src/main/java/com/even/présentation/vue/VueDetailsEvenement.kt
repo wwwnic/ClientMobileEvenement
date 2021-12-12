@@ -130,7 +130,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
     private fun clickListenerParticipation() {
         btnParticipation.setOnClickListener {
-            présentateur.traiterRequêteAjouterParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
+            présentateur.traiterRequêteAjouterRetirerParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
         }
 
     }
