@@ -9,14 +9,19 @@ import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
 import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.sourceDeDonnées.SourceDeDonnéesAPI
-import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        var nePasChargerSourcePourTestInstrumentation: Boolean = false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val source = SourceDeDonnéesAPI()
-        instancierLesModèles(source)
+        if (!nePasChargerSourcePourTestInstrumentation) {
+            instancierLesModèles(source)
+        }
         setContentView(R.layout.activity_main)
     }
 
