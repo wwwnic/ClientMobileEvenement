@@ -296,7 +296,11 @@ class PrésentateurDétailÉvenementTest : CouroutineTestHelper() {
         }
         verify(mockVue, times(invocationUnique)).afficherToastErreurServeur()
     }
-/*
+
+    /*
+    /**
+     * À revoir, je n'arrive pas à le faire fonctionner
+     */
     @Test
     fun `Étant donné un présentateur, lorsque la participation d'un utilisateur est ajouté, il affiche de toast pour aviser l'utilisateur que l'action s'est effectué avec succès`(){
         présentateurTruqué.idUtilisateurConnecté = fauxUtilisateur.idUtilisateur!!
@@ -312,7 +316,8 @@ class PrésentateurDétailÉvenementTest : CouroutineTestHelper() {
 
         verify(mockVue, times(invocationUnique)).afficherToastParticipationAjouté()
     }
- */
+     */
+
 
 
 }
