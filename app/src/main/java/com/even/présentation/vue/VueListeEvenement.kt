@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.even.R
 import com.even.domaine.entité.Événement
+import com.even.présentation.modèle.ModèleÉvénements
 import com.even.présentation.présenteur.IListeEvenements
 import com.even.présentation.présenteur.PrésentateurListeÉvénements
 import com.even.ui.composants.FragmentLoader
@@ -30,7 +31,7 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
-        présentateur = PrésentateurListeÉvénements(this)
+        présentateur = PrésentateurListeÉvénements(this, ModèleÉvénements())
         if (this.tag.isNullOrEmpty()) {
             présentateur.traiterRequêteAfficherListeRecents()
         } else {

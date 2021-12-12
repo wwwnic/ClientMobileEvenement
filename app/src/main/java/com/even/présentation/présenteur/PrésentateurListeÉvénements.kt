@@ -3,18 +3,21 @@ package com.even.présentation.présenteur
 
 import com.even.domaine.entité.Événement
 import com.even.présentation.modèle.ModèleÉvénements
+import com.even.testOuvert
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.jetbrains.annotations.TestOnly
 import java.net.SocketTimeoutException
 
+@testOuvert
 class PrésentateurListeÉvénements(
     val vue : IListeEvenements.IVue,
+    var modèleÉvénements : ModèleÉvénements
 ) : IListeEvenements.IPrésentateur {
 
     lateinit var liste : List<Événement>
-    val modèleÉvénements = ModèleÉvénements()
 
     override fun traiterRequêteAfficherListeRecents() {
         CoroutineScope(Dispatchers.IO).launch {
