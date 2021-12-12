@@ -5,8 +5,10 @@ import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
 import com.even.domaine.interacteur.*
 import com.even.sourceDeDonnées.ISourceDeDonnées
+import com.even.testOuvert
 import retrofit2.Response
 
+@testOuvert
 class ModèleÉvénements(
     val intGetÉvénement : IntGetÉvénement,
     val intGestionÉvénement: IntGestionÉvénement,
