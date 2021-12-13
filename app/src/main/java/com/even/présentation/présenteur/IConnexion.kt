@@ -15,6 +15,12 @@ interface IConnexion {
     }
 
     interface IPrésentateur {
+        /**
+         * Vérifie les informations entrées, si elles sont valides, envoie une requête contenant les informations au modèle
+         *
+         * @param nomUtilisateur Un nom qu'un utilisateur a entré
+         * @param motDePasse Un mot de passe qu'un utilisateur a entré
+         */
         fun traiterRequêteDemanderProfilPourConnexion(
             nomUtilisateur: CharSequence,
             motDePasse: CharSequence

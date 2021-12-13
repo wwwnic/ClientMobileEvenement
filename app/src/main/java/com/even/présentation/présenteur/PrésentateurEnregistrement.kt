@@ -10,7 +10,9 @@ import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
 class PrésentateurEnregistrement(
-    val vue: IEnregistrement.IVue, val modeleAuthentification: ModèleAuthentification, val validateur: ValidateurTextuel
+    val vue: IEnregistrement.IVue,
+    val modeleAuthentification: ModèleAuthentification,
+    val validateur: ValidateurTextuel
 ) : IEnregistrement.IPrésentateur {
     private val handlerRéponse: Handler
 
@@ -43,6 +45,14 @@ class PrésentateurEnregistrement(
         }
     }
 
+    /**
+     * Vérifie les informations entrées, si elles sont valides, envoie une requête contenant les informations au modèle
+     *
+     * @param nomUtilisateur Un nom qu'un utilisateur a entré
+     * @param motDePasse Un mot de passe qu'un utilisateur a entré
+     * @param courriel Un courriel qu'un utilisateur a entré
+     * @param telephone Un telephone qu'un utilisateur a entré
+     */
     override fun traiterRequêteReclamerEnregistrement(
         nomUsager: CharSequence,
         motDePasse: CharSequence,
@@ -74,6 +84,15 @@ class PrésentateurEnregistrement(
         }
     }
 
+    /**
+     * Valide le nom et le mot de passe qu'un utilisateur a rentré.
+     *
+     * @param nomUsager Un nom qu'un utilisateur a entré
+     * @param motDePasse Un mot de passe qu'un utilisateur a entré
+     * @param courriel Un courriel qu'un utilisateur a entré
+     * @param telephone Un telephone qu'un utilisateur a entré
+     * @return Les entrées de l'utilisateur sont valides
+     */
     override fun traiterRequêteValiderTousLesEntrées(
         nomUsager: CharSequence,
         motDePasse: CharSequence,
@@ -90,25 +109,49 @@ class PrésentateurEnregistrement(
         return (entréesValide)
     }
 
-    override fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
+    /**
+     * Valide le nom qu'un utilisateur a rentré.
+     *
+     * @param nomUsager Un nom qu'un utilisateur a entré
+     * @return Le nom entrée est valide
+     */
+    private fun traiterRequêteValiderNomUsager(nomUsager: CharSequence): Boolean {
         val estValide = validateur.validerNomUsager(nomUsager)
         vue.afficherErreurNomUsager(!estValide)
         return estValide
     }
 
-    override fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
+    /**
+     * Valide le mot de passe qu'un utilisateur a rentré
+     *
+     * @param motDePasse Un mot de passe qu'un utilisateur a entré
+     * @return Le mot de passe entrée est valide
+     */
+    private fun traiterRequêteValiderMotDePasse(motDePasse: CharSequence): Boolean {
         val estValide = validateur.validerMotDePasse(motDePasse)
         vue.afficherErreurMotDePasse(!estValide)
         return estValide
     }
 
-    override fun traiterRequêteValiderCourriel(courriel: CharSequence): Boolean {
+    /**
+     * Valide le courriel qu'un utilisateur a rentré
+     *
+     * @param courriel Un courriel qu'un utilisateur a entré
+     * @return Le courriel entrée est valide
+     */
+    private fun traiterRequêteValiderCourriel(courriel: CharSequence): Boolean {
         val estValide = validateur.validerCourriel(courriel)
         vue.afficherErreurCourriel(!estValide)
         return estValide
     }
 
-    override fun traiterRequêteValiderTelephone(telephone: CharSequence): Boolean {
+    /**
+     * Valide le telephone qu'un utilisateur a rentré
+     *
+     * @param telephone Un telephone qu'un utilisateur a entré
+     * @return Le telephone entrée est valide
+     */
+    private fun traiterRequêteValiderTelephone(telephone: CharSequence): Boolean {
         val estValide = validateur.validerTelephone(telephone)
         vue.afficherErreurTéléphone(!estValide)
         return estValide
