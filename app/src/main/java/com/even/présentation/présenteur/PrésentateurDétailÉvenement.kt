@@ -14,10 +14,19 @@ import okhttp3.internal.wait
 import retrofit2.Response
 import java.net.SocketTimeoutException
 
+/**
+ * Permet de faire les traitements dans la vue de détail d'un événement.
+ *
+ * @property vue La vue VueDétailsÉvénement
+ * @property modeleAuthentification Le modèle d'authentification
+ * @property modèleUtilisateurs Le modèle d'utilisateur
+ * @property modèleÉvénements Le modèle d'événement
+ * @property dispatcher Le contexte pour les coroutines
+ */
 @testOuvert
 class PrésentateurDétailÉvenement(
     var vue: IDétailÉvenement.IVue,
-    var modeleAu : ModèleAuthentification,
+    var modeleAuthentification : ModèleAuthentification,
     var modèleUtilisateurs : ModèleUtilisateurs,
     var modèleÉvénements : ModèleÉvénements,
     val dispatcher: UnCoroutineDispatcher
@@ -34,6 +43,13 @@ class PrésentateurDétailÉvenement(
     var idUtilisateurConnecté = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
     var nombreParticipant = 0
 
+    /**
+     * Cette méthode permet d'interroger les différents modèles afin d'aller chercher les informations
+     * d'un événement. C'est cette méthode qui s'occupera de l'affichage des détails de l'événement
+     * lorsqu'un événement est sélectionné.
+     *
+     * @param idEvenement C'est la clé unique qui identifie l'événement.
+     */
     override fun traiterRequêteAfficherDétailÉvenement(idEvenement: Int) {
         coroutileDétailÉvenement = CoroutineScope(dispatcher.io).launch {
             try {
@@ -77,6 +93,12 @@ class PrésentateurDétailÉvenement(
         }
     }
 
+    /**
+     * Cette méthode s'occupe d'ajouter ou retirer la participation d'un utilisateur en fonction
+     * de son status de participation qui est initialisé lorsque la vue est chargé.     *
+     *
+     * @param idEvenement C'est la clé unique qui identifie l'événement.
+     */
     override fun traiterRequêteAjouterRetirerParticipation(idEvenement: Int) {
         var reponseApi : Response<Void>
         val utilisateurÉvenement = UtilisateurÉvénement(idUtilisateurConnecté, idEvenement)
@@ -133,6 +155,11 @@ class PrésentateurDétailÉvenement(
         }
     }
 
+    /**
+     * Permet d'aller chercher la liste de participant à partir du modèle et de la passer
+     * à la vue pour en faire l'affichage.
+     *
+     */
     override fun traiterRequêteAfficherParticipants() {
         var liste : List<Utilisateur> = ArrayList<Utilisateur>()
         CoroutineScope(Dispatchers.IO).launch {
@@ -153,6 +180,11 @@ class PrésentateurDétailÉvenement(
         }
     }
 
+    /**
+     * Permet d'aller chercher la liste de commentaire à partir du modèle et de la passer
+     * à la vue pour en faire l'affichage.
+     *
+     */
     override fun traiterRequêteAfficherCommentaires() {
         var liste : List<Commentaire> = ArrayList<Commentaire>()
         CoroutineScope(Dispatchers.IO).launch {
@@ -170,6 +202,12 @@ class PrésentateurDétailÉvenement(
         }
     }
 
+    /**
+     * Permet de faire la vérification pour voir si l'utilisateur sélectionné participe
+     * ou ne participe pas à l'événement en cours. À partir de la variable de classe participation,
+     * le texte du bouton de participation sera changé dans la vue.
+     *
+     */
     private fun vérifierParticipation() {
         if (!(listeÉvénementsClient?.isEmpty())!!) {
             for (evenement : Événement in listeÉvénementsClient!!) {
@@ -185,6 +223,11 @@ class PrésentateurDétailÉvenement(
         }
     }
 
+    /**
+     * Permet de changer la date en tableau.
+     *
+     * @return Retourne la date sous forme de tableau.
+     */
     private fun setDatePourCalendrier() : IntArray {
         val array = IntArray(5)
         val date = evenementEnCours!!.date

@@ -4,8 +4,21 @@ import com.even.domaine.entité.Commentaire
 import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.testOuvert
 
+/**
+ * Permet d'interagir avec la source de donnée pour aller chercher les informations nécessaire.
+ *
+ * @property _source La source de données avec laquelle interagir
+ */
 @testOuvert
 class IntGetCommentaires(var _source: ISourceDeDonnées) {
+
+    /**
+     * Méthode qui permet d'aller chercher le liste de commentaire relié à un événement
+     * à partir de la source de donnée.
+     *
+     * @param id Clé unique qui représente l'événement sélectionné
+     * @return La liste de commentaire de l'événement.
+     */
     suspend fun getCommentairesParÉvénement(id: Int): List<Commentaire> {
         var listeCommentaires = _source.getCommentairesParEvenement(id)
         if (listeCommentaires.isNullOrEmpty()) listeCommentaires = ArrayList<Commentaire>()

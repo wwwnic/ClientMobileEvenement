@@ -16,7 +16,11 @@ import com.even.présentation.présenteur.PrésentateurListeÉvénements
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.ListeCarteÉvénements
 
-
+/**
+ * La vue d'accueil une fois que l'utilisateur est connecté.
+ * Elle affiche la liste des événements sous forme de carte.
+ *
+ */
 class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeEvenements.IVue {
 
     lateinit var fragmentLoader: FragmentLoader
@@ -44,6 +48,12 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
         imageErreur = view.findViewById(R.id.imageErreur)
     }
 
+    /**
+     * Méthode qui permet de faire l'affichage des événements sous forme de carte.
+     *
+     * @param listeEvens Liste d'événement à afficher
+     * @param imageUrl Chaine de caractère de l'url de l'image
+     */
     override fun afficherListeEvenements(listeEvens: List<Événement>, imageUrl: (Int) -> String) {
         if (!listeEvens.isEmpty()) {
             chargement.visibility = View.INVISIBLE
@@ -58,16 +68,29 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
         }
     }
 
+    /**
+     * Permet de rediriger vers les détails d'un événement
+     *
+     */
     override fun afficherDétailsÉvénement() {
         fragmentLoader.loadFragment(VueDetailsEvenement())
     }
 
+    /**
+     * Méthode qui permet d'afficher une image et un texte lorsqu'une erreur survient.
+     *
+     */
     override fun afficherErreurConnexion() {
         chargement.visibility = View.INVISIBLE
         imageErreur.visibility = View.VISIBLE
         textErreur.visibility = View.VISIBLE
     }
 
+    /**
+     * Méthode qui permet d'afficher une image et un texte lorsqu'aucun événement n'est retourné
+     * lors d'une recherche.
+     *
+     */
     override fun afficherAucunRésultatRecherche() {
         chargement.visibility = View.INVISIBLE
         imageErreur.visibility = View.VISIBLE

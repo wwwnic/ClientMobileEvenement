@@ -14,6 +14,10 @@ import com.even.présentation.présenteur.PrésentateurModification
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
+/**
+ * La vue qui permet de faire les modifications à un événement existant.
+ *
+ */
 class VueModifierEvenement : Fragment(R.layout.fragment_modifier_evenement),
 IModificationÉvénement.IVue {
     lateinit var fragmentLoader: FragmentLoader
@@ -58,6 +62,11 @@ IModificationÉvénement.IVue {
         texteDate.setOnClickListener { afficherSelecteurDate() }
     }
 
+    /**
+     *
+     *
+     * @param modification
+     */
     override fun afficherÉvénementModifiéOuRetourMenu(modification: Boolean) {
         if (modification) {
             Toast.makeText(requireContext(), "Événement modifié.", Toast.LENGTH_SHORT).show()
@@ -68,6 +77,12 @@ IModificationÉvénement.IVue {
         }
     }
 
+    /**
+     * Méthode qui permet de remplir les champs lorsque la vue est appelé à partir des informations
+     * de l'événement en paramètre
+     *
+     * @param événement L'événement sélectionné.
+     */
     override fun remplirChamps(événement : Événement) {
         texteNom.setText(événement.nomEvenement)
         texteDate.text = événement.date
@@ -75,11 +90,20 @@ IModificationÉvénement.IVue {
         texteDescription.setText(événement.description)
     }
 
+    /**
+     * Permet d'afficher le sélecteur de date lorsque l'utilisateur veut modifier la date
+     *  ou l'heure de l'événement.
+     *
+     */
     private fun afficherSelecteurDate() {
         val selecteur = SelecteurDate(texteDate = texteDate, "modification")
         selecteur.show(requireActivity().supportFragmentManager, null)
     }
 
+    /**
+     * Affiche simplement un toast lorsqu'une erreur survient.
+     *
+     */
     override fun afficherErreurConnexion() {
         Toast.makeText(requireContext(), R.string.serveur_error, Toast.LENGTH_SHORT).show()
     }

@@ -7,6 +7,11 @@ import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
+/**
+ * Permet de faire les traitements dans la vue de gestion de mes événements.
+ *
+ * @property vue La vue VueMesÉvénements
+ */
 class PrésentateurMesÉvènements(
     val vue: IMesÉvènements.IVue,
 ) : IMesÉvènements.IPrésentateur {
@@ -15,6 +20,11 @@ class PrésentateurMesÉvènements(
 
     val modèleÉvénements = ModèleÉvénements()
 
+    /**
+     * Lance une coroutine pour recuperer ses évènements ou ses participations selon l'onglet
+     *
+     * @param estSurOngletMesÉvènement est vrai si l'utilisateur est sur l'onglet mes évènements
+     */
     override fun traiterRequêtelancerCoroutine(estSurOngletMesÉvènement: Boolean) {
         val idUtilisateur = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
         coroutine?.cancel()
@@ -37,6 +47,11 @@ class PrésentateurMesÉvènements(
         }
     }
 
+    /**
+     * Affiche l'évènement que l'utilisateur à choisi
+     *
+     * @param idÉvénement l'id de l'évènement selectionné
+     */
     override fun traiterRequêteAfficherÉvénement(idÉvénement: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -52,6 +67,11 @@ class PrésentateurMesÉvènements(
         }
     }
 
+    /**
+     * Permets d'afficher une liste d'évènement quelconque
+     *
+     * @param lstÉvènement Une liste d'évènement à afficher
+     */
     private fun afficherlstÉvènement(lstÉvènement: List<Événement>) {
         if (lstÉvènement.isNotEmpty()) {
             vue.afficherListeEvenements(

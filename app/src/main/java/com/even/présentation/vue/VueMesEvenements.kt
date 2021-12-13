@@ -14,6 +14,10 @@ import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.ListeCarteÉvénements
 import com.google.android.material.tabs.TabLayout
 
+/**
+ *  Une vue qui permet d'interagir avec le fragment mes evenements
+ *
+ */
 class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvènements.IVue {
 
     lateinit var fragmentLoader: FragmentLoader
@@ -61,6 +65,12 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
         })
     }
 
+    /**
+     * Affiche la liste d'évènements
+     *
+     * @param listeEvens une liste d'évènement à afficher
+     * @param imageUrl le lien de l'image de l'évènement
+     */
     override fun afficherListeEvenements(
         lstÉvènenement: List<Événement>,
         imageUrl: (Int) -> String
@@ -72,6 +82,11 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
         }
     }
 
+    /**
+     * Affiche une liste évènement et permets de le sélectionner
+     * @param lstÉvènenement une liste d'évènement
+     * @param imageUrl le lien des images des évènements
+     */
     private fun afficherÉvènementCliquable(
         lstÉvènenement: List<Événement>,
         imageUrl: (Int) -> String
@@ -85,12 +100,23 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
         }
     }
 
+    /**
+     * Navigue vers les détails de l'évènement ou la modification
+     * de l'évènement selon le filtre actif.
+     */
     override fun afficherÉvénementSelectionné() {
         fragmentLoader.loadFragment(
             if (estSurMesÉvènement) VueModifierEvenement() else VueDetailsEvenement()
         )
     }
 
+    /**
+     * Affiche un message indiquant à l'utilisateur qu'il y a
+     * aucun évènement à afficher selon le filtre selectionné
+     *
+     * @param listeEvens une liste d'évènement à afficher
+     * @param imageUrl le lien de l'image de l'évènement
+     */
     override fun afficherAucunRésultatRecherche(estErreurConnexion: Boolean) {
         chargement.visibility = View.INVISIBLE
         emojiTriste.visibility = View.VISIBLE
