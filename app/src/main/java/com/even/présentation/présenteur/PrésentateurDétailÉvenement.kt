@@ -14,10 +14,19 @@ import okhttp3.internal.wait
 import retrofit2.Response
 import java.net.SocketTimeoutException
 
+/**
+ * Permet de faire les traitements dans la vue de détail d'un événement.
+ *
+ * @property vue La vue VueDétailsÉvénement
+ * @property modeleAuthentification Le modèle d'authentification
+ * @property modèleUtilisateurs Le modèle d'utilisateur
+ * @property modèleÉvénements Le modèle d'événement
+ * @property dispatcher Le contexte pour les coroutines
+ */
 @testOuvert
 class PrésentateurDétailÉvenement(
     var vue: IDétailÉvenement.IVue,
-    var modeleAu : ModèleAuthentification,
+    var modeleAuthentification : ModèleAuthentification,
     var modèleUtilisateurs : ModèleUtilisateurs,
     var modèleÉvénements : ModèleÉvénements,
     val dispatcher: UnCoroutineDispatcher

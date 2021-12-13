@@ -9,6 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Permet de faire les traitements dans la vue de création d'événement
+ *
+ * @property vue La vue VueCréationÉvénement
+ */
 class PrésentateurCreationÉvénement(
     val vue: ICreationEvenement.IVue
 ) : ICreationEvenement.IPrésentateur {

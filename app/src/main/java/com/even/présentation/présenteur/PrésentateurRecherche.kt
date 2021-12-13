@@ -1,5 +1,10 @@
 package com.even.présentation.présenteur
 
+/**
+ * Permet de faire les traitements dans la vue de recherche d'événement
+ *
+ * @property vue La vue VueRecherche
+ */
 class PrésentateurRecherche(
     val vue : IRecherche.IVue
 ) : IRecherche.IPrésentateur{

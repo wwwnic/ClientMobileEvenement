@@ -9,6 +9,13 @@ import com.even.présentation.modèle.ModèleAuthentification
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
+/**
+ * Permet de faire les traitements dans la vue d'enregistrement
+ *
+ * @property vue Le vue VueEnregistrement
+ * @property modeleAuthentification Le modèle d'authentification
+ * @property validateur Le validateur d'entrée utilisateur
+ */
 class PrésentateurEnregistrement(
     val vue: IEnregistrement.IVue,
     val modeleAuthentification: ModèleAuthentification,

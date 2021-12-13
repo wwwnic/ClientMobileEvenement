@@ -9,6 +9,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
 
+/**
+ * Permet de faire les traitements dans la vue de la liste d'événement
+ *
+ * @property vue La vue VueListeÉvénement
+ */
 class PrésentateurListeÉvénements(
     val vue : IListeEvenements.IVue,
 ) : IListeEvenements.IPrésentateur {

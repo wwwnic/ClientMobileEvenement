@@ -14,6 +14,10 @@ import com.even.présentation.présenteur.PrésentateurModification
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
+/**
+ * La vue qui permet de faire les modifications à un événement existant.
+ *
+ */
 class VueModifierEvenement : Fragment(R.layout.fragment_modifier_evenement),
 IModificationÉvénement.IVue {
     lateinit var fragmentLoader: FragmentLoader

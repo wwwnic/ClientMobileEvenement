@@ -14,7 +14,10 @@ import com.even.présentation.présenteur.PrésentateurCreationÉvénement
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
-
+/**
+ * La vue qui s'occupe de gérer la création d'événement
+ *
+ */
 class VueCreationEvenement : Fragment(R.layout.fragment_creation_evenement),
     ICreationEvenement.IVue {
 

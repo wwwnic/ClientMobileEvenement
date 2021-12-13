@@ -15,7 +15,11 @@ import com.even.présentation.présenteur.PrésentateurListeÉvénements
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.ListeCarteÉvénements
 
-
+/**
+ * La vue d'accueil une fois que l'utilisateur est connecté.
+ * Elle affiche la liste des événements sous forme de carte.
+ *
+ */
 class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeEvenements.IVue {
 
     lateinit var fragmentLoader: FragmentLoader

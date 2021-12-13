@@ -11,6 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Permet de faire les traitements dans la vue de création de commentaire
+ *
+ * @property vue La vue VueCréationCommentaire
+ */
 class PrésentateurCreationCommentaire(
     val vue : ICreationCommentaire.IVue
     ) : ICreationCommentaire.IPrésentateur {

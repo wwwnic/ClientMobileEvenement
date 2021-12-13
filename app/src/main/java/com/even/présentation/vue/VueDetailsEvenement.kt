@@ -33,7 +33,10 @@ import com.even.ui.composants.ListeCarteUtilisateurs
 import com.google.android.material.tabs.TabLayout
 import java.util.*
 
-
+/**
+ * La vue qui affiche les informations détaillé de l'événement.
+ *
+ */
 class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue {
 
     lateinit var fragmentLoader: FragmentLoader

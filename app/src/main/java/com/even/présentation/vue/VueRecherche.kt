@@ -13,7 +13,10 @@ import com.even.présentation.présenteur.PrésentateurRecherche
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
-
+/**
+ * La vue qui s'occupe de gérer la recherche d'événement à partir de critère.
+ *
+ */
 class VueRecherche : Fragment(R.layout.fragment_recherche), IRecherche.IVue {
 
     lateinit var fragmentLoader: FragmentLoader

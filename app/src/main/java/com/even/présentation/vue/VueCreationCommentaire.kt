@@ -12,6 +12,10 @@ import com.even.présentation.présenteur.PrésentateurCreationCommentaire
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
 import com.even.ui.composants.FragmentLoader
 
+/**
+ * La vue qui s'occupe de gérer la création de commentaire.
+ *
+ */
 class VueCreationCommentaire : Fragment(R.layout.fragment_creation_commentaire),
 ICreationCommentaire.IVue {
 

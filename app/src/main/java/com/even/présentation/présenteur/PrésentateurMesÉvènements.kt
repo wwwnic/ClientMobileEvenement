@@ -7,6 +7,11 @@ import com.even.présentation.modèle.ModèleÉvénements
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
+/**
+ * Permet de faire les traitements dans la vue de gestion de mes événements.
+ *
+ * @property vue La vue VueMesÉvénements
+ */
 class PrésentateurMesÉvènements(
     val vue: IMesÉvènements.IVue,
 ) : IMesÉvènements.IPrésentateur {

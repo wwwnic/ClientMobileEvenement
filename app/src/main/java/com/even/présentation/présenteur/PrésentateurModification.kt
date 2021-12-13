@@ -7,6 +7,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Permet de faire les traitements dans la vue de modification d'événement
+ *
+ * @property vue La vue VueModifierÉvénement
+ */
 class PrésentateurModification(
     val vue : IModificationÉvénement.IVue
 ) : IModificationÉvénement.IPrésentateur {
