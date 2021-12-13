@@ -40,15 +40,29 @@ ICreationCommentaire.IVue {
         }
     }
 
+    /**
+     * Méthode qui permet de rediriger vers la vue des détails de l'événement lorsque
+     * l'utilisateur a ajouté un commentaire.
+     *
+     */
     override fun afficherVueDétailsÉvénement() {
         Toast.makeText(context, R.string.commentCreated, Toast.LENGTH_LONG).show()
         fragmentLoader.loadFragment(VueDetailsEvenement())
     }
 
+    /**
+     * Méthode qui permet de modifier le nom de l'événement
+     *
+     * @param nom Nouveau nom à remplacer
+     */
     override fun afficherNomÉvénement(nom: String) {
         texteNomÉvénement.text = nom
     }
 
+    /**
+     * Affiche simplement un toast disant qu'une erreur niveau serveur est survenu.
+     *
+     */
     override fun afficherToastErreurServeur() {
         Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
     }

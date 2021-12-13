@@ -137,7 +137,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     }
 
     /**
-     * Ajoute l'écouteur sur le bouton de prticipation.
+     * Ajoute l'écouteur sur le bouton de participation.
      *
      */
     private fun clickListenerParticipation() {
