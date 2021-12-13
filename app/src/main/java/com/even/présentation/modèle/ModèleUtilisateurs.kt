@@ -5,6 +5,11 @@ import com.even.domaine.interacteur.IntGetUtilisateur
 import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.testOuvert
 
+/**
+ * Permet d'aller chercher les informations nécessaire dans l'intéracteur.
+ *
+ * @property intGetUtilisateur un intéracteur pour permettre l'accès à la source de donnée.
+ */
 @testOuvert
 class ModèleUtilisateurs(
     val intGetUtilisateur : IntGetUtilisateur

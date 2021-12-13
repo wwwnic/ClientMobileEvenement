@@ -4,6 +4,11 @@ import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.testOuvert
 
+/**
+ * Permet d'interagir avec la source de donnée pour aller chercher les informations nécessaire.
+ *
+ * @property _source La source de données avec laquelle interagir
+ */
 @testOuvert
 class IntGetÉvénement(var _source: ISourceDeDonnées) {
 

@@ -5,6 +5,11 @@ import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.testOuvert
 import retrofit2.Response
 
+/**
+ * Permet d'interagir avec la source de donnée pour aller chercher les informations nécessaire.
+ *
+ * @property _source La source de données avec laquelle interagir
+ */
 @testOuvert
 class IntGestionÉvénement(var _source: ISourceDeDonnées) {
 

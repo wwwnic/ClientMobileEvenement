@@ -8,6 +8,17 @@ import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.testOuvert
 import retrofit2.Response
 
+/**
+ * Permet d'aller chercher les informations nécessaire dans l'intéracteur.
+ * Garde aussi une instance de l'événement sélectionné en mémoire.
+ *
+ * @property intGetÉvénement Un intéracteur pour aller chercher un événement.
+ * @property intGestionÉvénement Un intéracteur pour faire la gestion d'un événement
+ * @property intDétailÉvenement Un intéracteur pour faire la gestion des détails d'un événement
+ * @property intGetCommentaires Un intéracteur pour aller chercher les commentaire d'un événement
+ * @property intCreerCommentaire Un intérateur pour ajouter des commentaires
+ * @property intGetUtilisateur Un intéracteur pour aller chercher un utilisateur
+ */
 @testOuvert
 class ModèleÉvénements(
     val intGetÉvénement : IntGetÉvénement,

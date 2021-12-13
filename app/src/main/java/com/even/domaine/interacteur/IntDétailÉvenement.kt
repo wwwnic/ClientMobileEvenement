@@ -1,13 +1,17 @@
 package com.even.domaine.interacteur
 
 import com.even.domaine.entité.UtilisateurÉvénement
-import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.testOuvert
 import retrofit2.Response
 
+/**
+ * Permet d'interagir avec la source de donnée pour aller chercher les informations nécessaire.
+ *
+ * @property _source La source de données avec laquelle interagir
+ */
 @testOuvert
-class IntDétailÉvenement(val api: ISourceDeDonnées) {
+class IntDétailÉvenement(val _source: ISourceDeDonnées) {
 
     /**
      * Méthode qui permet d'ajouter la participation d'un utilisateur à un événement.
@@ -16,7 +20,7 @@ class IntDétailÉvenement(val api: ISourceDeDonnées) {
      * @return Réponse vide de l'api
      */
     suspend fun ajouterParticipation(utilisateurÉvenement: UtilisateurÉvénement): Response<Void> {
-        val reponseRequête = api.ajouterParticipation(utilisateurÉvenement)
+        val reponseRequête = _source.ajouterParticipation(utilisateurÉvenement)
         return reponseRequête
     }
 
@@ -27,7 +31,7 @@ class IntDétailÉvenement(val api: ISourceDeDonnées) {
      * @return Réponse vide de l'api
      */
     suspend fun retirerParticipation(utilisateurÉvenement: UtilisateurÉvénement): Response<Void> {
-        val reponseRequête = api.retirerParticipation(utilisateurÉvenement)
+        val reponseRequête = _source.retirerParticipation(utilisateurÉvenement)
         return reponseRequête
     }
 
