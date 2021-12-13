@@ -130,7 +130,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtils
     }
 
-    override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
+    suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
         return listeUtilEven
     }
 
