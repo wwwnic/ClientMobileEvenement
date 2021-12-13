@@ -35,6 +35,12 @@ class ModèleÉvénements(
         }
     }
 
+    /**
+     * Méthode qui permet de sauvegarder les informations de l'événement directement dans le modèle
+     * pour pouvoir y accéder facilement dans les présentateurs
+     *
+     * @param id Clé unique qui représente l'événement à garder en mémoire.
+     */
     suspend fun setÉvénementPrésenté(id : Int) {
         var événement = intGetÉvénement.getÉvénementParId(id)
         événement!!.organisateur = intGetUtilisateur.getParId(événement.idOrganisateur)
@@ -43,10 +49,25 @@ class ModèleÉvénements(
         événementPrésenté = événement
     }
 
+    /**
+     * Méthode qui permet de faire la recherche de tous les événements présent dans la source de donnée
+     *
+     * @return Retourne la liste des événements trouvé.
+     */
     suspend fun getÉvénementsRécents(): List<Événement> {
         return intGetÉvénement.getÉvénementsRécents()
     }
 
+    /**
+     * Méthode qui permet de faire la recherche d'un événement à partir de plusieurs critère.
+     *
+     * @param nom Nom de l'événement à rechercher
+     * @param mois Mois durant lequel l'événement à rechercher se déroulera
+     * @param location L'endroit dans lequel l'événement à rechercher se déroulera
+     * @param organisateur Le nom de l'utilisateur qui organise l'événement à rechercher.
+     *
+     * @return Retourne l'événement trouvé
+     */
     suspend fun getÉvénementsParRecherche(
         nom: String,
         mois: String,
