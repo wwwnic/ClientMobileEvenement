@@ -184,7 +184,7 @@ interface IApiService {
     /**
      * Méthode qui permet de faire une requête à l'api pour retirer la participation d'un utilisateur
      * dans un événement.
-     * 
+     *
      * @param utilisateurÉvenement Objet qui a comme clé unique le Id de l'utilisateur et de l'événement
      * @return Réponse vide de l'api
      */
