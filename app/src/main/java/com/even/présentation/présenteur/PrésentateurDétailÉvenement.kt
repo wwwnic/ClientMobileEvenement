@@ -4,92 +4,38 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Log
-import com.even.domaine.entité.Commentaire
-import com.even.domaine.entité.Utilisateur
-import com.even.domaine.entité.UtilisateurÉvénement
-import com.even.domaine.entité.Événement
+import com.even.domaine.entité.*
 import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
+import com.even.testOuvert
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
 import retrofit2.Response
 import java.net.SocketTimeoutException
 
+@testOuvert
 class PrésentateurDétailÉvenement(
     var vue: IDétailÉvenement.IVue,
+    var modeleAu : ModèleAuthentification,
+    var modèleUtilisateurs : ModèleUtilisateurs,
+    var modèleÉvénements : ModèleÉvénements,
+    val dispatcher: UnCoroutineDispatcher
+
 ) : IDétailÉvenement.IPrésentateur {
-    private val handlerRéponse: Handler
 
     private var evenementEnCours: Événement? = ModèleÉvénements.événementPrésenté
 
-    val modèleÉvénements = ModèleÉvénements()
-    val modèleUtilisateurs = ModèleUtilisateurs()
-
     private var coroutileDétailÉvenement: Job? = null
 
-    private var participation : Boolean? = null
+    var participation : Boolean? = null
 
     var listeÉvénementsClient : List<Événement>? = null
-    val idUtilisateurConnecté = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
+    var idUtilisateurConnecté = ModèleAuthentification.utilisateurConnecté?.idUtilisateur!!
     var nombreParticipant = 0
 
-    private val MSG_ECHEC = 0
-    private val MSG_ANNULER = 1
-    private val MSG_RÉUSSI_GET_INFO = 2
-    private val MSG_RÉUSSI_AJOUTER_PARTICIPATION = 3
-    private val MSG_RÉUSSI_RETIRER_PARTICIPATION = 4
-
-    init {
-        handlerRéponse = object : Handler(Looper.getMainLooper()) {
-            override fun handleMessage(msg: Message) {
-                super.handleMessage(msg)
-
-                if (msg.what == MSG_RÉUSSI_GET_INFO) {
-                    vue.setInfo(evenementEnCours!!)
-                    vue.setNombreParticipant(nombreParticipant)
-
-                    if (evenementEnCours!!.idOrganisateur == idUtilisateurConnecté) {
-                        vue.cacherBoutonParticipation()
-
-                    } else if (participation == true) {
-                        vue.afficherNePlusParticiper()
-
-                    } else {
-                        vue.afficherParticipation()
-                    }
-
-                } else if (msg.what == MSG_RÉUSSI_AJOUTER_PARTICIPATION) {
-                    participation = true
-                    vue.afficherNePlusParticiper()
-                    vue.afficherToastParticipationAjouté()
-                    vue.afficherApplicationCalendrierPourAjouter(setDatePourCalendrier())
-
-                } else if  (msg.what == MSG_RÉUSSI_RETIRER_PARTICIPATION) {
-                    participation = false
-                    vue.afficherParticipation()
-                    vue.afficherToastParticipationRetiré()
-                    vue.afficherApplicationCalendrierPourEffacer(setDatePourCalendrier())
-
-                } else if (msg.what == MSG_ECHEC) {
-                    vue.afficherToastErreurServeur()
-                    Log.e(
-                        "Évèn",
-                        "Le serveur a retourné une erreur"
-                    )
-
-                } else {
-                    coroutileDétailÉvenement?.cancel()
-                    vue.afficherToastErreurServeur()
-                    Log.e("Évèn", "Erreur d'accès à l'API", msg.obj as Throwable)
-                }
-            }
-        }
-    }
-
     override fun traiterRequêteAfficherDétailÉvenement(idEvenement: Int) {
-        coroutileDétailÉvenement = CoroutineScope(Dispatchers.IO).launch {
-            var msg: Message?
+        coroutileDétailÉvenement = CoroutineScope(dispatcher.io).launch {
             try {
                 evenementEnCours!!.urlImage = modèleÉvénements.getImageÉvénement(evenementEnCours!!.idEvenement)
 
@@ -97,29 +43,45 @@ class PrésentateurDétailÉvenement(
 
                 nombreParticipant = modèleUtilisateurs.getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement).count()
 
-
                 withContext(Dispatchers.Main) {
                     vue.montrerLesDetailsEvenement()
                     vérifierParticipation()
+
                     if (evenementEnCours != null && participation != null && nombreParticipant != 0) {
-                        msg = handlerRéponse.obtainMessage(MSG_RÉUSSI_GET_INFO)
+                        vue.setInfo(evenementEnCours!!)
+                        vue.setNombreParticipant(nombreParticipant)
+
+                        if (evenementEnCours!!.idOrganisateur == idUtilisateurConnecté) {
+                            vue.cacherBoutonParticipation()
+
+                        } else if (participation == true) {
+                            vue.afficherNePlusParticiper()
+
+                        } else {
+                            vue.afficherParticipation()
+                        }
+
                     } else {
-                        msg = handlerRéponse.obtainMessage(MSG_ECHEC)
+                        vue.afficherToastErreurServeur()
+                        Log.e(
+                            "Évèn",
+                            "Le serveur a retourné une erreur"
+                        )
                     }
                 }
             } catch (e: Exception) {
-                msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
+                coroutileDétailÉvenement?.cancel()
+                vue.afficherToastErreurServeur()
+                Log.e("Évèn", "Erreur d'accès à l'API")
             }
-            handlerRéponse.sendMessage(msg!!)
         }
     }
 
-    override fun traiterRequêteAjouterParticipation(idEvenement: Int) {
+    override fun traiterRequêteAjouterRetirerParticipation(idEvenement: Int) {
         var reponseApi : Response<Void>
         val utilisateurÉvenement = UtilisateurÉvénement(idUtilisateurConnecté, idEvenement)
 
         coroutileDétailÉvenement = CoroutineScope(Dispatchers.IO).launch {
-            var msg : Message?
 
             if (participation == false) {
                 try {
@@ -127,13 +89,22 @@ class PrésentateurDétailÉvenement(
 
                     withContext(Dispatchers.Main) {
                         if (reponseApi.isSuccessful) {
-                            msg = handlerRéponse.obtainMessage(MSG_RÉUSSI_AJOUTER_PARTICIPATION)
+                            participation = true
+                            vue.afficherNePlusParticiper()
+                            vue.afficherToastParticipationAjouté()
+                            vue.afficherApplicationCalendrierPourAjouter(setDatePourCalendrier())
                         } else {
-                            msg = handlerRéponse.obtainMessage(MSG_ECHEC)
+                            vue.afficherToastErreurServeur()
+                            Log.e(
+                                "Évèn",
+                                "Le serveur a retourné une erreur"
+                            )
                         }
                     }
                 } catch (e : Exception){
-                    msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
+                    coroutileDétailÉvenement?.cancel()
+                    vue.afficherToastErreurServeur()
+                    Log.e("Évèn", "Erreur d'accès à l'API")
                 }
             } else {
                 try {
@@ -141,16 +112,24 @@ class PrésentateurDétailÉvenement(
 
                     withContext(Dispatchers.Main) {
                         if (reponseApi.isSuccessful) {
-                            msg = handlerRéponse.obtainMessage(MSG_RÉUSSI_RETIRER_PARTICIPATION)
+                            participation = false
+                            vue.afficherParticipation()
+                            vue.afficherToastParticipationRetiré()
+                            vue.afficherApplicationCalendrierPourEffacer(setDatePourCalendrier())
                         } else {
-                            msg = handlerRéponse.obtainMessage(MSG_ECHEC)
+                            vue.afficherToastErreurServeur()
+                            Log.e(
+                                "Évèn",
+                                "Le serveur a retourné une erreur"
+                            )
                         }
                     }
                 } catch (e : Exception){
-                    msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
+                    coroutileDétailÉvenement?.cancel()
+                    vue.afficherToastErreurServeur()
+                    Log.e("Évèn", "Erreur d'accès à l'API")
                 }
             }
-            handlerRéponse.sendMessage(msg!!)
         }
     }
 

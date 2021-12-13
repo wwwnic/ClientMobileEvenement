@@ -19,8 +19,11 @@ import androidx.fragment.app.Fragment
 import coil.load
 import com.even.R
 import com.even.domaine.entité.Commentaire
+import com.even.domaine.entité.UnCoroutineDispatcher
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.Événement
+import com.even.présentation.modèle.ModèleAuthentification
+import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
 import com.even.présentation.présenteur.IDétailÉvenement
 import com.even.présentation.présenteur.PrésentateurDétailÉvenement
@@ -59,7 +62,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
 
         fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
 
-        présentateur = PrésentateurDétailÉvenement(this)
+        présentateur = PrésentateurDétailÉvenement(this, ModèleAuthentification(), ModèleUtilisateurs(), ModèleÉvénements(), UnCoroutineDispatcher())
 
         barreTab = view.findViewById(R.id.barreTabDetailsEven)
 
@@ -139,7 +142,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
      */
     private fun clickListenerParticipation() {
         btnParticipation.setOnClickListener {
-            présentateur.traiterRequêteAjouterParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
+            présentateur.traiterRequêteAjouterRetirerParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
         }
 
     }
