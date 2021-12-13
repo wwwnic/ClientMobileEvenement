@@ -16,6 +16,11 @@ class PrésentateurListeÉvénements(
     lateinit var liste : List<Événement>
     val modèleÉvénements = ModèleÉvénements()
 
+    /**
+     * Méthode qui permet d'aller chercher la liste de tous les événements à afficher et de la passer
+     * à la vue pour faire l'affichage.
+     *
+     */
     override fun traiterRequêteAfficherListeRecents() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -35,6 +40,12 @@ class PrésentateurListeÉvénements(
         }
     }
 
+    /**
+     * Méthode qui permet d'aller chercher la liste d'événement à partir d'une recherche et de la passer
+     * à la vue pour faire l'affichage.
+     *
+     * @param tag Chaine de caractère qui représente la recherche de l'utilisateur.
+     */
     override fun traiterRequêteAfficherListeRecherche(tag : String) {
         var motCles = tag.split(":")
         CoroutineScope(Dispatchers.IO).launch {
@@ -62,6 +73,12 @@ class PrésentateurListeÉvénements(
         }
     }
 
+    /**
+     * Méthode qui permet de mettre l'événement sélectionnéé dans le modèle et de rediriger vers la
+     * vue des détails de l'événement sélectionné.
+     *
+     * @param idÉvénement Clé unique qui représente l'événement sélectionné.
+     */
     override fun traiterRequêteAfficherDétailsÉvénement(idÉvénement : Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
