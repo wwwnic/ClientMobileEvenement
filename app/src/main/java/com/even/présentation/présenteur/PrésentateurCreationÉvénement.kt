@@ -15,6 +15,14 @@ class PrésentateurCreationÉvénement(
 
     val modèleÉvénements = ModèleÉvénements()
 
+    /**
+     * Méthode qui permet d'ajouter un nouvel événement à la source de donnée.
+     *
+     * @param nom Nom de l'événement
+     * @param date Date de l'événement
+     * @param location Endroit de l'événement
+     * @param description Description de l'événement
+     */
     override fun traiterRequêteCréerÉvénement(
         nom: String,
         date: String,

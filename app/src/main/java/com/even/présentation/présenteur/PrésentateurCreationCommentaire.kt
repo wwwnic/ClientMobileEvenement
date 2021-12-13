@@ -17,10 +17,20 @@ class PrésentateurCreationCommentaire(
 
     val modèleÉvénements = ModèleÉvénements()
 
+    /**
+     * Méthode qui permet de faire l'affichage dans la vue du nom de l'événement sélectionné.
+     *
+     */
     override fun traiterRequêteAfficherNomÉvénement() {
         vue.afficherNomÉvénement(ModèleÉvénements.événementPrésenté!!.nomEvenement)
     }
 
+    /**
+     * Méthode qui permet de faire l'ajout d'un commentaire dans l'événement sélectionné.
+     * Lorsque le commentaire est ajouté, l'utilisateur est rediriger sur la vue détail de l'événement.
+     *
+     * @param texte Texte du commentaire en question
+     */
     override fun traiterRequêteAjouterCommentaire(texte: String) {
         val événementCommenté = ModèleÉvénements.événementPrésenté
         val utilisateur = ModèleAuthentification.utilisateurConnecté
