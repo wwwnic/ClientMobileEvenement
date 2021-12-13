@@ -13,7 +13,10 @@ import com.even.présentation.présenteur.PrésentateurRecherche
 import com.even.ui.composants.FragmentLoader
 import com.even.ui.composants.SelecteurDate
 
-
+/**
+ * La vue qui s'occupe de gérer la recherche d'événement à partir de critère.
+ *
+ */
 class VueRecherche : Fragment(R.layout.fragment_recherche), IRecherche.IVue {
 
     lateinit var fragmentLoader: FragmentLoader
@@ -50,15 +53,28 @@ class VueRecherche : Fragment(R.layout.fragment_recherche), IRecherche.IVue {
         texteMois.setOnClickListener { afficherSelecteurDate() }
     }
 
+    /**
+     * Méthode qui permet de faire l'affichage de la liste d'événement retourné après la recherche
+     *
+     * @param tag Chaine de caratère de la recherche
+     */
     override fun afficherRésultatsRecherche(tag: String) {
         fragmentLoader.loadFragment(VueListeEvenement(), tag)
     }
 
+    /**
+     * Méthode qui permet d'afficher un sélecteur de date pour lancer la recherche avec le mois
+     *
+     */
     private fun afficherSelecteurDate() {
         val selecteur = SelecteurDate(texteDate = texteMois, "recherche")
         selecteur.show(requireActivity().supportFragmentManager, null)
     }
 
+    /**
+     * Méthode qui affiche simplement un toast lorsqu'aucun mot-clé n'est entré.
+     *
+     */
     override fun afficherMessageAucunMotCle() {
         Toast.makeText(requireContext(), "Aucun mot-clé entré.", Toast.LENGTH_SHORT).show()
     }
