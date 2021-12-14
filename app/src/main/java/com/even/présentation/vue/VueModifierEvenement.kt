@@ -8,7 +8,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.even.R
+import com.even.domaine.entité.UnCoroutineDispatcher
 import com.even.domaine.entité.Événement
+import com.even.présentation.modèle.ModèleÉvénements
 import com.even.présentation.présenteur.IModificationÉvénement
 import com.even.présentation.présenteur.PrésentateurModification
 import com.even.ui.composants.FragmentLoader
@@ -19,7 +21,7 @@ import com.even.ui.composants.SelecteurDate
  *
  */
 class VueModifierEvenement : Fragment(R.layout.fragment_modifier_evenement),
-IModificationÉvénement.IVue {
+    IModificationÉvénement.IVue {
     lateinit var fragmentLoader: FragmentLoader
 
     lateinit var présentateur: PrésentateurModification
@@ -29,13 +31,15 @@ IModificationÉvénement.IVue {
     lateinit var texteLocation: EditText
     lateinit var texteDescription: EditText
     lateinit var boutonModifier: Button
-    lateinit var boutonAnnuler : Button
+    lateinit var boutonAnnuler: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
 
-        présentateur = PrésentateurModification(this)
+        présentateur = PrésentateurModification(
+            this, ModèleÉvénements(), UnCoroutineDispatcher()
+        )
 
         texteNom = view.findViewById(R.id.modifier_evenement_nom)
         texteDate = view.findViewById(R.id.modifier_evenement_date)
@@ -83,7 +87,7 @@ IModificationÉvénement.IVue {
      *
      * @param événement L'événement sélectionné.
      */
-    override fun remplirChamps(événement : Événement) {
+    override fun remplirChamps(événement: Événement) {
         texteNom.setText(événement.nomEvenement)
         texteDate.text = événement.date
         texteLocation.setText(événement.location)

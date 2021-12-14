@@ -21,7 +21,7 @@ import retrofit2.Response
  */
 @testOuvert
 class ModèleÉvénements(
-    val intGetÉvénement : IntGetÉvénement,
+    val intGetÉvénement: IntGetÉvénement,
     val intGestionÉvénement: IntGestionÉvénement,
     val intDétailÉvenement: IntDétailÉvenement,
     val intGetCommentaires: IntGetCommentaires,
@@ -41,9 +41,28 @@ class ModèleÉvénements(
     companion object {
         lateinit var _source: ISourceDeDonnées
         var événementPrésenté: Événement? = null
+
         fun setSource(source: ISourceDeDonnées) {
             _source = source
         }
+    }
+
+    /**
+     * Permets d'obtenir l'évènement static qui n'est pas accessible autrement (et pour les tests)
+     *
+     * @param evenement l'evement qui va remplacer l'evenement du modele
+     */
+    fun ajouterUnÉvénement(evenement: Événement?) {
+        événementPrésenté = evenement
+    }
+
+    /**
+     * Permets prendre l'événement static pour les tests
+     *
+     * @return l'evenement du modele
+     */
+    fun obtenirÉvénement(): Événement? {
+        return événementPrésenté
     }
 
     /**
@@ -52,11 +71,12 @@ class ModèleÉvénements(
      *
      * @param id Clé unique qui représente l'événement à garder en mémoire.
      */
-    suspend fun setÉvénementPrésenté(id : Int) {
+    suspend fun setÉvénementPrésenté(id: Int) {
         var événement = intGetÉvénement.getÉvénementParId(id)
         événement!!.organisateur = intGetUtilisateur.getParId(événement.idOrganisateur)
-        événement.organisateur!!.urlImage = ModèleUtilisateurs(intGetUtilisateur).getImageUtilisateur(événement.organisateur!!.idUtilisateur!!)
-        événement.date = événement.date.split("T").let { it[0] + " " + it[1] }.substring(0,16)
+        événement.organisateur!!.urlImage =
+            ModèleUtilisateurs(intGetUtilisateur).getImageUtilisateur(événement.organisateur!!.idUtilisateur!!)
+        événement.date = événement.date.split("T").let { it[0] + " " + it[1] }.substring(0, 16)
         événementPrésenté = événement
     }
 
@@ -110,7 +130,7 @@ class ModèleÉvénements(
      * dans la source de donnée.
      * @return Une réponse vide de l'api
      */
-    suspend fun modifierÉvénement(événement: Événement) : Response<Void> {
+    suspend fun modifierÉvénement(événement: Événement): Response<Void> {
         return intGestionÉvénement.modifierÉvénement(événement = événement)
     }
 
@@ -120,7 +140,7 @@ class ModèleÉvénements(
      * @param id Clé unique qui représente l'événement retirer.
      * @return Une réponse vide de l'api
      */
-    suspend fun annulerÉvénement(id : Int) : Response<Void> {
+    suspend fun annulerÉvénement(id: Int): Response<Void> {
         return intGestionÉvénement.annulerÉvénement(id)
     }
 
@@ -175,7 +195,7 @@ class ModèleÉvénements(
      * @param id Clé unique qui représente l'événement sélectionné.
      * @return Retourne la liste de commentaire pour l'événement.
      */
-    suspend fun getCommentairesDansÉvénement(id : Int) : List<Commentaire> {
+    suspend fun getCommentairesDansÉvénement(id: Int): List<Commentaire> {
         return intGetCommentaires.getCommentairesParÉvénement(id)
     }
 
@@ -185,8 +205,7 @@ class ModèleÉvénements(
      * @param commentaire Un objet commentaire
      * @return Réponse vide de l'api
      */
-    suspend fun créerCommentaire(commentaire: Commentaire) : Response<Void>
-    {
+    suspend fun créerCommentaire(commentaire: Commentaire): Response<Void> {
         return intCreerCommentaire.creerCommentaire(commentaire = commentaire)
     }
 
