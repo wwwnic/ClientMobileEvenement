@@ -76,10 +76,12 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
         imageUrl: (Int) -> String
     ) {
         if (!lstÉvènenement.isEmpty()) {
-            val chargement = requireView().findViewById<ProgressBar>(R.id.mesEvenement_chargement)
-            chargement.visibility = View.INVISIBLE
-            afficherÉvènementCliquable(lstÉvènenement, imageUrl)
+            emojiTriste.visibility = View.INVISIBLE
+            textErreur.visibility = View.INVISIBLE
         }
+        val chargement = requireView().findViewById<ProgressBar>(R.id.mesEvenement_chargement)
+        chargement.visibility = View.INVISIBLE
+        afficherÉvènementCliquable(lstÉvènenement, imageUrl)
     }
 
     /**
