@@ -40,7 +40,7 @@ class PrésentateurMesÉvènements(
                     modèleÉvénements.demanderLesParticipations(idUtilisateur)
                 }
                 withContext(Dispatchers.Main) {
-                    afficherlstÉvènement(lstÉvènement)
+                    afficherlstÉvènement(lstÉvènement, estSurOngletMesÉvènement)
                 }
             } catch (e: Exception) {
                 Log.e("Évèn", "La requête a rencontré une erreur", e)
@@ -72,16 +72,20 @@ class PrésentateurMesÉvènements(
     }
 
     /**
-     * Permets d'afficher une liste d'évènement quelconque
+     * Permets d'afficher une liste d'évènement quelconque et affiche un message
+     * d'erreur selon l'onglet
      *
      * @param lstÉvènement Une liste d'évènement à afficher
+     * @param estSurOngletMesÉvènement est sur l'onglet mes evenement
      */
-    private fun afficherlstÉvènement(lstÉvènement: List<Événement>) {
+    private fun afficherlstÉvènement(lstÉvènement: List<Événement>, estSurOngletMesÉvènement : Boolean) {
         vue.afficherListeEvenements(
             lstÉvènement
         ) { i -> modèleÉvénements.getImageÉvénement(i) }
-        if (lstÉvènement.isEmpty()) {
+        if (lstÉvènement.isEmpty() && !estSurOngletMesÉvènement) {
             vue.afficherAucunRésultatRecherche(estErreurConnexion = false)
+        } else if (lstÉvènement.isEmpty()) {
+            vue.afficherAucunEvenementCree()
         }
     }
 }

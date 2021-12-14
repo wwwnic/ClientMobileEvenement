@@ -134,7 +134,7 @@ class PrésentateurListeÉvénementTest : CouroutineTestHelper() {
             delay(delaiPourWithContext)
         }
 
-        verify(mockVue).afficherErreurConnexion()
+        verify(mockVue).afficherAucunRésultatRecherche()
     }
 
     @Test

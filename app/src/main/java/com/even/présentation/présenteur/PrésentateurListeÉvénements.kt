@@ -18,7 +18,7 @@ import java.net.SocketTimeoutException
 @testOuvert
 class PrésentateurListeÉvénements(
     val vue: IListeEvenements.IVue,
-    var modèleÉvénements : ModèleÉvénements
+    var modèleÉvénements: ModèleÉvénements
 ) : IListeEvenements.IPrésentateur {
 
     lateinit var liste: List<Événement>
@@ -36,8 +36,9 @@ class PrésentateurListeÉvénements(
                     if (!liste.isEmpty()) {
                         vue.afficherListeEvenements(liste,
                             { i -> ModèleÉvénements().getImageÉvénement(i) })
+
                     } else {
-                        vue.afficherErreurConnexion()
+                        vue.afficherAucunRésultatRecherche()
                     }
                 }
             } catch (e: SocketTimeoutException) {

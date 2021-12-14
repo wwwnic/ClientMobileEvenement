@@ -12,9 +12,22 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/mesEvenement_imageCalendrier"
+            android:layout_width="107dp"
+            android:layout_height="101dp"
+            android:layout_marginBottom="65dp"
+            android:src="@drawable/ic_baseline_event_busy_24"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barreTabMesEvens" />
+
+        <ImageView
             android:id="@+id/mesEvenement_imageErreur"
             android:layout_width="107dp"
             android:layout_height="101dp"
+            android:layout_marginBottom="65dp"
             android:contentDescription="@string/connection_error"
             android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
             android:visibility="invisible"
@@ -26,8 +39,24 @@
         <TextView
             android:id="@+id/mesEvenement_textErreur"
             android:layout_width="282dp"
-            android:layout_height="149dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="200dp"
+            android:gravity="center"
             android:text="@string/connection_error"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mesEvenement_chargement" />
+
+        <TextView
+            android:id="@+id/mesEvenement_textAucun"
+            android:layout_width="282dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="200dp"
+            android:gravity="center"
+            android:text="@string/no_any_created_event"
             android:textSize="24sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +69,7 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="129dp"
             android:layout_height="128dp"
+            android:layout_marginBottom="65dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -27,7 +27,10 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
     lateinit var boutonCreer: Button
     lateinit var chargement: ProgressBar
     lateinit var emojiTriste: ImageView
+    lateinit var emojiCalendrier: ImageView
     lateinit var textErreur: TextView
+    lateinit var textAucun: TextView
+
 
     private var estSurMesÉvènement = false
 
@@ -37,7 +40,10 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
 
         chargement = view.findViewById(R.id.mesEvenement_chargement)
         emojiTriste = view.findViewById(R.id.mesEvenement_imageErreur)
+        emojiCalendrier = view.findViewById(R.id.mesEvenement_imageCalendrier)
         textErreur = view.findViewById(R.id.mesEvenement_textErreur)
+        textAucun = view.findViewById(R.id.mesEvenement_textAucun)
+
 
         barreTab = view.findViewById(R.id.barreTabMesEvens)
         boutonCreer = view.findViewById(R.id.boutonCreer)
@@ -50,14 +56,11 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
                 if (tab?.position == 0) {
                     estSurMesÉvènement = false
                     boutonCreer.visibility = View.INVISIBLE
-                    présentateur.traiterRequêtelancerCoroutine(estSurMesÉvènement)
                 } else {
                     estSurMesÉvènement = true
                     boutonCreer.visibility = View.VISIBLE
-                    présentateur.traiterRequêtelancerCoroutine(estSurMesÉvènement)
                 }
-
-
+                présentateur.traiterRequêtelancerCoroutine(estSurMesÉvènement)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
@@ -78,6 +81,8 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
         if (!lstÉvènenement.isEmpty()) {
             emojiTriste.visibility = View.INVISIBLE
             textErreur.visibility = View.INVISIBLE
+            emojiCalendrier.visibility = View.INVISIBLE
+            textAucun.visibility = View.INVISIBLE
         }
         val chargement = requireView().findViewById<ProgressBar>(R.id.mesEvenement_chargement)
         chargement.visibility = View.INVISIBLE
@@ -112,6 +117,18 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
         )
     }
 
+
+    /**
+     * Cache le petit emoji triste avec son msg :(
+     *
+     */
+    override fun afficherAucunEvenementCree() {
+        emojiCalendrier.visibility = View.VISIBLE
+        emojiTriste.visibility = View.INVISIBLE
+        textErreur.visibility = View.INVISIBLE
+        textAucun.visibility = View.VISIBLE
+    }
+
     /**
      * Affiche un message indiquant à l'utilisateur qu'il y a
      * aucun évènement à afficher selon le filtre selectionné
@@ -120,6 +137,8 @@ class VueMesEvenements() : Fragment(R.layout.fragment_mes_evenements), IMesÉvè
      * @param imageUrl le lien de l'image de l'évènement
      */
     override fun afficherAucunRésultatRecherche(estErreurConnexion: Boolean) {
+        emojiCalendrier.visibility = View.INVISIBLE
+        textAucun.visibility = View.INVISIBLE
         chargement.visibility = View.INVISIBLE
         emojiTriste.visibility = View.VISIBLE
         textErreur.text =
