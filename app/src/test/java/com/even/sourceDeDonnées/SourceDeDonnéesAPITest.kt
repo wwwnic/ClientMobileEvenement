@@ -26,7 +26,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getAllUtilisateurs() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service une liste de tous les utilisateurs, les bonnes informations lui sont transmises`() {
         var liste = substitueReponseApi.reponseListeUtilisateur200
 
         runBlocking (coroutineProvider.io) {
@@ -41,7 +41,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getAllEvenements() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service une liste de tous les événements, les bonnes informations lui sont transmises`() {
         var liste = substitueReponseApi.reponseListeÉvénement200
 
         runBlocking (coroutineProvider.io){
@@ -56,7 +56,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getEvenementParId() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service un événement avec un id spécifique, les bonnes informations lui sont transmises`() {
         var événement = substitueReponseApi.reponseÉvénement200
 
         runBlocking (coroutineProvider.io) {
@@ -71,7 +71,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getUtilisateursEvenement() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service un les événements auxquelles un utilisateur participe, les bonnes informations lui sont transmises`() {
         var liste = substitueReponseApi.reponseListeUtilisateur200
 
         runBlocking (coroutineProvider.io) {
@@ -86,7 +86,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun creerUtilisateur() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service de créer un utilisateur, les bonnes informations lui sont transmises`() {
 
         runBlocking (coroutineProvider.io) {
             sourceDeDonnéesTruqué.creerUtilisateur(substitueReponseApi.utilisateur200)
@@ -127,7 +127,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getEvenementsParRecherche() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service un événement à partir d'une recherche, les bonnes informations lui sont transmises`() {
         val liste = substitueReponseApi.reponseListeÉvénement200
 
         runBlocking (coroutineProvider.io) {
@@ -142,7 +142,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun creerEvenement() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service de créer un événement, les bonnes informations lui sont transmises`() {
         val événement = substitueReponseApi.reponseÉvénement200
 
         runBlocking (coroutineProvider.io){
@@ -157,7 +157,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun modifierEvenement() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service de modifier un événement, les bonnes informations lui sont transmises`() {
         runBlocking (coroutineProvider.io) {
             sourceDeDonnéesTruqué.modifierEvenement(substitueReponseApi.événement200)
         }
@@ -168,7 +168,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun supprimerEvenement() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service de supprimer un événement, les bonnes informations lui sont transmises`() {
         runBlocking (coroutineProvider.io) {
             sourceDeDonnéesTruqué.supprimerEvenement(1)
         }
@@ -179,7 +179,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getUtilisateurParId() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service un utilisateur avec un id spécifique, les bonnes informations lui sont transmises`() {
         val utilisateur = substitueReponseApi.reponseUtilisateur200
 
         runBlocking (coroutineProvider.io) {
@@ -194,7 +194,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getUtilisateursParNom() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service une liste d'utilisateur avec un nom spécifique, les bonnes informations lui sont transmises`() {
         val liste = substitueReponseApi.reponseListeUtilisateur200
 
         runBlocking (coroutineProvider.io) {
@@ -209,7 +209,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getEvenementParParticipation() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service une liste d'événement par participation, les bonnes informations lui sont transmises`() {
         val liste = substitueReponseApi.reponseListeÉvénement200
 
         runBlocking (coroutineProvider.io) {
@@ -224,7 +224,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getEvenementsParOrganisateur() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service une liste d'événement relié à un organisateur, les bonnes informations lui sont transmises`() {
         val liste = substitueReponseApi.reponseListeÉvénement200
 
         runBlocking (coroutineProvider.io) {
@@ -239,7 +239,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getImageUtilisateur() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service une image d'un utilisateur, les bonnes informations lui sont transmises`() {
         var résultatAttendu = "http://140.82.8.101/images/utilisateurs/1.jpg"
         var résultatObservé = ""
 
@@ -249,7 +249,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
     }
 
     @Test
-    fun getImageEvenement() {
+    fun `Etant donne une source de donnée lorsqu'on demande au service une image d'un événement, les bonnes informations lui sont transmises`() {
         var résultatAttendu = "http://140.82.8.101/images/evenements/1.jpg"
         var résultatObservé = ""
 
