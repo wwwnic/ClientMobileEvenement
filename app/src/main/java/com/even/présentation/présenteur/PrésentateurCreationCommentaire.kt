@@ -17,10 +17,14 @@ import kotlinx.coroutines.withContext
  * @property vue La vue VueCréationCommentaire
  */
 class PrésentateurCreationCommentaire(
-    val vue : ICreationCommentaire.IVue
+    val vue : ICreationCommentaire.IVue,
+    val modèleÉvénements: ModèleÉvénements
     ) : ICreationCommentaire.IPrésentateur {
 
-    val modèleÉvénements = ModèleÉvénements()
+    constructor(vue : ICreationCommentaire.IVue) : this(
+        vue,
+        ModèleÉvénements()
+    )
 
     /**
      * Méthode qui permet de faire l'affichage dans la vue du nom de l'événement sélectionné.

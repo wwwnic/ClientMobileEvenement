@@ -11,6 +11,11 @@ import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 
+
+
+/**
+ * Classe qui gère le dialogue de sélection de l'heure.
+ */
 class SelecteurTemps(texteDate: TextView) : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     var texteDate = texteDate
 

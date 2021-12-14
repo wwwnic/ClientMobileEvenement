@@ -15,10 +15,14 @@ import kotlinx.coroutines.withContext
  * @property vue La vue VueCréationÉvénement
  */
 class PrésentateurCreationÉvénement(
-    val vue: ICreationEvenement.IVue
+    val vue: ICreationEvenement.IVue,
+    val modèleÉvénements : ModèleÉvénements
 ) : ICreationEvenement.IPrésentateur {
 
-    val modèleÉvénements = ModèleÉvénements()
+    constructor(vue : ICreationEvenement.IVue) : this(
+        vue,
+        ModèleÉvénements()
+    )
 
     /**
      * Méthode qui permet d'ajouter un nouvel événement à la source de donnée.

@@ -63,9 +63,9 @@ IModificationÉvénement.IVue {
     }
 
     /**
+     * Retourne la page de l'événement si il a été modifié ou la page Mes événements si il a été annulé
      *
-     *
-     * @param modification
+     * @param modification Vrai si c'est une modification ou faux si c'est une annulation
      */
     override fun afficherÉvénementModifiéOuRetourMenu(modification: Boolean) {
         if (modification) {

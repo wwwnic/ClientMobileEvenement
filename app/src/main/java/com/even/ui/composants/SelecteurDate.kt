@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 
+/**
+ * Classe qui gère le dialogue de sélection de la date.
+ */
 class SelecteurDate(texteDate: TextView, type: String) : DialogFragment(),
     DatePickerDialog.OnDateSetListener {
     val texteDate = texteDate
@@ -22,6 +25,7 @@ class SelecteurDate(texteDate: TextView, type: String) : DialogFragment(),
         var year = c.get(Calendar.YEAR)
         var month = c.get(Calendar.MONTH)
         var day = c.get(Calendar.DAY_OF_MONTH)
+        // Si on modifie un événement, la date dans le dialogue correspond à la date actuelle de celui-ci.
         if (!texteDate.text.isNullOrBlank()) {
             year = texteDate.text.substring(0, 4).toInt()
             month = texteDate.text.substring(5, 7).toInt()
