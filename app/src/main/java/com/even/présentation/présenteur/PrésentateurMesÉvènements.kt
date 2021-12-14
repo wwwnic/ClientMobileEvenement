@@ -14,11 +14,15 @@ import java.net.SocketTimeoutException
  */
 class PrésentateurMesÉvènements(
     val vue: IMesÉvènements.IVue,
+    val modèleÉvénements : ModèleÉvénements
 ) : IMesÉvènements.IPrésentateur {
 
     private var coroutine: Job? = null
 
-    val modèleÉvénements = ModèleÉvénements()
+    constructor(vue : IMesÉvènements.IVue) : this(
+        vue,
+        ModèleÉvénements()
+    )
 
     /**
      * Lance une coroutine pour recuperer ses évènements ou ses participations selon l'onglet
