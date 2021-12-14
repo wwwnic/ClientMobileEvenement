@@ -24,8 +24,9 @@ import com.even.R
 import coil.compose.rememberImagePainter
 import com.even.domaine.entité.Événement
 
-//TODO: string.xml getString(id)
-
+/**
+ * Affichage d'un événement sous forme de carte.
+ */
 @Composable
 fun CarteÉvénement(événement: Événement, clickEvent: () -> Unit, imageUrl: (Int) -> String) {
     var urlImg = imageUrl(événement.idEvenement)

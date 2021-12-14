@@ -26,6 +26,11 @@ import com.even.domaine.entité.Utilisateur
 import java.text.SimpleDateFormat
 import java.util.*
 
+
+/**
+ * Affichage sous forme de carte d'un commentaire.
+ *
+ */
 @Composable
 fun CarteCommentaire(commentaire: Commentaire) {
     var isExpanded by remember { mutableStateOf(false) }
@@ -74,6 +79,9 @@ fun CarteCommentaire(commentaire: Commentaire) {
     }
 }
 
+/**
+ * Affichage d'une liste de carte commentaires.
+ */
 @Composable
 fun ListeCarteCommentaires(commentaires: List<Commentaire>) {
     LazyColumn {

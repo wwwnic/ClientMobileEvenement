@@ -19,6 +19,9 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.even.domaine.entité.Utilisateur
 
+/**
+ * Affichage d'un utilisateur avec son nom et avatar.
+ */
 @Composable
 fun CarteUtilisateur(utilisateur: Utilisateur, imageUrl: (Int) -> String) {
     var urlImg = imageUrl(utilisateur.idUtilisateur!!)

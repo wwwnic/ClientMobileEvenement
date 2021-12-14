@@ -16,6 +16,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
+/**
+ * Vue principale qui contient la barre de navigation et les fragments contenant les pages
+ * de l'application.
+ *
+ */
 class VuePrincipale : Fragment(R.layout.fragment_principal) {
 
     lateinit var fragmentLoader: FragmentLoader
@@ -48,6 +53,10 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         navViewOnClick(navView)
     }
 
+    /**
+     * Setup du menu de la barre du haut.
+     *
+     */
     private fun navViewOnClick(navView: NavigationView) {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -70,6 +79,10 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         }
     }
 
+    /**
+     * Setup de la barre de navigation du bas.
+     *
+     */
     private fun bottomNavOnClick(bottomNav: BottomNavigationView) {
         val source = SourceDeDonnéesBidon()
         bottomNav.setOnItemSelectedListener { item ->
