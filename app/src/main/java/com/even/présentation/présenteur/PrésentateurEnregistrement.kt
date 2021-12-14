@@ -79,7 +79,9 @@ class PrésentateurEnregistrement(
                     )
                 }
             } catch (e: Exception) {
-                vue.afficherToastErreurServeur()
+                withContext(dispatcher.main) {
+                    vue.afficherToastErreurServeur()
+                }
                 Log.e("Évèn", "Erreur d'accès à l'API", e)
             }
         }
