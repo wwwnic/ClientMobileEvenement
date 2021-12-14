@@ -59,4 +59,6 @@
         <string name="no_comments">Il y a aucun commentaire pour cet événement</string>
         <string name="no_result">Aucun résultat...</string>
         <string name="not_going_to_any_event">Vous n\'avez pas annoncé votre participation à aucun évènement</string>
+        <string name="no_any_recent_event">Aucun événement à visualiser</string>
+
 </resources>

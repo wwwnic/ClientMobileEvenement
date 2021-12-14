@@ -30,6 +30,8 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
     lateinit var composeView: ComposeView
     lateinit var chargement: ProgressBar
     lateinit var textErreur: TextView
+    lateinit var textAucunEvenement: TextView
+
     lateinit var imageErreur: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
         composeView = view.findViewById(R.id.listeBlocsEven)
         chargement = view.findViewById(R.id.chargementListe)
         textErreur = view.findViewById(R.id.textErreur)
+        textAucunEvenement = view.findViewById(R.id.textAucun)
         imageErreur = view.findViewById(R.id.imageErreur)
     }
 
@@ -86,15 +89,14 @@ class VueListeEvenement() : Fragment(R.layout.fragment_liste_evenement), IListeE
         textErreur.visibility = View.VISIBLE
     }
 
+
     /**
      * Méthode qui permet d'afficher une image et un texte lorsqu'aucun événement n'est retourné
      * lors d'une recherche.
-     *
      */
     override fun afficherAucunRésultatRecherche() {
         chargement.visibility = View.INVISIBLE
         imageErreur.visibility = View.VISIBLE
-        textErreur.text = "Aucun résultat..."
-        textErreur.visibility = View.VISIBLE
+        textAucunEvenement.visibility = View.VISIBLE
     }
 }
