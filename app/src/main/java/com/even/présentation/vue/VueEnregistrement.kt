@@ -11,13 +11,11 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.even.R
+import com.even.domaine.entité.UnCoroutineDispatcher
 import com.even.domaine.entité.ValidateurTextuel
-import com.even.domaine.interacteur.IntConnexion
-import com.even.domaine.interacteur.IntEnregistrement
 import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.présenteur.IEnregistrement
 import com.even.présentation.présenteur.PrésentateurEnregistrement
-import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 
 /**
  *  Une vue qui permet d'interagir avec le fragment enregistrement
@@ -33,7 +31,8 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
             PrésentateurEnregistrement(
                 this,
                 ModèleAuthentification(),
-                ValidateurTextuel()
+                ValidateurTextuel(),
+                UnCoroutineDispatcher()
             )
         val toolbar = view.findViewById<Toolbar>(R.id.enregistrement_toolbar)
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
@@ -52,20 +51,12 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
             val txtMotDePasse = view.findViewById<TextView>(R.id.enregistrement_motDePasse).text
             val txtCourriel = view.findViewById<TextView>(R.id.enregistrement_courriel).text
             val txtTelephone = view.findViewById<TextView>(R.id.enregistrement_telephone).text
-            val entréesValide = présentateurEnregistrement.traiterRequêteValiderTousLesEntrées(
+            présentateurEnregistrement.traiterRequêteEnregistrerUtilisateur(
                 txtNomUsager,
                 txtMotDePasse,
                 txtCourriel,
                 txtTelephone
             )
-            if (entréesValide) {
-                présentateurEnregistrement.traiterRequêteReclamerEnregistrement(
-                    txtNomUsager,
-                    txtMotDePasse,
-                    txtCourriel,
-                    txtTelephone
-                )
-            }
         }
     }
 
@@ -84,6 +75,7 @@ class VueEnregistrement : Fragment(R.layout.fragment_enregistrement), IEnregistr
     override fun afficherToastSuccesEnregistrement() {
         Toast.makeText(context, R.string.sign_up_completed, Toast.LENGTH_SHORT).show()
     }
+
     /**
      * Affiche un toast qui indique une erreur d'enregistrement
      *

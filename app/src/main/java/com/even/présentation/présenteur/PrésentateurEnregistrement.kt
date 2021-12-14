@@ -1,13 +1,10 @@
 package com.even.présentation.présenteur
 
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import android.util.Log
+import com.even.domaine.entité.UnCoroutineDispatcher
 import com.even.domaine.entité.ValidateurTextuel
 import com.even.présentation.modèle.ModèleAuthentification
 import kotlinx.coroutines.*
-import java.net.SocketTimeoutException
 
 /**
  * Permet de faire les traitements dans la vue d'enregistrement
@@ -19,38 +16,11 @@ import java.net.SocketTimeoutException
 class PrésentateurEnregistrement(
     val vue: IEnregistrement.IVue,
     val modeleAuthentification: ModèleAuthentification,
-    val validateur: ValidateurTextuel
+    val validateur: ValidateurTextuel,
+    val dispatcher: UnCoroutineDispatcher
 ) : IEnregistrement.IPrésentateur {
-    private val handlerRéponse: Handler
-
     private var coroutileEnregistrement: Job? = null
 
-    private val MSG_RÉUSSI = 0
-    private val MSG_ECHEC = 1
-    private val MSG_ANNULER = 2
-
-    init {
-        handlerRéponse = object : Handler(Looper.getMainLooper()) {
-            override fun handleMessage(msg: Message) {
-                super.handleMessage(msg)
-                if (msg.what == MSG_RÉUSSI) {
-                    vue.naviguerVersConnexion()
-                    vue.afficherToastSuccesEnregistrement()
-
-                } else if (msg.what == MSG_ECHEC) {
-                    vue.afficherToastErreurServeur()
-                    Log.e(
-                        "Évèn",
-                        "Le serveur a retourné une erreur"
-                    )
-                } else {
-                    coroutileEnregistrement?.cancel()
-                    vue.afficherToastErreurServeur()
-                    Log.e("Évèn", "Erreur d'accès à l'API", msg.obj as Throwable)
-                }
-            }
-        }
-    }
 
     /**
      * Vérifie les informations entrées, si elles sont valides, envoie une requête contenant les informations au modèle
@@ -60,14 +30,35 @@ class PrésentateurEnregistrement(
      * @param courriel Un courriel qu'un utilisateur a entré
      * @param telephone Un telephone qu'un utilisateur a entré
      */
-    override fun traiterRequêteReclamerEnregistrement(
+    override fun traiterRequêteEnregistrerUtilisateur(
         nomUsager: CharSequence,
         motDePasse: CharSequence,
         courriel: CharSequence,
         telephone: CharSequence
     ) {
-        coroutileEnregistrement = CoroutineScope(Dispatchers.IO).launch {
-            var msg: Message? = null
+        val entréesValide = validerTousLesEntrées(nomUsager, motDePasse, courriel, telephone)
+        if (entréesValide) {
+            lancerRequeteEnregistrement(nomUsager, motDePasse, courriel, telephone)
+        } else {
+            vue.afficherToastErreurEnregistrement()
+        }
+    }
+
+    /**
+     * Enregistre l'utilisateur via le model
+     *
+     * @param nomUtilisateur un nom utilisateur qui a été validé
+     * @param motDePasse Un mot de passe qui a été validé
+     * @param courriel Un courriel qui a été validé
+     * @param telephone Un telephone qui a été validé
+     */
+    private fun lancerRequeteEnregistrement(
+        nomUsager: CharSequence,
+        motDePasse: CharSequence,
+        courriel: CharSequence,
+        telephone: CharSequence
+    ) {
+        coroutileEnregistrement = CoroutineScope(dispatcher.io).launch {
             try {
                 var reponseApi = modeleAuthentification.effectuerEnregistrement(
                     nomUsager.toString(),
@@ -76,18 +67,21 @@ class PrésentateurEnregistrement(
                     telephone.toString()
                 )
                 if (reponseApi.isSuccessful) {
-                    withContext(Dispatchers.Main) {
-                        msg = handlerRéponse.obtainMessage(MSG_RÉUSSI)
+                    withContext(dispatcher.main) {
+                        vue.naviguerVersConnexion()
+                        vue.afficherToastSuccesEnregistrement()
                     }
                 } else {
-                    msg = handlerRéponse.obtainMessage(MSG_ECHEC)
+                    vue.afficherToastErreurEnregistrement()
+                    Log.e(
+                        "Évèn",
+                        "Le serveur a retourné une erreur"
+                    )
                 }
-            } catch (e: SocketTimeoutException) {
-                msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
-            } catch (e: InterruptedException) {
-                msg = handlerRéponse.obtainMessage(MSG_ANNULER, e)
+            } catch (e: Exception) {
+                vue.afficherToastErreurServeur()
+                Log.e("Évèn", "Erreur d'accès à l'API", e)
             }
-            handlerRéponse.sendMessage(msg!!)
         }
     }
 
@@ -100,7 +94,7 @@ class PrésentateurEnregistrement(
      * @param telephone Un telephone qu'un utilisateur a entré
      * @return Les entrées de l'utilisateur sont valides
      */
-    override fun traiterRequêteValiderTousLesEntrées(
+    private fun validerTousLesEntrées(
         nomUsager: CharSequence,
         motDePasse: CharSequence,
         courriel: CharSequence,
@@ -112,8 +106,7 @@ class PrésentateurEnregistrement(
         val estTelephoneValide = this.traiterRequêteValiderTelephone(telephone)
         val entréesValide =
             estCourrielValide && estTelephoneValide && estNomUsagerValide && estMotDePasseValide
-        if (!entréesValide) vue.afficherToastErreurEnregistrement()
-        return (entréesValide)
+        return entréesValide
     }
 
     /**

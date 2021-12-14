@@ -72,27 +72,11 @@ interface IEnregistrement {
          * @param courriel Un courriel qu'un utilisateur a entré
          * @param telephone Un telephone qu'un utilisateur a entré
          */
-        fun traiterRequêteReclamerEnregistrement(
+        fun traiterRequêteEnregistrerUtilisateur(
             nomUsager: CharSequence,
             motDePasse: CharSequence,
             courriel: CharSequence,
             telephone: CharSequence
         )
-
-        /**
-         * Valide le nom et le mot de passe qu'un utilisateur a rentré.
-         *
-         * @param nomUsager Un nom qu'un utilisateur a entré
-         * @param motDePasse Un mot de passe qu'un utilisateur a entré
-         * @param courriel Un courriel qu'un utilisateur a entré
-         * @param telephone Un telephone qu'un utilisateur a entré
-         * @return Les entrées de l'utilisateur sont valides
-         */
-        fun traiterRequêteValiderTousLesEntrées(
-            nomUsager: CharSequence,
-            motDePasse: CharSequence,
-            courriel: CharSequence,
-            telephone: CharSequence
-        ): Boolean
     }
 }
