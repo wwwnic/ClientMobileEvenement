@@ -8,6 +8,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.*
+import java.util.Arrays.asList
 
 class SourceDeDonnéesAPITest : CouroutineTestHelper() {
 
@@ -25,12 +26,32 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
 
     @Test
     fun getAllUtilisateurs() {
-        assert(true)
+        var liste = asList(substitueReponseApi.utilisateur200)
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(liste).whenever(mockServiceApi).getAllUtilisateurs()
+
+            sourceDeDonnéesTruqué.getAllUtilisateurs()
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getAllUtilisateurs()
+        }
     }
 
     @Test
     fun getAllEvenements() {
-        assert(true)
+        var liste = asList(substitueReponseApi.événement)
+
+        runBlocking (coroutineProvider.io){
+            doReturn(liste).whenever(mockServiceApi).getAllEvenements()
+
+            sourceDeDonnéesTruqué.getAllEvenements()
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)){
+            getAllEvenements()
+        }
     }
 
     @Test
@@ -48,7 +69,6 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
         assert(true)
     }
 
-    //Test demanderProfil
     @Test
     fun `Etant donne une source de donnée lorsqu'on demande au service un profil, les bonnes informations lui sont transmises`() {
         val utilisateur = sourceBidon.listeUtils[0]
