@@ -35,6 +35,10 @@
     <string name="changeAvatar">Change avatar</string>
     <string name="participant">attendee(s)</string>
     <string name="participation">I\'m attending</string>
+    <string name="nonParticipation">I\'m not attending</string>
+    <string name="addCalendar">Add to calendar</string>
+    <string name="participationAdded">Your participation was added</string>
+    <string name="participationRemoved">Your participation was removed</string>
     <string name="number">0</string>
     <string name="drawer_open">Open navigation</string>
     <string name="drawer_close">Close navigation</string>

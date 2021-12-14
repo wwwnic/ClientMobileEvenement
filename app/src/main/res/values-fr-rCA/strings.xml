@@ -36,6 +36,10 @@
         <string name="changeAvatar">Changer l\'avatar</string>
         <string name="participant">participant(s)</string>
         <string name="participation">Je participe</string>
+        <string name="nonParticipation">Je ne participe pas</string>
+        <string name="addCalendar">Ajouter au calendrier</string>
+        <string name="participationAdded">Votre participation a été ajoutée</string>
+        <string name="participationRemoved">Votre participation a été retirée</string>
         <string name="number">0</string>
         <string name="drawer_open">Ouvrir la navigation</string>
         <string name="drawer_close">Fermer la navigation</string>

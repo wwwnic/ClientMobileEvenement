@@ -106,15 +106,6 @@ interface IDétailÉvenement {
         fun afficherApplicationCalendrierPourAjouter(date : IntArray)
 
         /**
-         * Cette méthode permet d'ouvrir le calendrier et de retirer l'événement
-         * ajouté préalablement lorsque l'utilisateur clique sur le bouton
-         * pour retirer sa participation
-         *
-         * @param date représente la date de l'événement qui sera retirer du calendrier
-         */
-        fun afficherApplicationCalendrierPourEffacer(date : IntArray)
-
-        /**
          * Cette méthode cache la vue de chargement lorsque les informations de l'événement
          * sont chargé correctement.
          *
@@ -140,6 +131,12 @@ interface IDétailÉvenement {
          * @param idEvenement C'est la clé unique qui identifie l'événement.
          */
         fun traiterRequêteAjouterRetirerParticipation(idEvenement: Int)
+
+        /**
+         * Traite la requête pour faire un ajout au calendrier en passant une date configurée à la vue
+         * pour que celle-ci puisse ouvrir l'application calendrier de l'utilisateur.
+         */
+        fun traiterRequêteAjouterAuCalendrier()
 
         /**
          * Permet d'aller chercher la liste de participant à partir du modèle et de la passer

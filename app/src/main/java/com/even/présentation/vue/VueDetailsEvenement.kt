@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -51,9 +52,11 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     lateinit var texteParticipant: TextView
     lateinit var btnParticipation: Button
     lateinit var btnAddCommentaire: Button
+    lateinit var btnCalendrier : Button
     lateinit var barreTab: TabLayout
     lateinit var groupeDetails: ConstraintLayout
     lateinit var groupeParticipation: ConstraintLayout
+    lateinit var groupeBoutons : ConstraintLayout
     lateinit var listeComposables: ComposeView
 
     lateinit var chargement: View
@@ -79,10 +82,12 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         texteParticipant = view.findViewById(R.id.detailEvenement_nomber)
         btnParticipation = view.findViewById(R.id.detailEvenement_participation)
         btnAddCommentaire = view.findViewById(R.id.detailEvenement_btnAddCommentaire)
+        btnCalendrier = view.findViewById(R.id.detailEvenement_boutonCalendrier)
         chargement = view.findViewById(R.id.detailEvenement_progressBar)
 
         groupeDetails = view.findViewById(R.id.groupeDetails)
         groupeParticipation = view.findViewById(R.id.groupeParticipations)
+        groupeBoutons = view.findViewById(R.id.groupeBoutons)
         listeComposables = view.findViewById(R.id.listeComposablesDetails)
 
         barreTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -108,6 +113,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         clickListenerParticipation()
 
         btnAddCommentaire.setOnClickListener { afficherVueAjoutCommentaire() }
+        btnCalendrier.setOnClickListener { présentateur.traiterRequêteAjouterAuCalendrier() }
     }
 
     /**
@@ -122,7 +128,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         if (pageÀgénérer == "details") {
             groupeDetails.visibility = View.VISIBLE
             groupeParticipation.visibility = View.VISIBLE
-            btnParticipation.visibility = View.VISIBLE
+            groupeBoutons.visibility = View.VISIBLE
             imageEvent.visibility = View.VISIBLE
 
             listeComposables.visibility = View.INVISIBLE
@@ -130,7 +136,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         } else {
             groupeDetails.visibility = View.INVISIBLE
             groupeParticipation.visibility = View.INVISIBLE
-            btnParticipation.visibility = View.INVISIBLE
+            groupeBoutons.visibility = View.INVISIBLE
             imageEvent.visibility = View.INVISIBLE
 
             listeComposables.visibility = View.VISIBLE
@@ -177,27 +183,6 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
     }
 
     /**
-     * Cette méthode permet d'ouvrir le calendrier et de retirer l'événement
-     * ajouté préalablement lorsque l'utilisateur clique sur le bouton
-     * pour retirer sa participation
-     *
-     * @param date représente la date de l'événement qui sera retirer du calendrier
-     */
-    // https://developer.android.com/guide/topics/providers/calendar-provider#intents
-    override fun afficherApplicationCalendrierPourEffacer(date: IntArray) {
-        val startMillis: Long = Calendar.getInstance().run {
-            set(date[0], date[1] - 1, date[2], date[3], date[4])
-            timeInMillis
-        }
-        val builder: Uri.Builder = CalendarContract.CONTENT_URI.buildUpon()
-            .appendPath("time")
-        ContentUris.appendId(builder, startMillis)
-        val intent = Intent(Intent.ACTION_VIEW)
-            .setData(builder.build())
-        startActivity(intent)
-    }
-
-    /**
      * Affiche simplement un toast disant qu'une erreur niveau serveur est survenu.
      *
      */
@@ -220,7 +205,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
      *
      */
     override fun afficherToastParticipationAjouté() {
-        Toast.makeText(context, "Votre participation a été ajouté.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, resources.getString(R.string.participationAdded), Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -229,7 +214,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
      *
      */
     override fun afficherToastParticipationRetiré() {
-        Toast.makeText(context, "Votre participation a été retiré.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, resources.getString(R.string.participationRemoved), Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -265,7 +250,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
      *
      */
     override fun afficherNePlusParticiper() {
-        btnParticipation.text = "Je ne participe pas"
+        btnParticipation.text = resources.getString(R.string.nonParticipation)
     }
 
     /**
@@ -274,7 +259,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
      *
      */
     override fun afficherParticipation() {
-        btnParticipation.text = "Je participe"
+        btnParticipation.text = resources.getString(R.string.participation)
     }
 
     /**
@@ -284,6 +269,7 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
      */
     override fun cacherBoutonParticipation() {
         btnParticipation.isVisible = false
+        btnCalendrier.isVisible = false
     }
 
     /**

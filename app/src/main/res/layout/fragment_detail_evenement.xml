@@ -40,6 +40,44 @@
                 app:layout_constraintTop_toBottomOf="@+id/detailEvenement_eventImage"
                 tools:visibility="visible">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/groupeBoutons"
+                    android:layout_width="255dp"
+                    android:layout_height="114dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailEvenement_description">
+
+                    <Button
+                        android:id="@+id/detailEvenement_participation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/participation"
+                        app:layout_constraintBottom_toTopOf="@+id/detailEvenement_boutonCalendrier"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/detailEvenement_boutonCalendrier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/addCalendar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/detailEvenement_participation" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <ImageView
                     android:id="@+id/detailEvenement_eventImage"
                     android:layout_width="wrap_content"
@@ -104,34 +142,25 @@
                     android:id="@+id/detailEvenement_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/description"
                     android:textColor="@color/black"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/groupeParticipations"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detailEvenement_organizerAvatar" />
-
-                <Button
-                    android:id="@+id/detailEvenement_participation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/participation"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/groupeParticipations"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detailEvenement_description" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/groupeParticipations"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/detailEvenement_participation">
+                    app:layout_constraintStart_toEndOf="@+id/groupeBoutons"
+                    app:layout_constraintTop_toBottomOf="@+id/detailEvenement_description">
 
                     <TextView
                         android:id="@+id/detailEvenement_nomber"

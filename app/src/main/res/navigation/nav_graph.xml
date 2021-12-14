@@ -29,5 +29,11 @@
     <fragment
         android:id="@+id/principal"
         android:name="com.even.présentation.vue.VuePrincipale"
-        android:label="principal" />
+        android:label="principal" >
+        <action
+            android:id="@+id/action_principal_to_connexion"
+            app:destination="@id/connexion"
+            app:popUpTo="@id/principal"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
