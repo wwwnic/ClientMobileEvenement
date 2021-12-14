@@ -58,6 +58,7 @@
     <string name="no_comments">There are no comments for this event</string>
     <string name="no_result">No results...</string>
     <string name="not_going_to_any_event">You did not announce your attendance to any events</string>
-    <string name="no_any_recent_event">No events to be viewed.</string>
+    <string name="no_any_recent_event">No events to be viewed</string>
+    <string name="no_any_created_event">No organized events</string>
 
 </resources>

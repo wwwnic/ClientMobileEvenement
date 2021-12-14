@@ -11,6 +11,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.*
+import java.util.Arrays.asList
 
 class PrésentateurMesÉvénementsTest : CouroutineTestHelper() {
 
@@ -111,6 +112,60 @@ class PrésentateurMesÉvénementsTest : CouroutineTestHelper() {
             times(invocationUnique)
         ) {
             afficherÉvénementSelectionné()
+        }
+    }
+
+    @Test
+    fun `Étant donné un présentateur, lorsqu'on traite la requete lancer coroutine, on affiche une liste d'evenement`() {
+        var listEven = asList<Événement>()
+        runBlocking(coroutineProvider.io) {
+            doReturn("urlFactice.com").whenever(mockModèleÉvénements).getImageÉvénement(any())
+            doReturn(listEven).whenever(mockModèleÉvénements).demanderLesParticipations(any())
+            présentateurTruqué.traiterRequêtelancerCoroutine(estSurOngletMesÉvènement = false)
+            delay(delaiPourWithContext)
+        }
+
+        verifyBlocking(
+            mockVue,
+            times(invocationUnique)
+        ) {
+            afficherListeEvenements(any(),any())
+        }
+    }
+
+    @Test
+    fun `Étant donné un présentateur, lorsqu'on demande l'affichage de la liste d'evenement et que la liste est vide, on affiche un message indiquant qu'il y a aucun resultat sur l'onglet evenement`() {
+        var listEven = asList<Événement>()
+        runBlocking(coroutineProvider.io) {
+            doReturn("urlFactice.com").whenever(mockModèleÉvénements).getImageÉvénement(any())
+            doReturn(listEven).whenever(mockModèleÉvénements).demanderLesParticipations(any())
+            présentateurTruqué.traiterRequêtelancerCoroutine(estSurOngletMesÉvènement = false)
+            delay(delaiPourWithContext)
+        }
+
+        verifyBlocking(
+            mockVue,
+            times(invocationUnique)
+        ) {
+            afficherAucunRésultatRecherche(estErreurConnexion = false)
+        }
+    }
+
+    @Test
+    fun `Étant donné un présentateur, lorsqu'on demande l'affichage de la liste d'evenement et que la liste est vide, on affiche un message indiquant qu'il y a aucun resultat sur l'onglet evenement cree`() {
+        var listEven = asList<Événement>()
+        runBlocking(coroutineProvider.io) {
+            doReturn("urlFactice.com").whenever(mockModèleÉvénements).getImageÉvénement(any())
+            doReturn(listEven).whenever(mockModèleÉvénements).demanderSesPropreÉvènement(any())
+            présentateurTruqué.traiterRequêtelancerCoroutine(estSurOngletMesÉvènement = true)
+            delay(delaiPourWithContext)
+        }
+
+        verifyBlocking(
+            mockVue,
+            times(invocationUnique)
+        ) {
+            afficherAucunEvenementCree()
         }
     }
 }

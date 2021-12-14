@@ -30,6 +30,7 @@ interface IMesÉvènements {
          * de l'évènement selon le filtre actif.
          */
         fun afficherÉvénementSelectionné()
+        fun afficherAucunEvenementCree()
     }
 
     interface IPrésentateur {
