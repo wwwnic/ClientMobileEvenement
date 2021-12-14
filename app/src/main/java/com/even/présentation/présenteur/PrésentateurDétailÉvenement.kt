@@ -108,13 +108,14 @@ class PrésentateurDétailÉvenement(
             if (participation == false) {
                 try {
                     reponseApi = modèleÉvénements.ajouterParticipation(utilisateurÉvenement)
+                    nombreParticipant = modèleUtilisateurs.getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement).count()
 
                     withContext(Dispatchers.Main) {
                         if (reponseApi.isSuccessful) {
                             participation = true
                             vue.afficherNePlusParticiper()
+                            vue.setNombreParticipant(nombreParticipant)
                             vue.afficherToastParticipationAjouté()
-                            vue.afficherApplicationCalendrierPourAjouter(setDatePourCalendrier())
                         } else {
                             vue.afficherToastErreurServeur()
                             Log.e(
@@ -131,13 +132,14 @@ class PrésentateurDétailÉvenement(
             } else {
                 try {
                     reponseApi = modèleÉvénements.retirerParticipation(utilisateurÉvenement)
+                    nombreParticipant = modèleUtilisateurs.getUtilisateursDansÉvénement(evenementEnCours!!.idEvenement).count()
 
                     withContext(Dispatchers.Main) {
                         if (reponseApi.isSuccessful) {
                             participation = false
                             vue.afficherParticipation()
+                            vue.setNombreParticipant(nombreParticipant)
                             vue.afficherToastParticipationRetiré()
-                            vue.afficherApplicationCalendrierPourEffacer(setDatePourCalendrier())
                         } else {
                             vue.afficherToastErreurServeur()
                             Log.e(
@@ -153,6 +155,13 @@ class PrésentateurDétailÉvenement(
                 }
             }
         }
+    }
+
+    /**
+     * Passe la date à la vue pour pouvoir ouvrir l'application calendrier.
+     */
+    override fun traiterRequêteAjouterAuCalendrier() {
+        vue.afficherApplicationCalendrierPourAjouter(setDatePourCalendrier())
     }
 
     /**

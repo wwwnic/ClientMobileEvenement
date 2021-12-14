@@ -8,8 +8,15 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavHost
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.even.R
+import com.even.présentation.présenteur.IPrincipal
+import com.even.présentation.présenteur.PrésentateurPrincipal
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
 import com.even.ui.composants.FragmentLoader
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,12 +28,15 @@ import com.google.android.material.navigation.NavigationView
  * de l'application.
  *
  */
-class VuePrincipale : Fragment(R.layout.fragment_principal) {
+class VuePrincipale : Fragment(R.layout.fragment_principal),IPrincipal.IVue {
 
     lateinit var fragmentLoader: FragmentLoader
 
+    lateinit var présentateur : IPrincipal.IPrésentateur
+
     lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var drawerLayout: DrawerLayout
+    lateinit var navView : NavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +49,10 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoader = FragmentLoader(requireActivity().supportFragmentManager)
 
+        présentateur = PrésentateurPrincipal(this)
+
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
-        val navView = view.findViewById<NavigationView>(R.id.nav_view)
+        navView = view.findViewById(R.id.nav_view)
 
         toolbar = view.findViewById(R.id.toolbar)
         drawerLayout = view.findViewById(R.id.drawer_layout)
@@ -67,9 +79,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
                     true
                 }
                 R.id.log_off -> {
-                    navView.findNavController().navigate(R.id.connexion)
-                    drawerLayout.close()
-                    Toast.makeText(context, R.string.log_off_msg, Toast.LENGTH_SHORT).show()
+                    présentateur.traiterRequêteDéconnexion()
                     true
                 }
                 else -> {
@@ -115,5 +125,15 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
             R.string.drawer_open,
             R.string.drawer_close
         )
+    }
+
+    /**
+     * Affiche la page de connexion après la déconnexion.
+     */
+    override fun afficherPageConnexion() {
+        requireActivity().supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        navView.findNavController().navigate(R.id.action_principal_to_connexion)
+        drawerLayout.close()
+        Toast.makeText(context, R.string.log_off_msg, Toast.LENGTH_SHORT).show()
     }
 }

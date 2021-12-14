@@ -20,6 +20,7 @@ class PrésentateurConnexion(
     val validateur: ValidateurTextuel,
     val dispatcher: UnCoroutineDispatcher
 ) : IConnexion.IPrésentateur {
+
     private var coroutileLogin: Job? = null
 
     /**
