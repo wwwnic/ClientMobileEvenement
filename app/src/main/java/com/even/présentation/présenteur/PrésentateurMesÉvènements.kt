@@ -77,11 +77,10 @@ class PrésentateurMesÉvènements(
      * @param lstÉvènement Une liste d'évènement à afficher
      */
     private fun afficherlstÉvènement(lstÉvènement: List<Événement>) {
-        if (lstÉvènement.isNotEmpty()) {
-            vue.afficherListeEvenements(
-                lstÉvènement
-            ) { i -> modèleÉvénements.getImageÉvénement(i) }
-        } else {
+        vue.afficherListeEvenements(
+            lstÉvènement
+        ) { i -> modèleÉvénements.getImageÉvénement(i) }
+        if (lstÉvènement.isEmpty()) {
             vue.afficherAucunRésultatRecherche(estErreurConnexion = false)
         }
     }
