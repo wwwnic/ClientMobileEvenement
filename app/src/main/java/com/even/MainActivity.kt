@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.even.présentation.modèle.ModèleAuthentification
 import com.even.présentation.modèle.ModèleUtilisateurs
 import com.even.présentation.modèle.ModèleÉvénements
+import com.even.sourceDeDonnées.ApiClient
 import com.even.sourceDeDonnées.ISourceDeDonnées
 import com.even.sourceDeDonnées.SourceDeDonnéesAPI
 import com.even.sourceDeDonnées.SourceDeDonnéesBidon
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val source = SourceDeDonnéesAPI()
+        val source = SourceDeDonnéesAPI(ApiClient.apiService)
         instancierLesModèles(source)
         setContentView(R.layout.activity_main)
     }
