@@ -1,6 +1,7 @@
 package com.even.sourceDeDonnées
 
 import com.even.domaine.entité.Utilisateur
+import com.even.domaine.entité.Événement
 import com.even.testHelper.CouroutineTestHelper
 import com.even.testHelper.SubstitueReponseApi
 import kotlinx.coroutines.runBlocking
@@ -26,7 +27,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
 
     @Test
     fun getAllUtilisateurs() {
-        var liste = asList(substitueReponseApi.utilisateur200)
+        var liste = substitueReponseApi.reponseListeUtilisateur200
 
         runBlocking (coroutineProvider.io) {
             doReturn(liste).whenever(mockServiceApi).getAllUtilisateurs()
@@ -41,7 +42,7 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
 
     @Test
     fun getAllEvenements() {
-        var liste = asList(substitueReponseApi.événement)
+        var liste = substitueReponseApi.reponseListeÉvénement200
 
         runBlocking (coroutineProvider.io){
             doReturn(liste).whenever(mockServiceApi).getAllEvenements()
@@ -56,17 +57,44 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
 
     @Test
     fun getEvenementParId() {
-        assert(true)
+        var événement = substitueReponseApi.reponseÉvénement200
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(événement).whenever(mockServiceApi).getEvenementParId(any())
+
+            sourceDeDonnéesTruqué.getÉvénementParId(1)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getEvenementParId(1)
+        }
     }
 
     @Test
     fun getUtilisateursEvenement() {
-        assert(true)
+        var liste = substitueReponseApi.reponseListeUtilisateur200
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(liste).whenever(mockServiceApi).getUtilisateursDansEvenement(any())
+
+            sourceDeDonnéesTruqué.getUtilisateursDansEvenement(1)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getUtilisateursDansEvenement(1)
+        }
     }
 
     @Test
     fun creerUtilisateur() {
-        assert(true)
+
+        runBlocking (coroutineProvider.io) {
+            sourceDeDonnéesTruqué.creerUtilisateur(substitueReponseApi.utilisateur200)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            creerUtilisateur(substitueReponseApi.utilisateur200)
+        }
     }
 
     @Test
@@ -100,51 +128,133 @@ class SourceDeDonnéesAPITest : CouroutineTestHelper() {
 
     @Test
     fun getEvenementsParRecherche() {
-        assert(true)
+        val liste = substitueReponseApi.reponseListeÉvénement200
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(liste).whenever(mockServiceApi).getEvenementsParRecherche(any(), any(), any(), any())
+
+            sourceDeDonnéesTruqué.getÉvénementsParRecherche("Party","","","")
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getEvenementsParRecherche("Party","","","")
+        }
     }
 
     @Test
     fun creerEvenement() {
-        assert(true)
+        val événement = substitueReponseApi.reponseÉvénement200
+
+        runBlocking (coroutineProvider.io){
+            doReturn(événement).whenever(mockServiceApi).creerEvenement(any())
+
+            sourceDeDonnéesTruqué.creerEvenement(substitueReponseApi.événement200)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            creerEvenement(substitueReponseApi.événement200)
+        }
     }
 
     @Test
     fun modifierEvenement() {
-        assert(true)
+        runBlocking (coroutineProvider.io) {
+            sourceDeDonnéesTruqué.modifierEvenement(substitueReponseApi.événement200)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            updateEvenement(substitueReponseApi.événement200)
+        }
     }
 
     @Test
     fun supprimerEvenement() {
-        assert(true)
+        runBlocking (coroutineProvider.io) {
+            sourceDeDonnéesTruqué.supprimerEvenement(1)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            deleteEvenement(1)
+        }
     }
 
     @Test
     fun getUtilisateurParId() {
-        assert(true)
+        val utilisateur = substitueReponseApi.reponseUtilisateur200
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(utilisateur).whenever(mockServiceApi).getUtilisateurParId(any())
+
+            sourceDeDonnéesTruqué.getUtilisateurParId(1)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getUtilisateurParId(1)
+        }
     }
 
     @Test
     fun getUtilisateursParNom() {
-        assert(true)
+        val liste = substitueReponseApi.reponseListeUtilisateur200
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(liste).whenever(mockServiceApi).getUtilisateursParNom(any())
+
+            sourceDeDonnéesTruqué.getUtilisateursParNom("Bob")
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getUtilisateursParNom("Bob")
+        }
     }
 
     @Test
     fun getEvenementParParticipation() {
-        assert(true)
+        val liste = substitueReponseApi.reponseListeÉvénement200
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(liste).whenever(mockServiceApi).getEvenementsParParticipation(any())
+
+            sourceDeDonnéesTruqué.getÉvénementsParParticipation(1)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getEvenementsParParticipation(1)
+        }
     }
 
     @Test
     fun getEvenementsParOrganisateur() {
-        assert(true)
+        val liste = substitueReponseApi.reponseListeÉvénement200
+
+        runBlocking (coroutineProvider.io) {
+            doReturn(liste).whenever(mockServiceApi).getEvenementsParOrganisateur(any())
+
+            sourceDeDonnéesTruqué.getÉvénementsParOrganisateur(1)
+        }
+
+        verifyBlocking(mockServiceApi, times(invocationUnique)) {
+            getEvenementsParOrganisateur(1)
+        }
     }
 
     @Test
     fun getImageUtilisateur() {
-        assert(true)
+        var résultatAttendu = "http://140.82.8.101/images/utilisateurs/1.jpg"
+        var résultatObservé = ""
+
+        résultatObservé = sourceDeDonnéesTruqué.getImageUtilisateur(1)
+
+        assertEquals(résultatAttendu,résultatObservé)
     }
 
     @Test
     fun getImageEvenement() {
-        assert(true)
+        var résultatAttendu = "http://140.82.8.101/images/evenements/1.jpg"
+        var résultatObservé = ""
+
+        résultatObservé = sourceDeDonnéesTruqué.getImageEvenement(1)
+
+        assertEquals(résultatAttendu,résultatObservé)
     }
 }

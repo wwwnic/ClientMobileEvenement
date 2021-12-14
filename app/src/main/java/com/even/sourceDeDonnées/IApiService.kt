@@ -4,9 +4,11 @@ import com.even.domaine.entité.Commentaire
 import com.even.domaine.entité.Utilisateur
 import com.even.domaine.entité.UtilisateurÉvénement
 import com.even.domaine.entité.Événement
+import com.even.testOuvert
 import retrofit2.Response
 import retrofit2.http.*
 
+@testOuvert
 interface IApiService {
 
     /**

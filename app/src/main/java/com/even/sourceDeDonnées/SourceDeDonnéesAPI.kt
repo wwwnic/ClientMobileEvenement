@@ -7,8 +7,8 @@ import com.even.domaine.entité.Événement
 import com.even.sourceDeDonnées.ApiClient.apiService
 import retrofit2.Response
 
-class SourceDeDonnéesAPI(val serviceApi: IApiService ) : ISourceDeDonnées {
-    constructor() : this(apiService)
+class SourceDeDonnéesAPI(val apiService: IApiService ) : ISourceDeDonnées {
+
 
     /**
      * Méthode qui permet de faire une requête à l'api pour aller cherhcer la liste complète des
@@ -76,7 +76,7 @@ class SourceDeDonnéesAPI(val serviceApi: IApiService ) : ISourceDeDonnées {
      * @return L'utilisateur qui correspond aux information de connexion.
      */
     override suspend fun demanderProfil(identifiantUtilisateur: Utilisateur): Utilisateur? {
-        var reponseApi = serviceApi.demanderProfil(identifiantUtilisateur)
+        var reponseApi = apiService.demanderProfil(identifiantUtilisateur)
         return reponseApi.body()
     }
 
