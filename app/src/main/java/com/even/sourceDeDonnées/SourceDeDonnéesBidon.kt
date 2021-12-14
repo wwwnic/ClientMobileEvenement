@@ -8,6 +8,7 @@ import com.even.domaine.entité.Événement
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SourceDeDonnéesBidon : ISourceDeDonnées {
 
@@ -130,7 +131,7 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
         return listeUtils
     }
 
-    override suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
+    suspend fun getUtilisateursEvenement(): List<UtilisateurÉvénement> {
         return listeUtilEven
     }
 
@@ -164,11 +165,19 @@ class SourceDeDonnéesBidon : ISourceDeDonnées {
     }
 
     override suspend fun getÉvénementsParParticipation(id: Int): List<Événement> {
-        TODO("Not yet implemented")
+        var listeParticipations = listeUtilEven.filter { ue -> ue.idUtilisateur == id}
+        var listeEvenements : MutableList<Événement> = mutableListOf()
+        listeEvens.forEach {
+            e -> listeParticipations.forEach {
+                ue -> if (ue.idEvenement == e.idEvenement)
+                listeEvenements.add(e)
+            }
+        }
+        return listeEvenements
     }
 
     override suspend fun getÉvénementsParOrganisateur(id: Int): List<Événement> {
-        TODO("Not yet implemented")
+        return listeEvens.filter { e -> e.idOrganisateur == id }
     }
 
     override suspend fun demanderProfil(

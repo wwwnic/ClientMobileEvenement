@@ -9,12 +9,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Permet de faire les traitements dans la vue de création d'événement
+ *
+ * @property vue La vue VueCréationÉvénement
+ */
 class PrésentateurCreationÉvénement(
-    val vue: ICreationEvenement.IVue
+    val vue: ICreationEvenement.IVue,
+    val modèleÉvénements : ModèleÉvénements
 ) : ICreationEvenement.IPrésentateur {
 
-    val modèleÉvénements = ModèleÉvénements()
+    constructor(vue : ICreationEvenement.IVue) : this(
+        vue,
+        ModèleÉvénements()
+    )
 
+    /**
+     * Méthode qui permet d'ajouter un nouvel événement à la source de donnée.
+     *
+     * @param nom Nom de l'événement
+     * @param date Date de l'événement
+     * @param location Endroit de l'événement
+     * @param description Description de l'événement
+     */
     override fun traiterRequêteCréerÉvénement(
         nom: String,
         date: String,

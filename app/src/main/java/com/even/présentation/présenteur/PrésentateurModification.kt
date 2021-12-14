@@ -7,12 +7,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Permet de faire les traitements dans la vue de modification d'événement
+ *
+ * @property vue La vue VueModifierÉvénement
+ */
 class PrésentateurModification(
     val vue : IModificationÉvénement.IVue
 ) : IModificationÉvénement.IPrésentateur {
 
     val modèleÉvénements = ModèleÉvénements()
 
+    /**
+     * Méthode qui permet de faire la modification d'un événement
+     *
+     * @param nom Nouveau nom de l'événement
+     * @param date Nouvelle date de l'événement
+     * @param location Nouvelle location de l'événement
+     * @param description Nouvelle description de l'événement
+     */
     override fun traiterRequêteModifierÉvénement(
         nom: String,
         date: String,
@@ -45,6 +58,10 @@ class PrésentateurModification(
         }
     }
 
+    /**
+     * Méthode qui permet d'annuler un événement.
+     *
+     */
     override fun traiterRequêteAnnulerÉvénement() {
         var événementAnnulé = ModèleÉvénements.événementPrésenté
         CoroutineScope(Dispatchers.IO).launch {
@@ -67,6 +84,11 @@ class PrésentateurModification(
         }
     }
 
+    /**
+     * Méthode qui permet de faire l'affichage des informations actuelles de l'événement
+     * sur la vue.
+     *
+     */
     override fun traiterRequêteRemplirChamps() {
         vue.remplirChamps(ModèleÉvénements.événementPrésenté!!)
     }

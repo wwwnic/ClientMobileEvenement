@@ -33,7 +33,10 @@ import com.even.ui.composants.ListeCarteUtilisateurs
 import com.google.android.material.tabs.TabLayout
 import java.util.*
 
-
+/**
+ * La vue qui affiche les informations détaillé de l'événement.
+ *
+ */
 class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDétailÉvenement.IVue {
 
     lateinit var fragmentLoader: FragmentLoader
@@ -107,6 +110,14 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         btnAddCommentaire.setOnClickListener { afficherVueAjoutCommentaire() }
     }
 
+    /**
+     * Cette méthode sert à afficher ou cacher les composants des différentes vue
+     * qui ne sont pas nécéssaire à la vue en cours. Par exemple, lorsque la vue
+     * détailÉvénement est en cours, les composants de la liste de participant
+     * et de commentaire sont caché.
+     *
+     * @param pageÀgénérer le nom de la vue à afficher
+     */
     private fun setVisibilitéVues(pageÀgénérer: String) {
         if (pageÀgénérer == "details") {
             groupeDetails.visibility = View.VISIBLE
@@ -128,13 +139,24 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         }
     }
 
+    /**
+     * Ajoute l'écouteur sur le bouton de participation.
+     *
+     */
     private fun clickListenerParticipation() {
         btnParticipation.setOnClickListener {
-            présentateur.traiterRequêteAjouterParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
+            présentateur.traiterRequêteAjouterRetirerParticipation(ModèleÉvénements.événementPrésenté!!.idEvenement)
         }
 
     }
 
+    /**
+     * Cette méthode permet d'ouvrir le calendrier et remplir automatiquement
+     * les champs en fonction des informations de l'événement lorsque
+     * l'utilisateur clique sur le bouton participer.
+     *
+     * @param date représente la date de l'événement qui sera ajouté au calendrier
+     */
     // https://developer.android.com/guide/topics/providers/calendar-provider#intents
     override fun afficherApplicationCalendrierPourAjouter(date: IntArray) {
         val startMillis: Long = Calendar.getInstance().run {
@@ -154,6 +176,13 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         startActivity(intent)
     }
 
+    /**
+     * Cette méthode permet d'ouvrir le calendrier et de retirer l'événement
+     * ajouté préalablement lorsque l'utilisateur clique sur le bouton
+     * pour retirer sa participation
+     *
+     * @param date représente la date de l'événement qui sera retirer du calendrier
+     */
     // https://developer.android.com/guide/topics/providers/calendar-provider#intents
     override fun afficherApplicationCalendrierPourEffacer(date: IntArray) {
         val startMillis: Long = Calendar.getInstance().run {
@@ -168,23 +197,47 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         startActivity(intent)
     }
 
+    /**
+     * Affiche simplement un toast disant qu'une erreur niveau serveur est survenu.
+     *
+     */
     override fun afficherToastErreurServeur() {
         Toast.makeText(context, R.string.serveur_error, Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Affiche simplement un toast qui indique qu'il n'y a aucun commentaire
+     * pour l'événement sélectionné.
+     *
+     */
     override fun afficherToastAucunCommentaire() {
         Toast.makeText(context, R.string.no_comments, Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Affiche simplement un toast qui indique à l'utilisateur que sa participation
+     * à un événement a bien été enregistré.
+     *
+     */
     override fun afficherToastParticipationAjouté() {
         Toast.makeText(context, "Votre participation a été ajouté.", Toast.LENGTH_SHORT).show()
     }
 
-
+    /**
+     * Affiche simplement un toast qui indique à l'utilisateur que sa participation
+     * à un événement a bien été retiré.
+     *
+     */
     override fun afficherToastParticipationRetiré() {
         Toast.makeText(context, "Votre participation a été retiré.", Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Cette méthode sert à initialiser les informations concernant l'événement
+     * à partir de l'objet événement qui lui est passé en paramètre.
+     *
+     * @param evenement Un objet événenement passé par le présentateur.
+     */
     override fun setInfo(evenement: Événement) {
         texteNom.text = evenement.nomEvenement
         texteLocation.text = evenement.location
@@ -195,22 +248,51 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         imageOrganisateur.load(evenement.organisateur!!.urlImage)
     }
 
+    /**
+     * Cette méthode sert à initialiser le nombre de participant inscrit à l'événement
+     * dans la vue des détails de l'événement
+     *
+     * @param nombreParticipant Le nombre correspondant au nombre total de partitipant
+     * inscrit à l'événement en question.
+     */
     override fun setNombreParticipant(nombreParticipant: Int) {
         texteParticipant.text = nombreParticipant.toString()
     }
 
+    /**
+     * Change simplement le texte du bouton de participation si l'utilisateur sélectionné
+     * participe déjà à l'événement.
+     *
+     */
     override fun afficherNePlusParticiper() {
         btnParticipation.text = "Je ne participe pas"
     }
 
+    /**
+     * Change simplement le texte du bouton de participation si l'utilisateur sélectionné
+     * ne participe pas encore à l'événement.
+     *
+     */
     override fun afficherParticipation() {
         btnParticipation.text = "Je participe"
     }
 
+    /**
+     * Permet de cacher le bouton de participation lorsque l'utilisateur connecté
+     * est aussi l'organisateur de l'événement.
+     *
+     */
     override fun cacherBoutonParticipation() {
         btnParticipation.isVisible = false
     }
 
+    /**
+     * Cette méthode permet de faire l'affichage de la liste complète des participants
+     * inscrit à l'événement sélectionné.
+     *
+     * @param participants La liste de tous les participants.
+     * @param imageUrl L'url de l'image de chaque utilisateur.
+     */
     override fun afficherListeParticipants(
         participants: List<Utilisateur>,
         imageUrl: (Int) -> String
@@ -226,11 +308,22 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         }
     }
 
+    /**
+     * Cette méthode cache la vue de chargement lorsque les informations de l'événement
+     * sont chargé correctement.
+     *
+     */
     override fun montrerLesDetailsEvenement() {
         chargement.isVisible = false
         groupeDetails.isVisible = true
     }
 
+    /**
+     * Cette méthode permet de faire l'affichage de la liste complète des commentaires
+     * laissé relié à l'événement sélectionné.
+     *
+     * @param commentaires La liste de tous les commentaires de l'événement
+     */
     override fun afficherListeCommentaires(commentaires: List<Commentaire>) {
         listeComposables.setContent {
             MaterialTheme {
@@ -240,6 +333,10 @@ class VueDetailsEvenement : Fragment(R.layout.fragment_detail_evenement), IDéta
         if (commentaires.isEmpty()) afficherToastAucunCommentaire()
     }
 
+    /**
+     * Permet de rediriger vers la vue d'ajout de commentaire.
+     *
+     */
     override fun afficherVueAjoutCommentaire() {
         fragmentLoader.loadFragment(VueCreationCommentaire())
     }
