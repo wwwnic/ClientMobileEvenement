@@ -68,9 +68,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     @Test
     fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur, il envoie le nom et le mot de passe de l'utilisateur correctement car la verificatrion reussi`() {
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
+            BouchonValidationReussie()
             présentateurTruqué.traiterRequêteDemanderProfilPourConnexion(
                 fauxNomUtilisateur,
                 fauxMotDePasse
@@ -112,9 +110,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     @Test
     fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur, celui-ci l'ajoute au modele authentification`() {
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
+            BouchonValidationReussie()
             doReturn(fauxUtilisateur).whenever(mockModele)
                 .demanderProfilUtilisateur(
                     fauxNomUtilisateur,
@@ -220,9 +216,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     @Test
     fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur et que ca marche, il navigue vers l'ecran principal`() {
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
+            BouchonValidationReussie()
             doReturn(fauxUtilisateur).whenever(mockModele)
                 .demanderProfilUtilisateur(
                     fauxNomUtilisateur,
@@ -241,9 +235,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     @Test
     fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur et que ca marche, il affiche un toast qui indique le succes de l'operation`() {
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
+            BouchonValidationReussie()
             doReturn(fauxUtilisateur).whenever(mockModele)
                 .demanderProfilUtilisateur(
                     fauxNomUtilisateur,
@@ -262,9 +254,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur et qu'il indique que les informations sont invalides, il affiche un toast qui indique une erreur de connexion`() {
         val utilisateurVide = Utilisateur(null, null)
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
+            BouchonValidationReussie()
             doReturn(utilisateurVide).whenever(mockModele)
                 .demanderProfilUtilisateur(
                     fauxNomUtilisateur,
@@ -283,9 +273,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur et qu'il indique que les informations sont invalides, il affiche une erreur sur nom utilisateur`() {
         val utilisateurVide = Utilisateur(null, null)
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
+            BouchonValidationReussie()
             doReturn(utilisateurVide).whenever(mockModele)
                 .demanderProfilUtilisateur(
                     fauxNomUtilisateur,
@@ -307,9 +295,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     fun `Etant donne un presentateur lorsqu'il demande au modele le profil de l'utilisateur et qu'il indique que les informations sont invalides, il affiche une erreur sur mot de passe`() {
         val estUtilisateurNull = Utilisateur(null, null)
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxNomUtilisateur)
+            BouchonValidationReussie()
             doReturn(estUtilisateurNull).whenever(mockModele)
                 .demanderProfilUtilisateur(
                     fauxNomUtilisateur,
@@ -327,9 +313,7 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
     @Test
     fun `Etant donne un presentateur lorsqu'il rencontre une erreur, il affiche un toast erreur serveur`() {
         runBlocking(coroutineProvider.io) {
-            doReturn(true).whenever(mockValidateur)
-                .validerNomUsager(fauxNomUtilisateur)
-            doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
+            BouchonValidationReussie()
             doThrow(JsonParseException("Une erreur quelconque")).whenever(mockModele)
                 .demanderProfilUtilisateur(
                     fauxNomUtilisateur,
@@ -343,6 +327,11 @@ class PrésentateurConnexionTest : CouroutineTestHelper() {
             delay(delaiPourWithContext)
         }
         verify(mockVue, times(invocationUnique)).afficherToastErreurServeur()
+    }
+
+    private fun BouchonValidationReussie() {
+        doReturn(true).whenever(mockValidateur).validerNomUsager(fauxNomUtilisateur)
+        doReturn(true).whenever(mockValidateur).validerMotDePasse(fauxMotDePasse)
     }
 
 }
