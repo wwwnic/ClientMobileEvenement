@@ -61,7 +61,7 @@ class VuePrincipale : Fragment(R.layout.fragment_principal) {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.account_management -> {
-                    fragmentLoader.loadFragment(modification_compte())
+                    fragmentLoader.loadFragment(VueModificationCompte())
                     toolbar.title = resources.getString(R.string.account_management)
                     drawerLayout.close()
                     true
